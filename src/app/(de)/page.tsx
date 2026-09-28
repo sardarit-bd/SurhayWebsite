@@ -10,23 +10,19 @@ import Pricing from "@/components/sections/Pricing";
 import Insights from "@/components/sections/Insights";
 import Faq from "@/components/sections/Faq";
 import ContactCta from "@/components/ContactCta";
-import ServicesInteractive from "@/components/sections/ServicesInteractive";
 import { astroPathname } from "@/lib/props";
 
 export default function Page() {
   const lang = "de" as const;
   const pathname = astroPathname("/");
-
   return (
     <Base alternates={homePaths()} lang={lang} pathname={pathname}>
       <Hero lang={lang} />
       <Services lang={lang} />
       <Studio lang={lang} />
       <TrustBar lang={lang} />
-      <Work lang={lang} />\
+      <Work lang={lang} />
       <Process lang={lang} />
-
-      {/* <ServicesInteractive /> */}
       <Pricing lang={lang} />
       <Insights lang={lang} />
       <Faq lang={lang} />

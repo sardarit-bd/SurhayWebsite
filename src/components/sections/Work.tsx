@@ -79,18 +79,17 @@ export default function TechExpertiseScroll({ lang }: LangProp) {
     <div className="w-full ">
       <section
         ref={sectionRef}
-        className="relative w-full min-h-screen flex items-center overflow-hidden "
+        className="relative w-full min-h-dvh sm:min-h-[80vh] md:min-h-[85vh] lg:min-h-screen flex items-center overflow-hidden "
       >
         <div className="relative w-full py-2 sm:py-3">
-          {/* Top track */}
           <div
             ref={topTrackRef}
-            className="flex w-max gap-2 sm:gap-3"
+            className="flex w-max gap-2 sm:gap-3 md:gap-4"
           >
             {[...TOP_ROW, ...TOP_ROW].map((img, i) => (
               <div
                 key={`top-${i}`}
-                className="w-[45vw] sm:w-[32vw] md:w-[24vw] lg:w-[33vw] aspect-4/3 shrink-0"
+                className="h-[26vh] w-auto sm:h-[30vh] md:h-[34vh] lg:h-auto lg:w-[33vw] aspect-4/3 shrink-0"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -111,7 +110,7 @@ export default function TechExpertiseScroll({ lang }: LangProp) {
             {[...BOTTOM_ROW, ...BOTTOM_ROW].map((img, i) => (
               <div
                 key={`bottom-${i}`}
-                className="w-[45vw] sm:w-[32vw] md:w-[24vw] lg:w-[33vw] aspect-4/3 shrink-0"
+                className="h-[26vh] w-auto sm:h-[30vh] md:h-[34vh] lg:h-auto lg:w-[33vw] aspect-4/3 shrink-0"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img

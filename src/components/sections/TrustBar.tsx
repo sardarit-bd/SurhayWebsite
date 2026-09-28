@@ -83,7 +83,7 @@ const Row = ({
   </div>
 );
 
-export default function TrustedBy() {
+export default function TrustedBy({ lang }: LangProp) {
   return (
     <section className="py-12 sm:py-16 lg:py-20 overflow-hidden w-full relative  border-y border-neutral-100">
       <div className="container mx-auto px-6 lg:px-8 mb-8 sm:mb-10 text-center">
@@ -97,9 +97,8 @@ export default function TrustedBy() {
         <Row direction="right" speed={200} />
       </div>
 
-      {/* Side Gradient Fade Overlays */}
-      <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-28 lg:w-40 bg-linear-to-r from-white via-white/80 to-transparent pointer-events-none z-10" />
-      <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-28 lg:w-40 bg-linear-to-l from-white via-white/80 to-transparent pointer-events-none z-10" />
+      <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-28 lg:w-40 bg-linear-to-r from-paper via-paper/80 to-transparent pointer-events-none z-10" />
+      <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-28 lg:w-40 bg-linear-to-l from-paper via-paper/80 to-transparent pointer-events-none z-10" />
     </section>
   );
 }

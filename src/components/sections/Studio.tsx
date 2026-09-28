@@ -3,8 +3,8 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import { FiPlay } from "react-icons/fi";
-
-export default function Showreel() {
+import type { LangProp } from '../../lib/props';
+export default function Showreel({ lang }: LangProp) {
   const [isPlaying, setIsPlaying] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);

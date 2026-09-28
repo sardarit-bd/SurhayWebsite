@@ -624,16 +624,6 @@ body {
   }
 }
 
-/* ------------------------------------------------------------ Ruhige Zelle
-   Stufe 3 — dunkle Raster aus Zellen in einem gemeinsamen Rahmen, die nicht
-   klickbar sind (Prinzipien, Regeln der Zusammenarbeit). Zweck ist
-   Leseunterstuetzung beim Ueberfliegen, nicht ein Interaktionsversprechen;
-   deshalb bewusst so schwach.
-   Die Trennlinien bleiben unberuehrt und die aktive Zelle bekommt keinen
-   Rahmen — das Raster ist eine Flaeche, keine Sammlung von Karten.
-   Genau eine Zelle ist hell: :hover kann nur an einer Stelle stehen, Ein-
-   und Ausblendung laufen dadurch von selbst gleichzeitig.
-   Auf Touch gibt es hier keinen Zustand. */
 
 .quiet-cell {
   transition: background-color var(--dur-short) var(--ease-micro);
@@ -659,36 +649,6 @@ body {
   }
 }
 
-/* ------------------------------------------------------------ Preis-Karte
-   Stufe 2 — die Karte ist kein Link, klickbar ist nur ihr Button. Sie
-   bekommt deshalb weder cursor: pointer noch einen Klick-Handler. Der Hover
-   hat trotzdem eine Aufgabe: er bereitet den Button vor, waehrend die Liste
-   noch gelesen wird. Vier leise Bewegungen gleichzeitig — die Karte hebt
-   sich mit wachsendem Schatten, ihre Flaeche wird heller, die Nachbarn
-   treten zurueck, der Button fuellt sich vor. Der vierte Punkt ist der
-   eigentliche Gewinn: der Klick fuehlt sich an wie etwas, das ohnehin
-   schon begonnen hat.
-
-   Kein farbiger Rahmen um die gehoverte Karte. Auf einer Preisliste liest
-   sich ein Akzentrahmen als „ausgewaehlt“ — der Hover auf Starter wuerde
-   die Empfehlung Business ueberschreiben. Auf Tinte waeren Rahmen, Haken
-   und Badge ausserdem nicht mehr auseinanderzuhalten, und ein heller
-   Rahmen auf Schwarz liest sich als Leuchtrand.
-
-   Drei Aufgaben, drei Ebenen:
-     .price-cell   Anhebung, Schatten, Badge — und das Reveal
-     .price-card   Flaeche, Rahmen, Abdunkeln der Nachbarn
-     .price-badge  haengt in der Zelle: hebt mit an, dunkelt aber nie ab
-
-   Angehoben wird mit `translate`, nicht mit `transform`: das Reveal setzt
-   auf derselben Zelle am Ende `transform: none`, zwei Regeln um dieselbe
-   Eigenschaft waeren ein Zufallsergebnis. Der Schatten liegt auf einer
-   eigenen Ebene und wird eingeblendet statt umgeschaltet — box-shadow wird
-   auf dieser Seite nicht animiert.
-   Anhebung und Schatten kommen immer zusammen: Anhebung ohne Schatten
-   sieht aus wie eine verrutschte Karte, das war der Grund fuer die
-   fruehere Regel „keine Bewegung“. 4 px sind bewusst wenig; ab 8 px kippt
-   die Reihe ins Verspielte. Raus geht es kuerzer als rein. */
 
 .price-cell {
   --lift: 4px;
@@ -733,9 +693,6 @@ body {
   transition: opacity var(--dur-short) var(--ease-out);
 }
 
-/* Nach dem Reveal setzt [data-reveal].reveal-done `transition: none`, um
-   die will-change-Reserve freizugeben. Die Zelle braucht ihren Weg danach
-   zurueck. */
 html.js .price-cell[data-reveal].reveal-done {
   transition: translate var(--dur-short) var(--ease-out);
 }
@@ -747,17 +704,11 @@ html.js .price-cell[data-reveal].reveal-done {
     border-color var(--dur-short) var(--ease-micro);
 }
 
-/* Helle Karte: im Ruhezustand eine Spur Papier im Weiss, beim Hover reines
-   Weiss. Ohne die warme Ruhestufe koennte die Flaeche nicht heller werden —
-   Weiss hat keine Reserve nach oben. */
 .price-card--light {
   --card-bg-hover: var(--color-white);
   background: color-mix(in srgb, var(--color-paper) 25%, var(--color-white));
 }
 
-/* Die Business-Karte bringt ihre dunkle Flaeche selbst mit und sitzt auf
-   ink; die Wartungskarten liegen in einer dunklen Sektion auf ink-2 und
-   hellen eine Spur staerker auf, weil dort die Flaeche die Tiefe traegt. */
 .price-card.dark-section {
   --card-bg-hover: color-mix(in srgb, var(--color-paper) 4%, var(--color-ink));
 }
@@ -893,14 +844,12 @@ html.js .price-cell[data-reveal].reveal-done {
   }
 }
 
-/* Marker: Wort mit Akzent-Hinterlegung (Hero) */
 .marker {
   position: relative;
   white-space: nowrap;
   z-index: 0;
 }
 
-/* Ohne JS sofort vollflächig; mit JS animiert (s. Animations-Block unten) */
 .marker::after {
   content: '';
   position: absolute;
@@ -913,8 +862,6 @@ html.js .price-cell[data-reveal].reveal-done {
   transform-origin: left center;
 }
 
-/* ------------------------------------------------------------- Sektionen */
-
 .dark-section {
   background: var(--color-ink);
   color: var(--color-paper);
@@ -922,7 +869,6 @@ html.js .price-cell[data-reveal].reveal-done {
   --color-accent-ctx: var(--color-accent-400);
 }
 
-/* Feines Korn auf dunklen Flächen — verhindert Banding, gibt Haptik */
 .grain::before {
   content: '';
   position: absolute;
@@ -932,7 +878,6 @@ html.js .price-cell[data-reveal].reveal-done {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Rasterlinien-Hintergrund (Hero) */
 .grid-bg {
   background-image:
     linear-gradient(var(--line) 1px, transparent 1px),
@@ -941,43 +886,16 @@ html.js .price-cell[data-reveal].reveal-done {
   mask-image: radial-gradient(ellipse 90% 75% at 50% 30%, black 30%, transparent 75%);
 }
 
-/* ------------------------------------------------------ Kachel-Sektionen
-   Gemeinsame Optik zweier Sektionen am Fuss der Leistungsseiten: der
-   Technologie-Sektion mit Markenzeichen und der Kennzahl-Sektion mit
-   Zielwerten. Beide zeigen dieselbe Karte — deshalb steht der Stil hier und
-   nicht zweimal in zwei Astro-Komponenten.
-
-   Der Grund bleibt Papier, nicht die vertiefte Flaeche: --color-mute ist
-   laut Token-Kommentar auf --color-paper auf AA gerechnet (4,75:1); auf
-   --color-paper-2 faellt derselbe Grauton auf 4,30:1. Eyebrow und Lead
-   stehen unmittelbar auf dem Sektionsgrund, also bleibt es bei Papier. Die
-   Karten grenzen sich ueber die Haarlinie ab, wie das Enthalten-Raster und
-   die FAQ-Zeilen weiter oben auf derselben Seite. */
-
 .tile-section {
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   padding-block: var(--spacing-section-sm);
 }
 
-/* Spaltenzahl kommt von der Sektion (--tile-cols-md / --tile-cols-lg), damit
-   sich das Raster der Anzahl anpasst: sechs Kacheln laufen dreispaltig, zwei
-   oder vier zweispaltig. Sonst stuende bei zwei Eintraegen eine leere dritte
-   Spalte, und bei vier ein einzelner Nachzuegler in der zweiten Reihe.
-
-   Die Stufen sind die der uebrigen Seite (390 / 810 / 1200), nicht die
-   Tailwind-Vorgaben — sonst spraenge dieses Raster an anderen Stellen um als
-   das der Leistungs- und Preiszeilen. */
 .tile-grid {
   display: grid;
   gap: 1.25rem;
   grid-template-columns: 1fr;
-  /* Wenige Kacheln duerfen die Containerbreite nicht auseinanderziehen: bei
-     zwei oder vier Eintraegen deckelt die Sektion das Raster ueber
-     --tile-max, damit die Kachel ungefaehr so breit bleibt wie im
-     dreispaltigen Fall. Linksbuendig, wie Ueberschrift und Lead darueber.
-     Ohne den Deckel (sechs Kacheln) fuellt das Raster den Container wie
-     bisher — die Entwicklungsseite aendert sich dadurch nicht. */
   max-width: var(--tile-max, none);
 }
 
@@ -1000,8 +918,6 @@ html.js .price-cell[data-reveal].reveal-done {
   transition: border-color var(--dur-micro) var(--ease-micro);
 }
 
-/* Unter 390 px zaehlt jeder Millimeter Textbreite: engeres Polster, damit
-   lange Produktnamen wie "PostgreSQL" auch bei 280 px in einer Zeile bleiben. */
 @media (max-width: 389px) {
   .tile {
     padding: 1.25rem;
@@ -1035,12 +951,6 @@ html.js .price-cell[data-reveal].reveal-done {
   text-wrap: pretty;
 }
 
-/* ------------------------------------------------------------- Animationen
-   Ein Trigger, ein Endzustand (.is-visible):
-     [data-reveal] → IntersectionObserver (alles unter dem Hero)
-   Der Hero bringt seine eigene Einblend-Staffelung mit ([data-fade]).
-   Startzustände gelten NUR unter html.js — ohne JS ist alles sichtbar.
-   Animiert wird ausschließlich transform + opacity. */
 
 html.js [data-reveal] {
   opacity: 0;
@@ -1057,18 +967,14 @@ html.js [data-reveal].is-visible {
   transform: none;
 }
 
-/* Nach dem Reveal die will-change-Reservierung wieder freigeben */
 html.js [data-reveal].reveal-done {
   will-change: auto;
   transition: none;
 }
 
-/* Zeilen-Reveal (Hero-Headline und Sektions-Headlines):
-   Inhalt schiebt sich aus einer overflow-hidden-Maske von unten hoch. */
 .reveal-mask {
   display: block;
   overflow: hidden;
-  /* Platz für Unterlängen, ohne die Maske sichtbar zu machen */
   padding-bottom: 0.12em;
   margin-bottom: -0.12em;
 }
@@ -1095,7 +1001,6 @@ html.js .reveal-mask.reveal-done .reveal-line {
   transition: none;
 }
 
-/* Der grüne Unterstrich im Hero: skaliert von links auf */
 html.js .marker::after {
   transform: scaleX(0);
   transform-origin: left center;
@@ -1121,8 +1026,6 @@ html.js .marker.is-visible::after {
   }
 }
 
-/* ------------------------------------------------------------------ Prose
-   Markdown-Inhalte (Blog, Case Studies, Rechtstexte) */
 
 .prose {
   max-width: 65ch;
@@ -1209,22 +1112,8 @@ html.js .marker.is-visible::after {
 .prose strong {
   font-weight: 650;
 }
-
-/* --------------------------------------------------------- Tabelle im Text
-   Gebraucht wird sie bisher nur von der Cookie-Seite, gehoert aber hierher:
-   eine Tabelle in einem Rechtstext ist Fliesstext-Inhalt wie eine Liste.
-
-   Sie steht in einem eigenen Scroll-Behaelter (.table-scroll). Ohne ihn
-   schiebt eine Tabelle die ganze Seite waagerecht auf, sobald sie breiter
-   ist als der Viewport — auf 280 px passiert das sofort. Der Behaelter
-   traegt tabindex und role="region", damit der Bereich auch per Tastatur
-   erreichbar und scrollbar ist; ein Scrollbereich, den nur die Maus
-   erreicht, ist keiner. */
 .table-scroll {
   overflow-x: auto;
-  /* Ein zu schmaler Kasten quetscht die Spalten zu Buchstabensaeulen. Lieber
-     scrollen lassen — der Wert ist so gewaehlt, dass die Tabelle bis etwa
-     380 px Viewport ohne Scrollen auskommt. */
   --table-min: 20rem;
 }
 
@@ -1267,8 +1156,6 @@ html.js .marker.is-visible::after {
 
 .prose tbody th {
   font-weight: 650;
-  /* Die erste Spalte nennt nur den Bereich — sie darf schmal bleiben, damit
-     der Erlaeuterungsspalte die Breite bleibt. */
   width: 34%;
 }
 
@@ -1281,10 +1168,6 @@ html.js .marker.is-visible::after {
   background: var(--color-paper-2);
 }
 
-/* Auf schmalen Geraeten zaehlt jeder Pixel: knapperes Zellpolster und eine
-   niedrigere Mindestbreite. Bei 320 px kommt die Tabelle damit ohne
-   Seitwaertsscrollen aus, bei 280 px bleibt ein kurzer Rest — lieber der
-   als Spalten, in denen einzelne Buchstaben untereinander stehen. */
 @media (max-width: 559px) {
   .table-scroll {
     --table-min: 15rem;
@@ -1303,14 +1186,6 @@ html.js .marker.is-visible::after {
     width: 38%;
   }
 }
-
-/* ------------------------------------------------------------- Intro-Rise
-   Einblenden fuer Inhalte oberhalb der Sichtgrenze (Seitenkoepfe, Titel).
-   Der IntersectionObserver aus Base.astro greift dort nicht zuverlaessig:
-   Was beim Laden schon sichtbar ist, loest kein Intersect-Ereignis aus.
-   Deshalb eine reine CSS-Animation mit `both` — sie endet immer sichtbar,
-   auch wenn sie nie startet. Die Klasse wurde in mehreren Layouts benutzt,
-   war aber nirgends definiert; hier ist sie. */
 
 html.js .intro-rise {
   animation: intro-rise var(--dur-reveal) var(--ease-out) both;
@@ -1334,11 +1209,6 @@ html.js .intro-rise {
   }
 }
 
-/* --------------------------------------------------------- Seitenkopf
-   Feine Rasterlinien hinter dem Kopf jeder Unterseite: Sie geben den
-   Unterseiten einen eigenen Auftakt, ohne eine zweite Farbflaeche
-   einzufuehren. */
-
 .page-header:not(.dark-section)::before {
   content: '';
   position: absolute;
@@ -1352,32 +1222,10 @@ html.js .intro-rise {
   opacity: 0.6;
 }
 
-/* ------------------------------------------------------------ FAQ-Accordion
-   Markup (siehe FaqAccordion.astro / FaqItem.astro):
-
-     <faq-accordion>
-       .faq-item
-         h3.faq-head > button.faq-trigger[aria-expanded][aria-controls]
-         .faq-panel[role=region] > .faq-panel-inner
-
-   Warum kein <details>: Die Vorgabe verlangt das ARIA-Disclosure-Muster
-   (Button + region) und eine animierte Hoehe. Beides gibt <details> nicht her
-   — der `open`-Zustand kennt kein Dazwischen. Mehrere Panels duerfen offen
-   stehen; die Begruendung steht in FaqAccordion.astro.
-
-   Die Hoehe misst JS und schreibt sie als Inline-Wert; Kurve und Dauer stehen
-   hier, damit die Responsive-Stufe unter 810px automatisch greift. Nach dem
-   Oeffnen steht `height: auto` — dann stimmt die Hoehe auch nach einem Resize
-   ohne zweite Messung. Ohne JS bleibt jedes Panel offen: der Inhalt wiegt
-   schwerer als die Faltung.
-
-   Die drei FAQ-eigenen Zeitwerte (Textversatz beim Oeffnen, Textausblendung
-   und Kollaps-Versatz beim Schliessen) sind keine Site-Tokens — sie gehoeren
-   zu diesem Bauteil und stehen deshalb hier. */
 
 .faq-item {
-  --faq-text-in: 80ms; /* Text folgt dem Panel, er laeuft ihm nie voraus */
-  --faq-text-out: 140ms; /* Text ist weg, bevor die Hoehe kollabiert */
+  --faq-text-in: 80ms; 
+  --faq-text-out: 140ms; 
   --faq-collapse-in: 40ms;
   border-top: 1px solid var(--line);
 }
@@ -1394,12 +1242,9 @@ html.js .intro-rise {
   color: inherit;
 }
 
-/* Ohne JS ist der Plus-Kreis eine Zusage, die niemand einloest. */
 html:not(.js) .faq-icon {
   display: none;
 }
-
-/* ------------------------------------------------------------------ Panel */
 
 html.js .faq-panel {
   height: 0;
@@ -1411,7 +1256,6 @@ html.js .faq-panel-inner {
   transform: translateY(var(--move-text));
 }
 
-/* Oeffnen: Hoehe zuerst, Text mit Versatz hinterher. */
 html.js .faq-item.is-open .faq-panel {
   transition: height var(--dur-panel) var(--ease-panel);
 }
@@ -1424,9 +1268,6 @@ html.js .faq-item.is-open .faq-panel-inner {
     transform var(--dur-short) var(--ease-out) var(--faq-text-in);
 }
 
-/* Schliessen: Text zuerst weg, Hoehe folgt versetzt und kuerzer als beim
-   Oeffnen. `transform: none` bleibt stehen — sonst rutschte der Text waehrend
-   des Ausblendens noch einmal um --move-text nach unten. */
 html.js .faq-item.is-closing .faq-panel {
   transition: height var(--dur-panel-out) var(--ease-panel) var(--faq-collapse-in);
 }
@@ -1437,14 +1278,11 @@ html.js .faq-item.is-closing .faq-panel-inner {
   transition: opacity var(--faq-text-out) var(--ease-micro);
 }
 
-/* Zustand ohne Bewegung setzen (Suchtreffer aufklappen). Steht nach den
-   Zustandsregeln, gleiche Spezifitaet — die spaetere Regel gewinnt. */
 html.js .faq-item.is-instant .faq-panel,
 html.js .faq-item.is-instant .faq-panel-inner {
   transition: none;
 }
 
-/* -------------------------------------------------------------------- Icon */
 
 .faq-icon {
   position: relative;
@@ -1452,8 +1290,6 @@ html.js .faq-item.is-instant .faq-panel-inner {
   width: 2rem;
   flex: none;
   border-radius: 999px;
-  /* Der Kreis zeigt an, dass die Zeile aufklappt, und traegt mit der
-     Drehung den Zustand — also Bedienelement-Stufe, nicht Haarlinie. */
   border: 1px solid var(--line-control);
   transition:
     background-color var(--dur-micro) var(--ease-micro),
@@ -1461,9 +1297,6 @@ html.js .faq-item.is-instant .faq-panel-inner {
     color var(--dur-micro) var(--ease-micro);
 }
 
-/* Ein einziges Plus-Glyph, gedreht — kein Icon-Austausch, kein Crossfade.
-   Der Kreis selbst dreht sich nicht, nur das Glyph; Origin ist seine Mitte,
-   sonst wandert das Kreuz beim Drehen aus dem Kreis. */
 .faq-glyph {
   position: absolute;
   inset: 0;
@@ -1505,10 +1338,6 @@ html.js .faq-item.is-instant .faq-panel-inner {
   transition: color var(--dur-micro) var(--ease-micro);
 }
 
-/* ------------------------------------------------------------------ Hover
-   Nur auf Zeigergeraeten, und ohne jede Verschiebung: Die Zeile ist
-   vollstaendig Klickflaeche, sie muss beim Zielen stillhalten. */
-
 @media (hover: hover) and (pointer: fine) {
   .faq-trigger:hover .faq-num {
     color: var(--color-accent-600);
@@ -1529,10 +1358,6 @@ html.js .faq-item.is-instant .faq-panel-inner {
   }
 }
 
-/* --------------------------------------------------------- Reduced Motion
-   Hoehe und Rotation schalten ab, die Deckkraft darf bleiben: Sie erklaert
-   den Wechsel, ohne etwas zu bewegen. */
-
 @media (prefers-reduced-motion: reduce) {
   html.js .faq-item.is-open .faq-panel,
   html.js .faq-item.is-closing .faq-panel,
@@ -1548,14 +1373,6 @@ html.js .faq-item.is-instant .faq-panel-inner {
     transition: opacity var(--dur-micro) var(--ease-micro);
   }
 }
-
-/* -------------------------------------------------------- Reveal der Zeilen
-   Der Container traegt `data-reveal` und dient nur als Ausloeser — sein
-   eigener Startzustand ist neutralisiert. So bleiben die Trennlinien stehen
-   und bewegt wird ausschliesslich der Zeileninhalt. Die Zeilenhoehe steht
-   dabei von Anfang an: kein Layout-Shift.
-   Ausgeloest wird ueber den vorhandenen Observer in Base.astro (15 % im
-   Viewport, einmalig) — ein zweiter Beobachter waere ein zweites Verhalten. */
 
 faq-accordion {
   display: block;
@@ -1590,35 +1407,6 @@ html.js [data-faq-rows].is-visible .faq-trigger {
   }
 }
 
-/* ------------------------------------------------------------ Flaechen-Hover
-   Ein Kreis in der Akzentfarbe laeuft vom Cursor aus ueber die Flaeche und
-   faerbt sie voll ein. Gilt fuer genau drei Bauteile: die Leistungs-Zeilen der
-   Startseite (.service-row), die kleinen Karten "Weitere Leistungen"
-   (.other-card) und die grossen Leistungs-Karten (.service-card). Buttons,
-   Navigation, FAQ und Preistabelle behalten die dezenten Hover-Regeln.
-
-   Aufbau (JS baut ihn in Base.astro, siehe dort):
-
-     .fx-fill              das Bauteil selbst, Bezugsrahmen
-       .fx-clip            unbewegte Maske, schneidet den Kreis am Rand ab
-         .fx-circle        der Kreis, Groesse und Ort vom Cursor
-           .fx-clone       Kopie des Inhalts in den hellen Farben
-       …Inhalt             das Original, von der Maske zugedeckt
-
-   Warum eine Kopie statt umgefaerbtem Text: so sitzt der Farbwechsel exakt an
-   der Kreiskante — kein Delay, das man nachjustieren muesste, und nichts, was
-   der Kante vorauseilt.
-
-   Warum die Maske ein eigenes Element ist und nicht `overflow: hidden` am
-   Bauteil: das wuerde die Fokus-Outline der enthaltenen Links abschneiden.
-
-   Der Kreis skaliert (transform), der Klon skaliert exakt gegen (1/s) um
-   denselben Punkt — zusammengesetzt bleibt der Inhalt bei 1:1 stehen und nur
-   die Kante wandert. Beide lesen dieselbe animierte Zahl --fx-s, deshalb ist
-   sie als @property registriert: unregistriert liesse sie sich nicht
-   uebergehen. max(…, 0.02) haelt die Division vom Nullpunkt fern; der Rest
-   liegt in einem Kreis von wenigen Pixeln und ist nicht sichtbar. */
-
 @property --fx-s {
   syntax: '<number>';
   inherits: true;
@@ -1631,14 +1419,10 @@ html.js [data-faq-rows].is-visible .faq-trigger {
   --fx-dur: 600ms;
 }
 
-/* Karten: die Maske deckt auch den 1px-Rand ab, sonst bliebe ein heller Ring
-   um die gefuellte Flaeche stehen. Die Zeilen bekommen 0 — ihre Haarlinie
-   liegt ausserhalb der Maske und bleibt damit unberuehrt sichtbar. */
 .fx-card {
   --fx-inset: -1px;
 }
 
-/* Die Flaeche bestimmt die Zeit, nicht umgekehrt. */
 .service-row {
   --fx-dur: 830ms;
 }
@@ -1649,7 +1433,6 @@ html.js [data-faq-rows].is-visible .faq-trigger {
   --fx-dur: 616ms;
 }
 
-/* Unter 810 px ist der Weg kuerzer: gleiche Kurve, 20 % knapper. */
 @media (max-width: 809px) {
   .service-row {
     --fx-dur: 664ms;
@@ -1661,21 +1444,6 @@ html.js [data-faq-rows].is-visible .faq-trigger {
     --fx-dur: 493ms;
   }
 }
-
-/* ---------------------------------------------- Ueberstand der Zeilenflaeche
-   Nummer und Pfeil sitzen buendig an den Kanten der Inhaltsspalte. Endete die
-   Farbe dort, klebten beide am Rand. Statt den Inhalt einzuruecken — dann
-   verloere er die Flucht mit der Sektionsueberschrift — waechst die Flaeche
-   nach aussen in den Seitenrand hinein. Der Inhalt bleibt, wo er ist.
-
-   Gedeckelt wird auf den schmaleren der beiden Seitenraender minus 8 px; wie
-   viel Platz dort wirklich ist, misst JS und legt es als --fx-room ab. So
-   laeuft die Flaeche nie aus dem Viewport, auch nicht bei 280 px. Der
-   Ueberstand deckt zugleich die 6 px ab, die der Pfeil beim Hover wandert.
-
-   Vertikal geht die Flaeche NICHT bis an die Kante: 1 px vor der Haarlinie
-   ist Schluss, oben wie unten. Die Linien behalten damit ihre Ruhefarbe und
-   bleiben im Hover an derselben Stelle sichtbar wie ueberall sonst. */
 
 .service-row {
   --fx-bleed-want: 16px;
@@ -1701,24 +1469,16 @@ html.js [data-faq-rows].is-visible .faq-trigger {
   }
 }
 
-/* Die Maske liegt ueber dem Inhalt und deckt ihn mit dem Kreis zu — darunter
-   liegt die helle Kopie. Der Inhalt wird also bewusst NICHT angehoben: sonst
-   stuende das dunkle Original ueber der Kopie und der Farbwechsel bliebe aus.
-   Geklickt wird trotzdem durch (pointer-events: none). */
+
 .fx-clip {
   position: absolute;
   inset: var(--fx-inset);
-  /* Ueber allem, was im Bauteil einen eigenen Stapelkontext aufmacht — der
-     verschobene Pfeil ist durch sein transform genau so ein Fall und lag
-     sonst als dunkle Grafik auf der gefuellten Flaeche. */
   z-index: 1;
   overflow: hidden;
   border-radius: inherit;
   pointer-events: none;
 }
 
-/* Grundzustand ohne Kreis: volle Flaeche ueber die Deckkraft. Das ist der
-   Zustand fuer Touch (:active) und fuer reduzierte Bewegung. */
 .fx-circle {
   position: absolute;
   left: 0;
@@ -1745,11 +1505,9 @@ html.js [data-faq-rows].is-visible .faq-trigger {
   color: var(--color-white);
 }
 
-/* ------------------------------------------------- Zeigergeraet mit Kreis */
-
 html.fx-radial .fx-fill {
   --fx-s: 0;
-  --fx-t: var(--dur-fill-out); /* raus ist schneller als rein */
+  --fx-t: var(--dur-fill-out); 
   --fx-e: var(--ease-out);
 }
 
@@ -1759,9 +1517,6 @@ html.fx-radial .fx-fill.is-fx-on {
   --fx-e: var(--ease-fill);
 }
 
-/* Groesse und Ort setzt JS in Pixeln, ohne Uebergang: nur --fx-s laeuft.
-   Der Uebergang haengt am Kreis, nicht am Bauteil — die Reveal-Regeln
-   ueberschreiben `transition` auf jedem [data-reveal]-Element komplett. */
 html.fx-radial .fx-circle {
   width: auto;
   height: auto;
@@ -1776,27 +1531,17 @@ html.fx-radial .fx-clone {
   transform: scale(calc(1 / max(var(--fx-s), 0.02)));
 }
 
-/* ------------------------------------------------------- Farben im Klon
-   Die einzige Stelle, an der die hellen Werte stehen. Alles, was im
-   Ruhezustand die Akzentfarbe traegt — Icons, Haken, "Mehr erfahren" —
-   wechselt zwingend mit, sonst verschwindet es auf der Flaeche.
-   Reihenfolge zaehlt: die knapperen Rollen stehen nach .text-mute. */
 
-/* Die Abstufung stand vorher bei 0.75 / 0.85 / 0.55 und trug auf der
-   gefuellten Flaeche 3.74:1, 4.34:1 und 2.72:1 — alle drei unter AA. Der
-   Hover ist ein Zustand wie jeder andere und muss lesbar sein. Die
-   Rangfolge bleibt erhalten, sie beginnt nur eine Stufe hoeher:
-     0.90  4.67:1      0.95  5.00:1      0.86  4.42 → 0.88 = 4.53:1 */
 .fx-clone .text-mute {
-  color: rgb(255 255 255 / 0.9); /* Fliesstext — 4.67:1 */
+  color: rgb(255 255 255 / 0.9); 
 }
 
 .fx-clone .fx-list {
-  color: rgb(255 255 255 / 0.95); /* Listentext — 5.00:1 */
+  color: rgb(255 255 255 / 0.95); 
 }
 
 .fx-clone .fx-dim {
-  color: rgb(255 255 255 / 0.88); /* Nummer, Label — 4.53:1 */
+  color: rgb(255 255 255 / 0.88); 
 }
 
 .fx-clone .row-arrow,
@@ -1806,4 +1551,22 @@ html.fx-radial .fx-clone {
 
 .fx-clone .border-t {
   border-color: rgb(255 255 255 / 0.2);
+}
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-16.666%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 12s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
 }

@@ -2,23 +2,34 @@
 
 import { useState } from "react";
 import Image from "next/image";
-
-/* ---------- Contacts slider ---------- */
-
+import type { LangProp } from "../../lib/props";
 const CONTACT_LABELS = ["1K", "5K", "10K", "15K", "1M"];
-
-/* ---------- Pricing plans ---------- */
-
 type PlanFeature = { label: string; tooltip: string };
-
-// Shared across all three tiers — swap in real tooltip copy per plan if it differs.
 const PLAN_FEATURES: PlanFeature[] = [
-  { label: "Unlimited workspace boards", tooltip: "Create and organize as many boards as your team needs." },
-  { label: "Unlimited viewers", tooltip: "Invite any number of read-only collaborators at no extra cost." },
-  { label: "Unlimited project templates", tooltip: "Save and reuse layouts across every new project." },
-  { label: "Change management", tooltip: "Track edits and roll back to any previous version." },
-  { label: "Taxonomy development", tooltip: "Organize assets with custom tags and categories." },
-  { label: "Customer success manager", tooltip: "Get a dedicated contact for onboarding and support." },
+  {
+    label: "Unlimited workspace boards",
+    tooltip: "Create and organize as many boards as your team needs.",
+  },
+  {
+    label: "Unlimited viewers",
+    tooltip: "Invite any number of read-only collaborators at no extra cost.",
+  },
+  {
+    label: "Unlimited project templates",
+    tooltip: "Save and reuse layouts across every new project.",
+  },
+  {
+    label: "Change management",
+    tooltip: "Track edits and roll back to any previous version.",
+  },
+  {
+    label: "Taxonomy development",
+    tooltip: "Organize assets with custom tags and categories.",
+  },
+  {
+    label: "Customer success manager",
+    tooltip: "Get a dedicated contact for onboarding and support.",
+  },
 ];
 
 type Plan = {
@@ -55,7 +66,11 @@ const PLANS: Plan[] = [
 
 function CheckIcon() {
   return (
-    <svg className="mr-3 h-3 w-3 shrink-0 fill-emerald-500" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      className="mr-3 h-3 w-3 shrink-0 fill-emerald-500"
+      viewBox="0 0 12 12"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
     </svg>
   );
@@ -117,12 +132,20 @@ function PricingCard({ plan, index }: { plan: Plan; index: number }) {
         )}
 
         <div className="mb-4">
-          <div className={`mb-1 text-lg font-semibold ${isDark ? "text-zinc-200" : "text-zinc-900"}`}>
+          <div
+            className={`mb-1 text-lg font-semibold ${isDark ? "text-zinc-200" : "text-zinc-900"}`}
+          >
             {plan.name}
           </div>
           <div className="font-inter-tight mb-2 inline-flex items-baseline">
-            <span className={`text-2xl font-bold ${isDark ? "text-zinc-200" : "text-zinc-900"}`}>$</span>
-            <span className={`text-3xl font-bold ${isDark ? "text-zinc-200" : "text-zinc-900"}`}>
+            <span
+              className={`text-2xl font-bold ${isDark ? "text-zinc-200" : "text-zinc-900"}`}
+            >
+              $
+            </span>
+            <span
+              className={`text-3xl font-bold ${isDark ? "text-zinc-200" : "text-zinc-900"}`}
+            >
               {plan.price}
             </span>
             <span className="font-medium text-zinc-500">/mo</span>
@@ -131,12 +154,18 @@ function PricingCard({ plan, index }: { plan: Plan; index: number }) {
         </div>
 
         <div className="grow">
-          <div className={`mb-4 text-sm font-medium ${isDark ? "text-zinc-200" : "text-zinc-900"}`}>
+          <div
+            className={`mb-4 text-sm font-medium ${isDark ? "text-zinc-200" : "text-zinc-900"}`}
+          >
             Includes:
           </div>
           <ul className="grow space-y-3 text-sm text-zinc-600 dark:text-zinc-400">
             {PLAN_FEATURES.map((feature, i) => (
-              <FeatureItem key={feature.label} feature={feature} id={`tooltip-${index}-${i}`} />
+              <FeatureItem
+                key={feature.label}
+                feature={feature}
+                id={`tooltip-${index}-${i}`}
+              />
             ))}
           </ul>
         </div>
@@ -158,8 +187,6 @@ function PricingCard({ plan, index }: { plan: Plan; index: number }) {
   );
 }
 
-/* ---------- FAQ accordion ---------- */
-
 type Faq = { question: string; answer: string };
 
 const FAQS: Faq[] = [
@@ -179,7 +206,8 @@ const FAQS: Faq[] = [
       "Absolutely! Grey allows you to create as many commercial graphics/images as you like, for yourself or your clients.",
   },
   {
-    question: "Can I use the tool for personal, client, and commercial projects?",
+    question:
+      "Can I use the tool for personal, client, and commercial projects?",
     answer:
       "Absolutely! Grey allows you to create as many commercial graphics/images as you like, for yourself or your clients.",
   },
@@ -221,8 +249,19 @@ function AccordionItem({
           onClick={() => onToggle(index)}
         >
           <span>{faq.question}</span>
-          <svg className="ml-8 shrink-0 fill-zinc-400" width="12" height="12" xmlns="http://www.w3.org/2000/svg">
-            <rect y="5" width="12" height="2" rx="1" className="origin-center transform transition duration-200 ease-out" />
+          <svg
+            className="ml-8 shrink-0 fill-zinc-400"
+            width="12"
+            height="12"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              y="5"
+              width="12"
+              height="2"
+              rx="1"
+              className="origin-center transform transition duration-200 ease-out"
+            />
             <rect
               y="5"
               width="12"
@@ -251,10 +290,9 @@ function AccordionItem({
   );
 }
 
-
-export default function PricingFaqSection() {
-  const [contactsIndex, setContactsIndex] = useState(2); // 0-4, default "10K"
-  const [openFaq, setOpenFaq] = useState<number | null>(3); // matches original default-open item
+export default function PricingFaqSection({ lang }: LangProp) {
+  const [contactsIndex, setContactsIndex] = useState(2);
+  const [openFaq, setOpenFaq] = useState<number | null>(3);
 
   const progress = `${(contactsIndex / (CONTACT_LABELS.length - 1)) * 100}%`;
 
@@ -267,68 +305,27 @@ export default function PricingFaqSection() {
               Start your journey today
             </h2>
             <p className="text-lg text-zinc-500">
-              Start creating realtime design experiences for free. Upgrade for extra
-              features and collaboration with your team.
+              Start creating realtime design experiences for free. Upgrade for
+              extra features and collaboration with your team.
             </p>
           </div>
 
           <div className="pb-12 md:pb-20">
-            {/* Slider */}
-            {/* <div className="mx-auto mb-12 max-w-sm space-y-3 lg:mb-16 lg:max-w-3xl">
-        
-              <div
-                className="relative flex items-center"
-                style={
-                  {
-                    "--progress": progress,
-                    "--segments-width": "25%",
-                  } as React.CSSProperties
-                }
-              >
-                <div
-                  aria-hidden="true"
-                  className="absolute right-2.5 left-2.5 h-1.5 overflow-hidden rounded-full bg-zinc-200
-                    before:absolute before:inset-0 before:bg-linear-to-r before:from-zinc-400 before:to-zinc-800
-                    before:[mask-image:linear-gradient(to_right,var(--color-white),var(--color-white)_var(--progress),transparent_var(--progress))]
-                    after:absolute after:inset-0
-                    after:bg-[repeating-linear-gradient(to_right,transparent,transparent_calc(var(--segments-width)-1px),--theme(--color-white/.7)_calc(var(--segments-width)-1px),--theme(--color-white/.7)_calc(var(--segments-width)+1px))]"
-                />
-                <input
-                  type="range"
-                  min={0}
-                  max={CONTACT_LABELS.length - 1}
-                  step={1}
-                  value={contactsIndex}
-                  onChange={(e) => setContactsIndex(Number(e.target.value))}
-                  aria-valuetext={`${CONTACT_LABELS[contactsIndex]} contacts/month`}
-                  aria-label="Pricing Slider"
-                  className="relative w-full cursor-pointer appearance-none bg-transparent focus:outline-hidden
-                    [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:rounded-full
-                    [&::-moz-range-thumb]:border-none [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:shadow-sm
-                    [&::-moz-range-thumb]:focus-visible:ring-3 [&::-moz-range-thumb]:focus-visible:ring-zinc-300
-                    [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:appearance-none
-                    [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-sm
-                    [&::-webkit-slider-thumb]:focus-visible:ring-3 [&::-webkit-slider-thumb]:focus-visible:ring-zinc-300"
-                />
-              </div>
-              <ul className="flex justify-between px-2.5 text-xs font-medium text-zinc-500">
-                {CONTACT_LABELS.map((label) => (
-                  <li key={label} className="relative">
-                    <span className="absolute -translate-x-1/2">{label}</span>
-                  </li>
-                ))}
-              </ul>
-            </div> */}
-
-            {/* Pricing cards */}
-            <div className="mx-auto grid max-w-sm items-start gap-6 lg:max-w-none lg:grid-cols-3">
+            <div className="mx-auto grid max-w-sm items-start gap-6 md:max-w-3xl md:grid-cols-2 lg:max-w-none lg:grid-cols-3">
               {PLANS.map((plan, i) => (
-                <PricingCard key={plan.name} plan={plan} index={i} />
+                <div
+                  key={plan.name}
+                  className={
+                    i === PLANS.length - 1
+                      ? "md:col-span-2 md:max-w-sm md:mx-auto lg:col-span-1 lg:max-w-none lg:mx-0"
+                      : ""
+                  }
+                >
+                  <PricingCard plan={plan} index={i} />
+                </div>
               ))}
             </div>
           </div>
-
-
         </div>
       </div>
     </section>

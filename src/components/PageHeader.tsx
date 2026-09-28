@@ -3,19 +3,11 @@ import Breadcrumbs, { type Crumb } from './Breadcrumbs';
 import { css } from '../lib/css';
 import type { LangProp } from '../lib/props';
 
-/**
- * Kopfbereich jeder Unterseite — Brotkrumen, Eyebrow, H1, Lead.
- *
- * Eine eigene Komponente, damit alle Unterseiten denselben Auftakt haben:
- * gleicher Abstand unter der fixierten Leiste, gleiche Typo-Stufen, gleiche
- * Position der Brotkrumen. Ohne sie driften zwoelf Seiten in zwoelf Richtungen.
- */
 interface Props extends LangProp {
   eyebrow: string;
   title: string;
   lead?: string;
   crumbs: Crumb[];
-  /** Zusatzangaben unter dem Lead, z. B. Preisrahmen und Dauer. */
   meta?: { label: string; value: string }[];
   dark?: boolean;
 }

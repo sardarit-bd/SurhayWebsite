@@ -10,7 +10,7 @@ type Feature = {
   imageHeight: number;
   span?: boolean;
 };
-
+import type { LangProp } from '../../lib/props';
 const FEATURES: Feature[] = [
   {
     title: "Truly Collaborative",
@@ -107,22 +107,22 @@ const FEATURES: Feature[] = [
   },
 ];
 
-export default function AiFeaturesSection() {
+export default function AiFeaturesSection({ lang }: LangProp) {
   return (
     <section>
-      <div className="py-12 md:py-20">
-        <div className="mx-auto container px-4 sm:px-6">
-          <div className="relative mx-auto max-w-3xl pb-12 text-center md:pb-20">
-            <h2 className="font-inter-tight mb-4 text-3xl font-bold text-zinc-900 md:text-4xl">
+      <div className="py-12 ">
+        <div className="mx-auto container px-4 ">
+          <div className="relative mx-auto max-w-3xl pb-10 text-center sm:pb-14 md:pb-20">
+            <h2 className="font-inter-tight mb-4 text-3xl font-bold text-zinc-900 sm:text-4xl md:text-5xl">
               AI-powered features and effects
             </h2>
-            <p className="text-lg text-zinc-500">
+            <p className="text-base text-zinc-500 sm:text-lg md:text-xl">
               Whenever you are ready, just hit publish to turn your site sketches
               into an actual designs. No creating, no skills, no reshaping.
             </p>
           </div>
 
-          <div className="mx-auto grid max-w-xs gap-8 sm:max-w-none sm:grid-cols-2 sm:gap-4 md:grid-cols-3 lg:gap-8">
+          <div className="mx-auto grid container gap-2 sm:max-w-none sm:grid-cols-2 sm:gap-6 md:grid-cols-3 md:gap-2 lg:gap-2">
             {FEATURES.map((feature) => (
               <article
                 key={feature.title}
@@ -130,24 +130,30 @@ export default function AiFeaturesSection() {
                   [background:linear-gradient(var(--color-white),var(--color-zinc-50))_padding-box,linear-gradient(120deg,var(--color-zinc-300),var(--color-zinc-100),var(--color-zinc-300))_border-box]
                   ${feature.span ? "sm:col-span-2" : ""}`}
               >
-                <div className="flex grow flex-col p-5 pt-6">
+                <div className="flex grow flex-col p-5 pt-6 sm:p-6 sm:pt-7 lg:p-7 lg:pt-8">
                   <div className="mb-1 flex items-center space-x-3">
                     {feature.icon}
                     <h3 className="font-inter-tight font-semibold text-zinc-900">
                       {feature.title}
                     </h3>
                   </div>
-                  <p className="max-w-md grow text-sm text-zinc-500">
+                  <p className="max-w-md grow text-sm text-zinc-500 sm:text-base">
                     {feature.description}
                   </p>
                 </div>
-                <figure>
+                <figure className="w-full overflow-hidden">
                   <Image
                     src={feature.image}
                     alt={feature.imageAlt}
                     width={feature.imageWidth}
                     height={feature.imageHeight}
-                    className="mx-auto h-70 object-cover object-left sm:h-auto sm:object-contain"
+                    sizes={
+                      feature.span
+                        ? "(min-width: 640px) 66vw, 100vw"
+                        : "(min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    }
+                    style={{ aspectRatio: `${feature.imageWidth} / ${feature.imageHeight}` }}
+                    className="h-auto w-full object-cover"
                   />
                 </figure>
               </article>

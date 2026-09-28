@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
-// import Header from "./Header";
 import type { LangProp } from '../../lib/props';
 const SLIDE_TRANSITION_S = 1.1;
 const POST_SLIDE_DELAY_MS = 500;
@@ -33,42 +32,72 @@ const SLIDES: Slide[] = [
   {
     id:"1",
     image:
-      "images/project/image4.webp",
-    alt: "Sculptural wooden coffee table in a warm, wood-paneled interior",
-    titleTop: "WOODEN",
-    titleBottom: "LONG TABLES",
+      "images/hero/image1.avif",
+    alt: "Craftsmen ",
+    titleTop: "Craftsmen ",
+    titleBottom: "Construction Companies",
     description:
-      "With the precision and vivid identity that our artisans imbued in their work, this table was designed to conjure function and perfection in living spaces.",
+      "High-quality construction documentation, transparent service offerings and automated preliminary inquiries: We present your craftsmanship as precisely and masterfully as your work on site.",
   },
   {
-    id:"1",
+    id:"2",
     image:
-      "images/project/image2.webp",
+      "images/hero/image2.avif",
     alt: "Carved wooden lounge chair beside a warm textured wall",
-    titleTop: "CARVED",
-    titleBottom: "LOUNGE CHAIRS",
+    titleTop: "Medical Practices",
+    titleBottom: "HEALTHCARE",
     description:
-      "Every curve is shaped by hand, balancing weight and comfort so the chair disappears beneath you and only the sitting remains.",
+      "A calm, confidence-building practice design with barrier-free patient guidance, digital appointment scheduling and clear structuring of the specialist disciplines.",
   },
   {
-    id:"1",
+    id:"3",
     image:
-      "images/project/image3.webp",
+      "images/hero/image3.avif",
     alt: "Modern oak cabinet in a minimal, sunlit living space",
-    titleTop: "MODERN",
-    titleBottom: "OAK CABINETS",
+    titleTop: "Lawyers",
+    titleBottom: "Tax Advisors",
     description:
-      "Straight grain and quiet joinery let the wood speak for itself, built to hold a home's quiet essentials for decades.",
+      "A confident legal presence with excellent typography and clear profiling of your legal areas — optimized for discerning private and business clients.",
   },
   {
-    id:"1",
+    id:"4",
     image:
-      "images/project/image5.avif",
+      "images/hero/image4.avif",
     alt: "Artisan dining set with wooden chairs around a long table",
-    titleTop: "ARTISAN",
+    titleTop: "real estate agent",
+    titleBottom: "REAL ESTATE UI",
+    description:
+      "Exclusive property presentations with interactive floor plans, filter functions and automatic OpenImmo import for maximum marketing speed.",
+  },
+    {
+    id:"5",
+    image:
+      "images/hero/image5.avif",
+    alt: "Artisan dining set with wooden chairs around a long table",
+    titleTop: "Motor vehicles",
+    titleBottom: "Automotive",
+    description:
+      "Dynamic vehicle presentation, transparent workshop services and direct online test drive bookings in a modern premium ambience.",
+  },
+    {
+    id:"6",
+    image:
+      "images/hero/image6.avif",
+    alt: "Artisan dining set with wooden chairs around a long table",
+    titleTop: "Small & large ",
+    titleBottom: "companies",
+    description:
+      "Scalable corporate identities that combine brand, employer branding and sales — coded for high performance and easy for employees to maintain.",
+  },
+   {
+    id:"7",
+    image:
+      "images/hero/image7.jpg",
+    alt: "Artisan dining set with wooden chairs around a long table",
+    titleTop: "Individual solutions",
     titleBottom: "DINING SETS",
     description:
-      "Gathered around solid wood, each set is finished by hand so no two grains, and no two evenings around them, are quite the same.",
+      "Tailor-made web applications, individual portals and customized interfaces — perfectly suited to specific digital business models.",
   },
 ];
 
@@ -237,7 +266,7 @@ export default function HeroSection({ lang }: LangProp) {
   }, []);
 
   return (
-    <section className="relative flex min-h-svh w-full flex-col overflow-hidden bg-[#241812] text-[#f4ede3]">
+    <section className="relative flex h-svh w-full flex-col overflow-hidden bg-[#241812] text-[#f4ede3]">
       <div className="absolute inset-0 overflow-hidden">
         <div
           ref={trackRef}
@@ -270,12 +299,12 @@ export default function HeroSection({ lang }: LangProp) {
         <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent" />
       </div>
 
-      <div className="relative z-10 flex flex-1 flex-col justify-between px-5 pb-8 pt-40 sm:px-8 sm:pb-12 lg:px-12">
+      <div className="relative z-10 flex flex-1 flex-col justify-between px-5 pb-6 pt-24 sm:px-8 sm:pb-10 sm:pt-28 md:pt-24 lg:px-12 lg:pb-12 lg:pt-40">
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-start">
           <h1
             ref={topRef}
             className="font-serif leading-[0.85] tracking-tight text-[#f4ede3]"
-            style={{ fontSize: "clamp(3.25rem, 11vw, 8.5rem)" }}
+            style={{ fontSize: "clamp(2.5rem, min(11vw, 12vh), 8.5rem)" }}
           />
 
           <div className="max-w-xs font-sans text-[0.8rem] leading-relaxed text-[#f4ede3]/90 md:pt-3 md:text-right">
@@ -289,7 +318,7 @@ export default function HeroSection({ lang }: LangProp) {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col items-start justify-between gap-6 sm:mt-24 md:flex-row md:items-end md:gap-4">
+        <div className="mt-8 flex flex-col items-start justify-between gap-6 sm:mt-12 md:mt-16 md:flex-row md:items-end md:gap-4 lg:mt-24">
           <div
             className="flex items-center gap-4 font-sans text-xs tracking-widest text-[#f4ede3]/80"
             role="status"
@@ -322,7 +351,7 @@ export default function HeroSection({ lang }: LangProp) {
           <h2
             ref={bottomRef}
             className="self-end font-serif leading-[0.85] tracking-tight text-[#f4ede3] md:text-right"
-            style={{ fontSize: "clamp(3rem, 10vw, 7.5rem)" }}
+            style={{ fontSize: "clamp(2.25rem, min(10vw, 11vh), 7.5rem)" }}
           />
         </div>
       </div>

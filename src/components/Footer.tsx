@@ -1,199 +1,127 @@
-import { scoped } from "../lib/scoped";
-import { css } from "../lib/css";
-import type { LangProp, PfadProp } from "../lib/props";
-import { SITE } from "../config";
-import { services } from "../data/services";
-import { useTranslations, localePath, path, isActive } from "../i18n/utils";
+import Link from "next/link";
+import { HiArrowRight } from "react-icons/hi2";
 
-export default function Footer({ lang, pathname }: LangProp & PfadProp) {
-  const t = useTranslations(lang);
-  const home = localePath(lang, "/");
-  const year = new Date().getFullYear();
+type FooterLinkItem = {
+  label: string;
+  href: string;
+  external?: boolean;
+};
 
-  const legalLinks = [
-    { href: path(lang, "imprint"), label: t("footer.imprint") },
-    { href: path(lang, "privacy"), label: t("footer.privacy") },
-    { href: path(lang, "cookies"), label: t("footer.cookies") },
-  ];
+function FooterLink({ label, href, external }: FooterLinkItem) {
+  const isInternal = href.startsWith("/");
+  const Wrapper = isInternal ? Link : "a";
 
-  const here = pathname;
-  const columns = [
-    {
-      title: t("footer.servicesCol"),
-      links: [
-        ...services.map((s) => ({
-          href: path(lang, "services", s[lang].slug),
-          label: s[lang].title,
-          external: false,
-        })),
-        {
-          href: path(lang, "services"),
-          label: t("nav.allServices"),
-          external: false,
-        },
-      ],
-    },
-    {
-      title: t("footer.company"),
-      links: [
-        { href: path(lang, "about"), label: t("nav.about"), external: false },
-        {
-          href: path(lang, "process"),
-          label: t("nav.process"),
-          external: false,
-        },
-        { href: path(lang, "work"), label: t("nav.work"), external: false },
-        {
-          href: path(lang, "pricing"),
-          label: t("nav.pricing"),
-          external: false,
-        },
-      ],
-    },
-    {
-      title: t("footer.resources"),
-      links: [
-        { href: path(lang, "blog"), label: t("nav.blog"), external: false },
-        { href: path(lang, "faq"), label: t("nav.faq"), external: false },
-        {
-          href: path(lang, "configurator"),
-          label: t("contact.configurator"),
-          external: false,
-        },
-      ],
-    },
-    {
-      title: t("footer.social"),
-      links: [
-        { href: SITE.social.linkedin, label: "LinkedIn", external: true },
-        { href: SITE.social.instagram, label: "Instagram", external: true },
-        { href: SITE.social.github, label: "GitHub", external: true },
-      ],
-    },
-  ];
-
-  return scoped(
-    "data-c-footer",
-    <footer
-      className="dark-section grain"
-      style={css("border-top: 1px solid var(--line-dark);")}
+  return (
+    <Wrapper
+      href={href}
+      className="group inline-flex w-fit items-center text-paragraph-13 text-text-soft-500 transition-colors duration-200 ease-entrance hover:text-text-strong-950"
+      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
     >
-      <div className="relative mx-auto container px-5 py-16 md:px-8 md:py-20">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1fr]">
-          <div>
-            <a
-              href={home}
-              className="group inline-flex items-baseline gap-0.5"
-              aria-label={`Surhay Design — ${t("nav.home")}`}
-            >
-              <span className="font-display text-2xl font-bold tracking-tight">
-                Surhay
-              </span>
-              <span
-                className="pulse-dot inline-block h-2 w-2 rounded-full bg-accent-ctx"
-                aria-hidden="true"
-              ></span>
-              <span className="font-display text-2xl font-light tracking-tight text-mute-dark">
-                Design
-              </span>
-            </a>
-            <p className="mt-4 max-w-xs text-mute-dark">
-              {t("footer.tagline")}
-            </p>
-            <a
-              href={`mailto:${SITE.email}`}
-              className="link-slide tap-24 mt-6 inline-block font-semibold"
-            >
-              {SITE.email}
-            </a>
-            <p className="mt-2 text-sm text-mute-dark">
-              {SITE.city}, {t("common.country")}
-            </p>
-            <a
-              href={path(lang, "contact")}
-              className="btn btn-ghost btn-sm mt-6"
-            >
-              {t("nav.cta")}
-              <svg
-                className="btn-arrow h-3.5 w-3.5"
-                viewBox="0 0 16 16"
-                fill="none"
-                aria-hidden="true"
-              >
-                <path
-                  d="M1 8h13M9 3l5 5-5 5"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                ></path>
-              </svg>
-            </a>
-          </div>
-
-          {columns.map((col) => (
-            <nav aria-label={col.title}>
-              <h2 className="eyebrow mb-5 text-mute-dark">{col.title}</h2>
-              <ul className="space-y-3">
-                {col.links.map((link) => (
-                  <li>
-                    <a
-                      href={link.href}
-                      className="link-slide tap-24 text-[0.95rem]"
-                      rel={link.external ? "noopener noreferrer" : undefined}
-                      target={link.external ? "_blank" : undefined}
-                    >
-                      {link.label}
-                      {link.external && (
-                        <span className="sr-only"> ({t("nav.newTab")})</span>
-                      )}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          ))}
-        </div>
-
-        <div
-          className="footer-bottom mt-16 pt-8 text-sm text-mute-dark"
-          style={css("border-top: 1px solid var(--line-dark);")}
+      <span className="relative inline-flex items-center">
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 inset-s-0 flex -translate-x-1 items-center opacity-0 transition-[opacity,transform] duration-200 ease-entrance group-hover:translate-x-0 group-hover:opacity-100"
         >
-          <p className="footer-bottom__copy">
-            © {year} {SITE.name}. {t("footer.rights")}
-          </p>
-          <nav className="footer-legal" aria-label={t("footer.legal")}>
-            <ul>
-              {legalLinks.map((link, i) => (
-                <li>
-                  {i > 0 && (
-                    <span className="footer-legal__sep" aria-hidden="true">
-                      ·
-                    </span>
-                  )}
-                  <a
-                    href={link.href}
-                    className="footer-legal__link tap-24"
-                    aria-current={
-                      isActive(here, link.href, true) ? "page" : undefined
-                    }
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          <HiArrowRight className="size-3.5" />
+        </span>
+        <span className="inline-block transition-transform duration-200 ease-entrance group-hover:translate-x-5">
+          {label}
+        </span>
+      </span>
+    </Wrapper>
+  );
+}
 
-          <p className="footer-bottom__made">
-            <span
-              className="inline-block h-1.5 w-1.5 rounded-full bg-accent-ctx"
-              aria-hidden="true"
-            ></span>
-            {t("footer.madeIn")}
+type FooterNavColumnProps = {
+  title: string;
+  links: FooterLinkItem[];
+};
+
+function FooterNavColumn({ title, links }: FooterNavColumnProps) {
+  return (
+    <nav aria-label={title} className="flex flex-col gap-3">
+      <h3 className="text-label-13 text-text-strong-950">{title}</h3>
+      <ul className="flex flex-col gap-2.5">
+        {links.map((link) => (
+          <li key={link.label}>
+            <FooterLink {...link} />
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
+
+const footerNav: FooterNavColumnProps[] = [
+  {
+    title: "Company",
+    links: [
+      { label: "Careers", href: "/career" },
+      { label: "Fundraising", href: "mailto:fundraising@offloop.org" },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { label: "Blog", href: "/blog" },
+      { label: "Influencer templates", href: "/template/agent-teams#influencer" },
+      { label: "Contact", href: "/contact" },
+      { label: "Markdown to PDF", href: "/markdown-to-pdf" },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      { label: "Privacy Policy", href: "/privacy-policy" },
+      { label: "Terms of Service", href: "/terms-of-service" },
+    ],
+  },
+  {
+    title: "Connect with us",
+    links: [
+      { label: "GitHub", href: "https://github.com/OffloopHQ", external: true },
+      { label: "TikTok", href: "https://www.tiktok.com/@heyitsoffloop", external: true },
+      { label: "Instagram", href: "https://www.instagram.com/offloop2026/", external: true },
+      { label: "X(Twitter)", href: "https://x.com/Offloop", external: true },
+      { label: "LinkedIn", href: "https://www.linkedin.com/company/offloop-hq", external: true },
+      { label: "Medium", href: "https://medium.com/@offloop", external: true },
+      { label: "Email", href: "mailto:hello@offloop.org" },
+    ],
+  },
+];
+
+export default function Footer() {
+  return (
+    <footer className="bg-bg-page">
+      <div className="mx-auto grid w-full container grid-cols-2 gap-x-8 gap-y-10 px-5 py-16 sm:grid-cols-4 sm:gap-x-10 sm:px-9 md:grid-cols-[1.4fr_repeat(4,1fr)] md:gap-8">
+        <div className="col-span-2 flex flex-col gap-4 sm:col-span-4 md:col-span-1">
+          <Link aria-label="Offloop home" href="/home" className="inline-flex w-fit">
+            <span className="font-(family-name:--font-denton) text-marketing-wordmark text-text-strong-950 [font-variation-settings:'wdth'_350,'wght'_420]">
+              Offloop
+            </span>
+          </Link>
+          <p className="max-w-65 text-paragraph-13 text-text-soft-500">
+            Scale your team&rsquo;s work without scaling headcount.
           </p>
         </div>
+        {footerNav.map((column) => (
+          <FooterNavColumn key={column.title} {...column} />
+        ))}
       </div>
-    </footer>,
+      <div className="mx-auto w-full container border-t border-text-strong-950/10 px-5 py-8 sm:px-9">
+        <p className="text-[12px] leading-5 text-text-soft-500">
+          © 2026
+          <a
+            href="https://intelligence.software"
+            target="_blank"
+            rel="noreferrer"
+            className="underline decoration-text-strong-950/20 underline-offset-4 transition-colors hover:text-text-strong-950"
+          >
+            Intelligence Software, Inc.
+          </a>
+          All rights reserved.
+        </p>
+      </div>
+    </footer>
   );
 }
