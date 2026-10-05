@@ -15,39 +15,13 @@
   --color-paper: #f5f3ee; /* Warmes Off-White, Basis heller Sektionen */
   --color-paper-2: #ebe8e0; /* Vertiefte helle Fläche */
   --color-white: #ffffff;
-
-  /* Akzentskala — Teal. Drei Stufen mit klar getrennten Aufgaben:
-       600  Buttons, Links, Fokusring, aktive Zustaende — Schrift darauf WEISS
-       400  Marker, Indikatoren, Akzentflaechen        — Schrift darauf SCHWARZ
-       100  Hover-Flaechen und Tints                   — Schrift darauf SCHWARZ
-     Gemessene Kontraste:
-       weiss auf 600            5.36:1   600 als Text auf Papier   4.83:1
-       schwarz auf 400         10.95:1   400 als Text auf Tinte   10.95:1
-       schwarz auf 100         17.68:1   600 als Flaeche auf Tinte 3.69:1
-     400 darf NIE Textfarbe auf hellem Grund sein (1.63:1).
-
-     Zwei Randstufen kamen mit den Zustaenden dazu:
-       800  Gedrueckt, und Hover auf bereits gefuellter Flaeche  — Schrift WEISS
-       300  Hellster Akzent, nur als Antwort auf Tinte           — nie Flaeche
-     Gemessene Kontraste:
-       weiss auf 800            7.27:1   300 als Text auf Tinte  13.65:1 */
   --color-accent-800: #155e75;
   --color-accent-600: #0e7490;
   --color-accent-400: #22d3ee;
   --color-accent-300: #67e8f9;
   --color-accent-100: #cffafe;
-
-  /* Kontextabhaengiger Akzent: auf hellem Grund der Vollton, auf dunklem der
-     helle. Wird in .dark-section umdeklariert — ein var() im @theme-Wert
-     wuerde schon auf :root aufgeloest und wuerde nicht nachziehen. */
   --color-accent-ctx: #0e7490;
 
-  /* Sekundaertext. Der Wert war #6d6c66 und trug auf `paper` 4.75:1 — aber
-     auf der vertieften Flaeche `paper-2` nur 4.30:1. Genau dort steht er
-     haeufig (Hinweiszeile im Aufklappmenue, Kachelraster auf Prozess-,
-     Preis- und Blogseiten), und 4.30 verfehlt AA. Eine Stufe dunkler loest
-     das ueberall auf einmal:
-       paper 5.13:1   paper-2 4.64:1   weiss 5.68:1   accent-100 5.08:1 */
   --color-mute: #68675f; /* Sekundärtext auf hellem Grund (AA auf paper-2) */
   --color-mute-dark: #a3a29a; /* Sekundärtext auf Tinte (7.72:1 auf ink) */
 
@@ -68,37 +42,10 @@
   --text-h2-sm: clamp(1.6rem, 3.2vw, 2.4rem);
   --text-h3: clamp(1.35rem, 2.6vw, 1.75rem);
   --text-lead: clamp(1.05rem, 1.6vw, 1.3rem);
-  /* Linienfarben kontextabhängig.
-
-     ZWEI STUFEN, ZWEI AUFGABEN
-     --line / --line-dark sind Haarlinien: Trennung zwischen Zeilen, Raster,
-     Rahmen um Flaechen. Sie tragen 1.36:1 bzw. 1.49:1 und duerfen das auch —
-     WCAG 1.4.11 verlangt 3:1 nur fuer Grafik, die man BRAUCHT, um ein
-     Bedienelement oder seinen Zustand zu erkennen. Eine Zeilentrennung
-     gehoert nicht dazu; der Inhalt steht daneben.
-
-     --line-control / --line-control-dark sind der sichtbare Rand eines
-     Bedienelements: Eingabefeld, Auswahlkachel, Umriss-Schaltflaeche,
-     Plus-Kreis im FAQ. Ohne diesen Rand ist nicht zu sehen, wo das Feld
-     anfaengt — hier gilt 3:1. Die Alpha-Werte sind gemessen, nicht geraten:
-       0.45 auf weiss 3.15:1 · auf paper 3.11:1 · auf paper-2 3.05:1
-       0.38 auf ink   3.27:1 · auf ink-2 3.34:1 · auf ink-3 3.31:1 */
   --line: rgb(10 10 11 / 0.14);
   --line-dark: rgb(245 243 238 / 0.16);
   --line-control: rgb(10 10 11 / 0.45);
   --line-control-dark: rgb(245 243 238 / 0.38);
-
-  /* ------------------------------------------------------- Motion-Tokens
-     Verbindlich für die ganze Seite. Bewegung erklärt einen Zustandswechsel,
-     sie schmückt ihn nicht: kein Spring, kein Overshoot. Die Obergrenze liegt
-     bei 600 ms; einzige Ausnahme ist der Flächen-Hover weiter unten, dessen
-     Kreis über eine ganze Zeilenbreite läuft und dafür bis 830 ms bekommt.
-     Animiert werden ausschließlich opacity, transform, height und Farben —
-     nie `all`, nie margin, padding, width oder box-shadow.
-     Sie stehen bewusst in :root statt in @theme: `--ease-*` ist in Tailwind
-     ein Utility-Namensraum, und wir wollen hier Tokens, keine Klassen. */
-
-  /* Kurven */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1); /* Eintritte, Reveals, Text-In */
   --ease-panel: cubic-bezier(0.65, 0, 0.35, 1); /* Zweiwege: Höhe, Rotation */
   --ease-micro: cubic-bezier(0.4, 0, 0.2, 1); /* Farbe, Border, Hover */
@@ -121,40 +68,8 @@
   /* Rhythmus */
   --stagger: 60ms; /* Versatz zwischen Geschwistern */
 
-  /* ------------------------------------------------------- Hoehe der Leiste
-     Die Kopfzeile ist fix positioniert und deckt damit die oberen Pixel jeder
-     Seite ab. Wer weiss, wie hoch sie ist, kann darunter anfangen — das
-     Burger-Menue tut genau das. Der Wert stand vorher nur als `h-[72px]` in
-     einer Utility-Klasse und war damit fuer niemanden sonst lesbar.
-
-     Das Skript in Header.astro schreibt die GEMESSENE Hoehe der Leiste hierher
-     zurueck (ResizeObserver). Die 72px sind also nur der Startwert fuer den
-     ersten Frame und fuer den Fall ohne JS — keine Annahme, an der etwas
-     zerbricht, wenn die Leiste je waechst. */
   --header-h: 72px;
 
-  /* ---------------------------------------------------------- Ebenenordnung
-     Eine Leiter statt gewuerfelter Zahlen. Wer eine neue Ebene braucht, nimmt
-     eine Sprosse — und sieht auf einen Blick, wogegen er sich stellt.
-
-       --z-deko    Flaechen HINTER dem Text (Hero-Marker)
-       --z-inhalt  der normale Fluss
-       --z-sticky  mitlaufende Spalten, Sprachwahl-Aufklapper
-       --z-blatt   das Burger-Menue
-       --z-leiste  die Kopfzeile — liegt im Menuezustand ueber dem Blatt,
-                   damit Logo und Schliessen-Kreuz erreichbar bleiben
-       --z-sprung  die Sprungmarke; sie ist der Notausgang und gehoert
-                   deshalb ueber alles andere
-
-     Modals gibt es auf dieser Seite nicht, ein Cookie-Banner seit d015f2f
-     auch nicht mehr (er wurde eine eigene Seite). Beide bekaemen ihre Sprosse
-     zwischen --z-leiste und --z-sprung, sobald sie gebraucht werden.
-
-     Nicht in dieser Leiter stehen die z-index-Werte, die INNERHALB eines
-     Bauteils sortieren (`.marker::after`, `.fx-clip`): Sie ordnen Geschwister
-     in einem eigenen Stapelkontext und haben mit der Seitenebene nichts zu
-     tun. Sie zu Tokens zu machen wuerde eine Beziehung behaupten, die es
-     nicht gibt. */
   --z-deko: -1;
   --z-inhalt: 1;
   --z-sticky: 10;
@@ -197,22 +112,10 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: clip;
-  /* Bei 320 px Breite (WCAG 1.4.10) passen einzelne Woerter nicht mehr in
-     die Spalte: „Datenschutzerklärung" in der Seitenueberschrift misst dort
-     371 px, die EU-Schlichtungs-URL im Impressum 306 px. Beide schoben den
-     Inhalt aus dem Fenster — und `overflow-x: clip` am body schnitt ihn dann
-     ab, statt ihn scrollbar zu machen: Inhaltsverlust statt Querbalken.
 
-     `break-word` greift ausschliesslich dann, wenn ein Wort sonst
-     ueberliefe. Auf jeder normalen Breite aendert sich dadurch nichts. */
   overflow-wrap: break-word;
 }
 
-/* Unter 30em darf zusaetzlich getrennt werden. Sauberer als ein harter
-   Umbruch mitten im Wort — und im Deutschen der Normalfall, sobald die
-   Spalte schmal wird. Die Trennregeln kommen aus dem lang-Attribut am
-   <html>, das jede Seite korrekt setzt. Bewusst nur auf schmalen Schirmen:
-   auf dem Desktop soll die Typografie unberuehrt bleiben. */
 @media (max-width: 30em) {
   h1,
   h2,

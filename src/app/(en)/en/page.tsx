@@ -11,12 +11,9 @@ import Insights from "@/components/sections/Insights";
 import Faq from "@/components/sections/Faq";
 import ContactCta from "@/components/ContactCta";
 import { astroPathname } from "@/lib/props";
-
-/** Englische Startseite — identische Sektionsfolge, siehe src/app/(de)/page.tsx. */
 export default function Page() {
   const lang = "en" as const;
   const pathname = astroPathname("/en");
-
   return (
     <Base alternates={homePaths()} lang={lang} pathname={pathname}>
       <Hero lang={lang} />

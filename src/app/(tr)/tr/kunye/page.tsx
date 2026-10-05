@@ -2,15 +2,6 @@ import { altPaths, useTranslations } from '@/i18n/utils';
 import { SITE, LEGAL, legalAddress } from '@/config';
 import Legal from '@/layouts/Legal';
 import { astroPathname } from '@/lib/props';
-
-/**
- * Impressum (TR) — Uebersetzung der deutschen Fassung.
- *
- * Verbindlich bleibt src/pages/impressum.astro; der Hinweis darauf steht
- * ueber dem Text und kommt aus Legal.astro. Die Paragrafenverweise bleiben
- * bewusst in ihrer deutschen Originalform (§ 5 DDG, § 19 UStG …) — sie
- * bezeichnen deutsche Normen und werden nicht uebersetzt.
- */
 export default function Page() {
   const lang = 'tr' as const;
   const t = useTranslations(lang);

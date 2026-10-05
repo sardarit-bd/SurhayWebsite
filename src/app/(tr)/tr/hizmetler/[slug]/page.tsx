@@ -1,8 +1,6 @@
 import ServiceDetailPage from '@/components/pages/ServiceDetailPage';
 import { services } from '@/data/services';
 import { astroPathname } from '@/lib/props';
-
-/* Leistungs-Detailseiten (tr) — Slugs kommen aus src/data/services.ts. */
 export function generateStaticParams() {
   return services.map((service) => ({ slug: service.tr.slug }));
 }

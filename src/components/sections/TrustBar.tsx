@@ -1,46 +1,63 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import type { LangProp } from "../../lib/props";
 import { useTranslations } from "../../i18n/utils";
 import type { UiKey } from "../../i18n/ui";
 
 const WORD_KEYS: UiKey[] = ["tb.1", "tb.2", "tb.3", "tb.4", "tb.5", "tb.6"];
 
+// Must stay an even number: the loop moves by exactly half of the track.
 const REPEAT = 8;
 
 const Row = ({
   words,
   direction,
-  speed = 250,
-  className = "",
+  speed,
+  outline = false,
+  reduced,
 }: {
   words: string[];
   direction: "left" | "right";
-  speed?: number;
-  className?: string;
+  speed: number;
+  outline?: boolean;
+  reduced: boolean;
 }) => (
-  <div className="overflow-hidden w-full flex">
+  <div className="flex w-full overflow-hidden">
     <motion.div
-      key={`${direction}-${speed}`}
-      className={`flex gap-10 sm:gap-14 lg:gap-18 items-center w-max flex-nowrap ${className}`}
-      animate={{ x: direction === "left" ? ["0%", "-50%"] : ["-50%", "0%"] }}
-      transition={{
-        duration: speed,
-        repeat: Infinity,
-        ease: "linear",
-      }}
+      className="flex w-max flex-nowrap items-center"
+      animate={
+        reduced
+          ? undefined
+          : { x: direction === "left" ? ["0%", "-50%"] : ["-50%", "0%"] }
+      }
+      transition={{ duration: speed, repeat: Infinity, ease: "linear" }}
     >
       {Array.from({ length: REPEAT }, () => words)
         .flat()
         .map((word, index) => (
           <div
             key={`${word}-${index}`}
-            className="relative shrink-0 h-10 sm:h-12 lg:h-14 flex items-center justify-center px-2"
+            className="flex shrink-0 items-center gap-6 pr-6 sm:gap-10 sm:pr-10"
           >
-            <span className="whitespace-nowrap text-2xl sm:text-3xl lg:text-4xl font-semibold uppercase tracking-widest text-neutral-400">
+            <span
+              className="font-display whitespace-nowrap font-bold leading-none tracking-tight"
+              style={{
+                fontSize: "clamp(2.5rem, 7vw, 6rem)",
+                ...(outline
+                  ? {
+                      color: "transparent",
+                      WebkitTextStroke: "1.5px var(--color-ink)",
+                    }
+                  : { color: "var(--color-ink)" }),
+              }}
+            >
               {word}
             </span>
+            <span
+              aria-hidden="true"
+              className="size-2 shrink-0 rounded-full bg-accent-600 sm:size-2.5"
+            />
           </div>
         ))}
     </motion.div>
@@ -49,33 +66,34 @@ const Row = ({
 
 export default function TrustedBy({ lang }: LangProp) {
   const t = useTranslations(lang);
+  const reduced = useReducedMotion() ?? false;
   const words = WORD_KEYS.map((key) => t(key));
 
   return (
-    <section className="py-12 sm:py-16 lg:py-20 overflow-hidden w-full relative  border-y border-neutral-100">
-      <div className="container mx-auto px-6 lg:px-8 mb-8 sm:mb-10 text-center">
-        <p className="text-md md:text-lg font-semibold uppercase tracking-widest text-neutral-500 pb-14">
-          {t("tb.label")}
-        </p>
+    <section className="relative w-full overflow-hidden border-y border-(--line) bg-paper py-section-sm text-ink">
+      <div className="container mx-auto px-6 sm:px-10 lg:px-16">
+        <p className="eyebrow text-mute">{t("tb.label")}</p>
       </div>
-
-      {/* Dekorativ: die Branchen stehen einmal als Liste fuer Screenreader. */}
       <ul className="sr-only">
         {words.map((word) => (
           <li key={word}>{word}</li>
         ))}
       </ul>
-
       <div
-        className="relative flex flex-col gap-8 sm:gap-10 overflow-hidden"
+        className="relative mt-10 flex flex-col gap-4 overflow-hidden sm:mt-14 sm:gap-6"
         aria-hidden="true"
       >
-        <Row words={words} direction="left" speed={150} />
-        <Row words={[...words].reverse()} direction="right" speed={200} />
+        <Row words={words} direction="left" speed={60} reduced={reduced} />
+        <Row
+          words={[...words].reverse()}
+          direction="right"
+          speed={80}
+          outline
+          reduced={reduced}
+        />
       </div>
-
-      <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-28 lg:w-40 bg-linear-to-r from-paper via-paper/80 to-transparent pointer-events-none z-10" />
-      <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-28 lg:w-40 bg-linear-to-l from-paper via-paper/80 to-transparent pointer-events-none z-10" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-linear-to-r from-paper via-paper/80 to-transparent sm:w-28 lg:w-40" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-linear-to-l from-paper via-paper/80 to-transparent sm:w-28 lg:w-40" />
     </section>
   );
 }

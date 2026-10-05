@@ -3,13 +3,6 @@ import { SITE } from '@/config';
 import Legal from '@/layouts/Legal';
 import { astroPathname } from '@/lib/props';
 
-/**
- * Cookie-Seite (TR) — Uebersetzung der deutschen Fassung.
- *
- * Verbindlich bleibt src/pages/cookie-einstellungen.astro. Wird dort die
- * Bestandsaufnahme geaendert, muss diese Datei und en/cookie-settings.astro
- * mitgezogen werden.
- */
 export default function Page() {
   const lang = 'tr' as const;
   const t = useTranslations(lang);

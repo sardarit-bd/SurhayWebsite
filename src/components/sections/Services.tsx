@@ -6,7 +6,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ServiceRow from "./Servicerow";
 import { getServices } from "./Services.data";
 import { useTranslations } from "../../i18n/utils";
-import type { LangProp } from '../../lib/props';
+import type { LangProp } from "../../lib/props";
+
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
@@ -14,10 +15,44 @@ if (typeof window !== "undefined") {
 export default function ServicesSection({ lang }: LangProp) {
   const t = useTranslations(lang);
   const services = getServices(lang);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const lineRef = useRef<HTMLDivElement | null>(null);
+  const headerRef = useRef<HTMLDivElement | null>(null);
   const rowRefs = useRef<Array<HTMLDivElement | null>>([]);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     const ctx = gsap.context(() => {
+      if (lineRef.current) {
+        gsap.fromTo(
+          lineRef.current,
+          { scaleX: 0 },
+          {
+            scaleX: 1,
+            duration: 1.1,
+            ease: "power3.inOut",
+            transformOrigin: "left center",
+            scrollTrigger: { trigger: lineRef.current, start: "top 90%" },
+          }
+        );
+      }
+
+      if (headerRef.current) {
+        gsap.fromTo(
+          headerRef.current.children,
+          { y: 30, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.9,
+            stagger: 0.12,
+            ease: "power3.out",
+            scrollTrigger: { trigger: headerRef.current, start: "top 85%" },
+          }
+        );
+      }
+
       rowRefs.current.forEach((row) => {
         if (!row) return;
 
@@ -37,25 +72,37 @@ export default function ServicesSection({ lang }: LangProp) {
           }
         );
       });
-    });
+    }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section className="w-full  px-6 sm:px-10 lg:px-16 py-16 md:py-24">
+    <section
+      ref={sectionRef}
+      className="w-full bg-paper px-6 py-section text-ink sm:px-10 lg:px-16"
+    >
       <div className="container mx-auto">
         {/* Header */}
-        <div className="flex flex-col items-center text-center mb-16 md:mb-20">
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 lg:gap-10 w-full">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold uppercase leading-tight">
+        <div className="mb-14 md:mb-20">
+          <div ref={lineRef} className="mb-8 h-px w-full bg-(--line)" />
+
+          <div
+            ref={headerRef}
+            className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-end"
+          >
+            <span className="font-mono text-xs tracking-widest text-mute lg:col-span-2 lg:pb-3">
+              (02)
+            </span>
+
+            <h2 className="h2 lg:col-span-7">
               {t("svc.title.a")}{" "}
-              <span className="text-neutral-300">{t("svc.title.mark")}</span>
+              <span className="text-mute">{t("svc.title.mark")}</span>
               <br />
               {t("svc.title.b")}
             </h2>
 
-            <p className="text-sm text-neutral-500 max-w-55 lg:mb-2 lg:text-left mx-auto lg:mx-0">
+            <p className="max-w-xs text-sm leading-relaxed text-mute lg:col-span-3 lg:justify-self-end lg:pb-2">
               {t("svc.sub")}
             </p>
           </div>

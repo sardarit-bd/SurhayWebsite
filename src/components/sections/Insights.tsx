@@ -4,10 +4,9 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { FiArrowUpRight } from "react-icons/fi";
-import { GoDotFill } from "react-icons/go";
-import { t, path } from "../../i18n/utils";
+import { t } from "../../i18n/utils";
 import type { Lang, UiKey } from "../../i18n/ui";
-import type { LangProp } from '../../lib/props';
+import type { LangProp } from "../../lib/props";
 
 type ServiceItem = {
   id: string;
@@ -34,7 +33,7 @@ type ServiceItem = {
 
 function getServicesData(lang: Lang): ServiceItem[] {
   const k = (key: string) => `svcShow.${key}` as UiKey;
-  
+
   return [
     {
       id: "brand-identity",
@@ -46,9 +45,9 @@ function getServicesData(lang: Lang): ServiceItem[] {
       detailedDescription: t(k("p1.detailedDescription"), lang),
       features: [t(k("p1.f1"), lang), t(k("p1.f2"), lang), t(k("p1.f3"), lang), t(k("p1.f4"), lang)],
       deliverables: [t(k("p1.d1"), lang), t(k("p1.d2"), lang), t(k("p1.d3"), lang), t(k("p1.d4"), lang)],
-      image: "/images/project/CASA.webp",
-      fallbackImage: "/images/project/CASA.webp",
-      imageSrc: "/images/project/CASA.webp",
+      image: "/images/project/image4.webp",
+      fallbackImage: "/images/project/image4.webp",
+      imageSrc: "/images/project/image4.webp",
       href: lang === "de" ? "/leistungen/brand-identity" : "/en/services/brand-identity",
       bgClass: "bg-white border border-neutral-200/80",
       color: "text-neutral-900",
@@ -78,9 +77,9 @@ function getServicesData(lang: Lang): ServiceItem[] {
       detailedDescription: t(k("p2.detailedDescription"), lang),
       features: [t(k("p2.f1"), lang), t(k("p2.f2"), lang), t(k("p2.f3"), lang), t(k("p2.f4"), lang)],
       deliverables: [t(k("p2.d1"), lang), t(k("p2.d2"), lang), t(k("p2.d3"), lang), t(k("p2.d4"), lang)],
-      image: "/images/services/web-performance.webp",
-      fallbackImage: "/images/services/web-performance.webp",
-      imageSrc: "/images/services/mobile-dual-mockup.webp",
+      image: "/images/project/image5.avif",
+      fallbackImage: "/images/project/image5.avif",
+      imageSrc: "/images/project/image5.avif",
       href: lang === "de" ? "/leistungen/web-mobile-development" : "/en/services/web-mobile-development",
       bgClass: "bg-[#0B1120]",
       color: "text-white",
@@ -110,9 +109,9 @@ function getServicesData(lang: Lang): ServiceItem[] {
       detailedDescription: t(k("p3.detailedDescription"), lang),
       features: [t(k("p3.f1"), lang), t(k("p3.f2"), lang), t(k("p3.f3"), lang), t(k("p3.f4"), lang)],
       deliverables: [t(k("p3.d1"), lang), t(k("p3.d2"), lang), t(k("p3.d3"), lang), t(k("p3.d4"), lang)],
-      image: "/images/services/isometric-ai-core.png",
-      fallbackImage: "/images/services/isometric-ai-core.png",
-      imageSrc: "/images/services/isometric-ai-core.png",
+      image: "/images/project/image6.avif",
+      fallbackImage: "/images/project/image6.avif",
+      imageSrc: "/images/project/image6.avif",
       href: lang === "de" ? "/leistungen/ai-automation-solutions" : "/en/services/ai-automation-solutions",
       bgClass: "bg-[#133BD4]",
       color: "text-white",
@@ -127,7 +126,7 @@ function getServicesData(lang: Lang): ServiceItem[] {
       ],
       processSteps: [
         { step: "01", title: t(k("p3.ps1.title"), lang), description: t(k("p3.ps1.desc"), lang) },
-        { step: "02", title: t(k("p3.ps2.title"), lang), description: t(k("p3.ps2.desc"), lang) },
+      { step: "02", title: t(k("p3.ps2.title"), lang), description: t(k("p3.ps2.desc"), lang) },
         { step: "03", title: t(k("p3.ps3.title"), lang), description: t(k("p3.ps3.desc"), lang) },
         { step: "04", title: t(k("p3.ps4.title"), lang), description: t(k("p3.ps4.desc"), lang) },
       ],
@@ -142,9 +141,9 @@ function getServicesData(lang: Lang): ServiceItem[] {
       detailedDescription: t(k("p4.detailedDescription"), lang),
       features: [t(k("p4.f1"), lang), t(k("p4.f2"), lang), t(k("p4.f3"), lang), t(k("p4.f4"), lang)],
       deliverables: [t(k("p4.d1"), lang), t(k("p4.d2"), lang), t(k("p4.d3"), lang), t(k("p4.d4"), lang)],
-      image: "/images/services/digital-marketing.png",
-      fallbackImage: "/images/services/digital-marketing.png",
-      imageSrc: "/images/services/digital-marketing.png",
+      image: "/images/project/image7.jpg",
+      fallbackImage: "/images/project/image7.jpg",
+      imageSrc: "/images/project/image7.jpg",
       href: lang === "de" ? "/leistungen/digital-marketing" : "/en/services/digital-marketing",
       bgClass: "bg-[#F1F5F9]",
       color: "text-neutral-900",
@@ -166,6 +165,55 @@ function getServicesData(lang: Lang): ServiceItem[] {
   ];
 }
 
+type Theme = {
+  card: string;
+  muted: string;
+  line: string;
+  accent: string;
+  btn: string;
+  btnArrow: string;
+  fade: string;
+};
+
+const THEMES: Theme[] = [
+  {
+    card: "bg-paper text-ink border-(--line)",
+    muted: "text-mute",
+    line: "border-(--line)",
+    accent: "bg-accent-600",
+    btn: "bg-ink text-paper hover:bg-accent-800",
+    btnArrow: "bg-paper/15",
+    fade: "from-paper",
+  },
+  {
+    card: "bg-ink text-paper border-(--line-dark)",
+    muted: "text-mute-dark",
+    line: "border-(--line-dark)",
+    accent: "bg-accent-400",
+    btn: "bg-accent-400 text-ink hover:bg-accent-300",
+    btnArrow: "bg-ink/10",
+    fade: "from-ink",
+  },
+  {
+    card: "bg-accent-800 text-white border-white/15",
+    muted: "text-white/85",
+    line: "border-white/20",
+    accent: "bg-accent-100",
+    btn: "bg-white text-ink hover:bg-accent-100",
+    btnArrow: "bg-ink/10",
+    fade: "from-accent-800",
+  },
+  {
+    card: "bg-paper-2 text-ink border-(--line)",
+    muted: "text-mute",
+    line: "border-(--line)",
+    accent: "bg-accent-600",
+    btn: "bg-ink text-paper hover:bg-accent-800",
+    btnArrow: "bg-paper/15",
+    fade: "from-paper-2",
+  },
+];
+
 export function ServiceShowcaseCard({ lang }: LangProp) {
   const services = getServicesData(lang);
 
@@ -175,65 +223,71 @@ export function ServiceShowcaseCard({ lang }: LangProp) {
 
       <div className="w-full container mx-auto flex flex-col gap-4 sm:gap-6 md:gap-10 lg:gap-12 relative pb-10 sm:pb-14 lg:pb-20">
         {services.map((service, index) => {
-          const isDark = service.color === "text-white";
-          const isBlue = service.bgClass?.includes("#133BD4");
+          const theme = THEMES[index % THEMES.length];
+          const num = String(index + 1).padStart(2, "0");
 
           return (
             <div
               key={service.id}
               style={{ top: `calc(100px + ${index * 30}px)` }}
-              className={`sticky max-h-[85dvh] sm:max-h-[80dvh] lg:max-h-none w-full flex flex-col lg:flex-row overflow-hidden shadow transition-all duration-300 rounded-2xl sm:rounded-3xl ${
-                !isDark ? "border border-neutral-200/80" : "border border-neutral-800"
-              }`}
+              className={`sticky max-h-[85dvh] sm:max-h-[80dvh] lg:max-h-none w-full flex flex-col lg:flex-row overflow-hidden rounded-2xl border ${theme.card}`}
             >
               <motion.div
                 initial={{ opacity: 1, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
-                className={`flex flex-1 flex-col justify-between gap-4 sm:gap-6 lg:gap-10 p-4 sm:p-6 lg:basis-[55%] lg:p-12 ${service.bgClass} ${service.color || "text-neutral-900"}`}
+                className="flex flex-1 flex-col justify-between gap-6 p-5 sm:p-7 lg:basis-[55%] lg:gap-10 lg:p-12"
               >
-                <div className="flex flex-col gap-3 sm:gap-4 lg:gap-6">
-                  <div className="flex items-center justify-between">
-                    <h3 className={`text-lg font-bold leading-snug sm:text-2xl sm:leading-tight lg:text-4xl ${isDark ? "text-white" : "text-neutral-900"}`}>
-                      {service.title}
-                    </h3>
+                <div className="flex flex-col gap-4 sm:gap-5 lg:gap-6">
+                  {/* Number + label */}
+                  <div className="flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.16em] sm:text-xs">
+                    <span>{num}</span>
+                    <span aria-hidden="true" className={`h-px w-8 ${theme.accent}`} />
+                    <span className={theme.muted}>{service.label}</span>
                   </div>
 
-                  <p className={`text-xs font-normal leading-relaxed sm:text-sm lg:text-lg ${isDark ? (isBlue ? "text-blue-100" : "text-neutral-300") : "text-neutral-600"}`}>
+                  <h3 className="font-display text-2xl font-bold leading-[1.05] tracking-tight sm:text-3xl lg:text-5xl">
+                    {service.title}
+                  </h3>
+
+                  <p className={`max-w-xl text-sm leading-relaxed sm:text-base lg:text-lg ${theme.muted}`}>
                     {service.description}
                   </p>
 
-                  <div className="grid grid-cols-2 gap-x-3 gap-y-1.5 sm:gap-x-4 sm:gap-y-2.5">
+                  {/* Features */}
+                  <ul className={`mt-1 grid grid-cols-1 border-b sm:grid-cols-2 sm:gap-x-8 ${theme.line}`}>
                     {service.features.map((feature, i) => (
-                      <div key={i} className="flex flex-row items-center gap-1.5 sm:gap-2">
-                        <GoDotFill className={`shrink-0 text-[10px] sm:text-sm ${isDark ? (isBlue ? "text-blue-200" : "text-[#133BD4]") : "text-[#133BD4]"}`} />
-                        <span className={`text-[11px] font-medium leading-snug sm:text-sm lg:text-base ${isDark ? (isBlue ? "text-white" : "text-neutral-200") : "text-neutral-700"}`}>
-                          {feature}
-                        </span>
-                      </div>
+                      <li
+                        key={i}
+                        className={`flex items-center gap-3 border-t py-2.5 text-xs font-medium leading-snug sm:text-sm lg:text-base ${theme.line} ${
+                          i === 1 ? "sm:border-t" : ""
+                        } ${i >= 2 ? "sm:border-b-0" : ""}`}
+                      >
+                        <span aria-hidden="true" className={`h-px w-3 shrink-0 ${theme.accent}`} />
+                        <span>{feature}</span>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 </div>
 
                 <Link
                   href={service.href}
-                  className={`group w-full sm:w-fit justify-center inline-flex items-center gap-2 sm:gap-3 px-4 py-2 sm:px-5 sm:py-3 rounded-full ${
-                    (service.isBtnWhite ?? service.bthIsWhite)
-                      ? "bg-white text-neutral-950 hover:bg-neutral-100"
-                      : "bg-neutral-950 text-white hover:bg-neutral-800"
-                  } font-semibold text-xs sm:text-sm md:text-base transition-all duration-300 hover:scale-[1.02] shadow-sm`}
+                  className={`group inline-flex w-full items-center justify-between gap-4 rounded-full py-2 pl-5 pr-2 text-sm font-semibold transition-colors duration-(--dur-micro) ease-(--ease-micro) sm:w-fit sm:justify-center sm:gap-6 sm:text-base ${theme.btn}`}
                 >
                   <span>{t("svcShow.cta" as UiKey, lang)}</span>
-                  <span className={`flex items-center justify-center size-6 sm:size-7 rounded-full ${
-                    (service.isBtnWhite ?? service.bthIsWhite) ? "bg-neutral-100 text-neutral-950" : "bg-neutral-800 text-white"
-                  } transition-all duration-300`}>
-                    <FiArrowUpRight className="text-sm sm:text-base transition-transform duration-300 group-hover:rotate-45" />
+                  <span
+                    className={`flex size-9 items-center justify-center rounded-full ${theme.btnArrow}`}
+                  >
+                    <FiArrowUpRight className="text-base transition-transform duration-300 group-hover:rotate-45" />
                   </span>
                 </Link>
               </motion.div>
 
-              <div className="relative flex w-full flex-1 lg:w-7/12 lg:basis-[45%] min-h-32 sm:min-h-56 lg:min-h-105 bg-neutral-100 overflow-hidden">
+              {/* Image */}
+              <div
+                className={`relative flex min-h-32 w-full flex-1 overflow-hidden border-t sm:min-h-56 lg:min-h-105 lg:w-7/12 lg:basis-[45%] lg:border-l lg:border-t-0 ${theme.line}`}
+              >
                 <Image
                   src={service.imageSrc || service.image || service.fallbackImage || "/images/project/CASA.webp"}
                   alt={`${service.title} showcase`}
@@ -241,6 +295,10 @@ export function ServiceShowcaseCard({ lang }: LangProp) {
                   sizes="(max-width: 1024px) 100vw, 45vw"
                   className="object-cover"
                   priority={index < 2}
+                />
+                <div
+                  aria-hidden="true"
+                  className={`pointer-events-none absolute inset-x-0 top-0 h-16 bg-linear-to-b to-transparent opacity-60 lg:hidden ${theme.fade}`}
                 />
               </div>
             </div>

@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ProjectCardVertical from "./ProjectCardVertical";
 import { getWorkProjects } from "./Work.data";
 import { useTranslations } from "../../i18n/utils";
-import type { LangProp } from '../../lib/props';
+import type { LangProp } from "../../lib/props";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -15,10 +15,44 @@ if (typeof window !== "undefined") {
 export default function WorkSection({ lang }: LangProp) {
   const t = useTranslations(lang);
   const projects = getWorkProjects(lang);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const lineRef = useRef<HTMLDivElement | null>(null);
+  const headerRef = useRef<HTMLDivElement | null>(null);
   const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     const ctx = gsap.context(() => {
+      if (lineRef.current) {
+        gsap.fromTo(
+          lineRef.current,
+          { scaleX: 0 },
+          {
+            scaleX: 1,
+            duration: 1.1,
+            ease: "power3.inOut",
+            transformOrigin: "left center",
+            scrollTrigger: { trigger: lineRef.current, start: "top 90%" },
+          }
+        );
+      }
+
+      if (headerRef.current) {
+        gsap.fromTo(
+          headerRef.current.children,
+          { y: 30, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.9,
+            stagger: 0.12,
+            ease: "power3.out",
+            scrollTrigger: { trigger: headerRef.current, start: "top 85%" },
+          }
+        );
+      }
+
       cardRefs.current.forEach((card, index) => {
         if (!card) return;
 
@@ -28,51 +62,58 @@ export default function WorkSection({ lang }: LangProp) {
           {
             y: 0,
             opacity: 1,
-            duration: 0.8,
-            delay: index * 0.1,
+            duration: 0.9,
+            delay: (index % 3) * 0.1,
             ease: "power3.out",
             scrollTrigger: {
               trigger: card,
-              start: "top 85%",
+              start: "top 88%",
               toggleActions: "play none none reverse",
             },
           }
         );
       });
-    });
+    }, sectionRef);
 
     return () => ctx.revert();
-  }, [lang]); // Re-run if lang changes
+  }, [lang]);
 
   return (
-    <section className="w-full px-6 sm:px-10 lg:px-16 py-16 md:py-24 bg-neutral-50 dark:bg-neutral-950">
+    <section
+      ref={sectionRef}
+      className="dark-section w-full px-6 py-20 sm:px-10 md:py-32 lg:px-16"
+    >
       <div className="container mx-auto">
-        {/* Header */}
-        <div className="flex flex-col items-center text-center mb-16 md:mb-20">
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 lg:gap-10 w-full">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold uppercase leading-tight text-neutral-900 dark:text-white">
-              {t("work.title.a")}{" "}
-              <span className="text-neutral-400">{t("work.title.mark")}</span>
+        <div className="mb-14 md:mb-20">
+          {/* <div
+            ref={lineRef}
+            className="mb-8 h-px w-full bg-(--line-dark)"
+          /> */}
+          <div
+            ref={headerRef}
+            className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-end"
+          >
+            <h2 className="h2 text-paper lg:col-span-7">
+              {t("work.title.a")}
+              <span className="text-mute-dark">{t("work.title.mark")}</span>
               <br />
               {t("work.title.b")}
             </h2>
-
-            <p className="text-sm text-neutral-500 max-w-55 lg:mb-2 lg:text-left mx-auto lg:mx-0">
+            <p className="max-w-xs text-sm leading-relaxed text-mute-dark lg:col-span-3 lg:justify-self-end lg:pb-2">
               {t("work.sub")}
             </p>
           </div>
         </div>
-
-        {/* Project cards grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           {projects.map((project, index) => (
             <div
               key={project.title}
               ref={(el) => {
                 cardRefs.current[index] = el;
               }}
+              className="h-full"
             >
-              <ProjectCardVertical {...project} />
+              <ProjectCardVertical {...project} index={index} />
             </div>
           ))}
         </div>

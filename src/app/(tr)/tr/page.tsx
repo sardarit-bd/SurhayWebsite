@@ -12,7 +12,6 @@ import Faq from '@/components/sections/Faq';
 import ContactCta from '@/components/ContactCta';
 import { astroPathname } from '@/lib/props';
 
-/** Tuerkische Startseite — identische Sektionsfolge, siehe src/app/(de)/page.tsx. */
 export default function Page() {
   const lang = 'tr' as const;
   const pathname = astroPathname('/tr');

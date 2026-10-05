@@ -1,11 +1,4 @@
-/* Aus src/components/pages/WorkIndexPage.astro (Astro-Fassung), <style>-Block.
-   Die Regeln sind unveraendert; hinzugekommen ist nur die Bereichskennung
-   [data-c-work-index-page] an jedem Compound — dieselbe Umschreibung, die Astro mit
-   data-astro-cid-* vornahm. Erzeugt von scripts/gen-scoped-css.mjs.
-   Die Komponente setzt data-c-work-index-page="" an jedes eigene Element. */
-
-/* Der Rahmen ist die Schaltflaeche — Bedienelement-Stufe statt Haarlinie
-     (WCAG 1.4.11, 3:1). */.filter-btn[data-c-work-index-page] {
+.filter-btn[data-c-work-index-page] {
     border-color: var(--line-control);
     color: var(--color-mute);
   }
@@ -18,7 +11,7 @@
     border-color: var(--color-accent-600);
     color: var(--color-white);
   }
-  /* Der Zoom bleibt langsam, aber innerhalb der Obergrenze von 600 ms. */.case-image[data-c-work-index-page] {
+.case-image[data-c-work-index-page] {
     transition: transform var(--dur-reveal) var(--ease-out);
   }
 

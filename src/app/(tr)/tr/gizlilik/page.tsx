@@ -3,13 +3,6 @@ import { LEGAL, SITE, legalAddressInline } from '@/config';
 import Legal from '@/layouts/Legal';
 import { astroPathname } from '@/lib/props';
 
-/**
- * Datenschutzerklaerung (TR) — Uebersetzung der deutschen Fassung.
- *
- * Verbindlich bleibt src/pages/datenschutz.astro. Wird dort ein Abschnitt
- * geaendert — insbesondere Ziffer 4 (Kontaktformular, Empfangsdienst) —,
- * muss diese Datei und en/privacy.astro mitgezogen werden.
- */
 export default function Page() {
   const lang = 'tr' as const;
   const t = useTranslations(lang);

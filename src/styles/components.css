@@ -1,6 +1,4 @@
-/* Alle Bauteil-Styles, die unter Astro in <style>-Bloecken standen.
-   Einmal aus dem Wurzel-Layout eingebunden — Astro haengte sie pro Seite
-   an; Next buendelt sie selbst. Angewandt wird dasselbe. */
+
 
 @import './components/configurator.css';
 @import './components/contact-cta.css';

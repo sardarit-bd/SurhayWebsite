@@ -2,14 +2,6 @@ import { altPaths, path, useTranslations } from '@/i18n/utils';
 import { SITE } from '@/config';
 import Legal from '@/layouts/Legal';
 import { astroPathname } from '@/lib/props';
-
-/**
- * Cookie-Seite (EN) — Uebersetzung der deutschen Fassung.
- *
- * Verbindlich bleibt src/pages/cookie-einstellungen.astro. Wird dort die
- * Bestandsaufnahme geaendert, muss diese Datei und tr/cerez-ayarlari.astro
- * mitgezogen werden.
- */
 export default function Page() {
   const lang = 'en' as const;
   const t = useTranslations(lang);
