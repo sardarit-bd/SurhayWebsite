@@ -20,8 +20,8 @@ export default function Page() {
   return (
     <Base alternates={homePaths()} lang={lang} pathname={pathname}>
       <Hero lang={lang} />
-      <TrustBar lang={lang} />
       <Services lang={lang} />
+      <TrustBar lang={lang} />
       <Work lang={lang} />
       <Process lang={lang} />
       <Studio lang={lang} />

@@ -1,27 +1,45 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { FiPause, FiMenu, FiX } from "react-icons/fi";
+import { FiMenu, FiX } from "react-icons/fi";
 import gsap from "gsap";
+import type { LangProp, PfadProp } from "../lib/props";
+import { useTranslations, localePath, path } from "../i18n/utils";
+import { locales, localeMeta, type Lang, type UiKey } from "../i18n/ui";
+import type { RouteKey } from "../i18n/routes";
 
-const NAV_LINKS = ["Services", "Industries", "Projects", "process", "About Us"];
+/* Labels stehen in src/i18n/ui.ts (Schluessel header.*). Industries hat
+   keine Route und bleibt "#", wie im Entwurf. */
+const NAV_LINKS: { key: UiKey; route?: RouteKey }[] = [
+  { key: "header.services", route: "services" },
+  { key: "header.industries" },
+  { key: "header.projects", route: "work" },
+  { key: "header.process", route: "process" },
+  { key: "header.about", route: "about" },
+];
 
 const SCROLL_THRESHOLD = 24;
 
+interface Props extends LangProp, Partial<PfadProp> {
+  alternates: Record<Lang, string>;
+}
+
 function NavLink({
   label,
+  href,
   scrolled,
   className = "",
   onClick,
 }: {
   label: string;
+  href: string;
   scrolled: boolean;
   className?: string;
   onClick?: () => void;
 }) {
   return (
     <a
-      href="#"
+      href={href}
       onClick={onClick}
       className={`transition-colors duration-200 ${
         scrolled
@@ -34,12 +52,71 @@ function NavLink({
   );
 }
 
-export default function Header() {
+/* Sprachumschalter: einfache Links, Ziel = gleiche Seite in der anderen
+   Sprache (alternates kommt aus Base). Funktioniert ohne JavaScript. */
+function LangLinks({
+  lang,
+  alternates,
+  label,
+  tone,
+  className = "",
+  onClick,
+}: {
+  lang: Lang;
+  alternates: Record<Lang, string>;
+  label: string;
+  tone: "light" | "dark";
+  className?: string;
+  onClick?: () => void;
+}) {
+  const idle =
+    tone === "dark"
+      ? "text-neutral-500 hover:text-neutral-950"
+      : "text-white/70 hover:text-white";
+  const current = tone === "dark" ? "text-neutral-950" : "text-white";
+  return (
+    <ul
+      aria-label={label}
+      className={`flex items-center gap-3 font-sans text-sm ${className}`}
+    >
+      {locales.map((code) => {
+        const meta = localeMeta[code];
+        const isCurrent = code === lang;
+        return (
+          <li key={code}>
+            <a
+              href={alternates[code]}
+              hrefLang={meta.hreflang}
+              lang={meta.hreflang}
+              aria-label={meta.native}
+              aria-current={isCurrent ? "true" : undefined}
+              onClick={onClick}
+              className={`transition-colors duration-200 ${
+                isCurrent ? `${current} font-semibold` : idle
+              }`}
+            >
+              {meta.short}
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+export default function Header({ lang, alternates }: Props) {
+  const t = useTranslations(lang);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const overlayRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
+
+  const navItems = NAV_LINKS.map(({ key, route }) => ({
+    key,
+    label: t(key),
+    href: route ? path(lang, route) : "#",
+  }));
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > SCROLL_THRESHOLD);
@@ -95,7 +172,7 @@ export default function Header() {
       }`}
     >
       <div className="mx-auto flex w-full max-w-[1600px] items-center justify-between gap-4 px-5 py-4 sm:px-8 lg:px-12">
-        <a href="/" className="flex shrink-0 items-center font-sans text-lg sm:text-xl">
+        <a href={localePath(lang, "/")} className="flex shrink-0 items-center font-sans text-lg sm:text-xl">
           <span
             className={`font-bold transition-colors duration-300 ${
               scrolled ? "text-neutral-900" : "text-white"
@@ -115,23 +192,29 @@ export default function Header() {
 
 
         <nav className="hidden items-center gap-8 font-sans text-sm md:flex">
-          {NAV_LINKS.map((link) => (
-            <NavLink key={link} label={link} scrolled={scrolled} />
+          {navItems.map((link) => (
+            <NavLink key={link.key} label={link.label} href={link.href} scrolled={scrolled} />
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-3 md:flex">
+          <LangLinks
+            lang={lang}
+            alternates={alternates}
+            label={t("nav.langSwitch")}
+            tone={scrolled ? "dark" : "light"}
+          />
           <a
             href="#"
-            className="rounded-md bg-teal-700 px-4 py-2.5 font-sans text-sm font-semibold text-white transition-colors duration-200 hover:bg-teal-800"
+            className="hidden rounded-md bg-teal-700 px-4 py-2.5 font-sans text-sm font-semibold text-white transition-colors duration-200 hover:bg-teal-800 lg:block"
           >
-            Request website
+            {t("header.request")}
           </a>
         </div>
 
         <button
           type="button"
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-label={menuOpen ? t("nav.menuClose") : t("nav.menuOpen")}
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((v) => !v)}
           className={`relative z-50 flex items-center justify-center text-xl transition-colors duration-300 md:hidden ${
@@ -147,18 +230,29 @@ export default function Header() {
         style={{ visibility: "hidden", opacity: 0 }}
       >
         <nav className="flex flex-1 flex-col justify-center gap-7 font-sans">
-          {NAV_LINKS.map((link) => (
-            <div key={link} className="mobile-nav-link overflow-hidden">
+          {navItems.map((link) => (
+            <div key={link.key} className="mobile-nav-link overflow-hidden">
               <a
-                href="#"
+                href={link.href}
                 onClick={() => setMenuOpen(false)}
                 className="text-3xl font-medium text-white/90 transition-colors duration-200 hover:text-white"
               >
-                {link}
+                {link.label}
               </a>
             </div>
           ))}
         </nav>
+
+        <div className="mobile-nav-link pt-8">
+          <LangLinks
+            lang={lang}
+            alternates={alternates}
+            label={t("nav.langSwitch")}
+            tone="light"
+            className="gap-5 text-base"
+            onClick={() => setMenuOpen(false)}
+          />
+        </div>
 
         <div className="mobile-nav-link mt-auto flex items-center gap-3 pt-8">
           <a
@@ -166,7 +260,7 @@ export default function Header() {
             onClick={() => setMenuOpen(false)}
             className="flex-1 rounded-md bg-teal-700 px-4 py-3 text-center font-sans text-sm font-semibold text-white transition-colors duration-200 hover:bg-teal-800"
           >
-            Request website
+            {t("header.request")}
           </a>
         </div>
       </div>

@@ -4,42 +4,6 @@ import type { LangProp } from '../lib/props';
 import { useTranslations, withBase } from '../i18n/utils';
 import { locales, localeMeta, type Lang } from '../i18n/ui';
 
-/**
- * HINWEIS ZUM SKRIPT
- * Das Bauteil gibt sein <script> NICHT selbst aus — Header.tsx tut es, weil
- * Header den Umschalter ZWEIMAL rendert: als Dropdown fuer die Desktop-Leiste
- * und als Liste im Mobilmenue. Zweimal ausgegeben wuerde das Skript seine
- * Klick-Handler doppelt binden, `setOpen(!open)` liefe zweimal pro Klick und
- * das Dropdown ginge auf und sofort wieder zu. Astro buendelte pro Seite
- * einmal; hier sorgt die Aufrufstelle dafuer.
- *
- * Sprachumschalter — Flagge UND Textlabel, in drei Sprachen.
- *
- * ZWEI DARSTELLUNGEN, EINE QUELLE
- * `variant="dropdown"` steht in der Kopfleiste rechts neben der Navigation:
- * Bei sieben Navigationspunkten plus Schaltflaeche bleiben ab 1024 px keine
- * 150 px fuer eine dreiteilige Segmentleiste uebrig — die Auswahl klappt
- * deshalb auf. `variant="list"` steht im Burger-Menue, wo Platz fuer alle
- * drei Sprachen nebeneinander ist (Ziele mind. 44 px hoch).
- *
- * NIE NUR DIE FLAGGE
- * Jede Option traegt Kuerzel bzw. Sprachnamen. Flaggen sind fuer Screenreader
- * unsichtbar, in 12 px kaum unterscheidbar und bezeichnen Staaten, keine
- * Sprachen — sie sind hier Schmuck (aria-hidden), die Bedeutung traegt der
- * Text. Der Sprachname steht in der Zielsprache („Türkçe“, nicht „Türkisch“).
- *
- * ZIEL BLEIBT DIE AKTUELLE SEITE
- * `alternates` kommt aus Base.astro und damit aus derselben Tabelle wie die
- * hreflang-Angaben (i18n/utils.ts → routes). Von /leistungen fuehrt TR auf
- * /tr/hizmetler, nicht auf die Startseite. Fehlt eine Sprachfassung, zeigt
- * der Eintrag auf die Sammelseite bzw. Startseite dieser Sprache.
- *
- * KEINE AUTOMATISCHE UMLEITUNG
- * Weder Accept-Language noch ein gemerkter Wert leiten hier um. Die Sprache
- * waehlt ausschliesslich, wer klickt — sonst waeren geteilte Links kaputt und
- * die Indexierung unklar. Aus demselben Grund gibt es keinen localStorage-
- * Eintrag: Welche Sprache aktiv ist, steht in der URL, nicht im Browser.
- */
 interface Props extends LangProp {
   alternates: Record<Lang, string>;
   variant?: 'dropdown' | 'list';

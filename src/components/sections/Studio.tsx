@@ -3,7 +3,10 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import { FiPlay } from "react-icons/fi";
+import { t } from "../../i18n/utils";
+import type { Lang, UiKey } from "../../i18n/ui";
 import type { LangProp } from '../../lib/props';
+
 export default function Showreel({ lang }: LangProp) {
   const [isPlaying, setIsPlaying] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -15,11 +18,11 @@ export default function Showreel({ lang }: LangProp) {
   });
 
   // Expand width from 78% to 100%
-  const width = useTransform(scrollYProgress, [0.1, 0.45], ["60%", "100%"]); //78%
+  const width = useTransform(scrollYProgress, [0.1, 0.45], ["60%", "100%"]);
   // Expand height from 65vh to 100vh
-  const height = useTransform(scrollYProgress, [0.1, 0.45], ["80vh", "100vh"]); // 65vh
+  const height = useTransform(scrollYProgress, [0.1, 0.45], ["80vh", "100vh"]);
   // Border radius from 28px to 0px
-  const borderRadius = useTransform(scrollYProgress, [0.1, 0.45], ["0px", "0px"]); //0px
+  const borderRadius = useTransform(scrollYProgress, [0.1, 0.45], ["0px", "0px"]);
   // Scale from 0.9 to 1.0
   const scale = useTransform(scrollYProgress, [0.1, 0.45], [0.9, 1]);
 
@@ -36,7 +39,7 @@ export default function Showreel({ lang }: LangProp) {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-[170vh]  z-[60]"
+      className="relative w-full h-[170vh] z-[60]"
     >
       <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden z-[60]">
         <motion.div
@@ -80,7 +83,7 @@ export default function Showreel({ lang }: LangProp) {
                   />
                   <text className="text-[8.5px] font-bold uppercase tracking-[2px] fill-white">
                     <textPath href="#circlePath" startOffset="0%">
-                      • PLAY SHOWREEL • UNMUTE AUDIO
+                      {t("showreel.play" as UiKey, lang)}
                     </textPath>
                   </text>
                 </svg>

@@ -4,13 +4,16 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ServiceRow from "./Servicerow";
-import { services } from "./Services.data";
+import { getServices } from "./Services.data";
+import { useTranslations } from "../../i18n/utils";
 import type { LangProp } from '../../lib/props';
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
 export default function ServicesSection({ lang }: LangProp) {
+  const t = useTranslations(lang);
+  const services = getServices(lang);
   const rowRefs = useRef<Array<HTMLDivElement | null>>([]);
 
   useEffect(() => {
@@ -44,24 +47,16 @@ export default function ServicesSection({ lang }: LangProp) {
       <div className="container mx-auto">
         {/* Header */}
         <div className="flex flex-col items-center text-center mb-16 md:mb-20">
-          {/* Placeholder illustrated character — swap the src for the real asset
-          <div
-            className="w-12 h-12 mb-4 rounded-full bg-neutral-200 flex items-center justify-center text-xl"
-            aria-hidden="true"
-          >
-            🧑‍🔧
-          </div> */}
-
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 lg:gap-10 w-full">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold uppercase leading-tight">
-              WE <span className="text-neutral-300">PROVIDE</span> PREMIUM
+              {t("svc.title.a")}{" "}
+              <span className="text-neutral-300">{t("svc.title.mark")}</span>
               <br />
-              AROLAX SERVICE
+              {t("svc.title.b")}
             </h2>
 
-            <p className="text-sm text-neutral-500 max-w-[220px] lg:mb-2 lg:text-left mx-auto lg:mx-0">
-              Our ability to combine expertise and systems thinking is what
-              fuels us as a team.
+            <p className="text-sm text-neutral-500 max-w-55 lg:mb-2 lg:text-left mx-auto lg:mx-0">
+              {t("svc.sub")}
             </p>
           </div>
         </div>

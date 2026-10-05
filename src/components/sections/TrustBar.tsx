@@ -1,55 +1,21 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
-// import { brands, brands1 } from "@/data/brands";
-import { BrandLogo } from "@/types/brand";
+import type { LangProp } from "../../lib/props";
+import { useTranslations } from "../../i18n/utils";
+import type { UiKey } from "../../i18n/ui";
 
-export const brands: BrandLogo[] = [
-  { name: "Sequoia", src: "/logo/1.avif" },
-  { name: "Kodezi", src: "/logo/2.avif" },
-  { name: "Combinator", src: "/logo/3.avif" },
-  { name: "HeyGen", src: "/logo/4.avif" },
-  { name: "Recruitly", src: "/logo/5.avif" },
-  { name: "techstars", src: "/logo/6.avif" },
-  { name: "Delve", src: "/logo/7.avif" },
-  { name: "Accepty", src: "/logo/8.avif" },
-  { name: "Mavis", src: "/logo/9.avif" },
-  { name: "Oppatravel", src: "/logo/10.avif" },
-  { name: "Medical Student AI", src: "/logo/11.avif" },
-  { name: "500 Global", src: "/logo/12.avif" },
-  { name: "ZeroEssay", src: "/logo/13.avif" },
-  { name: "Seedcamp", src: "/logo/14.avif" },
-  { name: "Empresaa", src: "/logo/16.avif" },
-  { name: "Andreessen Horowitz", src: "/logo/17.avif" },
-  { name: "AI Partner", src: "/logo/18.avif" },
-];
+const WORD_KEYS: UiKey[] = ["tb.1", "tb.2", "tb.3", "tb.4", "tb.5", "tb.6"];
 
-export const brands1: BrandLogo[] = [
-  { name: "Accepty", src: "/logo/8.avif" },
-  { name: "Kodezi", src: "/logo/2.avif" },
-  { name: "Mavis", src: "/logo/9.avif" },
-  { name: "Combinator", src: "/logo/3.avif" },
-  { name: "HeyGen", src: "/logo/4.avif" },
-  { name: "Medical Student AI", src: "/logo/11.avif" },
-  { name: "Recruitly", src: "/logo/5.avif" },
-  { name: "AI Partner", src: "/logo/18.avif" },
-  { name: "Delve", src: "/logo/7.avif" },
-  { name: "techstars", src: "/logo/6.avif" },
-  { name: "Oppatravel", src: "/logo/10.avif" },
-  { name: "ZeroEssay", src: "/logo/13.avif" },
-  { name: "500 Global", src: "/logo/12.avif" },
-  { name: "Empresaa", src: "/logo/16.avif" },
-  { name: "Seedcamp", src: "/logo/14.avif" },
-  { name: "Sequoia", src: "/logo/1.avif" },
-  { name: "Andreessen Horowitz", src: "/logo/17.avif" },
-];
+const REPEAT = 8;
 
 const Row = ({
+  words,
   direction,
   speed = 250,
   className = "",
 }: {
+  words: string[];
   direction: "left" | "right";
   speed?: number;
   className?: string;
@@ -65,36 +31,47 @@ const Row = ({
         ease: "linear",
       }}
     >
-      {[...brands, ...brands1].map((brand, index) => (
-        <div
-          key={index}
-          className="relative shrink-0 w-28 h-10 sm:w-36 sm:h-12 lg:w-44 lg:h-14 flex items-center justify-center opacity-100 transition-all duration-300 cursor-pointer"
-        >
-          <Image
-            src={brand.src}
-            alt={brand.name}
-            fill
-            sizes="(max-width: 768px) 112px, (max-width: 1200px) 144px, 176px"
-            className="object-contain"
-          />
-        </div>
-      ))}
+      {Array.from({ length: REPEAT }, () => words)
+        .flat()
+        .map((word, index) => (
+          <div
+            key={`${word}-${index}`}
+            className="relative shrink-0 h-10 sm:h-12 lg:h-14 flex items-center justify-center px-2"
+          >
+            <span className="whitespace-nowrap text-2xl sm:text-3xl lg:text-4xl font-semibold uppercase tracking-widest text-neutral-400">
+              {word}
+            </span>
+          </div>
+        ))}
     </motion.div>
   </div>
 );
 
 export default function TrustedBy({ lang }: LangProp) {
+  const t = useTranslations(lang);
+  const words = WORD_KEYS.map((key) => t(key));
+
   return (
     <section className="py-12 sm:py-16 lg:py-20 overflow-hidden w-full relative  border-y border-neutral-100">
       <div className="container mx-auto px-6 lg:px-8 mb-8 sm:mb-10 text-center">
         <p className="text-md md:text-lg font-semibold uppercase tracking-widest text-neutral-500 pb-14">
-          TRUSTED BY 250+ GLOBAL BRANDS
+          {t("tb.label")}
         </p>
       </div>
 
-      <div className="relative flex flex-col gap-8 sm:gap-10 overflow-hidden">
-        <Row direction="left" speed={150} />
-        <Row direction="right" speed={200} />
+      {/* Dekorativ: die Branchen stehen einmal als Liste fuer Screenreader. */}
+      <ul className="sr-only">
+        {words.map((word) => (
+          <li key={word}>{word}</li>
+        ))}
+      </ul>
+
+      <div
+        className="relative flex flex-col gap-8 sm:gap-10 overflow-hidden"
+        aria-hidden="true"
+      >
+        <Row words={words} direction="left" speed={150} />
+        <Row words={[...words].reverse()} direction="right" speed={200} />
       </div>
 
       <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-28 lg:w-40 bg-linear-to-r from-paper via-paper/80 to-transparent pointer-events-none z-10" />

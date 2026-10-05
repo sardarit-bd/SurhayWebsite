@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import type { LangProp } from '../../lib/props';
+import { t, withBase } from '../../i18n/utils';
+import type { Lang, UiKey } from '../../i18n/ui';
 const SLIDE_TRANSITION_S = 1.1;
 const POST_SLIDE_DELAY_MS = 500;
 const TEXT_ENTER_S = 0.8;
@@ -11,7 +13,7 @@ const TEXT_ENTER_STAGGER_S = 0.12;
 const TEXT_HOLD_MS = 1000;
 const TEXT_EXIT_S = 0.6;
 const TEXT_EXIT_STAGGER_S = 0.1;
-const POST_EXIT_DELAY_MS = 200;
+const POST_EXIT_DELAY_MS = 200;``
 const CYCLE_DURATION_S =
   POST_SLIDE_DELAY_MS / 1000 +
   (TEXT_ENTER_S + TEXT_ENTER_STAGGER_S * 2) +
@@ -28,86 +30,34 @@ type Slide = {
   description: string;
 };
 
-const SLIDES: Slide[] = [
-  {
-    id:"1",
-    image:
-      "images/hero/image1.avif",
-    alt: "Craftsmen ",
-    titleTop: "Craftsmen ",
-    titleBottom: "Construction Companies",
-    description:
-      "High-quality construction documentation, transparent service offerings and automated preliminary inquiries: We present your craftsmanship as precisely and masterfully as your work on site.",
-  },
-  {
-    id:"2",
-    image:
-      "images/hero/image2.avif",
-    alt: "Carved wooden lounge chair beside a warm textured wall",
-    titleTop: "Medical Practices",
-    titleBottom: "HEALTHCARE",
-    description:
-      "A calm, confidence-building practice design with barrier-free patient guidance, digital appointment scheduling and clear structuring of the specialist disciplines.",
-  },
-  {
-    id:"3",
-    image:
-      "images/hero/image3.avif",
-    alt: "Modern oak cabinet in a minimal, sunlit living space",
-    titleTop: "Lawyers",
-    titleBottom: "Tax Advisors",
-    description:
-      "A confident legal presence with excellent typography and clear profiling of your legal areas — optimized for discerning private and business clients.",
-  },
-  {
-    id:"4",
-    image:
-      "images/hero/image4.avif",
-    alt: "Artisan dining set with wooden chairs around a long table",
-    titleTop: "real estate agent",
-    titleBottom: "REAL ESTATE UI",
-    description:
-      "Exclusive property presentations with interactive floor plans, filter functions and automatic OpenImmo import for maximum marketing speed.",
-  },
-    {
-    id:"5",
-    image:
-      "images/hero/image5.avif",
-    alt: "Artisan dining set with wooden chairs around a long table",
-    titleTop: "Motor vehicles",
-    titleBottom: "Automotive",
-    description:
-      "Dynamic vehicle presentation, transparent workshop services and direct online test drive bookings in a modern premium ambience.",
-  },
-    {
-    id:"6",
-    image:
-      "images/hero/image6.avif",
-    alt: "Artisan dining set with wooden chairs around a long table",
-    titleTop: "Small & large ",
-    titleBottom: "companies",
-    description:
-      "Scalable corporate identities that combine brand, employer branding and sales — coded for high performance and easy for employees to maintain.",
-  },
-   {
-    id:"7",
-    image:
-      "images/hero/image7.jpg",
-    alt: "Artisan dining set with wooden chairs around a long table",
-    titleTop: "Individual solutions",
-    titleBottom: "DINING SETS",
-    description:
-      "Tailor-made web applications, individual portals and customized interfaces — perfectly suited to specific digital business models.",
-  },
+const SLIDE_IMAGES: { id: string; image: string }[] = [
+  { id: "1", image: "/images/hero/image1.avif" },
+  { id: "2", image: "/images/hero/image2.avif" },
+  { id: "3", image: "/images/hero/image3.avif" },
+  { id: "4", image: "/images/hero/image4.avif" },
+  { id: "5", image: "/images/hero/image5.avif" },
+  { id: "6", image: "/images/hero/image6.avif" },
+  { id: "7", image: "/images/hero/image7.jpg" },
 ];
 
-const TRACK_SLIDES: Slide[] = [...SLIDES, SLIDES[0]];
+const buildSlides = (lang: Lang): Slide[] =>
+  SLIDE_IMAGES.map(({ id, image }) => ({
+    id,
+    image: image,
+    alt: t(`hero.slide.${id}.alt` as UiKey, lang),
+    titleTop: t(`hero.slide.${id}.top` as UiKey, lang),
+    titleBottom: t(`hero.slide.${id}.bottom` as UiKey, lang),
+    description: t(`hero.slide.${id}.desc` as UiKey, lang),
+  }));
 
 const delay = (ms: number) =>
   new Promise<void>((resolve) => setTimeout(resolve, ms));
 
 export default function HeroSection({ lang }: LangProp) {
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const SLIDES = useMemo(() => buildSlides(lang), [lang]);
+  const TRACK_SLIDES: Slide[] = useMemo(() => [...SLIDES, SLIDES[0]], [SLIDES]);
 
   const trackRef = useRef<HTMLDivElement | null>(null);
   const topRef = useRef<HTMLHeadingElement | null>(null);
@@ -309,12 +259,6 @@ export default function HeroSection({ lang }: LangProp) {
 
           <div className="max-w-xs font-sans text-[0.8rem] leading-relaxed text-[#f4ede3]/90 md:pt-3 md:text-right">
             <p ref={descTextRef} />
-            <a
-              href="#"
-              className="mt-4 inline-block text-[0.7rem] tracking-[0.2em] text-[#f4ede3] underline decoration-[#f4ede3]/40 underline-offset-4 transition-colors duration-200 hover:decoration-[#f4ede3]"
-            >
-              EXPLORE THE SELECTION
-            </a>
           </div>
         </div>
 
@@ -323,7 +267,9 @@ export default function HeroSection({ lang }: LangProp) {
             className="flex items-center gap-4 font-sans text-xs tracking-widest text-[#f4ede3]/80"
             role="status"
             aria-live="polite"
-            aria-label={`Slide ${activeIndex + 1} of ${SLIDES.length}`}
+            aria-label={t("hero.slideOf", lang)
+              .replace("{n}", String(activeIndex + 1))
+              .replace("{total}", String(SLIDES.length))}
           >
 
             <div className="flex items-center gap-3">
@@ -334,7 +280,7 @@ export default function HeroSection({ lang }: LangProp) {
                     i === activeIndex ? "text-[#f4ede3]" : "text-[#f4ede3]/45"
                   }`}
                 >
-                  {String(i + 1).padStart(2, "0")}
+                  {i+1}
                 </span>
               ))}
             </div>

@@ -21,29 +21,29 @@ const ServiceRow = forwardRef<HTMLDivElement, ServiceRowProps>(
           !isLast ? "border-b border-neutral-200" : ""
         }`}
       >
-        {/* Number */}
+
         <span className="text-sm text-neutral-500 font-medium">{number}</span>
 
-        {/* Title */}
         <h3 className="text-xl md:text-2xl font-bold uppercase leading-tight text-neutral-900">
           {title[0]}
           <br />
           {title[1]}
         </h3>
 
-        {/* Description + bullets */}
         <div className="max-w-md">
           <p className="text-sm text-neutral-500 leading-relaxed">
             {description}
           </p>
-          <ul className="mt-2 space-y-1">
-            {bullets.map((bullet) => (
-              <li key={bullet} className="text-sm text-neutral-700 flex gap-2">
-                <span className="text-neutral-400">+</span>
-                <span>{bullet}</span>
-              </li>
-            ))}
-          </ul>
+          {bullets.length > 0 && (
+            <ul className="mt-2 space-y-1">
+              {bullets.map((bullet) => (
+                <li key={bullet} className="text-sm text-neutral-700 flex gap-2">
+                  <span className="text-neutral-400">+</span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         {/* Icon */}

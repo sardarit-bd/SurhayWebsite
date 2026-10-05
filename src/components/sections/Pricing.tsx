@@ -1,67 +1,18 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
 import type { LangProp } from "../../lib/props";
-const CONTACT_LABELS = ["1K", "5K", "10K", "15K", "1M"];
-type PlanFeature = { label: string; tooltip: string };
-const PLAN_FEATURES: PlanFeature[] = [
-  {
-    label: "Unlimited workspace boards",
-    tooltip: "Create and organize as many boards as your team needs.",
-  },
-  {
-    label: "Unlimited viewers",
-    tooltip: "Invite any number of read-only collaborators at no extra cost.",
-  },
-  {
-    label: "Unlimited project templates",
-    tooltip: "Save and reuse layouts across every new project.",
-  },
-  {
-    label: "Change management",
-    tooltip: "Track edits and roll back to any previous version.",
-  },
-  {
-    label: "Taxonomy development",
-    tooltip: "Organize assets with custom tags and categories.",
-  },
-  {
-    label: "Customer success manager",
-    tooltip: "Get a dedicated contact for onboarding and support.",
-  },
-];
+import { useTranslations, path } from "../../i18n/utils";
+import type { Lang, UiKey } from "../../i18n/ui";
 
 type Plan = {
-  name: string;
-  price: string;
-  description: string;
+  id: "p1" | "p2" | "p3";
   variant: "light" | "dark";
-  ctaLabel: string;
+  showFrom: boolean;
 };
 
 const PLANS: Plan[] = [
-  {
-    name: "Essential",
-    price: "29",
-    description: "For power users who want access to creative features.",
-    variant: "light",
-    ctaLabel: "Try for Free",
-  },
-  {
-    name: "Premium",
-    price: "49",
-    description: "For creative organizations that need full control & support.",
-    variant: "dark",
-    ctaLabel: "Try for Free",
-  },
-  {
-    name: "Enterprise",
-    price: "99",
-    description: "For creative organizations that need full control & support.",
-    variant: "light",
-    ctaLabel: "Try for Free",
-  },
+  { id: "p1", variant: "light", showFrom: true },
+  { id: "p2", variant: "dark", showFrom: true },
+  { id: "p3", variant: "light", showFrom: false },
 ];
 
 function CheckIcon() {
@@ -76,40 +27,11 @@ function CheckIcon() {
   );
 }
 
-function FeatureItem({ feature, id }: { feature: PlanFeature; id: string }) {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <li className="flex items-center">
-      <CheckIcon />
-      <div className="relative">
-        <button
-          type="button"
-          className="block cursor-help text-left text-zinc-500 underline decoration-dotted underline-offset-4 decoration-zinc-300"
-          aria-describedby={id}
-          onMouseEnter={() => setOpen(true)}
-          onMouseLeave={() => setOpen(false)}
-          onFocus={() => setOpen(true)}
-          onBlur={() => setOpen(false)}
-        >
-          {feature.label}
-        </button>
-        {open && (
-          <div
-            id={id}
-            role="tooltip"
-            className="absolute top-full left-0 z-10 mt-1 w-56 rounded-md bg-zinc-900 px-3 py-2 text-xs font-normal text-zinc-100 shadow-lg"
-          >
-            {feature.tooltip}
-          </div>
-        )}
-      </div>
-    </li>
-  );
-}
-
-function PricingCard({ plan, index }: { plan: Plan; index: number }) {
+function PricingCard({ plan, lang }: { plan: Plan; lang: Lang }) {
+  const t = useTranslations(lang);
   const isDark = plan.variant === "dark";
+  const key = (suffix: string) => `pricing.${plan.id}.${suffix}` as UiKey;
+  const features = t(key("features")).split("|");
 
   return (
     <div className="h-full">
@@ -123,7 +45,7 @@ function PricingCard({ plan, index }: { plan: Plan; index: number }) {
         {isDark && (
           <Image
             src="/images/pricing-decoration.png"
-            alt="Pricing decoration"
+            alt=""
             aria-hidden="true"
             width={76}
             height={74}
@@ -135,51 +57,49 @@ function PricingCard({ plan, index }: { plan: Plan; index: number }) {
           <div
             className={`mb-1 text-lg font-semibold ${isDark ? "text-zinc-200" : "text-zinc-900"}`}
           >
-            {plan.name}
+            {t(key("name"))}
           </div>
-          <div className="font-inter-tight mb-2 inline-flex items-baseline">
-            <span
-              className={`text-2xl font-bold ${isDark ? "text-zinc-200" : "text-zinc-900"}`}
-            >
-              $
-            </span>
+          <div className="font-inter-tight mb-2 inline-flex items-baseline gap-2">
+            {plan.showFrom && (
+              <span className="font-medium text-zinc-500">
+                {t("pricing.from")}
+              </span>
+            )}
             <span
               className={`text-3xl font-bold ${isDark ? "text-zinc-200" : "text-zinc-900"}`}
             >
-              {plan.price}
+              {t(key("price"))}
             </span>
-            <span className="font-medium text-zinc-500">/mo</span>
           </div>
-          <div className="text-zinc-500">{plan.description}</div>
+          <div className="text-zinc-500">{t(key("desc"))}</div>
         </div>
 
         <div className="grow">
           <div
             className={`mb-4 text-sm font-medium ${isDark ? "text-zinc-200" : "text-zinc-900"}`}
           >
-            Includes:
+            {t("common.included")}
           </div>
           <ul className="grow space-y-3 text-sm text-zinc-600 dark:text-zinc-400">
-            {PLAN_FEATURES.map((feature, i) => (
-              <FeatureItem
-                key={feature.label}
-                feature={feature}
-                id={`tooltip-${index}-${i}`}
-              />
+            {features.map((label) => (
+              <li key={label} className="flex items-center">
+                <CheckIcon />
+                <span className="text-zinc-500">{label}</span>
+              </li>
             ))}
           </ul>
         </div>
 
         <div className="mt-8">
           <a
-            href="#0"
+            href={path(lang, "contact")}
             className={
               isDark
                 ? "btn w-full bg-white text-zinc-600 shadow-sm hover:text-zinc-900"
                 : "btn w-full bg-linear-to-r from-zinc-700 to-zinc-900 text-zinc-100 shadow-sm hover:from-zinc-900 hover:to-zinc-900"
             }
           >
-            {plan.ctaLabel}
+            {t("pricing.cta")}
           </a>
         </div>
       </div>
@@ -187,114 +107,8 @@ function PricingCard({ plan, index }: { plan: Plan; index: number }) {
   );
 }
 
-type Faq = { question: string; answer: string };
-
-const FAQS: Faq[] = [
-  {
-    question: "Can I use the product for free?",
-    answer:
-      "Absolutely! Grey allows you to create as many commercial graphics/images as you like, for yourself or your clients.",
-  },
-  {
-    question: "What payment methods can I use?",
-    answer:
-      "Absolutely! Grey allows you to create as many commercial graphics/images as you like, for yourself or your clients.",
-  },
-  {
-    question: "Can I change from monthly to yearly billing?",
-    answer:
-      "Absolutely! Grey allows you to create as many commercial graphics/images as you like, for yourself or your clients.",
-  },
-  {
-    question:
-      "Can I use the tool for personal, client, and commercial projects?",
-    answer:
-      "Absolutely! Grey allows you to create as many commercial graphics/images as you like, for yourself or your clients.",
-  },
-  {
-    question: "How can I ask other questions about pricing?",
-    answer:
-      "Absolutely! Grey allows you to create as many commercial graphics/images as you like, for yourself or your clients.",
-  },
-  {
-    question: "Do you offer discount for students and no-profit companies?",
-    answer:
-      "Absolutely! Grey allows you to create as many commercial graphics/images as you like, for yourself or your clients.",
-  },
-];
-
-function AccordionItem({
-  faq,
-  index,
-  isOpen,
-  onToggle,
-}: {
-  faq: Faq;
-  index: number;
-  isOpen: boolean;
-  onToggle: (index: number) => void;
-}) {
-  const panelId = `accordion-text-faqs-${index}`;
-  const titleId = `accordion-title-faqs-${index}`;
-
-  return (
-    <div className="rounded-sm bg-zinc-100">
-      <h2>
-        <button
-          type="button"
-          id={titleId}
-          className="font-inter-tight flex w-full items-center justify-between px-4 py-2.5 text-left font-medium text-zinc-800"
-          aria-expanded={isOpen}
-          aria-controls={panelId}
-          onClick={() => onToggle(index)}
-        >
-          <span>{faq.question}</span>
-          <svg
-            className="ml-8 shrink-0 fill-zinc-400"
-            width="12"
-            height="12"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect
-              y="5"
-              width="12"
-              height="2"
-              rx="1"
-              className="origin-center transform transition duration-200 ease-out"
-            />
-            <rect
-              y="5"
-              width="12"
-              height="2"
-              rx="1"
-              className={`origin-center transform transition duration-200 ease-out ${
-                isOpen ? "rotate-180" : "rotate-90"
-              }`}
-            />
-          </svg>
-        </button>
-      </h2>
-      <div
-        id={panelId}
-        role="region"
-        aria-labelledby={titleId}
-        className={`grid overflow-hidden text-sm text-zinc-500 transition-all duration-300 ease-in-out ${
-          isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-        }`}
-      >
-        <div className="overflow-hidden">
-          <p className="px-4 pb-3">{faq.answer}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export default function PricingFaqSection({ lang }: LangProp) {
-  const [contactsIndex, setContactsIndex] = useState(2);
-  const [openFaq, setOpenFaq] = useState<number | null>(3);
-
-  const progress = `${(contactsIndex / (CONTACT_LABELS.length - 1)) * 100}%`;
+  const t = useTranslations(lang);
 
   return (
     <section>
@@ -302,26 +116,23 @@ export default function PricingFaqSection({ lang }: LangProp) {
         <div className="mx-auto container px-4 sm:px-6">
           <div className="relative mx-auto max-w-3xl pb-12 text-center">
             <h2 className="font-inter-tight mb-4 text-3xl font-bold text-zinc-900 md:text-4xl">
-              Start your journey today
+              {t("pricing.title")}
             </h2>
-            <p className="text-lg text-zinc-500">
-              Start creating realtime design experiences for free. Upgrade for
-              extra features and collaboration with your team.
-            </p>
+            <p className="text-lg text-zinc-500">{t("pricing.sub")}</p>
           </div>
 
           <div className="pb-12 md:pb-20">
             <div className="mx-auto grid max-w-sm items-start gap-6 md:max-w-3xl md:grid-cols-2 lg:max-w-none lg:grid-cols-3">
               {PLANS.map((plan, i) => (
                 <div
-                  key={plan.name}
+                  key={plan.id}
                   className={
                     i === PLANS.length - 1
                       ? "md:col-span-2 md:max-w-sm md:mx-auto lg:col-span-1 lg:max-w-none lg:mx-0"
                       : ""
                   }
                 >
-                  <PricingCard plan={plan} index={i} />
+                  <PricingCard plan={plan} lang={lang} />
                 </div>
               ))}
             </div>

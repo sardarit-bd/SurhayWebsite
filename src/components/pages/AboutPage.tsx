@@ -7,14 +7,6 @@ import { SITE, ownerName } from '../../config';
 import { story, principles, stackGroups, notOurThing, facts } from '../../data/studio';
 import { useTranslations, path, altPaths, withBase } from '../../i18n/utils';
 
-/**
- * Agenturseite (/agentur, /en/about).
- *
- * Zweck: die Frage „mit wem habe ich es zu tun?“ ausfuehrlich beantworten,
- * bevor jemand einen vierstelligen Betrag freigibt. Der Block „Was wir nicht
- * machen“ steht bewusst mit drauf — eine Absage vorab spart beiden Seiten
- * ein Erstgespraech, das ohnehin nicht passt.
- */
 
 export default function AboutPage({ lang, pathname }: LangProp & PfadProp) {
   const t = useTranslations(lang);
@@ -22,8 +14,6 @@ export default function AboutPage({ lang, pathname }: LangProp & PfadProp) {
   return (
     <Base pathname={pathname} lang={lang} title={t('page.about.metaTitle')} description={t('page.about.metaDesc')} alternates={altPaths('about')}>
       <PageHeader lang={lang} eyebrow={t('studio.eyebrow')} title={t('studio.title')} lead={t('page.about.lead')} crumbs={[{ label: t('nav.about') }]} />
-
-      {/* ------------------------------------------------ Text + Portraet */}
       <section style={css("padding-bottom: var(--spacing-section);")}>
         <div className="mx-auto grid max-w-7xl gap-14 px-5 md:px-8 lg:grid-cols-[3fr_2fr] lg:gap-20">
           <div className="prose max-w-none" data-reveal="">
@@ -51,8 +41,6 @@ export default function AboutPage({ lang, pathname }: LangProp & PfadProp) {
           </aside>
         </div>
       </section>
-
-      {/* ------------------------------------------------------- Prinzipien */}
       <section className="dark-section grain" style={css("padding-block: var(--spacing-section);")}>
         <div className="relative mx-auto max-w-7xl px-5 md:px-8">
           <h2 className="h2 h2-sm max-w-2xl" data-reveal="">{t('page.about.principlesTitle')}</h2>
@@ -70,8 +58,6 @@ export default function AboutPage({ lang, pathname }: LangProp & PfadProp) {
           </ol>
         </div>
       </section>
-
-      {/* ------------------------------------------------------------ Stack */}
       <section style={css("padding-block: var(--spacing-section);")}>
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <div className="flex flex-wrap items-end justify-between gap-6">
@@ -100,8 +86,6 @@ export default function AboutPage({ lang, pathname }: LangProp & PfadProp) {
           </dl>
         </div>
       </section>
-
-      {/* ------------------------------------------------ Was wir nicht machen */}
       <section className="border-t" style={css("border-color: var(--line); background: var(--color-paper-2); padding-block: var(--spacing-section-sm);")}>
         <div className="mx-auto grid max-w-7xl gap-12 px-5 md:px-8 lg:grid-cols-[2fr_3fr]">
           <div>

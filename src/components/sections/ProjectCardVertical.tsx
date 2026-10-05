@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { FiArrowUpRight } from "react-icons/fi";
+import { t } from "../../i18n/utils"; // <-- 1. ADDED IMPORT
+import type { Lang, UiKey } from "../../i18n/ui";
 
 export interface ProjectCardVerticalProps {
   title: string;
@@ -18,6 +20,7 @@ export interface ProjectCardVerticalProps {
   statValue?: string;
   statLabel?: string;
   priority?: boolean;
+  lang?: Lang; // <-- 2. ADDED lang prop
 }
 
 export default function ProjectCardVertical({
@@ -29,11 +32,16 @@ export default function ProjectCardVertical({
   imageAlt,
   tags = [],
   ctaHref,
-  ctaLabel = "View Case Study",
+  ctaLabel,
   statValue,
   statLabel,
   priority = false,
+  lang = "de", // <-- 3. DEFAULT to "de"
 }: ProjectCardVerticalProps) {
+  
+  // <-- 4. FALLBACK to translated string if ctaLabel is not provided by parent
+  const finalCtaLabel = ctaLabel || t("work.viewCaseStudy" as UiKey, lang);
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 20 }}
@@ -116,7 +124,7 @@ export default function ProjectCardVertical({
             className="relative z-30 pointer-events-auto cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs font-semibold text-neutral-900 dark:text-white hover:bg-blue-600 hover:text-white hover:border-blue-600 dark:hover:bg-blue-600 dark:hover:border-blue-600 transition-all duration-200 shadow-2xs group/btn"
             onClick={(e) => e.stopPropagation()}
           >
-            <span>{ctaLabel}</span>
+            <span>{finalCtaLabel}</span> {/* <-- 5. USED finalCtaLabel */}
             <FiArrowUpRight className="text-sm transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
           </Link>
         </div>

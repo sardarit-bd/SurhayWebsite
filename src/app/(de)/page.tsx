@@ -19,10 +19,10 @@ export default function Page() {
     <Base alternates={homePaths()} lang={lang} pathname={pathname}>
       <Hero lang={lang} />
       <Services lang={lang} />
-      <Studio lang={lang} />
       <TrustBar lang={lang} />
       <Work lang={lang} />
       <Process lang={lang} />
+      <Studio lang={lang} />
       <Pricing lang={lang} />
       <Insights lang={lang} />
       <Faq lang={lang} />
