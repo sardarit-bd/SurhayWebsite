@@ -29,7 +29,6 @@ export default async function Faq({ lang }: LangProp) {
       style={css("padding-block: var(--spacing-section);")}
     >
       <div className="mx-auto container px-5 md:px-8">
-
         <div className="grid gap-12 lg:grid-cols-[2fr_3fr] lg:gap-20">
           <div className="lg:sticky lg:top-28 lg:self-start">
             <p className="eyebrow text-mute" data-reveal="">
