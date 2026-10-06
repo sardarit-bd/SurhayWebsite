@@ -240,12 +240,11 @@ export function ServiceShowcaseCard({ lang }: LangProp) {
                 className="flex flex-1 flex-col justify-between gap-6 p-5 sm:p-7 lg:basis-[55%] lg:gap-10 lg:p-12"
               >
                 <div className="flex flex-col gap-4 sm:gap-5 lg:gap-6">
-                  {/* Number + label */}
-                  <div className="flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.16em] sm:text-xs">
+                  {/* <div className="flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.16em] sm:text-xs">
                     <span>{num}</span>
                     <span aria-hidden="true" className={`h-px w-8 ${theme.accent}`} />
                     <span className={theme.muted}>{service.label}</span>
-                  </div>
+                  </div> */}
 
                   <h3 className="font-display text-2xl font-bold leading-[1.05] tracking-tight sm:text-3xl lg:text-5xl">
                     {service.title}
@@ -255,7 +254,6 @@ export function ServiceShowcaseCard({ lang }: LangProp) {
                     {service.description}
                   </p>
 
-                  {/* Features */}
                   <ul className={`mt-1 grid grid-cols-1 border-b sm:grid-cols-2 sm:gap-x-8 ${theme.line}`}>
                     {service.features.map((feature, i) => (
                       <li
@@ -283,8 +281,6 @@ export function ServiceShowcaseCard({ lang }: LangProp) {
                   </span>
                 </Link>
               </motion.div>
-
-              {/* Image */}
               <div
                 className={`relative flex min-h-32 w-full flex-1 overflow-hidden border-t sm:min-h-56 lg:min-h-105 lg:w-7/12 lg:basis-[45%] lg:border-l lg:border-t-0 ${theme.line}`}
               >

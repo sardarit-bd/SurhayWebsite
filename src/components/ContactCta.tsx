@@ -28,17 +28,13 @@ export default function CtaSection({ lang }: LangProp) {
     <section className="dark-section py-section">
       <div className="container mx-auto px-6 sm:px-10 lg:px-16">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end lg:gap-16">
-          {/* Headline */}
           <h2 className="h2 text-paper lg:col-span-7">
             {t("cs.title.pre")}{" "}
             <span className="text-accent-300">{t("cs.title.mark")}</span>
             {t("cs.title.post")}
           </h2>
-
-          {/* Text + actions */}
           <div className="lg:col-span-5">
             <p className="lead max-w-md text-mute-dark">{t("cs.sub")}</p>
-
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a className="btn btn-primary" href={path(lang, "contact")}>
                 {t("cs.primary")}
@@ -52,10 +48,8 @@ export default function CtaSection({ lang }: LangProp) {
             </div>
           </div>
         </div>
-
-        {/* Brand strip */}
         <div
-          className="relative mt-16 overflow-hidden border-t border-(--line-dark) py-8 md:mt-24"
+          className="relative mt-16 overflow-hidden  py-8 md:mt-24"
           style={{ maskImage: FADE_MASK, WebkitMaskImage: FADE_MASK }}
           role="marquee"
           aria-label="Trusted by brands"

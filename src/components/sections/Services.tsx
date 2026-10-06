@@ -83,18 +83,11 @@ export default function ServicesSection({ lang }: LangProp) {
       className="w-full bg-paper px-6 py-section text-ink sm:px-10 lg:px-16"
     >
       <div className="container mx-auto">
-        {/* Header */}
         <div className="mb-14 md:mb-20">
-          <div ref={lineRef} className="mb-8 h-px w-full bg-(--line)" />
-
           <div
             ref={headerRef}
             className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-end"
           >
-            <span className="font-mono text-xs tracking-widest text-mute lg:col-span-2 lg:pb-3">
-              (02)
-            </span>
-
             <h2 className="h2 lg:col-span-7">
               {t("svc.title.a")}{" "}
               <span className="text-mute">{t("svc.title.mark")}</span>
@@ -107,8 +100,6 @@ export default function ServicesSection({ lang }: LangProp) {
             </p>
           </div>
         </div>
-
-        {/* Service rows */}
         <div>
           {services.map((service, index) => (
             <ServiceRow
