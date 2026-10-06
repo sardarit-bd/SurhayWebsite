@@ -42,7 +42,6 @@ export default function ProjectCardVertical({
 
   return (
     <article className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-(--line-dark) bg-ink-2 transition-colors duration-(--dur-short) ease-(--ease-micro) hover:border-accent-ctx has-focus-visible:border-accent-ctx">
-      {/* Cover */}
       <div className="relative aspect-4/3 w-full overflow-hidden bg-ink-3">
         <Image
           src={imageSrc}
@@ -50,7 +49,7 @@ export default function ProjectCardVertical({
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
           priority={priority}
-          className="object-cover object-center transition-transform duration-(--dur-reveal) ease-(--ease-out) group-hover:scale-[1.03]"
+          className="object-cover object-center transition-transform duration-(--dur-reveal) ease-out group-hover:scale-[1.03]"
         />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-ink-2 to-transparent" />
 
@@ -61,7 +60,6 @@ export default function ProjectCardVertical({
         )}
       </div>
 
-      {/* Body */}
       <div className="flex flex-1 flex-col gap-5 p-6 md:p-7">
         <div className="flex flex-col gap-3">
           {(eyebrow || category) && (
@@ -91,7 +89,6 @@ export default function ProjectCardVertical({
           <p className="text-xs text-mute-dark/90">{tags.join(" · ")}</p>
         )}
 
-        {/* Footer: stat + arrow */}
         <div className="mt-auto flex items-end justify-between gap-4 border-t border-(--line-dark) pt-5">
           {statValue ? (
             <div className="flex flex-col gap-1">

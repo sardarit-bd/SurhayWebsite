@@ -114,7 +114,7 @@ export const ui = {
     "work.p3.eyebrow": "2026",
     "work.p3.desc":
       "Premium-Auftritt für eine führende Privatklinik. Digitale Behandlungsberatung, 3D-Vorher/Nachher-Integration und nahtlose Online-Terminvergabe.",
-    "work.p3.statValue": "-68%",
+    "work.p3.statValue": "68%",
     "work.p3.statLabel": "telefonische Terminanfragen reduziert",
     "blog.filterCount": "{n} Beiträge werden angezeigt",
     "ai.title": "KI-gestützte Funktionen und Effekte",
@@ -1183,7 +1183,7 @@ export const ui = {
     "work.p3.eyebrow": "2026",
     "work.p3.desc":
       "Premium presence for a leading private clinic. Digital treatment consultation, 3D before/after integration, and seamless online appointment scheduling.",
-    "work.p3.statValue": "-68%",
+    "work.p3.statValue": "68%",
     "work.p3.statLabel": "reduction in phone appointment requests",
     "header.request": "Request website",
     "showreel.play": "• PLAY SHOWREEL • UNMUTE AUDIO •",
