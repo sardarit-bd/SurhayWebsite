@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import { FiPlay } from "react-icons/fi";
 import { t } from "../../i18n/utils";
 import type { Lang, UiKey } from "../../i18n/ui";
-import type { LangProp } from '../../lib/props';
+import type { LangProp } from "../../lib/props";
 
 export default function Showreel({ lang }: LangProp) {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -17,15 +17,14 @@ export default function Showreel({ lang }: LangProp) {
     offset: ["start end", "end start"],
   });
 
-  // Expand width from 78% to 100%
   const width = useTransform(scrollYProgress, [0.1, 0.45], ["60%", "100%"]);
-  // Expand height from 65vh to 100vh
   const height = useTransform(scrollYProgress, [0.1, 0.45], ["80vh", "100vh"]);
-  // Border radius from 28px to 0px
-  const borderRadius = useTransform(scrollYProgress, [0.1, 0.45], ["0px", "0px"]);
-  // Scale from 0.9 to 1.0
+  const borderRadius = useTransform(
+    scrollYProgress,
+    [0.1, 0.45],
+    ["0px", "0px"],
+  );
   const scale = useTransform(scrollYProgress, [0.1, 0.45], [0.9, 1]);
-
   const toggleAudio = () => {
     setIsPlaying((prev) => {
       const nextState = !prev;
@@ -37,11 +36,8 @@ export default function Showreel({ lang }: LangProp) {
   };
 
   return (
-    <section
-      ref={containerRef}
-      className="relative w-full h-[170vh] z-[60]"
-    >
-      <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden z-[60]">
+    <section ref={containerRef} className="relative w-full h-[170vh] z-60">
+      <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden z-60">
         <motion.div
           style={{
             width,
@@ -52,7 +48,6 @@ export default function Showreel({ lang }: LangProp) {
           onClick={toggleAudio}
           className="relative overflow-hidden bg-slate-950 transition-all duration-75 ease-out cursor-pointer group"
         >
-          {/* Live Background Video (Always Playing) */}
           <video
             ref={videoRef}
             autoPlay
@@ -62,16 +57,14 @@ export default function Showreel({ lang }: LangProp) {
             className="w-full h-full object-cover"
           >
             <source
-              src="https://designmonks.b-cdn.net/DM%20Others/DM%20Showreel%202026.mp4"
+              src="reel.mp4"
               type="video/mp4"
             />
           </video>
 
-          {/* Rotating Circle Play Button Overlay (Visible when muted) */}
           {!isPlaying && (
             <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none bg-black/20 backdrop-blur-[2px]">
               <div className="relative flex items-center justify-center size-28 sm:size-32 md:size-36 rounded-full bg-white/20 backdrop-blur-md border border-white/40 shadow-2xl text-white transition-transform duration-300 group-hover:scale-110">
-                {/* Rotating SVG Curved Text */}
                 <svg
                   viewBox="0 0 100 100"
                   className="absolute inset-0 w-full h-full animate-spin [animation-duration:10s]"
@@ -88,7 +81,7 @@ export default function Showreel({ lang }: LangProp) {
                   </text>
                 </svg>
 
-                {/* Center Play Icon */}
+
                 <div className="size-11 sm:size-12 md:size-14 rounded-full bg-white text-slate-950 flex items-center justify-center shadow-lg">
                   <FiPlay className="text-xl md:text-2xl ml-1" />
                 </div>
