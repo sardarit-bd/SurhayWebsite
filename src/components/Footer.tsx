@@ -54,7 +54,6 @@ function FooterNavColumn({ title, links }: FooterNavColumnProps) {
 export default function Footer({ lang }: LangProp & Partial<PfadProp>) {
   const t = useTranslations(lang);
   const services = path(lang, "services");
-
   const footerNav: FooterNavColumnProps[] = [
     {
       title: t("footer.servicesCol"),

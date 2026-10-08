@@ -1,5 +1,3 @@
-
-
 export const languages = {
   de: "Deutsch",
   tr: "Türkçe",
@@ -81,6 +79,9 @@ export const ui = {
     "work.title.a": "Aus Ideen werden",
     "work.title.mark": "digitale",
     "work.title.b": "Erlebnisse.",
+    "work.intro":
+      "Ausgewählte Arbeiten und Fallstudien aus Berlin und dem DACH-Raum. Keine Massenware, sondern maßgeschneiderte Unikate.",
+
     "work.sub":
       "Ausgewählte Arbeiten und Fallstudien aus Berlin und dem DACH-Raum. Keine Massenware, sondern maßgeschneiderte Unikate.",
     "work.viewCaseStudy": "Projekt ansehen",
@@ -172,109 +173,136 @@ export const ui = {
       "Maßgeschneiderte Webplattform · Komplexe Anforderungen, Integrationen oder E-Commerce.",
     "pricing.p3.features":
       "Komplexe Schnittstellen & API-Anbindungen|Kundenportale oder Buchungssysteme|E-Commerce & Online-Shop Architekturen|Mehrsprachigkeit (DE, EN, FR etc.)|Spezifische Datenbankanbindungen|Prioritärer SLA-Wartungsvertrag",
-  "svcShow.cta": "Projekt starten",
-  "svcShow.stat1": "Weltweit realisierte Projekte",
-  "svcShow.stat2": "Kundenzufriedenheit",
-  "svcShow.stat3": "Betreute Länder",
-  "svcShow.stat4": "Design-System-Adoption",
-  
-  "svcShow.p1.title": "Digitales Produktdesign & Markensysteme",
-  "svcShow.p1.label": "Markenidentität",
-  "svcShow.p1.shortTitle": "Produkt & Marke",
-  "svcShow.p1.description": "Architektur intuitiver digitaler Erlebnisse, Design-Systeme und kohäsive Markenidentitäten, die auf globalen Märkten resonieren.",
-  "svcShow.p1.detailedDescription": "Schaffen Sie eine vertrauenswürdige, globale Marke mit unseren Expert-Designs und Strategien.",
-  "svcShow.p1.badgeTitle": "Markenidentität",
-  "svcShow.p1.f1": "Multi-Plattform UI/UX & Design-Systeme",
-  "svcShow.p1.f2": "Enterprise-Markenarchitektur & Positionierung",
-  "svcShow.p1.f3": "Interaktive High-Fidelity-Prototypen",
-  "svcShow.p1.f4": "Design-to-Code Engineering-Governance",
-  "svcShow.p1.d1": "Multi-Plattform Design-Tokens (Tailwind, React, Flutter)",
-  "svcShow.p1.d2": "Enterprise UI-Komponentenbibliotheken & Storybook-Übergabe",
-  "svcShow.p1.d3": "Vektor-Logo-Suite & globale Typografie-Hierarchie",
-  "svcShow.p1.d4": "Design-System-Governance & Barrierefreiheitsstandards (WCAG 2.1)",
-  "svcShow.p1.ps1.title": "Discovery & Markenarchitektur",
-  "svcShow.p1.ps1.desc": "Aufdecken von Markensäulen, User-Personas, Zieldynamik und Wettbewerbspositionierung.",
-  "svcShow.p1.ps2.title": "Design-Tokens & visuelle Erkundung",
-  "svcShow.p1.ps2.desc": "Definition von Typografie-Skalen, atomaren Farb-Tokens und markanter Markengeometrie.",
-  "svcShow.p1.ps3.title": "Komponentensystem & Prototyping",
-  "svcShow.p1.ps3.desc": "Architektur modularer UI-Kits in Figma, interaktive Mikro-Interaktionen und Multi-Tenant-Designmuster.",
-  "svcShow.p1.ps4.title": "Storybook & Produktions-Übergabe",
-  "svcShow.p1.ps4.desc": "Bereitstellung produktionsreifer Token-JSONs, Entwicklerdokumentation und WCAG-Compliance-Audit.",
+    "svcShow.cta": "Projekt starten",
+    "svcShow.stat1": "Weltweit realisierte Projekte",
+    "svcShow.stat2": "Kundenzufriedenheit",
+    "svcShow.stat3": "Betreute Länder",
+    "svcShow.stat4": "Design-System-Adoption",
 
-  "svcShow.p2.title": "Enterprise Web- & Mobile-App-Engineering",
-  "svcShow.p2.label": "Web- und Mobile-App-Entwicklung",
-  "svcShow.p2.shortTitle": "Engineering",
-  "svcShow.p2.description": "Bereitstellung robuster, Full-Stack-Digitalprodukte, die mit modernen Frameworks für hochskalierbare Enterprise-Workloads entwickelt wurden.",
-  "svcShow.p2.detailedDescription": "Wir entwerfen und bauen leistungsstarke Webanwendungen und Mobile Apps, die auf Geschwindigkeit, Skalierbarkeit und außergewöhnliche User Experience ausgelegt sind.",
-  "svcShow.p2.badgeTitle": "Web & Mobile Engineering",
-  "svcShow.p2.f1": "Next.js, React & moderner Full-Stack",
-  "svcShow.p2.f2": "iOS & Android Cross-Plattform-Apps",
-  "svcShow.p2.f3": "Skalierbare SaaS & Cloud-Microservices",
-  "svcShow.p2.f4": "Echtzeit-APIs & High-Throughput-Datenbanken",
-  "svcShow.p2.d1": "Full-Stack Web- & Mobile-Anwendungen",
-  "svcShow.p2.d2": "Skalierbare REST / GraphQL API-Architektur",
-  "svcShow.p2.d3": "CI/CD-Pipeline & Cloud-Deployment",
-  "svcShow.p2.d4": "Umfassende Codedokumentation & Tests",
-  "svcShow.p2.stat3": "Enterprise-Uptime-SLA",
-  "svcShow.p2.stat4": "Core Web Vitals Benchmark",
-  "svcShow.p2.ps1.title": "Architektur & Tech-Stack-Planung",
-  "svcShow.p2.ps1.desc": "Definition skalierbarer Schemata, API-Verträge, State-Management und moderner Framework-Wahlen.",
-  "svcShow.p2.ps2.title": "Frontend- & Backend-Engineering",
-  "svcShow.p2.ps2.desc": "Agile Sprint-Ausführung zum Bau responsiver Komponenten und hochdurchsatzfähiger Backend-Endpoints.",
-  "svcShow.p2.ps3.title": "Performance-Tuning & QA",
-  "svcShow.p2.ps3.desc": "Audit der Core Web Vitals, automatisierte Unit-Tests, End-to-End-Tests und Security-Hardening.",
-  "svcShow.p2.ps4.title": "Cloud-Deployment & Monitoring",
-  "svcShow.p2.ps4.desc": "Zero-Downtime-Deployment-Setup, Continuous Integration und Echtzeit-Observability.",
+    "svcShow.p1.title": "Digitales Produktdesign & Markensysteme",
+    "svcShow.p1.label": "Markenidentität",
+    "svcShow.p1.shortTitle": "Produkt & Marke",
+    "svcShow.p1.description":
+      "Architektur intuitiver digitaler Erlebnisse, Design-Systeme und kohäsive Markenidentitäten, die auf globalen Märkten resonieren.",
+    "svcShow.p1.detailedDescription":
+      "Schaffen Sie eine vertrauenswürdige, globale Marke mit unseren Expert-Designs und Strategien.",
+    "svcShow.p1.badgeTitle": "Markenidentität",
+    "svcShow.p1.f1": "Multi-Plattform UI/UX & Design-Systeme",
+    "svcShow.p1.f2": "Enterprise-Markenarchitektur & Positionierung",
+    "svcShow.p1.f3": "Interaktive High-Fidelity-Prototypen",
+    "svcShow.p1.f4": "Design-to-Code Engineering-Governance",
+    "svcShow.p1.d1": "Multi-Plattform Design-Tokens (Tailwind, React, Flutter)",
+    "svcShow.p1.d2":
+      "Enterprise UI-Komponentenbibliotheken & Storybook-Übergabe",
+    "svcShow.p1.d3": "Vektor-Logo-Suite & globale Typografie-Hierarchie",
+    "svcShow.p1.d4":
+      "Design-System-Governance & Barrierefreiheitsstandards (WCAG 2.1)",
+    "svcShow.p1.ps1.title": "Discovery & Markenarchitektur",
+    "svcShow.p1.ps1.desc":
+      "Aufdecken von Markensäulen, User-Personas, Zieldynamik und Wettbewerbspositionierung.",
+    "svcShow.p1.ps2.title": "Design-Tokens & visuelle Erkundung",
+    "svcShow.p1.ps2.desc":
+      "Definition von Typografie-Skalen, atomaren Farb-Tokens und markanter Markengeometrie.",
+    "svcShow.p1.ps3.title": "Komponentensystem & Prototyping",
+    "svcShow.p1.ps3.desc":
+      "Architektur modularer UI-Kits in Figma, interaktive Mikro-Interaktionen und Multi-Tenant-Designmuster.",
+    "svcShow.p1.ps4.title": "Storybook & Produktions-Übergabe",
+    "svcShow.p1.ps4.desc":
+      "Bereitstellung produktionsreifer Token-JSONs, Entwicklerdokumentation und WCAG-Compliance-Audit.",
 
-  "svcShow.p3.title": "Intelligente Workflow-Automatisierung & KI-Integration",
-  "svcShow.p3.label": "Workflow-Automatisierung & KI",
-  "svcShow.p3.shortTitle": "Automatisierung",
-  "svcShow.p3.description": "Straffung von Enterprise-Operationen mit selbst gehosteten n8n-Pipelines, intelligenten Webhook-Workflows und maßgeschneiderten KI-Agenten-Integrationen.",
-  "svcShow.p3.detailedDescription": "Eliminieren Sie repetitive manuelle Aufgaben. Wir archivieren produktionsgrade Workflow-Automatisierung mit selbst gehostetem n8n, Make und intelligenten LLM-Agenten.",
-  "svcShow.p3.badgeTitle": "Workflow-Automatisierung & KI",
-  "svcShow.p3.f1": "n8n Self-Hosted & Multi-Step-Orchestrierung",
-  "svcShow.p3.f2": "OpenAI & Anthropic API Workflow-Integration",
-  "svcShow.p3.f3": "Omnichannel-KI-Agenten (WhatsApp, Web, CRM)",
-  "svcShow.p3.f4": "Automatisierte ERP-, Courier- & Payment-Webhooks",
-  "svcShow.p3.d1": "Self-Hosted n8n Workflow-Infrastruktur",
-  "svcShow.p3.d2": "Maßgeschneiderte Webhook- & API-Connectoren",
-  "svcShow.p3.d3": "Intelligente Dokumenten-Pipelines (OCR/PDF)",
-  "svcShow.p3.d4": "Vollständige Workflow-Blueprints & 100% IP-Eigentum",
-  "svcShow.p3.stat3": "Automatisierte manuelle Aufgaben",
-  "svcShow.p3.ps1.title": "Prozess-Audit & Workflow-Architektur",
-  "svcShow.p3.ps1.desc": "Mapping manueller Engpässe, API-Endpoints und Datenflüsse zur Design von High-ROI-Automatisierungsschemata.",
-  "svcShow.p3.ps2.title": "Pipeline-Engineering in n8n & Make",
-  "svcShow.p3.ps2.desc": "Aufbau robuster Trigger, konditionaler Verzweigungslogik, Webhook-Listener und failsafe Retry-Mechanismen.",
-  "svcShow.p3.ps3.title": "KI-Prompting & Webhook-Integration",
-  "svcShow.p3.ps3.desc": "Anbindung von OpenAI/Claude APIs, Dokumenten-OCR-Parsing und bidirektionale CRM/ERP-Synchronisation.",
-  "svcShow.p3.ps4.title": "Produktions-Deployment & Monitoring",
-  "svcShow.p3.ps4.desc": "Self-Hosting containerisierter n8n-Instanzen, Webhook-Queue-Management und Echtzeit-Fehleralarmierung.",
+    "svcShow.p2.title": "Enterprise Web- & Mobile-App-Engineering",
+    "svcShow.p2.label": "Web- und Mobile-App-Entwicklung",
+    "svcShow.p2.shortTitle": "Engineering",
+    "svcShow.p2.description":
+      "Bereitstellung robuster, Full-Stack-Digitalprodukte, die mit modernen Frameworks für hochskalierbare Enterprise-Workloads entwickelt wurden.",
+    "svcShow.p2.detailedDescription":
+      "Wir entwerfen und bauen leistungsstarke Webanwendungen und Mobile Apps, die auf Geschwindigkeit, Skalierbarkeit und außergewöhnliche User Experience ausgelegt sind.",
+    "svcShow.p2.badgeTitle": "Web & Mobile Engineering",
+    "svcShow.p2.f1": "Next.js, React & moderner Full-Stack",
+    "svcShow.p2.f2": "iOS & Android Cross-Plattform-Apps",
+    "svcShow.p2.f3": "Skalierbare SaaS & Cloud-Microservices",
+    "svcShow.p2.f4": "Echtzeit-APIs & High-Throughput-Datenbanken",
+    "svcShow.p2.d1": "Full-Stack Web- & Mobile-Anwendungen",
+    "svcShow.p2.d2": "Skalierbare REST / GraphQL API-Architektur",
+    "svcShow.p2.d3": "CI/CD-Pipeline & Cloud-Deployment",
+    "svcShow.p2.d4": "Umfassende Codedokumentation & Tests",
+    "svcShow.p2.stat3": "Enterprise-Uptime-SLA",
+    "svcShow.p2.stat4": "Core Web Vitals Benchmark",
+    "svcShow.p2.ps1.title": "Architektur & Tech-Stack-Planung",
+    "svcShow.p2.ps1.desc":
+      "Definition skalierbarer Schemata, API-Verträge, State-Management und moderner Framework-Wahlen.",
+    "svcShow.p2.ps2.title": "Frontend- & Backend-Engineering",
+    "svcShow.p2.ps2.desc":
+      "Agile Sprint-Ausführung zum Bau responsiver Komponenten und hochdurchsatzfähiger Backend-Endpoints.",
+    "svcShow.p2.ps3.title": "Performance-Tuning & QA",
+    "svcShow.p2.ps3.desc":
+      "Audit der Core Web Vitals, automatisierte Unit-Tests, End-to-End-Tests und Security-Hardening.",
+    "svcShow.p2.ps4.title": "Cloud-Deployment & Monitoring",
+    "svcShow.p2.ps4.desc":
+      "Zero-Downtime-Deployment-Setup, Continuous Integration und Echtzeit-Observability.",
 
-  "svcShow.p4.title": "Digitales Wachstum & globales Marketing",
-  "svcShow.p4.label": "Digitales Marketing und Wachstum",
-  "svcShow.p4.shortTitle": "Globales Wachstum",
-  "svcShow.p4.description": "Skalierung der digitalen Reichweite über 60+ Länder durch datengestützte Performance-Strategien, technisches SEO und Conversion-Optimierung.",
-  "svcShow.p4.detailedDescription": "Beschleunigen Sie Ihr Geschäftswachstum mit gezieltem digitalem Marketing, SEO, Conversion-Rate-Optimierung und datengesteuerten Marketingkampagnen.",
-  "svcShow.p4.badgeTitle": "Digitales Marketing",
-  "svcShow.p4.f1": "Technisches SEO & organische Sichtbarkeit",
-  "svcShow.p4.f2": "Datengesteuertes Performance-Marketing",
-  "svcShow.p4.f3": "High-Conversion-Funnel-Optimierung",
-  "svcShow.p4.f4": "Omnichannel-Analytics & Reporting",
-  "svcShow.p4.d1": "SEO-Technik-Audit & Keyword-Strategie",
-  "svcShow.p4.d2": "Multi-Plattform-Werbekampagnen & Creative-Sets",
-  "svcShow.p4.d3": "Conversion-Rate-Optimierung (CRO) Roadmaps",
-  "svcShow.p4.d4": "Echtzeit-Analytics & Attributions-Dashboards",
-  "svcShow.p4.stat1": "Durchschnittliches Conversion-Wachstum",
-  "svcShow.p4.stat2": "Steigerung des organischen Traffics",
-  "svcShow.p4.stat3": "Ad-ROAS-Benchmark",
-  "svcShow.p4.ps1.title": "Markt- & Wettbewerbsanalyse",
-  "svcShow.p4.ps1.desc": "Audit bestehender Funnel-Metriken, Search-Intent-Keywords und Wettbewerber-Ad-Creatives.",
-  "svcShow.p4.ps2.title": "Strategie & Experiment-Matrix",
-  "svcShow.p4.ps2.desc": "Priorisierung von High-Leverage-Wachstumshypothesen über Paid, Organic und Retention-Funnels.",
-  "svcShow.p4.ps3.title": "Kampagnenstart & Creative-Testing",
-  "svcShow.p4.ps3.desc": "Deployment multivariater Ad-Varianten, conversion-fokussierter Landingpages und SEO-Architektur.",
-  "svcShow.p4.ps4.title": "Attribution & skalierte Optimierung",
-  "svcShow.p4.ps4.desc": "Verdopplung der Einsätze bei gewinnenden Segmenten, Verfeinerung der Unit Economics und Skalierung der Kundenakquise.",
+    "svcShow.p3.title":
+      "Intelligente Workflow-Automatisierung & KI-Integration",
+    "svcShow.p3.label": "Workflow-Automatisierung & KI",
+    "svcShow.p3.shortTitle": "Automatisierung",
+    "svcShow.p3.description":
+      "Straffung von Enterprise-Operationen mit selbst gehosteten n8n-Pipelines, intelligenten Webhook-Workflows und maßgeschneiderten KI-Agenten-Integrationen.",
+    "svcShow.p3.detailedDescription":
+      "Eliminieren Sie repetitive manuelle Aufgaben. Wir archivieren produktionsgrade Workflow-Automatisierung mit selbst gehostetem n8n, Make und intelligenten LLM-Agenten.",
+    "svcShow.p3.badgeTitle": "Workflow-Automatisierung & KI",
+    "svcShow.p3.f1": "n8n Self-Hosted & Multi-Step-Orchestrierung",
+    "svcShow.p3.f2": "OpenAI & Anthropic API Workflow-Integration",
+    "svcShow.p3.f3": "Omnichannel-KI-Agenten (WhatsApp, Web, CRM)",
+    "svcShow.p3.f4": "Automatisierte ERP-, Courier- & Payment-Webhooks",
+    "svcShow.p3.d1": "Self-Hosted n8n Workflow-Infrastruktur",
+    "svcShow.p3.d2": "Maßgeschneiderte Webhook- & API-Connectoren",
+    "svcShow.p3.d3": "Intelligente Dokumenten-Pipelines (OCR/PDF)",
+    "svcShow.p3.d4": "Vollständige Workflow-Blueprints & 100% IP-Eigentum",
+    "svcShow.p3.stat3": "Automatisierte manuelle Aufgaben",
+    "svcShow.p3.ps1.title": "Prozess-Audit & Workflow-Architektur",
+    "svcShow.p3.ps1.desc":
+      "Mapping manueller Engpässe, API-Endpoints und Datenflüsse zur Design von High-ROI-Automatisierungsschemata.",
+    "svcShow.p3.ps2.title": "Pipeline-Engineering in n8n & Make",
+    "svcShow.p3.ps2.desc":
+      "Aufbau robuster Trigger, konditionaler Verzweigungslogik, Webhook-Listener und failsafe Retry-Mechanismen.",
+    "svcShow.p3.ps3.title": "KI-Prompting & Webhook-Integration",
+    "svcShow.p3.ps3.desc":
+      "Anbindung von OpenAI/Claude APIs, Dokumenten-OCR-Parsing und bidirektionale CRM/ERP-Synchronisation.",
+    "svcShow.p3.ps4.title": "Produktions-Deployment & Monitoring",
+    "svcShow.p3.ps4.desc":
+      "Self-Hosting containerisierter n8n-Instanzen, Webhook-Queue-Management und Echtzeit-Fehleralarmierung.",
+
+    "svcShow.p4.title": "Digitales Wachstum & globales Marketing",
+    "svcShow.p4.label": "Digitales Marketing und Wachstum",
+    "svcShow.p4.shortTitle": "Globales Wachstum",
+    "svcShow.p4.description":
+      "Skalierung der digitalen Reichweite über 60+ Länder durch datengestützte Performance-Strategien, technisches SEO und Conversion-Optimierung.",
+    "svcShow.p4.detailedDescription":
+      "Beschleunigen Sie Ihr Geschäftswachstum mit gezieltem digitalem Marketing, SEO, Conversion-Rate-Optimierung und datengesteuerten Marketingkampagnen.",
+    "svcShow.p4.badgeTitle": "Digitales Marketing",
+    "svcShow.p4.f1": "Technisches SEO & organische Sichtbarkeit",
+    "svcShow.p4.f2": "Datengesteuertes Performance-Marketing",
+    "svcShow.p4.f3": "High-Conversion-Funnel-Optimierung",
+    "svcShow.p4.f4": "Omnichannel-Analytics & Reporting",
+    "svcShow.p4.d1": "SEO-Technik-Audit & Keyword-Strategie",
+    "svcShow.p4.d2": "Multi-Plattform-Werbekampagnen & Creative-Sets",
+    "svcShow.p4.d3": "Conversion-Rate-Optimierung (CRO) Roadmaps",
+    "svcShow.p4.d4": "Echtzeit-Analytics & Attributions-Dashboards",
+    "svcShow.p4.stat1": "Durchschnittliches Conversion-Wachstum",
+    "svcShow.p4.stat2": "Steigerung des organischen Traffics",
+    "svcShow.p4.stat3": "Ad-ROAS-Benchmark",
+    "svcShow.p4.ps1.title": "Markt- & Wettbewerbsanalyse",
+    "svcShow.p4.ps1.desc":
+      "Audit bestehender Funnel-Metriken, Search-Intent-Keywords und Wettbewerber-Ad-Creatives.",
+    "svcShow.p4.ps2.title": "Strategie & Experiment-Matrix",
+    "svcShow.p4.ps2.desc":
+      "Priorisierung von High-Leverage-Wachstumshypothesen über Paid, Organic und Retention-Funnels.",
+    "svcShow.p4.ps3.title": "Kampagnenstart & Creative-Testing",
+    "svcShow.p4.ps3.desc":
+      "Deployment multivariater Ad-Varianten, conversion-fokussierter Landingpages und SEO-Architektur.",
+    "svcShow.p4.ps4.title": "Attribution & skalierte Optimierung",
+    "svcShow.p4.ps4.desc":
+      "Verdopplung der Einsätze bei gewinnenden Segmenten, Verfeinerung der Unit Economics und Skalierung der Kundenakquise.",
 
     "hero.title.built": "gebaut für",
     "hero.sub":
@@ -374,8 +402,6 @@ export const ui = {
       "Individuelle digitale Lösungen für spezielle Anforderungen: Buchungssysteme, Kundenportale & Rechner.",
     "work.eyebrow": "Ausgewählte Projekte",
     "work.title": "Ergebnisse statt Referenzen.",
-    "work.sub":
-      "Jedes Projekt mit messbarem Resultat — von der Ausgangslage bis zur Kennzahl.",
     "work.filter.all": "Alle",
     "work.viewCase": "Case Study ansehen",
     "work.empty": "Keine Projekte in dieser Kategorie.",
@@ -425,6 +451,8 @@ export const ui = {
     "pricing.eyebrow": "Preise",
     "faq.eyebrow": "FAQ",
     "faq.title": "Häufige Fragen, ehrliche Antworten.",
+    "faq.sub":
+      "Alles Wichtige vor dem Erstgespräch — kurz und ehrlich beantwortet.",
     "faq.allLink": "Alle Fragen ansehen",
     "blog.eyebrow": "Insights",
     "blog.readMore": "Weiterlesen",
@@ -452,6 +480,9 @@ export const ui = {
     "studio.cta": "Erstgespräch buchen",
     "insights.eyebrow": "Insights",
     "insights.title": "Wissen, das Sie auch ohne uns anwenden können.",
+    "insights.sub":
+      "Praxiswissen zu Webdesign, Performance und Online-Marketing — direkt anwendbar.",
+
     "insights.all": "Alle Artikel",
     "contact.eyebrow": "Kontakt",
     "contact.title": "Lassen Sie uns über Ihr Projekt sprechen.",
@@ -500,7 +531,6 @@ export const ui = {
     "breadcrumb.label": "Sie sind hier",
     "common.readMore": "Mehr erfahren",
     "common.overview": "Zur Übersicht",
-    "common.included": "Enthalten",
     "common.from": "ab",
     "common.perMonth": "pro Monat",
     "common.netHint": "Alle Preise netto zzgl. gesetzlicher Umsatzsteuer.",
@@ -611,20 +641,20 @@ export const ui = {
     "footer.company": "Studio",
     "footer.resources": "Mehr",
     "footer.contactCol": "Kontakt",
-    "ft.tagline": "Websites that make businesses visible — from Berlin.",
-    "ft.resources": "Resources",
-    "ft.connect": "Connect",
-    "ft.l1": "Web design",
-    "ft.l2": "Web development",
-    "ft.l3": "SEO optimization",
-    "ft.l4": "Maintenance & support",
-    "ft.l5": "Full-stack solutions",
-    "ft.process": "Our process",
-    "ft.pricing": "Pricing & packages",
-    "ft.r1": "Agency blog",
-    "ft.r2": "BFSG guide 2026",
-    "ft.r3": "Website cost calculator",
-    "ft.r4": "FAQ & answers",
+    "ft.tagline": "Websites, die Unternehmen sichtbar machen — aus Berlin.",
+    "ft.resources": "Ressourcen",
+    "ft.connect": "Folgen Sie uns",
+    "ft.l1": "Webdesign",
+    "ft.l2": "Webentwicklung",
+    "ft.l3": "SEO-Optimierung",
+    "ft.l4": "Wartung & Support",
+    "ft.l5": "Full-Stack Lösungen",
+    "ft.process": "Unser Prozess",
+    "ft.pricing": "Preise & Pakete",
+    "ft.r1": "Agentur-Blog",
+    "ft.r2": "BFSG Leitfaden 2026",
+    "ft.r3": "Website-Kosten Rechner",
+    "ft.r4": "FAQ & Antworten",
     "cs.title.pre": "Bereit für einen professionellen digitalen",
     "cs.title.mark": "Auftritt",
     "cs.title.post": "?",
@@ -692,6 +722,201 @@ export const ui = {
     "header.request": "Web sitesi talep edin",
     "work.filterCount": "{n} proje gösteriliyor",
     "blog.filterCount": "{n} yazı gösteriliyor",
+    "showreel.play": "• SHOWREEL’İ OYNAT • SESİ AÇ •",
+
+    "work.title.a": "Fikirleri ",
+    "work.title.mark": "dijital ",
+    "work.title.b": "deneyimlere dönüştürüyoruz.",
+    "work.intro":
+      "Berlin ve Almanca konuşulan pazardan seçilmiş işler ve vaka çalışmaları. Seri üretim değil, ölçüye göre hazırlanmış özgün işler.",
+    "work.viewCaseStudy": "Projeyi görün",
+    "work.tags.design": "Web tasarım",
+    "work.tags.dev": "Web geliştirme",
+    "work.tags.seo": "SEO",
+    "work.tags.corporate": "Kurumsal tasarım",
+    "work.tags.nextjs": "Next.js",
+    "work.tags.gdpr": "Veri koruma GDPR",
+    "work.tags.fullstack": "Full Stack",
+    "work.tags.api": "Randevu sistemi API’si",
+    "work.tags.a11y": "Erişilebilirlik BFSG",
+
+    "work.p1.title": "Vanguard İnşaat & Mimarlık",
+    "work.p1.category": "Zanaat & inşaat şirketleri · Berlin",
+    "work.p1.eyebrow": "2026",
+    "work.p1.desc":
+      "Saygın bir Berlinli genel müteahhit için yeni marka kimliği ve dijital şantiye sunumu. Proje taleplerinin tam otomatik ön elemesi.",
+    "work.p1.statValue": "+135%",
+    "work.p1.statLabel": "ilk çeyrekte nitelikli inşaat talebi",
+
+    "work.p2.title": "Hukuk Bürosu Dr. v. Moers & Ortakları",
+    "work.p2.category": "Avukatlar & hukuk büroları · Berlin & Frankfurt",
+    "work.p2.eyebrow": "2026",
+    "work.p2.desc":
+      "Dijital vekâlet kabulü ve hukuk blogu içeren, ketum ve son derece hassas bir hukuk bürosu sitesi. Mobil cihazlarda 0,4 saniye yüklenme süresi.",
+    "work.p2.statValue": "Ø 38",
+    "work.p2.statLabel": "aylık yeni ticari dosya",
+
+    "work.p3.title": "Plastik Cerrahi & Estetik Merkezi",
+    "work.p3.category": "Tıp & uzman muayenehane · Kurfürstendamm Berlin",
+    "work.p3.eyebrow": "2026",
+    "work.p3.desc":
+      "Önde gelen bir özel klinik için premium görünüm. Dijital tedavi danışmanlığı, 3D önce/sonra entegrasyonu ve kesintisiz çevrimiçi randevu.",
+    "work.p3.statValue": "68%",
+    "work.p3.statLabel": "telefonla randevu talebinde azalma",
+
+    "ai.title": "Yapay zekâ destekli işlevler ve efektler",
+    "ai.sub":
+      "Hazır olduğunuzda yayınlamanız yeterli: web sitesi taslaklarınız gerçek tasarımlara dönüşür. Sıfırdan oluşturma, ön bilgi, yeniden şekillendirme yok.",
+    "ai.f1.title": "Gerçek iş birliği",
+    "ai.f1.desc":
+      "Ekipler oluşturun ve tasarımlarınızı proje özellikleri ve içgörülerle klasörlerde düzenleyin.",
+    "ai.f1.alt": "İş birliği özelliği",
+    "ai.f2.title": "Gelişmiş yapay zekâ",
+    "ai.f2.desc":
+      "Görseller üretin ve tasarımlarınızı yapay zekâyla sunmanın yeni yollarını keşfedin.",
+    "ai.f2.alt": "Yapay zekâ özelliği",
+    "ai.f3.title": "Basit kod parçacıkları",
+    "ai.f3.desc":
+      "Sahnelerinizi basit gömme kodu parçacıklarıyla projelerinize taşıyın.",
+    "ai.f3.alt": "Kod parçacığı özelliği",
+    "ai.f4.title": "Hassas etkileşim",
+    "ai.f4.desc":
+      "Kod yazmadan sürükle-bırak etkileşimlerini kolayca oluşturun.",
+    "ai.f4.alt": "Etkileşim özelliği",
+    "ai.f5.title": "Anlık geri bildirim",
+    "ai.f5.desc":
+      "Görevleri, projeleri, sorunları ve daha fazlasını sadece birkaç saniyede oluşturun.",
+    "ai.f5.alt": "Geri bildirim özelliği",
+
+    "svcShow.cta": "Projeyi başlatın",
+    "svcShow.stat1": "Dünya genelinde tamamlanan proje",
+    "svcShow.stat2": "Müşteri memnuniyeti",
+    "svcShow.stat3": "Hizmet verilen ülke",
+    "svcShow.stat4": "Tasarım sistemi benimsenmesi",
+
+    "svcShow.p1.title": "Dijital ürün tasarımı & marka sistemleri",
+    "svcShow.p1.label": "Marka kimliği",
+    "svcShow.p1.shortTitle": "Ürün & marka",
+    "svcShow.p1.description":
+      "Küresel pazarlarda karşılık bulan sezgisel dijital deneyimler, tasarım sistemleri ve tutarlı marka kimlikleri kurguluyoruz.",
+    "svcShow.p1.detailedDescription":
+      "Uzman tasarımlarımız ve stratejilerimizle güvenilir, küresel bir marka yaratın.",
+    "svcShow.p1.badgeTitle": "Marka kimliği",
+    "svcShow.p1.f1": "Çok platformlu UI/UX & tasarım sistemleri",
+    "svcShow.p1.f2": "Kurumsal marka mimarisi & konumlandırma",
+    "svcShow.p1.f3": "Etkileşimli yüksek doğruluklu prototipler",
+    "svcShow.p1.f4": "Tasarımdan koda mühendislik yönetişimi",
+    "svcShow.p1.d1":
+      "Çok platformlu tasarım token’ları (Tailwind, React, Flutter)",
+    "svcShow.p1.d2": "Kurumsal UI bileşen kütüphaneleri & Storybook teslimi",
+    "svcShow.p1.d3": "Vektör logo seti & küresel tipografi hiyerarşisi",
+    "svcShow.p1.d4":
+      "Tasarım sistemi yönetişimi & erişilebilirlik standartları (WCAG 2.1)",
+    "svcShow.p1.ps1.title": "Keşif & marka mimarisi",
+    "svcShow.p1.ps1.desc":
+      "Marka sütunlarının, kullanıcı personalarının, hedef pazar dinamiklerinin ve rekabet konumlandırmasının ortaya çıkarılması.",
+    "svcShow.p1.ps2.title": "Tasarım token’ları & görsel keşif",
+    "svcShow.p1.ps2.desc":
+      "Tipografi ölçeklerinin, atomik renk token’larının ve belirgin marka geometrisinin tanımlanması.",
+    "svcShow.p1.ps3.title": "Bileşen sistemi & prototipleme",
+    "svcShow.p1.ps3.desc":
+      "Figma’da modüler UI kitlerinin, etkileşimli mikro etkileşimlerin ve çok kiracılı tasarım kalıplarının kurgulanması.",
+    "svcShow.p1.ps4.title": "Storybook & üretim teslimi",
+    "svcShow.p1.ps4.desc":
+      "Üretime hazır token JSON’larının, geliştirici dokümantasyonunun ve WCAG uyumluluk denetiminin teslimi.",
+
+    "svcShow.p2.title": "Kurumsal web & mobil uygulama mühendisliği",
+    "svcShow.p2.label": "Web ve mobil uygulama geliştirme",
+    "svcShow.p2.shortTitle": "Mühendislik",
+    "svcShow.p2.description":
+      "Yüksek eşzamanlılıklı kurumsal iş yüklerine hizmet etmek üzere modern çatılarla geliştirilmiş, sağlam full-stack dijital ürünler sunuyoruz.",
+    "svcShow.p2.detailedDescription":
+      "Hız, ölçeklenebilirlik ve olağanüstü kullanıcı deneyimi için tasarlanmış yüksek performanslı web uygulamaları ve mobil uygulamalar tasarlıyor ve geliştiriyoruz.",
+    "svcShow.p2.badgeTitle": "Web & mobil mühendislik",
+    "svcShow.p2.f1": "Next.js, React & modern full-stack",
+    "svcShow.p2.f2": "iOS & Android çapraz platform uygulamalar",
+    "svcShow.p2.f3": "Ölçeklenebilir SaaS & bulut mikro hizmetleri",
+    "svcShow.p2.f4": "Gerçek zamanlı API’ler & yüksek verimli veritabanları",
+    "svcShow.p2.d1": "Full-stack web & mobil uygulamalar",
+    "svcShow.p2.d2": "Ölçeklenebilir REST / GraphQL API mimarisi",
+    "svcShow.p2.d3": "CI/CD hattı & bulut dağıtımı",
+    "svcShow.p2.d4": "Kapsamlı kod dokümantasyonu & testler",
+    "svcShow.p2.stat3": "Kurumsal çalışma süresi SLA’sı",
+    "svcShow.p2.stat4": "Core Web Vitals kıyas değeri",
+    "svcShow.p2.ps1.title": "Mimari & teknoloji yığını planlaması",
+    "svcShow.p2.ps1.desc":
+      "Ölçeklenebilir şemaların, API sözleşmelerinin, durum yönetiminin ve modern çatı seçimlerinin belirlenmesi.",
+    "svcShow.p2.ps2.title": "Ön yüz & arka yüz mühendisliği",
+    "svcShow.p2.ps2.desc":
+      "Duyarlı bileşenler ve yüksek verimli arka yüz uç noktaları geliştiren çevik sprint yürütmesi.",
+    "svcShow.p2.ps3.title": "Performans ayarı & kalite güvencesi",
+    "svcShow.p2.ps3.desc":
+      "Core Web Vitals denetimi, otomatik birim testleri, uçtan uca testler ve güvenlik sıkılaştırması.",
+    "svcShow.p2.ps4.title": "Bulut dağıtımı & izleme",
+    "svcShow.p2.ps4.desc":
+      "Kesintisiz dağıtım kurulumu, sürekli entegrasyon ve gerçek zamanlı gözlemlenebilirlik.",
+
+    "svcShow.p3.title": "Akıllı iş akışı otomasyonu & yapay zekâ entegrasyonu",
+    "svcShow.p3.label": "İş akışı otomasyonu & yapay zekâ",
+    "svcShow.p3.shortTitle": "Otomasyon",
+    "svcShow.p3.description":
+      "Kurumsal operasyonları kendi sunucunuzda barındırılan n8n hatları, akıllı webhook iş akışları ve özel yapay zekâ ajanı entegrasyonlarıyla sadeleştiriyoruz.",
+    "svcShow.p3.detailedDescription":
+      "Tekrarlayan manuel işleri ortadan kaldırın. Kendi sunucunuzda barındırılan n8n, Make ve akıllı LLM ajanlarıyla üretim seviyesinde iş akışı otomasyonu tasarlıyoruz.",
+    "svcShow.p3.badgeTitle": "İş akışı otomasyonu & yapay zekâ",
+    "svcShow.p3.f1": "Kendi sunucuda n8n & çok adımlı orkestrasyon",
+    "svcShow.p3.f2": "OpenAI & Anthropic API iş akışı entegrasyonu",
+    "svcShow.p3.f3": "Çok kanallı yapay zekâ ajanları (WhatsApp, web, CRM)",
+    "svcShow.p3.f4": "Otomatik ERP, kurye & ödeme webhook’ları",
+    "svcShow.p3.d1": "Kendi sunucuda n8n iş akışı altyapısı",
+    "svcShow.p3.d2": "Özel webhook & API bağlayıcıları",
+    "svcShow.p3.d3": "Akıllı belge (OCR/PDF) hatları",
+    "svcShow.p3.d4": "Tam iş akışı şablonları & %100 fikri mülkiyet sahipliği",
+    "svcShow.p3.stat3": "Otomatikleştirilen manuel görevler",
+    "svcShow.p3.ps1.title": "Süreç denetimi & iş akışı mimarisi",
+    "svcShow.p3.ps1.desc":
+      "Yüksek getirili otomasyon şemaları tasarlamak için manuel tıkanıklıkların, API uç noktalarının ve veri akışlarının haritalanması.",
+    "svcShow.p3.ps2.title": "n8n & Make’te hat mühendisliği",
+    "svcShow.p3.ps2.desc":
+      "Dayanıklı tetikleyicilerin, koşullu dallanma mantığının, webhook dinleyicilerinin ve hataya dayanıklı yeniden deneme mekanizmalarının kurulması.",
+    "svcShow.p3.ps3.title": "Yapay zekâ komutları & webhook entegrasyonu",
+    "svcShow.p3.ps3.desc":
+      "OpenAI/Claude API’lerinin bağlanması, belge OCR ayrıştırma ve çift yönlü CRM/ERP senkronizasyonu.",
+    "svcShow.p3.ps4.title": "Üretim dağıtımı & izleme",
+    "svcShow.p3.ps4.desc":
+      "Konteynerleştirilmiş n8n örneklerinin kendi sunucuda barındırılması, webhook kuyruk yönetimi ve gerçek zamanlı hata uyarıları.",
+
+    "svcShow.p4.title": "Dijital büyüme & küresel pazarlama",
+    "svcShow.p4.label": "Dijital pazarlama ve büyüme",
+    "svcShow.p4.shortTitle": "Küresel büyüme",
+    "svcShow.p4.description":
+      "Dijital erişimi 60+ ülkeye veriye dayalı performans stratejileri, teknik SEO ve dönüşüm optimizasyonuyla ölçeklendiriyoruz.",
+    "svcShow.p4.detailedDescription":
+      "İş büyümenizi hedefli dijital pazarlama, SEO, dönüşüm oranı optimizasyonu ve veriye dayalı pazarlama kampanyalarıyla hızlandırın.",
+    "svcShow.p4.badgeTitle": "Dijital pazarlama",
+    "svcShow.p4.f1": "Teknik SEO & organik görünürlük",
+    "svcShow.p4.f2": "Veriye dayalı performans pazarlaması",
+    "svcShow.p4.f3": "Yüksek dönüşümlü satış hunisi optimizasyonu",
+    "svcShow.p4.f4": "Çok kanallı analitik & raporlama",
+    "svcShow.p4.d1": "SEO teknik denetimi & anahtar kelime stratejisi",
+    "svcShow.p4.d2": "Çok platformlu reklam kampanyaları & kreatif setleri",
+    "svcShow.p4.d3": "Dönüşüm oranı optimizasyonu (CRO) yol haritaları",
+    "svcShow.p4.d4": "Gerçek zamanlı analitik & atıf panoları",
+    "svcShow.p4.stat1": "Ortalama dönüşüm artışı",
+    "svcShow.p4.stat2": "Organik trafik artışı",
+    "svcShow.p4.stat3": "Reklam ROAS kıyas değeri",
+    "svcShow.p4.ps1.title": "Pazar & rakip analizi",
+    "svcShow.p4.ps1.desc":
+      "Mevcut huni metriklerinin, arama niyeti anahtar kelimelerinin ve rakip reklam kreatiflerinin denetimi.",
+    "svcShow.p4.ps2.title": "Strateji & deney matrisi",
+    "svcShow.p4.ps2.desc":
+      "Ücretli, organik ve elde tutma hunilerinde yüksek kaldıraçlı büyüme hipotezlerinin önceliklendirilmesi.",
+    "svcShow.p4.ps3.title": "Kampanya lansmanı & kreatif testi",
+    "svcShow.p4.ps3.desc":
+      "Çok değişkenli reklam varyantlarının, dönüşüm odaklı açılış sayfalarının ve SEO mimarisinin devreye alınması.",
+    "svcShow.p4.ps4.title": "Atıf & ölçeklenmiş optimizasyon",
+    "svcShow.p4.ps4.desc":
+      "Kazanan segmentlere ağırlık verilmesi, birim ekonomisinin iyileştirilmesi ve müşteri ediniminin ölçeklenmesi.",
     "hero.eyebrow": "Web tasarım · Geliştirme · Bakım — Berlin",
     "hero.pauseLabel": "Değişen kelimeyi durdur",
     "hero.playLabel": "Değişen kelimeyi sürdür",
@@ -867,6 +1092,8 @@ export const ui = {
       "Özel kapsam|Arayüzler & entegrasyonlar|Atölye & strateji|Birebir danışmanlık",
     "faq.eyebrow": "SSS",
     "faq.title": "Sık sorulan sorular, dürüst yanıtlar.",
+    "faq.sub":
+      "Ön görüşmeden önce bilmeniz gerekenler — kısa ve dürüst yanıtlarla.",
     "faq.allLink": "Tüm soruları görün",
     "blog.eyebrow": "Insights",
     "blog.readMore": "Devamını okuyun",
@@ -1050,7 +1277,7 @@ export const ui = {
     "page.contact.lead":
       "Kısaca neyle ilgili olduğunu anlatın. Form iki dakikadan kısa sürer ve 24 saat içinde dürüst bir değerlendirme alırsınız.",
     "page.contact.expect": "Sonrasında ne oluyor",
-    "page.contact.expect1": "24 saat içinde yanıt — „hayır“ olsa bile.",
+    "page.contact.expect1": "24 saat içinde yanıt — “hayır” olsa bile.",
     "page.contact.expect2":
       "Uyuyorsa 30–45 dakikalık ücretsiz bir görüşme gelir.",
     "page.contact.expect3":
@@ -1067,20 +1294,20 @@ export const ui = {
     "footer.company": "Stüdyo",
     "footer.resources": "Daha fazla",
     "footer.contactCol": "İletişim",
-    "ft.tagline": "Websites, die Unternehmen sichtbar machen — aus Berlin.",
-    "ft.resources": "Ressourcen",
-    "ft.connect": "Connect",
-    "ft.l1": "Webdesign",
-    "ft.l2": "Webentwicklung",
-    "ft.l3": "SEO-Optimierung",
-    "ft.l4": "Wartung & Support",
-    "ft.l5": "Full-Stack Lösungen",
-    "ft.process": "Unser Prozess",
-    "ft.pricing": "Preise & Pakete",
-    "ft.r1": "Agentur-Blog",
-    "ft.r2": "BFSG Leitfaden 2026",
-    "ft.r3": "Website-Kosten Rechner",
-    "ft.r4": "FAQ & Antworten",
+    "ft.tagline": "Şirketleri görünür kılan web siteleri — Berlin’den.",
+    "ft.resources": "Kaynaklar",
+    "ft.connect": "Bizi takip edin",
+    "ft.l1": "Web tasarım",
+    "ft.l2": "Web geliştirme",
+    "ft.l3": "SEO optimizasyonu",
+    "ft.l4": "Bakım & destek",
+    "ft.l5": "Full-stack çözümler",
+    "ft.process": "Sürecimiz",
+    "ft.pricing": "Fiyatlar & paketler",
+    "ft.r1": "Ajans blogu",
+    "ft.r2": "BFSG rehberi 2026",
+    "ft.r3": "Web sitesi maliyet hesaplayıcı",
+    "ft.r4": "SSS & yanıtlar",
     "cs.title.pre": "Profesyonel bir dijital görünüme",
     "cs.title.mark": "hazır",
     "cs.title.post": " mısınız?",
@@ -1144,11 +1371,13 @@ export const ui = {
     "header.services": "Services",
     "header.industries": "Industries",
     "header.projects": "Projects",
-    "header.process": "process",
+    "header.process": "Process",
     "header.about": "About Us",
     "work.title.a": "Turning ideas into",
     "work.title.mark": "digital",
     "work.title.b": "experiences.",
+    "work.intro":
+      "Selected works and case studies from Berlin and the DACH region. No mass production, only tailor-made uniques.",
     "work.sub":
       "Selected works and case studies from Berlin and the DACH region. No mass production, only tailor-made uniques.",
     "work.viewCaseStudy": "View Case Study",
@@ -1273,131 +1502,162 @@ export const ui = {
     "trust.4.title": "Berlin, serving DACH",
     "trust.4.desc":
       "Remote collaboration in German and English, on-site meetings in Berlin.",
-    "showreel.play": "• SHOWREEL ABSPIELEN • TON EINSCHALTEN •",
-  "pricing.title": "Transparent Investment",
-  "pricing.sub": "Clear pricing with no hidden fees. Choose the package that fits your business needs.",
-  "pricing.from": "from",
-  "pricing.cta": "Start Project",
-  "common.included": "Included",
-  
-  "pricing.p1.name": "Starter",
-  "pricing.p1.price": "€3,900",
-  "pricing.p1.desc": "One-pager (up to 6 sections) · For freelancers and clinics looking for a clear, professional start.",
-  "pricing.p1.features": "Custom screen design (no builders)|Up to 6 tailor-made sections|Optimized for smartphone, tablet & desktop|High-conversion contact form|Basic SEO setup & Google preparation|Legally compliant (GDPR, imprint, cookie banner)",
-  
-  "pricing.p2.name": "Business",
-  "pricing.p2.price": "€6,900",
-  "pricing.p2.desc": "Multi-page website (5-12 subpages) · For companies that want to grow.",
-  "pricing.p2.features": "Everything from Starter plus|Multi-page structure with subpages|Lean, intuitive CMS for self-maintenance|Advanced on-page SEO & Schema.org structure|Blog or news infrastructure|Interactive elements & lead filters|Personal onboarding & video documentation",
-  
-  "pricing.p3.name": "Custom",
-  "pricing.p3.price": "On Request",
-  "pricing.p3.desc": "Tailor-made web platform · Complex requirements, integrations, or e-commerce.",
-  "pricing.p3.features": "Complex interfaces & API connections|Client portals or booking systems|E-commerce & online shop architectures|Multilingualism (DE, EN, FR etc.)|Specific database connections|Priority SLA maintenance contract",
-  "svcShow.cta": "Start a Project",
-  "svcShow.stat1": "Projects Delivered Globally",
-  "svcShow.stat2": "Client Satisfaction Rate",
-  "svcShow.stat3": "Countries Served",
-  "svcShow.stat4": "Design System Adoption",
-  
-  "svcShow.p1.title": "Digital Product Design & Brand Systems",
-  "svcShow.p1.label": "Brand Identity",
-  "svcShow.p1.shortTitle": "Product & Brand",
-  "svcShow.p1.description": "Architecting intuitive digital experiences, design systems, and cohesive brand identities that resonate across global markets.",
-  "svcShow.p1.detailedDescription": "Create a trusted, global brand with our expert designs and strategies.",
-  "svcShow.p1.badgeTitle": "Brand Identity",
-  "svcShow.p1.f1": "Multi-Platform UI/UX & Design Systems",
-  "svcShow.p1.f2": "Enterprise Brand Architecture & Positioning",
-  "svcShow.p1.f3": "Interactive High-Fidelity Prototypes",
-  "svcShow.p1.f4": "Design-to-Code Engineering Governance",
-  "svcShow.p1.d1": "Multi-Platform Design Tokens (Tailwind, React, Flutter)",
-  "svcShow.p1.d2": "Enterprise UI Component Libraries & Storybook Handoff",
-  "svcShow.p1.d3": "Vector Logo Suite & Global Typography Hierarchy",
-  "svcShow.p1.d4": "Design System Governance & Accessibility Standards (WCAG 2.1)",
-  "svcShow.p1.ps1.title": "Discovery & Brand Architecture",
-  "svcShow.p1.ps1.desc": "Uncovering brand pillars, user personas, target market dynamics, and competitive software positioning.",
-  "svcShow.p1.ps2.title": "Design Tokens & Visual Exploration",
-  "svcShow.p1.ps2.desc": "Defining typography scales, atomic color tokens, dark/light contrast ratios, and distinct brand geometry.",
-  "svcShow.p1.ps3.title": "Component System & Prototyping",
-  "svcShow.p1.ps3.desc": "Architecting modular UI kits in Figma, interactive micro-interactions, and multi-tenant design patterns.",
-  "svcShow.p1.ps4.title": "Storybook & Production Handoff",
-  "svcShow.p1.ps4.desc": "Delivering production-ready token JSONs, developer documentation, Storybook integration, and WCAG compliance audit.",
+    "pricing.title": "Transparent Investment",
+    "pricing.sub":
+      "Clear pricing with no hidden fees. Choose the package that fits your business needs.",
+    "pricing.from": "from",
+    "pricing.cta": "Start Project",
+    "common.included": "Included",
 
-  "svcShow.p2.title": "Enterprise Web & Mobile App Engineering",
-  "svcShow.p2.label": "Web and Mobile App Development",
-  "svcShow.p2.shortTitle": "Engineering",
-  "svcShow.p2.description": "Delivering robust, full-stack digital products engineered with modern frameworks to serve high-concurrency enterprise workloads.",
-  "svcShow.p2.detailedDescription": "We design and build high-performance web applications and mobile apps tailored for speed, scalability, and exceptional user experience.",
-  "svcShow.p2.badgeTitle": "Web & Mobile Engineering",
-  "svcShow.p2.f1": "Next.js, React & Modern Full-Stack",
-  "svcShow.p2.f2": "iOS & Android Cross-Platform Apps",
-  "svcShow.p2.f3": "Scalable SaaS & Cloud Microservices",
-  "svcShow.p2.f4": "Real-Time APIs & High-Throughput Databases",
-  "svcShow.p2.d1": "Full-Stack Web & Mobile Applications",
-  "svcShow.p2.d2": "Scalable REST / GraphQL API Architecture",
-  "svcShow.p2.d3": "CI/CD Pipeline & Cloud Deployment",
-  "svcShow.p2.d4": "Comprehensive Code Documentation & Tests",
-  "svcShow.p2.stat3": "Enterprise Uptime SLA",
-  "svcShow.p2.stat4": "Core Web Vitals Benchmark",
-  "svcShow.p2.ps1.title": "Architecture & Tech Stack Planning",
-  "svcShow.p2.ps1.desc": "Defining scalable schemas, API contracts, state management, and modern framework choices.",
-  "svcShow.p2.ps2.title": "Frontend & Backend Engineering",
-  "svcShow.p2.ps2.desc": "Agile sprint execution building responsive components and high-throughput backend endpoints.",
-  "svcShow.p2.ps3.title": "Performance Tuning & QA",
-  "svcShow.p2.ps3.desc": "Auditing Core Web Vitals, automated unit testing, end-to-end testing, and security hardening.",
-  "svcShow.p2.ps4.title": "Cloud Deployment & Monitoring",
-  "svcShow.p2.ps4.desc": "Zero-downtime deployment setup, continuous integration, and real-time observability.",
+    "pricing.p1.name": "Starter",
+    "pricing.p1.price": "€3,900",
+    "pricing.p1.desc":
+      "One-pager (up to 6 sections) · For freelancers and clinics looking for a clear, professional start.",
+    "pricing.p1.features":
+      "Custom screen design (no builders)|Up to 6 tailor-made sections|Optimized for smartphone, tablet & desktop|High-conversion contact form|Basic SEO setup & Google preparation|Legally compliant (GDPR, imprint, cookie banner)",
 
-  "svcShow.p3.title": "Intelligent Workflow Automation & AI Integration",
-  "svcShow.p3.label": "Workflow Automation & AI",
-  "svcShow.p3.shortTitle": "Automation",
-  "svcShow.p3.description": "Streamlining enterprise operations with self-hosted n8n pipelines, intelligent webhook workflows, and custom AI agent integrations.",
-  "svcShow.p3.detailedDescription": "Eliminate repetitive manual tasks. We architect production-grade workflow automation using self-hosted n8n, Make, and intelligent LLM agents.",
-  "svcShow.p3.badgeTitle": "Workflow Automation & AI",
-  "svcShow.p3.f1": "n8n Self-Hosted & Multi-Step Orchestration",
-  "svcShow.p3.f2": "OpenAI & Anthropic API Workflow Integration",
-  "svcShow.p3.f3": "Omnichannel AI Agents (WhatsApp, Web, CRM)",
-  "svcShow.p3.f4": "Automated ERP, Courier & Payment Webhooks",
-  "svcShow.p3.d1": "Self-Hosted n8n Workflow Infrastructure",
-  "svcShow.p3.d2": "Custom Webhook & API Connectors",
-  "svcShow.p3.d3": "Intelligent Document (OCR/PDF) Pipelines",
-  "svcShow.p3.d4": "Full Workflow Blueprints & 100% IP Ownership",
-  "svcShow.p3.stat3": "Manual Tasks Automated",
-  "svcShow.p3.ps1.title": "Process Audit & Workflow Architecture",
-  "svcShow.p3.ps1.desc": "Mapping manual bottlenecks, API endpoints, and data flows to design high-ROI automation schemas.",
-  "svcShow.p3.ps2.title": "Pipeline Engineering in n8n & Make",
-  "svcShow.p3.ps2.desc": "Building resilient triggers, conditional branching logic, webhook listeners, and fail-safe retry mechanisms.",
-  "svcShow.p3.ps3.title": "AI Prompting & Webhook Integration",
-  "svcShow.p3.ps3.desc": "Connecting OpenAI/Claude APIs, document OCR parsing, and bi-directional CRM/ERP synchronization.",
-  "svcShow.p3.ps4.title": "Production Deployment & Monitoring",
-  "svcShow.p3.ps4.desc": "Self-hosting containerized n8n instances, webhook queue management, and real-time failure alerting.",
-   "svcShow.p4.title": "Digital Growth & Global Marketing",
-  "svcShow.p4.label": "Digital Marketing and Growth",
-  "svcShow.p4.shortTitle": "Global Growth",
-  "svcShow.p4.description": "Scaling digital reach across 60+ countries through data-backed performance strategies, technical SEO, and conversion optimization.",
-  "svcShow.p4.detailedDescription": "Accelerate your business growth with targeted digital marketing, SEO, conversion rate optimization, and data-driven marketing campaigns.",
-  "svcShow.p4.badgeTitle": "Digital Marketing",
-  "svcShow.p4.f1": "Technical SEO & Organic Visibility",
-  "svcShow.p4.f2": "Data-Driven Performance Marketing",
-  "svcShow.p4.f3": "High-Conversion Funnel Optimization",
-  "svcShow.p4.f4": "Omnichannel Analytics & Reporting",
-  "svcShow.p4.d1": "SEO Technical Audit & Keyword Strategy",
-  "svcShow.p4.d2": "Multi-Platform Ad Campaigns & Creative Sets",
-  "svcShow.p4.d3": "Conversion Rate Optimization (CRO) Roadmaps",
-  "svcShow.p4.d4": "Real-Time Analytics & Attribution Dashboards",
-  "svcShow.p4.stat1": "Average Conversion Growth",
-  "svcShow.p4.stat2": "Organic Traffic Increase",
-  "svcShow.p4.stat3": "Ad ROAS Benchmark",
-  "svcShow.p4.ps1.title": "Market & Competitor Analysis",
-  "svcShow.p4.ps1.desc": "Auditing existing funnel metrics, search intent keywords, and competitor ad creatives.",
-  "svcShow.p4.ps2.title": "Strategy & Experiment Matrix",
-  "svcShow.p4.ps2.desc": "Prioritizing high-leverage growth hypotheses across paid, organic, and retention funnels.",
-  "svcShow.p4.ps3.title": "Campaign Launch & Creative Testing",
-  "svcShow.p4.ps3.desc": "Deploying multivariate ad variants, conversion-focused landing pages, and SEO architecture.",
-  "svcShow.p4.ps4.title": "Attribution & Scaled Optimization",
-  "svcShow.p4.ps4.desc": "Doubling down on winning segments, refining unit economics, and scaling customer acquisition.",
-  
-  "services.eyebrow": "Services",
+    "pricing.p2.name": "Business",
+    "pricing.p2.price": "€6,900",
+    "pricing.p2.desc":
+      "Multi-page website (5-12 subpages) · For companies that want to grow.",
+    "pricing.p2.features":
+      "Everything from Starter plus|Multi-page structure with subpages|Lean, intuitive CMS for self-maintenance|Advanced on-page SEO & Schema.org structure|Blog or news infrastructure|Interactive elements & lead filters|Personal onboarding & video documentation",
+
+    "pricing.p3.name": "Custom",
+    "pricing.p3.price": "On Request",
+    "pricing.p3.desc":
+      "Tailor-made web platform · Complex requirements, integrations, or e-commerce.",
+    "pricing.p3.features":
+      "Complex interfaces & API connections|Client portals or booking systems|E-commerce & online shop architectures|Multilingualism (DE, EN, FR etc.)|Specific database connections|Priority SLA maintenance contract",
+    "svcShow.cta": "Start a Project",
+    "svcShow.stat1": "Projects Delivered Globally",
+    "svcShow.stat2": "Client Satisfaction Rate",
+    "svcShow.stat3": "Countries Served",
+    "svcShow.stat4": "Design System Adoption",
+
+    "svcShow.p1.title": "Digital Product Design & Brand Systems",
+    "svcShow.p1.label": "Brand Identity",
+    "svcShow.p1.shortTitle": "Product & Brand",
+    "svcShow.p1.description":
+      "Architecting intuitive digital experiences, design systems, and cohesive brand identities that resonate across global markets.",
+    "svcShow.p1.detailedDescription":
+      "Create a trusted, global brand with our expert designs and strategies.",
+    "svcShow.p1.badgeTitle": "Brand Identity",
+    "svcShow.p1.f1": "Multi-Platform UI/UX & Design Systems",
+    "svcShow.p1.f2": "Enterprise Brand Architecture & Positioning",
+    "svcShow.p1.f3": "Interactive High-Fidelity Prototypes",
+    "svcShow.p1.f4": "Design-to-Code Engineering Governance",
+    "svcShow.p1.d1": "Multi-Platform Design Tokens (Tailwind, React, Flutter)",
+    "svcShow.p1.d2": "Enterprise UI Component Libraries & Storybook Handoff",
+    "svcShow.p1.d3": "Vector Logo Suite & Global Typography Hierarchy",
+    "svcShow.p1.d4":
+      "Design System Governance & Accessibility Standards (WCAG 2.1)",
+    "svcShow.p1.ps1.title": "Discovery & Brand Architecture",
+    "svcShow.p1.ps1.desc":
+      "Uncovering brand pillars, user personas, target market dynamics, and competitive software positioning.",
+    "svcShow.p1.ps2.title": "Design Tokens & Visual Exploration",
+    "svcShow.p1.ps2.desc":
+      "Defining typography scales, atomic color tokens, dark/light contrast ratios, and distinct brand geometry.",
+    "svcShow.p1.ps3.title": "Component System & Prototyping",
+    "svcShow.p1.ps3.desc":
+      "Architecting modular UI kits in Figma, interactive micro-interactions, and multi-tenant design patterns.",
+    "svcShow.p1.ps4.title": "Storybook & Production Handoff",
+    "svcShow.p1.ps4.desc":
+      "Delivering production-ready token JSONs, developer documentation, Storybook integration, and WCAG compliance audit.",
+
+    "svcShow.p2.title": "Enterprise Web & Mobile App Engineering",
+    "svcShow.p2.label": "Web and Mobile App Development",
+    "svcShow.p2.shortTitle": "Engineering",
+    "svcShow.p2.description":
+      "Delivering robust, full-stack digital products engineered with modern frameworks to serve high-concurrency enterprise workloads.",
+    "svcShow.p2.detailedDescription":
+      "We design and build high-performance web applications and mobile apps tailored for speed, scalability, and exceptional user experience.",
+    "svcShow.p2.badgeTitle": "Web & Mobile Engineering",
+    "svcShow.p2.f1": "Next.js, React & Modern Full-Stack",
+    "svcShow.p2.f2": "iOS & Android Cross-Platform Apps",
+    "svcShow.p2.f3": "Scalable SaaS & Cloud Microservices",
+    "svcShow.p2.f4": "Real-Time APIs & High-Throughput Databases",
+    "svcShow.p2.d1": "Full-Stack Web & Mobile Applications",
+    "svcShow.p2.d2": "Scalable REST / GraphQL API Architecture",
+    "svcShow.p2.d3": "CI/CD Pipeline & Cloud Deployment",
+    "svcShow.p2.d4": "Comprehensive Code Documentation & Tests",
+    "svcShow.p2.stat3": "Enterprise Uptime SLA",
+    "svcShow.p2.stat4": "Core Web Vitals Benchmark",
+    "svcShow.p2.ps1.title": "Architecture & Tech Stack Planning",
+    "svcShow.p2.ps1.desc":
+      "Defining scalable schemas, API contracts, state management, and modern framework choices.",
+    "svcShow.p2.ps2.title": "Frontend & Backend Engineering",
+    "svcShow.p2.ps2.desc":
+      "Agile sprint execution building responsive components and high-throughput backend endpoints.",
+    "svcShow.p2.ps3.title": "Performance Tuning & QA",
+    "svcShow.p2.ps3.desc":
+      "Auditing Core Web Vitals, automated unit testing, end-to-end testing, and security hardening.",
+    "svcShow.p2.ps4.title": "Cloud Deployment & Monitoring",
+    "svcShow.p2.ps4.desc":
+      "Zero-downtime deployment setup, continuous integration, and real-time observability.",
+
+    "svcShow.p3.title": "Intelligent Workflow Automation & AI Integration",
+    "svcShow.p3.label": "Workflow Automation & AI",
+    "svcShow.p3.shortTitle": "Automation",
+    "svcShow.p3.description":
+      "Streamlining enterprise operations with self-hosted n8n pipelines, intelligent webhook workflows, and custom AI agent integrations.",
+    "svcShow.p3.detailedDescription":
+      "Eliminate repetitive manual tasks. We architect production-grade workflow automation using self-hosted n8n, Make, and intelligent LLM agents.",
+    "svcShow.p3.badgeTitle": "Workflow Automation & AI",
+    "svcShow.p3.f1": "n8n Self-Hosted & Multi-Step Orchestration",
+    "svcShow.p3.f2": "OpenAI & Anthropic API Workflow Integration",
+    "svcShow.p3.f3": "Omnichannel AI Agents (WhatsApp, Web, CRM)",
+    "svcShow.p3.f4": "Automated ERP, Courier & Payment Webhooks",
+    "svcShow.p3.d1": "Self-Hosted n8n Workflow Infrastructure",
+    "svcShow.p3.d2": "Custom Webhook & API Connectors",
+    "svcShow.p3.d3": "Intelligent Document (OCR/PDF) Pipelines",
+    "svcShow.p3.d4": "Full Workflow Blueprints & 100% IP Ownership",
+    "svcShow.p3.stat3": "Manual Tasks Automated",
+    "svcShow.p3.ps1.title": "Process Audit & Workflow Architecture",
+    "svcShow.p3.ps1.desc":
+      "Mapping manual bottlenecks, API endpoints, and data flows to design high-ROI automation schemas.",
+    "svcShow.p3.ps2.title": "Pipeline Engineering in n8n & Make",
+    "svcShow.p3.ps2.desc":
+      "Building resilient triggers, conditional branching logic, webhook listeners, and fail-safe retry mechanisms.",
+    "svcShow.p3.ps3.title": "AI Prompting & Webhook Integration",
+    "svcShow.p3.ps3.desc":
+      "Connecting OpenAI/Claude APIs, document OCR parsing, and bi-directional CRM/ERP synchronization.",
+    "svcShow.p3.ps4.title": "Production Deployment & Monitoring",
+    "svcShow.p3.ps4.desc":
+      "Self-hosting containerized n8n instances, webhook queue management, and real-time failure alerting.",
+    "svcShow.p4.title": "Digital Growth & Global Marketing",
+    "svcShow.p4.label": "Digital Marketing and Growth",
+    "svcShow.p4.shortTitle": "Global Growth",
+    "svcShow.p4.description":
+      "Scaling digital reach across 60+ countries through data-backed performance strategies, technical SEO, and conversion optimization.",
+    "svcShow.p4.detailedDescription":
+      "Accelerate your business growth with targeted digital marketing, SEO, conversion rate optimization, and data-driven marketing campaigns.",
+    "svcShow.p4.badgeTitle": "Digital Marketing",
+    "svcShow.p4.f1": "Technical SEO & Organic Visibility",
+    "svcShow.p4.f2": "Data-Driven Performance Marketing",
+    "svcShow.p4.f3": "High-Conversion Funnel Optimization",
+    "svcShow.p4.f4": "Omnichannel Analytics & Reporting",
+    "svcShow.p4.d1": "SEO Technical Audit & Keyword Strategy",
+    "svcShow.p4.d2": "Multi-Platform Ad Campaigns & Creative Sets",
+    "svcShow.p4.d3": "Conversion Rate Optimization (CRO) Roadmaps",
+    "svcShow.p4.d4": "Real-Time Analytics & Attribution Dashboards",
+    "svcShow.p4.stat1": "Average Conversion Growth",
+    "svcShow.p4.stat2": "Organic Traffic Increase",
+    "svcShow.p4.stat3": "Ad ROAS Benchmark",
+    "svcShow.p4.ps1.title": "Market & Competitor Analysis",
+    "svcShow.p4.ps1.desc":
+      "Auditing existing funnel metrics, search intent keywords, and competitor ad creatives.",
+    "svcShow.p4.ps2.title": "Strategy & Experiment Matrix",
+    "svcShow.p4.ps2.desc":
+      "Prioritizing high-leverage growth hypotheses across paid, organic, and retention funnels.",
+    "svcShow.p4.ps3.title": "Campaign Launch & Creative Testing",
+    "svcShow.p4.ps3.desc":
+      "Deploying multivariate ad variants, conversion-focused landing pages, and SEO architecture.",
+    "svcShow.p4.ps4.title": "Attribution & Scaled Optimization",
+    "svcShow.p4.ps4.desc":
+      "Doubling down on winning segments, refining unit economics, and scaling customer acquisition.",
+
+    "services.eyebrow": "Services",
     "services.title": "Three things. Done right.",
     "services.sub":
       "No jack-of-all-trades agency: we focus on what makes your website successful — and deliver it at the highest quality.",
@@ -1435,8 +1695,6 @@ export const ui = {
 
     "work.eyebrow": "Selected work",
     "work.title": "Results, not references.",
-    "work.sub":
-      "Every project with a measurable outcome — from starting point to KPI.",
     "work.filter.all": "All",
     "work.viewCase": "View case study",
     "work.empty": "No projects in this category.",
@@ -1489,7 +1747,10 @@ export const ui = {
     "faq.eyebrow": "FAQ",
     "faq.title": "Common questions, honest answers.",
     "faq.allLink": "See all questions",
-
+    "faq.sub":
+      "Everything worth knowing before a first call — answered briefly and honestly.",
+    "insights.sub":
+      "Web tasarım, performans ve online pazarlama üzerine uygulanabilir bilgi.",
     "blog.eyebrow": "Insights",
     "blog.readMore": "Read more",
     "blog.back": "All articles",
@@ -1515,11 +1776,9 @@ export const ui = {
     "studio.3.desc":
       "Updates, security and support in one monthly plan — cancel monthly.",
     "studio.cta": "Book a first call",
-
     "insights.eyebrow": "Insights",
     "insights.title": "Knowledge you can apply without hiring us.",
     "insights.all": "All articles",
-
     "contact.eyebrow": "Contact",
     "contact.title": "Let’s talk about your project.",
     "contact.sub":
@@ -1548,7 +1807,6 @@ export const ui = {
     "contact.route2.desc":
       "30 to 45 minutes, free and without obligation. Or put together what you need in the configurator first.",
     "contact.route2.cta": "Pick a time",
-
     "footer.tagline": "Websites that sell — from Berlin.",
     "footer.nav": "Navigation",
     "footer.legal": "Legal",
@@ -1558,37 +1816,29 @@ export const ui = {
     "footer.cookies": "Cookie settings",
     "footer.rights": "All rights reserved.",
     "footer.madeIn": "Designed & built in Berlin",
-
-    /* ------------------------------------------------------- Multipage */
     "nav.about": "Studio",
     "nav.allServices": "All services",
     "nav.servicesHint":
       "Four services that build on each other — from structure to ongoing operation.",
     "nav.more": "More",
-
     "breadcrumb.home": "Home",
     "breadcrumb.label": "You are here",
-
     "common.readMore": "Learn more",
     "common.overview": "Back to overview",
-    "common.included": "Included",
     "common.from": "from",
     "common.perMonth": "per month",
     "common.netHint": "All prices net, plus VAT where applicable.",
     "common.country": "Germany",
-
     "cta.title": "Let us talk about your project.",
     "cta.sub":
       "A first call takes 30 to 45 minutes, costs nothing, and ends either with a proposal or with an honest recommendation of where else to go.",
     "cta.primary": "Request a first call",
     "cta.secondary": "Estimate the cost yourself",
-
     "ctaForm.eyebrow": "Enquiry",
     "ctaForm.title": "Ready for a website that pulls its weight?",
     "ctaForm.sub":
       "Tell us briefly what this is about — a reply within 24 hours.",
     "ctaForm.direct": "Prefer to write directly?",
-
     "page.services.title": "Services",
     "page.services.metaTitle":
       "Services — web design, development, SEO and care | Surhay Design",
@@ -1599,13 +1849,11 @@ export const ui = {
     "page.services.combineTitle": "How the four fit together",
     "page.services.combineText":
       "In most projects design and development run as one commission, SEO comes along as a base setup, and care starts at launch. You can also book a single service — an audit of your existing site, for instance, or taking over maintenance.",
-
     "page.work.metaTitle": "Work & case studies | Surhay Design",
     "page.work.metaDesc":
       "Selected projects with starting point, solution and measurable outcome — web design and development for SMEs, freelancers and startups.",
     "page.work.lead":
       "Every project with its starting point, the decisions made and a measurable outcome — not a picture gallery, but a case you can follow.",
-
     "page.process.metaTitle":
       "How a project runs — from first call to operation | Surhay Design",
     "page.process.metaDesc":
@@ -1618,7 +1866,6 @@ export const ui = {
     "page.process.rulesTitle": "Four rules that carry the collaboration",
     "page.process.rulesSub":
       "They are here because projects rarely fail on technology — they fail on expectations nobody talked about beforehand.",
-
     "page.pricing.metaTitle":
       "Pricing — fixed prices for websites, care and add-ons | Surhay Design",
     "page.pricing.metaDesc":
@@ -1638,7 +1885,6 @@ export const ui = {
     "page.pricing.includedTitle": "Included in every package",
     "page.pricing.paymentTitle": "Payment in three steps",
     "page.pricing.fit": "Fits",
-
     "page.about.metaTitle":
       "Studio — who is behind Surhay Design | Web design Berlin",
     "page.about.metaDesc":
@@ -1652,7 +1898,6 @@ export const ui = {
     "page.about.noTitle": "What we do not do",
     "page.about.noSub":
       "Because a no in the first call is cheaper than a project that suits nobody.",
-
     "page.faq.metaTitle":
       "Frequently asked questions on web design, pricing and process | Surhay Design",
     "page.faq.metaDesc":
@@ -1668,7 +1913,6 @@ export const ui = {
     "page.faq.stillOpen": "Question not covered?",
     "page.faq.stillOpenSub":
       "Send it over — you get an answer within 24 hours, even when the answer is no.",
-
     "page.contact.metaTitle":
       "Contact — request a first call | Surhay Design Berlin",
     "page.contact.metaDesc":
@@ -1681,32 +1925,30 @@ export const ui = {
       "If it fits, a free call of 30 to 45 minutes follows.",
     "page.contact.expect3":
       "Then a written proposal with fixed price, scope and dates.",
-
     "blog.filterAll": "All topics",
     "blog.empty": "No article on this topic yet.",
     "blog.latest": "Latest article",
     "blog.related": "More articles",
     "blog.metaTitle":
       "Blog — practical knowledge on web design, performance and SEO | Surhay Design",
-
     "footer.servicesCol": "Services",
     "footer.company": "Studio",
     "footer.resources": "More",
     "footer.contactCol": "Contact",
-    "ft.tagline": "Şirketleri görünür kılan web siteleri — Berlin’den.",
-    "ft.resources": "Kaynaklar",
-    "ft.connect": "Bizi takip edin",
-    "ft.l1": "Web tasarım",
-    "ft.l2": "Web geliştirme",
-    "ft.l3": "SEO optimizasyonu",
-    "ft.l4": "Bakım & destek",
-    "ft.l5": "Full-stack çözümler",
-    "ft.process": "Sürecimiz",
-    "ft.pricing": "Fiyatlar & paketler",
-    "ft.r1": "Ajans blogu",
-    "ft.r2": "BFSG rehberi 2026",
-    "ft.r3": "Web sitesi maliyet hesaplayıcı",
-    "ft.r4": "SSS & yanıtlar",
+    "ft.tagline": "Websites that make businesses visible — from Berlin.",
+    "ft.resources": "Resources",
+    "ft.connect": "Connect",
+    "ft.l1": "Web design",
+    "ft.l2": "Web development",
+    "ft.l3": "SEO optimization",
+    "ft.l4": "Maintenance & support",
+    "ft.l5": "Full-stack solutions",
+    "ft.process": "Our process",
+    "ft.pricing": "Pricing & packages",
+    "ft.r1": "Agency blog",
+    "ft.r2": "BFSG guide 2026",
+    "ft.r3": "Website cost calculator",
+    "ft.r4": "FAQ & answers",
     "cs.title.pre": "Ready for a professional digital",
     "cs.title.mark": "presence",
     "cs.title.post": "?",
@@ -1746,14 +1988,6 @@ export const ui = {
     "404.cta": "Go to homepage",
   },
 } as const;
-
-/** Schlüssel der Referenzsprache — Grundlage der Übersetzungsfunktion. */
 export type UiKey = keyof (typeof ui)["de"];
-
-/**
- * Vollständigkeitsprüfung zur Bauzeit: Fehlt in `tr` oder `en` ein Schlüssel,
- * schlägt hier die Zuweisung fehl und der Build bricht ab — statt die Lücke
- * erst auf der Seite sichtbar werden zu lassen.
- */
 const _vollstaendig: Record<Lang, Record<UiKey, string>> = ui;
 void _vollstaendig;

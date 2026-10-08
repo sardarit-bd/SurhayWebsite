@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { FiMenu, FiX } from "react-icons/fi";
 import gsap from "gsap";
 import type { LangProp, PfadProp } from "../lib/props";
@@ -8,8 +9,6 @@ import { useTranslations, localePath, path } from "../i18n/utils";
 import { locales, localeMeta, type Lang, type UiKey } from "../i18n/ui";
 import type { RouteKey } from "../i18n/routes";
 
-/* Labels stehen in src/i18n/ui.ts (Schluessel header.*). Industries hat
-   keine Route und bleibt "#", wie im Entwurf. */
 const NAV_LINKS: { key: UiKey; route?: RouteKey }[] = [
   { key: "header.services", route: "services" },
   { key: "header.industries" },
@@ -19,6 +18,8 @@ const NAV_LINKS: { key: UiKey; route?: RouteKey }[] = [
 ];
 
 const SCROLL_THRESHOLD = 24;
+
+const trim = (p: string) => p.replace(/\/+$/, "") || "/";
 
 interface Props extends LangProp, Partial<PfadProp> {
   alternates: Record<Lang, string>;
@@ -52,8 +53,6 @@ function NavLink({
   );
 }
 
-/* Sprachumschalter: einfache Links, Ziel = gleiche Seite in der anderen
-   Sprache (alternates kommt aus Base). Funktioniert ohne JavaScript. */
 function LangLinks({
   lang,
   alternates,
@@ -106,11 +105,15 @@ function LangLinks({
 
 export default function Header({ lang, alternates }: Props) {
   const t = useTranslations(lang);
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-
   const overlayRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
+
+  // Home page = transparent until scroll. Any other page = always solid.
+  const isHome = trim(pathname ?? "/") === trim(localePath(lang, "/"));
+  const solid = scrolled || !isHome;
 
   const navItems = NAV_LINKS.map(({ key, route }) => ({
     key,
@@ -145,7 +148,6 @@ export default function Header({ lang, alternates }: Props) {
     return () => ctx.revert();
   }, []);
 
-
   useEffect(() => {
     if (!timelineRef.current) return;
     if (menuOpen) {
@@ -154,7 +156,6 @@ export default function Header({ lang, alternates }: Props) {
       timelineRef.current.reverse();
     }
   }, [menuOpen]);
-
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -166,7 +167,7 @@ export default function Header({ lang, alternates }: Props) {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 w-full transition-[background-color,border-color,backdrop-filter] duration-300 ${
-        scrolled
+        solid
           ? " bg-[#efe9e0]/95 backdrop-blur-sm shadow"
           : "border-b border-transparent bg-transparent"
       }`}
@@ -175,7 +176,7 @@ export default function Header({ lang, alternates }: Props) {
         <a href={localePath(lang, "/")} className="flex shrink-0 items-center font-sans text-lg sm:text-xl">
           <span
             className={`font-bold transition-colors duration-300 ${
-              scrolled ? "text-neutral-900" : "text-white"
+              solid ? "text-neutral-900" : "text-white"
             }`}
           >
             Surhay
@@ -183,17 +184,16 @@ export default function Header({ lang, alternates }: Props) {
           <span className="mx-[0.15em] text-teal-600">•</span>
           <span
             className={`font-normal transition-colors duration-300 ${
-              scrolled ? "text-neutral-500" : "text-white/80"
+              solid ? "text-neutral-500" : "text-white/80"
             }`}
           >
             Design
           </span>
         </a>
 
-
         <nav className="hidden items-center gap-8 font-sans text-sm md:flex">
           {navItems.map((link) => (
-            <NavLink key={link.key} label={link.label} href={link.href} scrolled={scrolled} />
+            <NavLink key={link.key} label={link.label} href={link.href} scrolled={solid} />
           ))}
         </nav>
 
@@ -202,7 +202,7 @@ export default function Header({ lang, alternates }: Props) {
             lang={lang}
             alternates={alternates}
             label={t("nav.langSwitch")}
-            tone={scrolled ? "dark" : "light"}
+            tone={solid ? "dark" : "light"}
           />
           <a
             href="#"
@@ -218,7 +218,7 @@ export default function Header({ lang, alternates }: Props) {
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((v) => !v)}
           className={`relative z-50 flex items-center justify-center text-xl transition-colors duration-300 md:hidden ${
-            menuOpen ? "text-white" : scrolled ? "text-neutral-900" : "text-white"
+            menuOpen ? "text-white" : solid ? "text-neutral-900" : "text-white"
           }`}
         >
           {menuOpen ? <FiX aria-hidden /> : <FiMenu aria-hidden />}

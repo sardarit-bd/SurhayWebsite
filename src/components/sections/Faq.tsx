@@ -29,17 +29,20 @@ export default async function Faq({ lang }: LangProp) {
       style={css("padding-block: var(--spacing-section);")}
     >
       <div className="mx-auto container px-5 md:px-8">
+        <div className="mb-14 md:mb-20">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-end">
+            <h2 className="h2 lg:col-span-7">{t("faq.title")}</h2>
+            <p className="lead max-w-md text-mute lg:col-span-5 lg:justify-self-end">
+              {t("faq.sub")}
+            </p>
+          </div>
+        </div>
+
         <div className="grid gap-12 lg:grid-cols-[2fr_3fr] lg:gap-20">
           <div className="lg:sticky lg:top-28 lg:self-start">
-            <p className="eyebrow text-mute" data-reveal="">
-              {t("faq.eyebrow")}
-            </p>
-            <h2 className="h2 reveal-mask mt-5" data-reveal="">
-              <span className="reveal-line">{t("faq.title")}</span>
-            </h2>
             <a
               href={path(lang, "faq")}
-              className="link-slide mt-7 inline-block font-semibold"
+              className="link-slide inline-block font-semibold"
               data-reveal=""
               style={css("--reveal-delay: 0.08s;")}
             >
