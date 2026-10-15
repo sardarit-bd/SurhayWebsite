@@ -1,6 +1,7 @@
 import { homePaths } from "@/i18n/utils";
 import Base from "@/layouts/Base";
-import Hero from "@/components/sections/Hero";
+// import Hero from "@/components/sections/Hero";
+import Hero from "@/components/home/Hero"
 import TrustBar from "@/components/sections/TrustBar";
 import Services from "@/components/sections/Services";
 import Work from "@/components/sections/Work";

@@ -1,90 +1,155 @@
-import clsx from 'clsx';
-import { scoped } from '../lib/scoped';
-import type { LangProp } from '../lib/props';
-import { useTranslations, withBase } from '../i18n/utils';
-import { locales, localeMeta, type Lang } from '../i18n/ui';
+"use client";
 
-interface Props extends LangProp {
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { locales, localeMeta, type Lang } from "../i18n/ui";
+
+const FLAGS: Record<Lang, string> = {
+  de: "/flags/de.svg",
+  en: "/flags/gb.svg",
+  tr: "/flags/tr.svg",
+};
+
+type Props = {
+  lang: Lang;
   alternates: Record<Lang, string>;
-  variant?: 'dropdown' | 'list';
-  /** Hiess unter Astro `class`. */
-  className?: string;
-}
-export default function LanguageSwitcher({ alternates, variant = 'dropdown', className: extraClass, lang }: Props) {
-  const t = useTranslations(lang);
+  label: string;
+  tone?: "light" | "dark";
+  variant?: "dropdown" | "list";
+  onNavigate?: () => void;
+};
 
-  const options = locales.map((code) => ({
-    code,
-    meta: localeMeta[code],
-    href: alternates[code],
-    current: code === lang,
-  }));
-  const active = localeMeta[lang];
+const Flag = ({ code }: { code: Lang }) => (
+  <Image
+    src={FLAGS[code]}
+    alt=""
+    width={22}
+    height={16}
+    unoptimized
+    className="h-4 w-5.5 shrink-0 rounded-[3px] border border-black/15 object-cover"
+  />
+);
 
-  /* Flaggenhoehe in px — Breite folgt aus dem Seitenverhaeltnis des Originals
-     (DE 5:3, TR 3:2, GB 5:3). Nichts wird ins Quadrat gepresst. */
-  const FLAG_H = 12;
+export default function LanguageSwitcher({
+  lang,
+  alternates,
+  label,
+  tone = "dark",
+  variant = "dropdown",
+  onNavigate,
+}: Props) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
-  /* Alle Flaggen `eager`, auch die im zugeklappten Menue: `loading="lazy"`
-     laedt in einem Container mit `visibility: hidden` nicht — die Flaggen
-     blieben dauerhaft leer, weil das Aufklappen den Ladevorgang nicht
-     nachtraegt. Drei SVGs mit zusammen rund 1,3 kB rechtfertigen kein
-     Nachladen. */
-  const flagSize = (ratio: number) => ({ width: Math.round(FLAG_H * ratio), height: FLAG_H });
+  useEffect(() => {
+    if (variant !== "dropdown") return;
+    const onPointer = (e: PointerEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("pointerdown", onPointer);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("pointerdown", onPointer);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [variant]);
+
+  if (variant === "list") {
+    return (
+      <ul aria-label={label} className="flex flex-wrap items-center gap-2">
+        {locales.map((code) => {
+          const meta = localeMeta[code];
+          const current = code === lang;
+          return (
+            <li key={code}>
+              <a
+                href={alternates[code]}
+                hrefLang={meta.hreflang}
+                lang={meta.hreflang}
+                aria-current={current ? "true" : undefined}
+                onClick={onNavigate}
+                className={`flex min-h-11 items-center gap-2 rounded-full border px-4 font-sans text-sm transition-colors ${
+                  current
+                    ? "border-white font-semibold text-white"
+                    : "border-white/25 text-white/70 hover:text-white"
+                }`}
+              >
+                <Flag code={code} />
+                <span>{meta.short}</span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    );
+  }
+
+  const btn =
+    tone === "dark"
+      ? "border-black/10 bg-black/5 text-neutral-900 hover:bg-black/10"
+      : "border-white/25 bg-white/10 text-white hover:bg-white/20";
 
   return (
-    <>
-      {scoped(
-        'data-c-language-switcher',
-        <>
-        {
-          variant === 'dropdown' ? (
-            <div className={clsx(['lang', extraClass])} data-lang-switcher="">
-              <button type="button" className="lang-button" aria-expanded="false" aria-controls="lang-menu" /* Kein aria-haspopup: „true" bedeutet Menue-Widget und verspricht
-                    Pfeiltasten-Bedienung. Was hier aufklappt, ist eine Liste von
-                    Links — dafuer ist aria-expanded allein das richtige Muster
-                    (WCAG 4.1.2). */ data-lang-toggle="">
-                <span className="sr-only">{t('nav.langSwitch')} — {t('nav.langCurrent')}:</span>
-                <img className="flag" src={withBase(`/flags/${active.flag.file}`)} alt="" aria-hidden="true" {...flagSize(active.flag.ratio)} loading="eager" decoding="async" />
-                <span className="lang-code" lang={active.hreflang}>{active.short}</span>
-                <svg className="lang-caret" viewBox="0 0 10 6" fill="none" aria-hidden="true">
-                  <path d="M1 1.5 5 5l4-3.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-label={label}
+        className={`inline-flex h-10 items-center gap-2 rounded-full border px-3 font-sans text-[13px] font-medium backdrop-blur-md transition-colors duration-200 ${btn}`}
+      >
+        <Flag code={lang} />
+        <span>{localeMeta[lang].short}</span>
+        <svg
+          viewBox="0 0 12 12"
+          className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          aria-hidden
+        >
+          <path d="M2.5 4.5 6 8l3.5-3.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
 
-              <ul id="lang-menu" className="lang-menu" aria-label={t('nav.langSwitch')} data-lang-menu="">
-                {options.map((option) => (
-                  <li>
-                    <a href={option.href} className={clsx(['lang-option', option.current && 'is-current'])} hrefLang={option.meta.hreflang} lang={option.meta.hreflang} aria-current={option.current ? 'true' : undefined} data-lang-link="">
-                      <img className="flag" src={withBase(`/flags/${option.meta.flag.file}`)} alt="" aria-hidden="true" {...flagSize(option.meta.flag.ratio)} loading="eager" decoding="async" />
-                      <span className="lang-name">{option.meta.native}</span>
-                      <span className="lang-short" aria-hidden="true">{option.meta.short}</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : (
-            <nav className={clsx(['lang-list', extraClass])} aria-label={t('nav.langSwitch')}>
-              <p className="lang-list-label">{t('nav.langSwitch')}</p>
-              <ul className="lang-list-items">
-                {options.map((option) => (
-                  <li>
-                    <a href={option.href} className={clsx(['lang-tile', option.current && 'is-current'])} hrefLang={option.meta.hreflang} lang={option.meta.hreflang} aria-current={option.current ? 'true' : undefined} data-lang-link="">
-                      <img className="flag" src={withBase(`/flags/${option.meta.flag.file}`)} alt="" aria-hidden="true" {...flagSize(option.meta.flag.ratio)} loading="eager" decoding="async" />
-                      <span className="lang-tile-text">
-                        <span className="lang-short-strong" aria-hidden="true">{option.meta.short}</span>
-                        <span className="lang-name">{option.meta.native}</span>
-                      </span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          )
-        }
-        </>
+      {open && (
+        <ul
+          role="menu"
+          className="absolute right-0 top-full z-50 mt-2 w-48 overflow-hidden rounded-xl border border-black/5 bg-white p-1 text-neutral-900 shadow-[0_12px_32px_rgba(0,0,0,0.18)]"
+        >
+          {locales.map((code) => {
+            const meta = localeMeta[code];
+            const current = code === lang;
+            return (
+              <li key={code} role="none">
+                <a
+                  role="menuitem"
+                  href={alternates[code]}
+                  hrefLang={meta.hreflang}
+                  lang={meta.hreflang}
+                  aria-current={current ? "true" : undefined}
+                  onClick={() => setOpen(false)}
+                  className={`flex min-h-11 items-center gap-3 rounded-lg px-3 font-sans text-[14px] transition-colors hover:bg-black/5 ${
+                    current ? "font-semibold" : ""
+                  }`}
+                >
+                  <Flag code={code} />
+                  <span className="flex-1">{meta.native}</span>
+                  {current && (
+                    <svg viewBox="0 0 12 12" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+                      <path d="M2.5 6.5 5 9l4.5-5.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  )}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
       )}
-    </>
+    </div>
   );
 }

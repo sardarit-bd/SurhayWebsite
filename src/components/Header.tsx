@@ -1,5 +1,5 @@
 "use client";
-
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { FiMenu, FiX } from "react-icons/fi";
@@ -135,13 +135,13 @@ export default function Header({ lang, alternates }: Props) {
         .fromTo(
           overlayRef.current,
           { autoAlpha: 0 },
-          { autoAlpha: 1, duration: 0.4 }
+          { autoAlpha: 1, duration: 0.4 },
         )
         .fromTo(
           ".mobile-nav-link",
           { y: 28, opacity: 0 },
           { y: 0, opacity: 1, duration: 0.45, stagger: 0.06 },
-          "-=0.2"
+          "-=0.2",
         );
     }, overlayRef);
 
@@ -173,7 +173,10 @@ export default function Header({ lang, alternates }: Props) {
       }`}
     >
       <div className="mx-auto flex w-full max-w-[1600px] items-center justify-between gap-4 px-5 py-4 sm:px-8 lg:px-12">
-        <a href={localePath(lang, "/")} className="flex shrink-0 items-center font-sans text-lg sm:text-xl">
+        <a
+          href={localePath(lang, "/")}
+          className="flex shrink-0 items-center font-sans text-lg sm:text-xl"
+        >
           <span
             className={`font-bold transition-colors duration-300 ${
               solid ? "text-neutral-900" : "text-white"
@@ -193,12 +196,23 @@ export default function Header({ lang, alternates }: Props) {
 
         <nav className="hidden items-center gap-8 font-sans text-sm md:flex">
           {navItems.map((link) => (
-            <NavLink key={link.key} label={link.label} href={link.href} scrolled={solid} />
+            <NavLink
+              key={link.key}
+              label={link.label}
+              href={link.href}
+              scrolled={solid}
+            />
           ))}
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
-          <LangLinks
+          {/* <LangLinks
+            lang={lang}
+            alternates={alternates}
+            label={t("nav.langSwitch")}
+            tone={solid ? "dark" : "light"}
+          /> */}
+          <LanguageSwitcher
             lang={lang}
             alternates={alternates}
             label={t("nav.langSwitch")}
@@ -244,13 +258,20 @@ export default function Header({ lang, alternates }: Props) {
         </nav>
 
         <div className="mobile-nav-link pt-8">
-          <LangLinks
+          {/* <LangLinks
             lang={lang}
             alternates={alternates}
             label={t("nav.langSwitch")}
             tone="light"
             className="gap-5 text-base"
             onClick={() => setMenuOpen(false)}
+          /> */}
+          <LanguageSwitcher
+            lang={lang}
+            alternates={alternates}
+            label={t("nav.langSwitch")}
+            variant="list"
+            onNavigate={() => setMenuOpen(false)}
           />
         </div>
 

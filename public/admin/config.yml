@@ -11,6 +11,7 @@
 #      b) Ein PHP-OAuth-Proxy direkt auf Hostinger (Hostinger kann PHP!).
 #    Details und Links: siehe README.md → "CMS einrichten".
 # ---------------------------------------------------------------------------
+local_backend: true
 
 backend:
   name: github
@@ -73,7 +74,7 @@ collections:
           - { name: label, label: 'Beschriftung', widget: string }
       - { name: cover, label: 'Cover-Bild', widget: image, i18n: duplicate }
       - { name: coverAlt, label: 'Cover Alt-Text', widget: string, i18n: true }
-      - { name: gallery, label: 'Galerie', widget: list, field: { name: image, label: 'Bild', widget: image }, required: false, i18n: duplicate }
+      - { name: gallery, label: 'Galerie', widget: list, field: { name: image, label: 'Bild', widget: image }, required: false, i18n: true }
       - { name: date, label: 'Datum', widget: datetime, format: 'YYYY-MM-DD', time_format: false, i18n: duplicate }
       - { name: featured, label: 'Hervorgehoben', widget: boolean, default: false, i18n: duplicate }
       - { name: real, label: 'Echtes Projekt (auf Startseite zeigen)', widget: boolean, default: false, i18n: duplicate, hint: 'Erst aktivieren, wenn Projekt, Kennzahlen und Kundenfreigabe vorliegen — sonst irreführende Werbung' }

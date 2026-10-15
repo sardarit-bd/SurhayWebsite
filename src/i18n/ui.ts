@@ -101,7 +101,13 @@ export const ui = {
       "Neuer Markenauftritt und digitale Baustellen-Präsentation für einen renommierten Berliner Generalunternehmer. Vollautomatische Vorqualifikation von Objektanfragen.",
     "work.p1.statValue": "+135%",
     "work.p1.statLabel": "qualifizierte Bauanfragen im ersten Quartal",
-
+    "hero.badge": "48+ Startups & Gründer vertrauen wfc.design",
+    "hero.title1": "Aus Visionen werden",
+    "hero.title2": "Websites, die konvertieren",
+    "hero.text":
+      "Wir gestalten Websites, die überzeugen und Ergebnisse liefern – und bringen Ihren Online-Auftritt auf das nächste Level, damit Sie Ihre Geschäftsziele erreichen.",
+    "hero.cta.primary": "Projektangebot anfragen",
+    "hero.cta.secondary": "Unsere Arbeiten ansehen",
     "work.p2.title": "Kanzlei Dr. v. Moers & Partner",
     "work.p2.category": "Anwälte & Kanzleien · Berlin & Frankfurt",
     "work.p2.eyebrow": "2026",
@@ -723,7 +729,13 @@ export const ui = {
     "work.filterCount": "{n} proje gösteriliyor",
     "blog.filterCount": "{n} yazı gösteriliyor",
     "showreel.play": "• SHOWREEL’İ OYNAT • SESİ AÇ •",
-
+    "hero.badge": "48+ startups & founders chose wfc.design",
+    "hero.title1": "Transforming visions",
+    "hero.title2": "into conversion website",
+    "hero.text":
+      "We create websites that look stunning and drive results—elevating your online presence to achieve your business goals.",
+    "hero.cta.primary": "Get a project quote",
+    "hero.cta.secondary": "See our work",
     "work.title.a": "Fikirleri ",
     "work.title.mark": "dijital ",
     "work.title.b": "deneyimlere dönüştürüyoruz.",
@@ -1390,7 +1402,13 @@ export const ui = {
     "work.tags.fullstack": "Full Stack",
     "work.tags.api": "Booking System API",
     "work.tags.a11y": "Accessibility BFSG",
-
+    "hero.badge": "48+ startups & founders chose wfc.design",
+    "hero.title1": "Transforming visions",
+    "hero.title2": "into conversion website",
+    "hero.text":
+      "We create websites that look stunning and drive results—elevating your online presence to achieve your business goals.",
+    "hero.cta.primary": "Get a project quote",
+    "hero.cta.secondary": "See our work",
     "work.p1.title": "Vanguard Construction & Architecture",
     "work.p1.category": "Craft & Construction · Berlin",
     "work.p1.eyebrow": "2026",
