@@ -729,13 +729,13 @@ export const ui = {
     "work.filterCount": "{n} proje gösteriliyor",
     "blog.filterCount": "{n} yazı gösteriliyor",
     "showreel.play": "• SHOWREEL’İ OYNAT • SESİ AÇ •",
-    "hero.badge": "48+ startups & founders chose wfc.design",
-    "hero.title1": "Transforming visions",
-    "hero.title2": "into conversion website",
+    "hero.badge": "48+ girişim ve kurucu wfc.design’ı seçti",
+    "hero.title1": "Vizyonları",
+    "hero.title2": "satış getiren web sitelerine dönüştürüyoruz",
     "hero.text":
-      "We create websites that look stunning and drive results—elevating your online presence to achieve your business goals.",
-    "hero.cta.primary": "Get a project quote",
-    "hero.cta.secondary": "See our work",
+      "Etkileyici görünen ve sonuç getiren web siteleri tasarlıyoruz — çevrimiçi görünürlüğünüzü bir üst seviyeye taşıyarak iş hedeflerinize ulaşmanızı sağlıyoruz.",
+    "hero.cta.primary": "Proje teklifi isteyin",
+    "hero.cta.secondary": "Çalışmalarımızı görün",
     "work.title.a": "Fikirleri ",
     "work.title.mark": "dijital ",
     "work.title.b": "deneyimlere dönüştürüyoruz.",
@@ -1768,7 +1768,7 @@ export const ui = {
     "faq.sub":
       "Everything worth knowing before a first call — answered briefly and honestly.",
     "insights.sub":
-      "Web tasarım, performans ve online pazarlama üzerine uygulanabilir bilgi.",
+      "Practical knowledge on web design, performance and online marketing — directly applicable.",
     "blog.eyebrow": "Insights",
     "blog.readMore": "Read more",
     "blog.back": "All articles",

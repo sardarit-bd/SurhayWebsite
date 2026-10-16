@@ -114,7 +114,7 @@ export default function Base({
     "img-src 'self' data:",
     "font-src 'self'",
     "style-src 'self' 'unsafe-inline'",
-    "script-src 'self' 'unsafe-inline'",
+    `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ''}`,
     ["connect-src 'self'", ...submitOrigins].join(' '),
     `form-action ${formSources.length > 0 ? formSources.join(' ') : "'none'"}`,
     'upgrade-insecure-requests',

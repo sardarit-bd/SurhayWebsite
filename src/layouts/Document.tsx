@@ -32,7 +32,7 @@ const NO_JS = [
 
 export default function Document({ lang, children }: { lang: Lang; children: ReactNode }) {
   return (
-    <html lang={localeMeta[lang].hreflang} className="no-js">
+    <html lang={localeMeta[lang].hreflang} className="no-js" suppressHydrationWarning>
       <head>
         {/* Reveal-Startzustände greifen nur mit aktivem JS — vor dem ersten Paint
             umschalten. Steht im <head>, weil React ein Inline-Skript ohne src

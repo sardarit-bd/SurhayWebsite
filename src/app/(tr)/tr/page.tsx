@@ -9,6 +9,7 @@ import Studio from "@/components/sections/Studio";
 import Pricing from "@/components/sections/Pricing";
 import Insights from "@/components/sections/Insights";
 import Faq from "@/components/sections/Faq";
+import IndustrySlider from "@/components/sections/IndustrySlider";
 import ContactCta from "@/components/ContactCta";
 import { astroPathname } from "@/lib/props";
 
@@ -23,6 +24,7 @@ export default function Page() {
       <TrustBar lang={lang} />
       <Work lang={lang} />
       <Process lang={lang} />
+      <IndustrySlider lang={lang} />
       <Studio lang={lang} />
       <Pricing lang={lang} />
       <Insights lang={lang} />
