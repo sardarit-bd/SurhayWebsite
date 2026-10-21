@@ -3,7 +3,8 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { SITE, formAction, formspreeAction } from '../config';
 import { SITE_HREF } from '../base';
-import { useTranslations, withBase, homePaths } from '../i18n/utils';
+import { useTranslations, withBase, homePaths, path } from '../i18n/utils';
+import { services as serviceCatalog, serviceIcons } from '../data/services';
 import { locales, localeMeta, defaultLang, type Lang } from '../i18n/ui';
 import { InlineScript } from '../lib/inline-once';
 import type { LangProp, PfadProp } from '../lib/props';
@@ -122,7 +123,14 @@ export default function Base({
   const siteBase = SITE_HREF;
   const canonical = new URL(pathname, siteBase).href;
   const ogImageAbs = new URL(ogImage.startsWith('http') ? ogImage : withBase(ogImage), siteBase).href;
-
+  const serviceMenu = serviceCatalog.map((s) => ({
+    id: s.id,
+    index: s.index,
+    title: s[lang].title,
+    tagline: s[lang].tagline,
+    href: path(lang, 'services', s[lang].slug),
+    icon: serviceIcons[s.id],
+  }));
   /* LocalBusiness / ProfessionalService Schema (JSON-LD) */
   const schema = {
     '@context': 'https://schema.org',
@@ -203,7 +211,7 @@ export default function Base({
         {t('nav.skip')}
       </a>
 
-      <Header alternates={alt} lang={lang} pathname={pathname} />
+      <Header alternates={alt} lang={lang} pathname={pathname} serviceMenu={serviceMenu} />
 
       <main id="main">{children}</main>
 

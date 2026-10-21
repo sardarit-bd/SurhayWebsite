@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { FiArrowUpRight } from "react-icons/fi";
-import { t } from "../../i18n/utils";
+import { t, path } from "../../i18n/utils";
+import { services as catalog } from "../../data/services";
 import type { Lang, UiKey } from "../../i18n/ui";
 import type { LangProp } from "../../lib/props";
 
@@ -331,7 +332,22 @@ const THEMES: Theme[] = [
 ];
 
 export function Insights({ lang }: LangProp) {
-  const services = getServicesData(lang);
+  // Maps each showcase card to its real service page. The AI card is not listed, so it is dropped.
+  const CARD_TO_SERVICE: Record<string, string> = {
+    "brand-identity": "webdesign",
+    "web-mobile-development": "webentwicklung",
+    "digital-marketing": "seo-performance",
+  };
+  const services = getServicesData(lang)
+    .filter((s) => s.id in CARD_TO_SERVICE)
+    .map((s) => ({
+      ...s,
+      href: path(
+        lang,
+        "services",
+        catalog.find((c) => c.id === CARD_TO_SERVICE[s.id])![lang].slug,
+      ),
+    }));
 
   return (
     <section className="flex flex-col gap-8 sm:gap-10 lg:gap-14 w-full items-center justify-center px-6 md:px-10 py-10 sm:py-12 lg:py-16">

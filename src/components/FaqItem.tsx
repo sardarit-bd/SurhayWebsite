@@ -81,7 +81,7 @@ export default function FaqItem({
         </button>
       </h3>
 
-      <div className="faq-panel" id={`${id}-p`} role="region" aria-labelledby={`${id}-q`}>
+      <div className="faq-panel" id={`${id}-p`} role="region" aria-labelledby={`${id}-q`} suppressHydrationWarning>
         {answerHtml !== undefined ? (
           <div
             className={clsx(['faq-panel-inner', answer])}

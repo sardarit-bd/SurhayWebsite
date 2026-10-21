@@ -445,3 +445,30 @@
       animation: none;
     }
   }
+/* ---------------------------------------------- Hintergrundbild + Schatten */
+.hero[data-c-hero] {
+  /* Footer-Farbe als Grundfläche */
+  background-color: var(--color-ink);
+
+  /* Nur im Hero: helle Schrift auf dunklem Grund */
+  --color-ink: var(--color-paper);
+  --color-mute: rgb(245 243 238 / 0.72);
+  --color-accent-600: var(--color-accent-400);
+    --hero-ink: var(--color-ink);
+}
+
+.hero[data-c-hero]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    /* oben und unten in die Footer-Farbe auslaufen */
+    linear-gradient(to bottom, var(--hero-ink, #0b1220) 0%, transparent 28%, transparent 68%, var(--hero-ink, #0b1220) 100%),
+    /* links und rechts in die Footer-Farbe auslaufen */
+    linear-gradient(to right, var(--hero-ink, #0b1220) 0%, transparent 30%, transparent 70%, var(--hero-ink, #0b1220) 100%),
+    /* Abdunklung für die Lesbarkeit der Schrift */
+    linear-gradient(rgb(11 18 32 / 0.5), rgb(11 18 32 / 0.5)),
+    url('/images/hero/hero-bg.webp') center 30% / cover no-repeat;
+}

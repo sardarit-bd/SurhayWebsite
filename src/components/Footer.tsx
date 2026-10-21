@@ -13,7 +13,7 @@ function FooterLink({ label, href, external }: FooterLinkItem) {
   return (
     <a
       href={href}
-      className="group inline-flex w-fit items-center text-paragraph-13 text-text-soft-500 transition-colors duration-200 ease-entrance hover:text-text-strong-950"
+      className="group inline-flex w-fit items-center text-paragraph-13 text-mute-dark transition-colors duration-200 ease-entrance hover:text-paper"
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
     >
       <span className="relative inline-flex items-center">
@@ -39,7 +39,7 @@ type FooterNavColumnProps = {
 function FooterNavColumn({ title, links }: FooterNavColumnProps) {
   return (
     <nav aria-label={title} className="flex flex-col gap-3">
-      <h3 className="text-label-13 text-text-strong-950">{title}</h3>
+      <h3 className="text-label-13 text-paper">{title}</h3>
       <ul className="flex flex-col gap-2.5">
         {links.map((link) => (
           <li key={link.label}>
@@ -104,7 +104,7 @@ export default function Footer({ lang }: LangProp & Partial<PfadProp>) {
   ];
 
   return (
-    <footer className="bg-bg-page">
+    <footer className="bg-ink text-paper">
       <div className="mx-auto grid w-full container grid-cols-2 gap-x-8 gap-y-10 px-5 py-16 sm:grid-cols-4 sm:gap-x-10 sm:px-9 md:grid-cols-[1.4fr_repeat(4,1fr)] md:gap-8">
         <div className="col-span-2 flex flex-col gap-4 sm:col-span-4 md:col-span-1">
           <a
@@ -112,11 +112,11 @@ export default function Footer({ lang }: LangProp & Partial<PfadProp>) {
             href={localePath(lang, "/")}
             className="inline-flex w-fit"
           >
-            <span className="font-(family-name:--font-denton) text-marketing-wordmark text-text-strong-950 [font-variation-settings:'wdth'_350,'wght'_420]">
+            <span className="font-(family-name:--font-denton) text-marketing-wordmark text-paper [font-variation-settings:'wdth'_350,'wght'_420]">
               {SITE.name}
             </span>
           </a>
-          <p className="max-w-65 text-paragraph-13 text-text-soft-500">
+          <p className="max-w-65 text-paragraph-13 text-mute-dark">
             {t("ft.tagline")}
           </p>
         </div>
@@ -124,16 +124,16 @@ export default function Footer({ lang }: LangProp & Partial<PfadProp>) {
           <FooterNavColumn key={column.title} {...column} />
         ))}
       </div>
-      <div className="mx-auto flex w-full container flex-col gap-4 border-t border-text-strong-950/10 px-5 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-9">
-        <p className="text-[12px] leading-5 text-text-soft-500">
+      <div className="mx-auto flex w-full container flex-col gap-4 border-t border-paper/10 px-5 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-9">
+        <p className="text-[12px] leading-5 text-mute-dark">
           © 2026 {SITE.name}. {t("footer.rights")} · {t("footer.madeIn")}.
         </p>
-        <ul className="flex flex-wrap gap-x-5 gap-y-2 text-[12px] leading-5 text-text-soft-500">
+        <ul className="flex flex-wrap gap-x-5 gap-y-2 text-[12px] leading-5 text-mute-dark">
           {legalLinks.map((link) => (
             <li key={link.label}>
               <a
                 href={link.href}
-                className="underline decoration-text-strong-950/20 underline-offset-4 transition-colors hover:text-text-strong-950"
+                className="underline decoration-paper/30 underline-offset-4 transition-colors hover:text-paper"
               >
                 {link.label}
               </a>

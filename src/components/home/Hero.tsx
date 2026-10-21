@@ -1,12 +1,22 @@
 import Image from "next/image";
 import type { LangProp } from "@/lib/props";
-import { t, path } from "@/i18n/utils";
+import { t, path, withBase } from "@/i18n/utils";
 import type { UiKey } from "@/i18n/ui";
+import HeroBackground from "./HeroBackground";
+import HeroCollage from "./HeroCollage";
 
 const avatarSrc = [
   "/images/testimonials/jonas-weber.webp",
   "/images/testimonials/lena-bergmann.webp",
   "/images/testimonials/mara-koenig.webp",
+];
+
+const logos = [
+  { src: "/images/logos/figma.svg", name: "Figma" },
+  { src: "/images/logos/framer.svg", name: "Framer" },
+  { src: "/images/logos/webflow.svg", name: "Webflow" },
+  { src: "/images/logos/wordpress.svg", name: "WordPress" },
+  { src: "/images/logos/postgresql.svg", name: "PostgreSQL" },
 ];
 
 const Avatars = ({ size = 24 }: { size?: number }) => (
@@ -27,48 +37,66 @@ const Avatars = ({ size = 24 }: { size?: number }) => (
 
 export default function Hero({ lang }: LangProp) {
   const tr = (key: string) => t(key as UiKey, lang);
+
   return (
-    <section className="relative flex h-screen min-h-160 w-full flex-col overflow-hidden bg-[#050414] text-white">
-      <video
-        className="absolute inset-0 h-full w-full object-cover"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-      >
-        <source src="/colors.mp4" type="video/mp4" />
-      </video>
-      <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/30 via-black/20 to-black/60" />
-      <div className="relative z-10 mx-auto flex w-full max-w-300 flex-1 flex-col items-center justify-center px-5 pt-24 text-center">
-        <div className="animate-fade-up inline-flex items-center gap-2.5 rounded-full border border-white/20 bg-white/10 py-1.5 pl-1.5 pr-4 backdrop-blur-md">
-          <Avatars size={24} />
-          <span className="text-[12px] text-white/90">{tr("hero.badge")}</span>
+    <section className="hero-saas dark-section relative isolate w-full overflow-hidden pb-20 pt-32 text-white sm:pt-36 lg:pb-28 lg:pt-40">
+      <HeroBackground />
+
+      <div className="mx-auto grid w-full max-w-300 items-center gap-14 px-5 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
+        {/* Text column */}
+        <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+          <div className="animate-fade-up inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.06] py-1.5 pl-1.5 pr-4 backdrop-blur-md">
+            <Avatars size={24} />
+            <span className="text-[12px] text-white/90">{tr("hero.badge")}</span>
+            <span className="relative ml-1 flex h-2 w-2" aria-hidden="true">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-400 opacity-60" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-400" />
+            </span>
+          </div>
+
+          <h1 className="animate-fade-up mt-7 text-[40px] font-semibold leading-[1.02] tracking-tighter [animation-delay:100ms] sm:text-[60px] lg:text-[68px] xl:text-[78px]">
+            <span className="block">{tr("hero.title1")}</span>
+            <span className="block bg-gradient-to-r from-white via-accent-300 to-accent-400 bg-clip-text text-transparent">
+              {tr("hero.title2")}
+            </span>
+          </h1>
+
+          <p className="animate-fade-up mt-6 max-w-120 text-[15px] leading-relaxed text-white/70 [animation-delay:200ms] sm:text-[17px]">
+            {tr("hero.text")}
+          </p>
+
+          <div className="animate-fade-up mt-9 flex flex-wrap items-center justify-center gap-3 [animation-delay:300ms] lg:justify-start">
+            <a href={path(lang, "contact")} className="btn btn-primary">
+              {tr("hero.cta.primary")}
+              <svg className="btn-arrow h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </a>
+            <a href={path(lang, "work")} className="btn btn-ghost">
+              {tr("hero.cta.secondary")}
+            </a>
+          </div>
+
+          <ul
+            className="animate-fade-up mt-12 flex flex-wrap items-center justify-center gap-x-7 gap-y-4 [animation-delay:400ms] lg:justify-start"
+            aria-label="Tools"
+          >
+            {logos.map((l) => (
+              <li key={l.name}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={withBase(l.src)}
+                  alt={l.name}
+                  height={20}
+                  className="h-5 w-auto opacity-50 brightness-0 invert transition hover:opacity-90"
+                />
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <h1 className="animate-fade-up mt-6 text-[40px] font-semibold leading-[1.02] tracking-tighter [animation-delay:100ms] sm:text-[60px] lg:text-[84px]">
-          <span className="block">{tr("hero.title1")}</span>
-          <span className="block">{tr("hero.title2")}</span>
-        </h1>
-
-        <p className="animate-fade-up mt-6 max-w-110 text-[14px] leading-normal text-white/75 [animation-delay:200ms] sm:text-[16px]">
-          {tr("hero.text")}
-        </p>
-
-        <div className="animate-fade-up mt-8 flex flex-wrap items-center justify-center gap-3 [animation-delay:300ms]">
-          <a
-            href={path(lang, "contact")}
-            className="inline-flex h-12 items-center rounded-xl bg-[#171717] px-6 text-[14px] font-medium text-white shadow-[0_8px_24px_rgba(0,0,0,0.35)] transition hover:-translate-y-0.5 hover:bg-black"
-          >
-            {tr("hero.cta.primary")}
-          </a>
-          <a
-            href={path(lang, "work")}
-            className="inline-flex h-12 items-center rounded-xl bg-white px-6 text-[14px] font-medium text-[#171717] transition hover:-translate-y-0.5 hover:bg-white/90"
-          >
-            {tr("hero.cta.secondary")}
-          </a>
-        </div>
+        {/* Visual column */}
+        <HeroCollage />
       </div>
     </section>
   );

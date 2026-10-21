@@ -12,12 +12,12 @@ interface ServiceRowProps {
  */
 const ServiceRow = forwardRef<HTMLDivElement, ServiceRowProps>(
   ({ service, isLast }, ref) => {
-    const { number, title, description, bullets, Icon } = service;
+    const { number, title, description, bullets, Icon, href } = service;
 
     return (
       <div
         ref={ref}
-        className={`grid grid-cols-1 sm:grid-cols-[auto_1fr] md:grid-cols-[70px_220px_1fr_90px] items-start md:items-center gap-4 md:gap-6 py-8 ${
+        className={`relative grid grid-cols-1 sm:grid-cols-[auto_1fr] md:grid-cols-[70px_220px_1fr_90px] items-start md:items-center gap-4 md:gap-6 py-8 ${
           !isLast ? "border-b border-neutral-200" : ""
         }`}
       >
@@ -25,9 +25,19 @@ const ServiceRow = forwardRef<HTMLDivElement, ServiceRowProps>(
         <span className="text-sm text-neutral-500 font-medium">{number}</span>
 
         <h3 className="text-xl md:text-2xl font-bold uppercase leading-tight text-neutral-900">
-          {title[0]}
-          <br />
-          {title[1]}
+          {href ? (
+            <a href={href} className="after:absolute after:inset-0 after:content-['']">
+              {title[0]}
+              <br />
+              {title[1]}
+            </a>
+          ) : (
+            <>
+              {title[0]}
+              <br />
+              {title[1]}
+            </>
+          )}
         </h3>
 
         <div className="max-w-md">

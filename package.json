@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "node scripts/build-inline.mjs && node scripts/sync-case-study-routes.mjs && next dev",
+    "dev": "node scripts/build-inline.mjs && node scripts/sync-case-study-routes.mjs && next dev -p 3000",
     "build": "node scripts/build-inline.mjs && node scripts/sync-case-study-routes.mjs && next build && node scripts/postbuild.mjs",
     "start": "npx serve out",
     "check": "tsc --noEmit"

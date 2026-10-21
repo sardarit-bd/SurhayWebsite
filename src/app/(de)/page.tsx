@@ -12,7 +12,7 @@ import Faq from "@/components/sections/Faq";
 import ContactCta from "@/components/ContactCta";
 import IndustrySlider from "@/components/sections/IndustrySlider";
 import { astroPathname } from "@/lib/props";
-
+import BlogPreview from "@/components/sections/BlogPreview";
 export default function Page() {
   const lang = "de" as const;
   const pathname = astroPathname("/");
@@ -27,6 +27,7 @@ export default function Page() {
       <Studio lang={lang} />
       <Pricing lang={lang} />
       <Insights lang={lang} />
+      <BlogPreview lang={lang} />
       <Faq lang={lang} />
       <ContactCta lang={lang} />
     </Base>

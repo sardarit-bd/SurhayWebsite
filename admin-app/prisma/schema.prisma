@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+
+}
+
+model Inquiry {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Contact details (matching existing form contract)
+  name        String
+  email       String
+  nachricht   String
+  paket       String
+  leistung    String[]
+  telefon     String?
+  unternehmen String?
+  sprache     String
+
+  // Dashboard management
+  status      String   @default("new") // new, contacted, won, lost
+  note        String?
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model ConfiguratorRequest {
+  id            String   @id @default(cuid())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Configurator specific fields (exact form names)
+  typ           String
+  extras        String[]
+  wartung       String
+  konfiguration String   // The joined summary text (price + duration)
+
+  // Standard contact fields
+  name          String
+  email         String
+  anmerkungen   String?
+
+  // Fallback for any other hidden fields the script sends (e.g., _subject)
+  rawData       Json
+
+  // Dashboard management
+  status        String   @default("new")
+  note          String?
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model Setting {
+  id    String @id @default("global")
+  key   String @unique
+  value String
+}
+model Admin {
+  id           String   @id @default(cuid())
+  username     String   @unique @default("admin")
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}

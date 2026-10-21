@@ -1,31 +1,4 @@
-/* Aus src/components/Header.astro (Astro-Fassung), <style>-Block.
-   Die Regeln sind unveraendert; hinzugekommen ist nur die Bereichskennung
-   [data-c-header] an jedem Compound — dieselbe Umschreibung, die Astro mit
-   data-astro-cid-* vornahm. Erzeugt von scripts/gen-scoped-css.mjs.
-   Die Komponente setzt data-c-header="" an jedes eigene Element. */
 
-/* ------------------------------------------------- Zwei Schwellen in em
-     Beide Umschaltpunkte rechnen in `em`, nicht in Pixeln — und das ist der
-     Punkt: `em` bezieht sich in einer Media Query auf die Grundschriftgroesse
-     des Browsers. Wer sie auf 200 % stellt (WCAG 1.4.4), verdoppelt damit die
-     Schwelle, und die Leiste wechselt rechtzeitig in die Burger-Fassung. Mit
-     `lg:` (1024 px) blieb die offene Navigation stehen und lief aus dem
-     Fenster.
-
-     64em  offene Navigation ab hier (= 1024 px bei 16 px Grundschrift)
-     30em  Aufruf in der Leiste ab hier (= 480 px)
-
-     Die 30em sind kein Geschmack: Logo, Sprachumschalter, Aufruf und Burger
-     brauchen zusammen mehr Platz, als ein 360-px-Telefon hat — der Burger
-     landete dort ausserhalb des Fensters und wurde vom `overflow-x: clip`
-     des Body abgeschnitten. Der Aufruf geht nicht verloren, er steht im
-     Menue als Punkt und noch einmal als Schaltflaeche.
-
-     Custom Properties sind in Media Queries nicht erlaubt, die Werte stehen
-     deshalb ausgeschrieben. Wer eine aendert, aendert sie hier und im
-     Skript unten (DESKTOP_NAV_AB). */.desktop-nav[data-c-header] {
-    display: none;
-  }
 
   .menu-sheet[data-c-header],
   .menu-toggle[data-c-header] {
@@ -54,10 +27,7 @@
       display: inline-flex;
     }
   }
-
-  /* Die Leiste liegt ueber dem Menue-Blatt (--z-leiste > --z-blatt), damit
-     Logo und Schliessen-Kreuz beim offenen Menue erreichbar bleiben.
-     Am Seitenanfang transparent; erst beim Scrollen legt sich Blur darunter. */.header-bar[data-c-header] {
+.header-bar[data-c-header] {
     background: transparent;
     transition: background-color var(--dur-short) var(--ease-micro);
   }
@@ -66,19 +36,7 @@
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
   }
-
-  /* HIER SASS DER FEHLER. Vorher stand an dieser Stelle `background:
-     transparent`. Die Leiste lag damit zwar ueber dem Blatt, hatte aber keine
-     eigene Flaeche — die Menuepunkte scrollten sichtbar unter ihr hindurch und
-     landeten als zweiter Text unter dem Logo.
-
-     Deckend, nicht durchscheinend: Ein Blur oder ein Farbanteil unter 100 %
-     laesst bei schneller Bewegung immer noch Buchstaben durch. Die Flaeche
-     traegt deshalb denselben Vollton wie das Blatt darunter (`bg-ink`), damit
-     die Grenze zwischen beiden gar nicht erst als Kante auffaellt.
-
-     Diese Regel muss NACH `.scrolled` stehen: beide haben dieselbe
-     Spezifitaet, entschieden wird ueber die Reihenfolge. */header.menu-open .header-bar[data-c-header] {
+header.menu-open .header-bar[data-c-header] {
     background: var(--color-ink);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
@@ -89,8 +47,7 @@
   header.menu-open .brand-sub[data-c-header] {
     color: var(--color-mute-dark);
   }
-
-  /* ------------------------------------------------ Desktop-Navigation */.nav-link[data-c-header] {
+.nav-link[data-c-header] {
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -105,11 +62,7 @@
     transition: color var(--dur-micro) var(--ease-micro);
   }
 
-  /* Der Punkt statt einer Unterstreichung: Er muss auch dann erkennbar sein,
-     wenn daneben ein Menue aufklappt. Ein Element traegt beide Rollen — die
-     aktive Seite zeigt ihn dauerhaft, jeder andere Punkt zeigt ihn als
-     Antwort auf den Zeiger. Zwei getrennte Punkte waeren an derselben Stelle
-     doppelt gemoppelt. */.nav-link[data-c-header]::before {
+.nav-link[data-c-header]::before {
     content: '';
     position: absolute;
     left: 50%;
@@ -126,8 +79,7 @@
       transform var(--dur-short) var(--ease-out);
   }
 
-  /* Der Punkt der aktiven Seite steht fest und wird vom Hover nicht
-     angefasst — sonst wuerde die Ortsangabe zur Zeigerantwort. */.nav-link.is-active[data-c-header] {
+.nav-link.is-active[data-c-header] {
     color: var(--color-ink);
   }
   .nav-link.is-active[data-c-header]::before {

@@ -1,0 +1,55 @@
+/* ------------------------------------------------------------ SaaS-Hero */
+.hero-bg {
+  --mx: 50%;
+  --my: 30%;
+}
+
+.hero-aurora {
+  position: absolute;
+  inset: -20% -10% auto;
+  height: 80%;
+  background:
+    radial-gradient(40% 60% at 25% 40%, rgb(34 211 238 / 0.28), transparent 70%),
+    radial-gradient(35% 55% at 75% 30%, rgb(14 116 144 / 0.45), transparent 70%);
+  filter: blur(40px);
+  animation: hero-drift 18s ease-in-out infinite alternate;
+}
+
+@keyframes hero-drift {
+  to {
+    transform: translate3d(4%, 6%, 0) scale(1.08);
+  }
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgb(245 243 238 / 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(245 243 238 / 0.06) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 25%, black 20%, transparent 75%);
+}
+
+.hero-grid--spot {
+  background-image:
+    linear-gradient(rgb(34 211 238 / 0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(34 211 238 / 0.5) 1px, transparent 1px);
+  mask-image: radial-gradient(360px circle at var(--mx) var(--my), black, transparent 70%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-aurora {
+    animation: none;
+  }
+}
+
+/* Navigation ueber dem dunklen Hero: helle Schrift, solange die Leiste
+   transparent ist. Sobald gescrollt wird oder das Menue offen ist, greifen
+   wieder die normalen Farben aus header.css. */
+body:has(.hero-saas) header:not(.scrolled):not(.menu-open) :is(.nav-link, .brand-main, #menu-toggle) {
+  color: var(--color-paper);
+}
+body:has(.hero-saas) header:not(.scrolled):not(.menu-open) .nav-link:hover {
+  color: var(--color-accent-400);
+}

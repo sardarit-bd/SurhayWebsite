@@ -1,21 +1,4 @@
-/* ---------------------------------------------------------------------------
-   Inline-Skripte erzeugen — der Ersatz fuer Astros <script>-Verarbeitung.
 
-   Astro nahm jeden <script>-Block einer Komponente, kompilierte das
-   TypeScript darin zu JavaScript, minifizierte es (esbuild, ueber Vite) und
-   lieferte es inline im HTML aus — messbar: 0 .js-Dateien in dist/, sieben
-   <script type="module">-Bloecke auf der Startseite, alle in einer Zeile und
-   mit gemangelten Variablennamen.
-
-   Next hat davon nichts. Dieses Skript macht denselben Schritt mit demselben
-   Werkzeug: src/inline/*.script.ts  →  src/inline/generated.ts, das die
-   fertigen JS-Texte als Strings exportiert. Die Komponenten setzen sie per
-   dangerouslySetInnerHTML in ein <script type="module"> — dieselbe Stelle,
-   dieselbe Ausfuehrungsreihenfolge (Modul-Skripte sind ohnehin deferred).
-
-   Laeuft als `prebuild`, also vor jedem `next build`, und zusaetzlich vor
-   `next dev`. Die erzeugte Datei ist im Repo nicht versioniert.
---------------------------------------------------------------------------- */
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -32,9 +15,6 @@ for (const datei of dateien) {
   const code = await readFile(join(quelle, datei), 'utf8');
   const { code: js, warnings } = await transform(code, {
     loader: 'ts',
-    /* Minifiziert wie vorher. `legalComments: 'none'` wirft auch den
-       Kopfkommentar der Quelldatei weg — er gehoert ins Repo, nicht in die
-       ausgelieferte Seite. */
     minify: true,
     legalComments: 'none',
     target: 'es2022',

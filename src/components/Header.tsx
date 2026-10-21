@@ -2,27 +2,40 @@
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { FiMenu, FiX } from "react-icons/fi";
+import { FiMenu, FiX, FiChevronDown } from "react-icons/fi";
 import gsap from "gsap";
 import type { LangProp, PfadProp } from "../lib/props";
 import { useTranslations, localePath, path } from "../i18n/utils";
 import { locales, localeMeta, type Lang, type UiKey } from "../i18n/ui";
 import type { RouteKey } from "../i18n/routes";
 
-const NAV_LINKS: { key: UiKey; route?: RouteKey }[] = [
+const NAV_LINKS: { key: UiKey; route?: RouteKey; hash?: string }[] = [
   { key: "header.services", route: "services" },
-  { key: "header.industries" },
+  { key: "header.industries", hash: "branchen" },
   { key: "header.projects", route: "work" },
   { key: "header.process", route: "process" },
   { key: "header.about", route: "about" },
+  { key: "nav.blog", route: "blog" },
+  { key: "nav.faq", route: "faq" },
 ];
 
 const SCROLL_THRESHOLD = 24;
 
 const trim = (p: string) => p.replace(/\/+$/, "") || "/";
 
+export interface ServiceMenuItem {
+  id: string;
+  index: string;
+  title: string;
+  tagline: string;
+  href: string;
+  /** Inner markup of the Lucide <svg> (from serviceIcons). */
+  icon: string;
+}
+
 interface Props extends LangProp, Partial<PfadProp> {
   alternates: Record<Lang, string>;
+  serviceMenu: ServiceMenuItem[];
 }
 
 function NavLink({
@@ -50,6 +63,140 @@ function NavLink({
     >
       {label}
     </a>
+  );
+}
+
+function ServicesMenu({
+  label,
+  href,
+  solid,
+  allLabel,
+  hint,
+  items,
+}: {
+  label: string;
+  href: string;
+  solid: boolean;
+  allLabel: string;
+  hint: string;
+  items: ServiceMenuItem[];
+}) {
+  const [open, setOpen] = useState(false);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const show = () => {
+    if (timer.current) clearTimeout(timer.current);
+    setOpen(true);
+  };
+  const hide = () => {
+    if (timer.current) clearTimeout(timer.current);
+    timer.current = setTimeout(() => setOpen(false), 200);
+  };
+
+  useEffect(
+    () => () => {
+      if (timer.current) clearTimeout(timer.current);
+    },
+    [],
+  );
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  return (
+    <div
+      onMouseEnter={show}
+      onMouseLeave={hide}
+      onFocus={show}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) hide();
+      }}
+    >
+      <a
+        href={href}
+        aria-haspopup="true"
+        aria-expanded={open}
+        className={`inline-flex items-center gap-1 transition-colors duration-200 ${
+          solid
+            ? "text-neutral-700 hover:text-neutral-950"
+            : "text-white/90 hover:text-white"
+        }`}
+      >
+        {label}
+        <FiChevronDown
+          aria-hidden
+          className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+        />
+      </a>
+
+      {/* Positioned against the fixed <header>, so it spans the page width. */}
+      <div
+        className={`pointer-events-none absolute inset-x-0 top-full px-5 pt-2 transition-[opacity,transform,visibility] duration-200 sm:px-8 lg:px-12 ${
+          open
+            ? "visible translate-y-0 opacity-100"
+            : "invisible -translate-y-1.5 opacity-0"
+        }`}
+      >
+        <div className="pointer-events-auto mx-auto max-w-5xl overflow-hidden rounded-2xl border border-ink/10 bg-paper text-ink shadow-xl">
+          <ul className="grid md:grid-cols-2">
+            {items.map((item, i) => (
+              <li
+                key={item.id}
+                className={`border-ink/10 ${i % 2 === 0 ? "md:border-r" : ""} ${
+                  i < items.length - 2 ? "md:border-b" : ""
+                }`}
+              >
+                <a
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className="group flex gap-4 p-6 transition-colors duration-150 hover:bg-paper-2 focus-visible:bg-paper-2"
+                >
+                  <svg
+                    className="mt-0.5 size-5 shrink-0 text-mute transition-colors duration-150 group-hover:text-accent-600"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                    dangerouslySetInnerHTML={{ __html: item.icon }}
+                  />
+                  <span className="min-w-0">
+                    <span className="flex items-baseline gap-3">
+                      <span className="font-mono text-xs text-mute">{item.index}</span>
+                      <span className="font-display text-base font-bold text-ink">
+                        {item.title}
+                      </span>
+                    </span>
+                    <span className="mt-2 block text-sm leading-relaxed text-mute">
+                      {item.tagline}
+                    </span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <div className="flex items-center justify-between gap-6 border-t border-ink/10 bg-paper-2 px-6 py-4">
+            <p className="max-w-sm text-sm text-mute">{hint}</p>
+            <a
+              href={href}
+              onClick={() => setOpen(false)}
+              className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-ink transition-colors duration-150 hover:text-accent-600"
+            >
+              {allLabel}
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -103,7 +250,7 @@ function LangLinks({
   );
 }
 
-export default function Header({ lang, alternates }: Props) {
+export default function Header({ lang, alternates, serviceMenu }: Props) {
   const t = useTranslations(lang);
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
@@ -115,10 +262,16 @@ export default function Header({ lang, alternates }: Props) {
   const isHome = trim(pathname ?? "/") === trim(localePath(lang, "/"));
   const solid = scrolled || !isHome;
 
-  const navItems = NAV_LINKS.map(({ key, route }) => ({
+  const requestHref = path(lang, "contact");
+
+  const navItems = NAV_LINKS.map(({ key, route, hash }) => ({
     key,
     label: t(key),
-    href: route ? path(lang, route) : "#",
+    href: route
+      ? path(lang, route)
+      : hash
+        ? `${localePath(lang, "/")}#${hash}`
+        : "#",
   }));
 
   useEffect(() => {
@@ -195,14 +348,26 @@ export default function Header({ lang, alternates }: Props) {
         </a>
 
         <nav className="hidden items-center gap-8 font-sans text-sm md:flex">
-          {navItems.map((link) => (
-            <NavLink
-              key={link.key}
-              label={link.label}
-              href={link.href}
-              scrolled={solid}
-            />
-          ))}
+          {navItems.map((link) =>
+            link.key === "header.services" ? (
+              <ServicesMenu
+                key={link.key}
+                label={link.label}
+                href={link.href}
+                solid={solid}
+                allLabel={t("nav.allServices")}
+                hint={t("nav.servicesHint")}
+                items={serviceMenu}
+              />
+            ) : (
+              <NavLink
+                key={link.key}
+                label={link.label}
+                href={link.href}
+                scrolled={solid}
+              />
+            ),
+          )}
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
@@ -219,7 +384,7 @@ export default function Header({ lang, alternates }: Props) {
             tone={solid ? "dark" : "light"}
           />
           <a
-            href="#"
+            href={requestHref}
             className="hidden rounded-md bg-teal-700 px-4 py-2.5 font-sans text-sm font-semibold text-white transition-colors duration-200 hover:bg-teal-800 lg:block"
           >
             {t("header.request")}
@@ -253,6 +418,21 @@ export default function Header({ lang, alternates }: Props) {
               >
                 {link.label}
               </a>
+              {link.key === "header.services" && (
+                <ul className="mt-3 flex flex-col gap-2 pl-4">
+                  {serviceMenu.map((item) => (
+                    <li key={item.id}>
+                      <a
+                        href={item.href}
+                        onClick={() => setMenuOpen(false)}
+                        className="text-lg text-white/70 transition-colors duration-200 hover:text-white"
+                      >
+                        {item.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           ))}
         </nav>
@@ -277,7 +457,7 @@ export default function Header({ lang, alternates }: Props) {
 
         <div className="mobile-nav-link mt-auto flex items-center gap-3 pt-8">
           <a
-            href="#"
+            href={requestHref}
             onClick={() => setMenuOpen(false)}
             className="flex-1 rounded-md bg-teal-700 px-4 py-3 text-center font-sans text-sm font-semibold text-white transition-colors duration-200 hover:bg-teal-800"
           >
