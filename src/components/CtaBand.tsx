@@ -3,18 +3,6 @@ import { useTranslations, path } from '../i18n/utils';
 import { css } from '../lib/css';
 import type { LangProp } from '../lib/props';
 
-/**
- * Abschlussband — steht am Ende jeder Unterseite.
- *
- * Auf einer Multipage-Seite endet fast jeder Besuch auf einer Unterseite,
- * nicht auf der Startseite. Ohne einen Abschluss pro Seite laeuft der Besuch
- * dort ins Leere. Zwei Wege: Gespraech oder Konfigurator.
- *
- * Die {' '} im Markup sind kein Zierrat: JSX wirft Whitespace weg, der einen
- * Zeilenumbruch enthaelt, Astro lieferte ihn aus. Zwischen Inline-Inhalt ist
- * das ein sichtbares Leerzeichen — ohne die Einfuegung stuende hier
- * "·Festpreis" statt "· Festpreis".
- */
 interface Props extends LangProp {
   title?: string;
   sub?: string;

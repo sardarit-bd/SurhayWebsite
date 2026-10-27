@@ -10,7 +10,9 @@ export const SITE = {
   domain: "https://surhay.design",
   email: "hallo@surhay.design",
   city: "Berlin",
-  formEndpoint: "http://localhost:3001/api/inquiries",
+  formEndpoint:
+    process.env.NEXT_PUBLIC_FORM_ENDPOINT ??
+    "https://admin.surhay.design/api/inquiries",
   formspreeId: "DEINE_FORM_ID",
   calendarUrl: "https://cal.com/surhay/erstgespraech",
   social: {

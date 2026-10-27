@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
 
   try {
     const formData = await request.formData();
-    const _gotcha = formData.get('_gotcha') as string; // In case you add it later
+    const _gotcha = formData.get('_gotcha') as string;
     const zeitstempel = formData.get('zeitstempel') as string;
 
     if (_gotcha && _gotcha.trim() !== '') {

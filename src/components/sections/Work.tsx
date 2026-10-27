@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ProjectCardVertical from "./ProjectCardVertical";
 import { getWorkProjects } from "./Work.data";
-import { useTranslations } from "../../i18n/utils";
+import { useTranslations, path } from "../../i18n/utils";
 import type { LangProp } from "../../lib/props";
 
 if (typeof window !== "undefined") {
@@ -104,19 +104,42 @@ export default function WorkSection({ lang }: LangProp) {
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-          {projects.map((project, index) => (
-            <div
-              key={project.title}
-              ref={(el) => {
-                cardRefs.current[index] = el;
-              }}
-              className="h-full"
-            >
-              <ProjectCardVertical {...project} index={index} />
+
+        {projects.length > 0 ? (
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+            {projects.map((project, index) => (
+              <div
+                key={project.title}
+                ref={(el) => {
+                  cardRefs.current[index] = el;
+                }}
+                className="h-full"
+              >
+                <ProjectCardVertical {...project} index={index} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="rounded-xl border border-(--line-dark) bg-ink-2 p-8 md:p-12">
+            <p className="font-display text-2xl font-semibold leading-tight tracking-tight text-paper md:text-3xl">
+              {t("work.pending.title")}
+            </p>
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-mute-dark md:text-base">
+              {t("work.pending.sub")}
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <a href={path(lang, "configurator")} className="btn btn-primary">
+                {t("work.pending.cta")}
+                <svg className="btn-arrow h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
+              <a href={path(lang, "pricing")} className="btn btn-ghost">
+                {t("work.pending.ctaSecondary")}
+              </a>
             </div>
-          ))}
-        </div>
+          </div>
+        )}
       </div>
     </section>
   );

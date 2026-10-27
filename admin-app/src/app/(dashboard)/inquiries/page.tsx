@@ -97,7 +97,7 @@ export default async function InquiriesPage({
         </div>
       </div>
 
-      <div className="card !p-0 overflow-hidden">
+      <div className="card p-0! overflow-hidden">
         {/* Toolbar */}
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-(--border) px-4 py-3">
           <div className="flex flex-wrap items-center gap-1">
@@ -134,18 +134,18 @@ export default async function InquiriesPage({
               name="q"
               defaultValue={q}
               placeholder="Search name, email, message…"
-              className="min-w-0 flex-1 rounded-lg border border-[var(--border)] bg-white px-3 py-2 text-sm outline-none focus:border-[var(--accent)] sm:w-64 sm:flex-none"
+              className="min-w-0 flex-1 rounded-lg border border-(--border) bg-white px-3 py-2 text-sm outline-none focus:border-(--accent) sm:w-64 sm:flex-none"
             />
             <button
               type="submit"
-              className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white transition hover:opacity-90"
+              className="rounded-lg bg-(--accent) px-4 py-2 text-sm font-medium text-white transition hover:opacity-90"
             >
               Search
             </button>
             {q && (
               <Link
                 href={href({ page: 1 }).replace(/([?&])q=[^&]*&?/, "$1").replace(/[?&]$/, "") || "/inquiries"}
-                className="text-sm text-[var(--muted)] hover:text-[var(--ink)]"
+                className="text-sm text-(--muted) hover:text-(--ink)"
               >
                 Clear
               </Link>
@@ -156,7 +156,7 @@ export default async function InquiriesPage({
         {/* Table */}
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
-            <thead className="bg-black/[0.03] text-xs uppercase tracking-wide text-[var(--muted)]">
+            <thead className="bg-black/3 text-xs uppercase tracking-wide text-(--muted)">
               <tr>
                 <th className="px-4 py-3 font-medium">#</th>
                 <th className="px-4 py-3 font-medium">Name / Company</th>
@@ -168,15 +168,15 @@ export default async function InquiriesPage({
                 <th className="px-4 py-3 text-right font-medium">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[var(--border)]">
+            <tbody className="divide-y divide-(--border)">
               {inquiries.map((inq, i) => (
-                <tr key={inq.id} className="transition hover:bg-black/[0.02]">
-                  <td className="px-4 py-3 align-middle text-[var(--muted)]">
+                <tr key={inq.id} className="transition hover:bg-black/2">
+                  <td className="px-4 py-3 align-middle text-(--muted)">
                     {(page - 1) * PAGE_SIZE + i + 1}
                   </td>
                   <td className="px-4 py-3 align-middle">
                     <div className="flex items-center gap-3">
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--ink)] text-sm font-semibold text-[var(--paper)]">
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-(--ink) text-sm font-semibold text-(--paper)">
                         {inq.name.trim().charAt(0).toUpperCase() || "?"}
                       </span>
                       <div className="min-w-0">
@@ -188,7 +188,7 @@ export default async function InquiriesPage({
                         >
                           {inq.name}
                         </Link>
-                        <p className="truncate text-xs text-[var(--muted)]">
+                        <p className="truncate text-xs text-(--muted)">
                           {inq.unternehmen || "-"}
                         </p>
                       </div>
@@ -196,11 +196,11 @@ export default async function InquiriesPage({
                   </td>
                   <td className="px-4 py-3 align-middle">
                     <p>{inq.email}</p>
-                    <p className="text-xs text-[var(--muted)]">{inq.telefon || "-"}</p>
+                    <p className="text-xs text-(--muted)">{inq.telefon || "-"}</p>
                   </td>
                   <td className="px-4 py-3 align-middle whitespace-nowrap">{inq.paket}</td>
                   <td className="max-w-xs px-4 py-3 align-middle">
-                    <p className="line-clamp-1 break-words text-[var(--muted)]">{inq.nachricht}</p>
+                    <p className="line-clamp-1 wrap-break-word text-(--muted)">{inq.nachricht}</p>
                   </td>
                   <td className="px-4 py-3 align-middle whitespace-nowrap">
                     <span className="inline-flex items-center gap-2">
@@ -208,7 +208,7 @@ export default async function InquiriesPage({
                       {LABEL[inq.status] ?? inq.status}
                     </span>
                   </td>
-                  <td className="px-4 py-3 align-middle whitespace-nowrap text-[var(--muted)]">
+                  <td className="px-4 py-3 align-middle whitespace-nowrap text-(--muted)">
                     {new Date(inq.createdAt).toLocaleDateString("en-GB", {
                       day: "2-digit",
                       month: "short",
@@ -219,7 +219,7 @@ export default async function InquiriesPage({
                     <div className="flex items-center justify-end gap-2">
                       <Link
                         href={`/inquiries/${inq.id}`}
-                        className="inline-flex h-8 items-center rounded-lg border border-[var(--border)] bg-white px-3 text-sm font-medium text-[var(--ink)] transition hover:bg-black/5"
+                        className="inline-flex h-8 items-center rounded-lg border border-(--border) bg-white px-3 text-sm font-medium text-(--ink) transition hover:bg-black/5"
                       >
                         View
                       </Link>
@@ -232,13 +232,12 @@ export default async function InquiriesPage({
           </table>
 
           {inquiries.length === 0 && (
-            <p className="px-4 py-12 text-center text-[var(--muted)]">No inquiries found.</p>
+            <p className="px-4 py-12 text-center text-(--muted)">No inquiries found.</p>
           )}
         </div>
 
-        {/* Footer / pagination */}
-        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[var(--border)] px-4 py-3">
-          <p className="text-sm text-[var(--muted)]">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-(--border) px-4 py-3">
+          <p className="text-sm text-(--muted)">
             Showing {from}–{to} of {total}
           </p>
           {totalPages > 1 && (
@@ -246,12 +245,12 @@ export default async function InquiriesPage({
               {page > 1 ? (
                 <Link
                   href={href({ page: page - 1 })}
-                  className={`${pageBtn} border-[var(--border)] bg-white hover:bg-black/5`}
+                  className={`${pageBtn} border-(--border) bg-white hover:bg-black/5`}
                 >
                   ‹
                 </Link>
               ) : (
-                <span className={`${pageBtn} border-[var(--border)] opacity-40`}>‹</span>
+                <span className={`${pageBtn} border-(--border) opacity-40`}>‹</span>
               )}
               {pageNumbers.map((n) => (
                 <Link
@@ -259,8 +258,8 @@ export default async function InquiriesPage({
                   href={href({ page: n })}
                   className={`${pageBtn} ${
                     n === page
-                      ? "border-[var(--accent)] bg-[var(--accent)] text-white"
-                      : "border-[var(--border)] bg-white hover:bg-black/5"
+                      ? "border-(--accent) bg-(--accent) text-white"
+                      : "border-(--border) bg-white hover:bg-black/5"
                   }`}
                 >
                   {n}
@@ -269,12 +268,12 @@ export default async function InquiriesPage({
               {page < totalPages ? (
                 <Link
                   href={href({ page: page + 1 })}
-                  className={`${pageBtn} border-[var(--border)] bg-white hover:bg-black/5`}
+                  className={`${pageBtn} border-(--border) bg-white hover:bg-black/5`}
                 >
                   ›
                 </Link>
               ) : (
-                <span className={`${pageBtn} border-[var(--border)] opacity-40`}>›</span>
+                <span className={`${pageBtn} border-(--border) opacity-40`}>›</span>
               )}
             </div>
           )}

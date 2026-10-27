@@ -304,7 +304,7 @@ export const services: Service[] = [
       deliverables: [
         {
           title: 'Statisch generierte Website',
-          desc: 'Vorgerenderte HTML-Seiten statt Datenbankabfragen bei jedem Aufruf. Nichts, was zur Laufzeit kaputtgehen kann, und nichts, was gehackt werden könnte.',
+          desc: 'Vorgerenderte HTML-Seiten statt Datenbankabfragen bei jedem Aufruf. Das verkleinert die Angriffsfläche gegenüber datenbankgestützten Systemen und reduziert mögliche Fehlerquellen zur Laufzeit. Hosting, Skripte, Formulare und Abhängigkeiten bleiben dennoch Teil der laufenden Pflege.',
         },
         {
           title: 'CMS zur eigenen Pflege',
@@ -384,7 +384,7 @@ export const services: Service[] = [
       deliverables: [
         {
           title: 'Statik üretilen web sitesi',
-          desc: 'Her çağrıda veritabanı sorgusu yerine önceden üretilmiş HTML sayfaları. Çalışma anında bozulabilecek bir şey yok, ele geçirilebilecek bir şey de yok.',
+          desc: 'Her çağrıda veritabanı sorgusu yerine önceden üretilmiş HTML sayfaları. Bu, veritabanı tabanlı sistemlere kıyasla saldırı yüzeyini küçültür ve çalışma anındaki olası hata kaynaklarını azaltır. Barındırma, betikler, formlar ve bağımlılıklar yine de sürekli bakımın konusudur.',
         },
         {
           title: 'Kendi yönetiminiz için içerik sistemi',
@@ -464,7 +464,7 @@ export const services: Service[] = [
       deliverables: [
         {
           title: 'Statically generated site',
-          desc: 'Pre-rendered HTML instead of a database query per visit. Nothing that can break at runtime, and nothing that can be hacked.',
+          desc: 'Pre-rendered HTML instead of a database query per visit. This shrinks the attack surface compared with database-driven systems and reduces possible runtime failure points. Hosting, scripts, forms and dependencies still need ongoing upkeep.',
         },
         {
           title: 'A CMS you maintain yourself',

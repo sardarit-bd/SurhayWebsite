@@ -36,13 +36,6 @@ export default function Page() {
       <h2>Responsible for content pursuant to § 18 (2) MStV</h2>
       <p>{LEGAL.owner}, address as above</p>
 
-      <h2>EU dispute resolution</h2>
-      <p>
-        The European Commission provides a platform for online dispute resolution (ODR):{' '}
-        <a href="https://ec.europa.eu/consumers/odr/" rel="noopener noreferrer" target="_blank">https://ec.europa.eu/consumers/odr/<span className="sr-only"> (opens in a new tab)</span></a>.
-        You can find our email address above.
-      </p>
-
       <h2>Consumer dispute resolution</h2>
       <p>
         We are neither willing nor obliged to participate in dispute resolution proceedings before a consumer

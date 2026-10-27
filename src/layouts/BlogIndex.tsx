@@ -7,7 +7,7 @@ import ContactCta from '../components/ContactCta';
 import { useTranslations, path, altPaths, splitId, formatDate, readingTime } from '../i18n/utils';
 import type { BlogData } from '../content.config';
 import type { Entry } from '../lib/content';
-import { InlineScript } from '../lib/inline-once';
+import BlogIndexScript from '../components/BlogIndexScript';
 
 /**
  * Blog-Uebersicht.
@@ -128,7 +128,7 @@ export default function BlogIndex({ posts, lang, pathname }: Props) {
           <ContactCta lang={lang} />
         </Base>
       )}
-      <InlineScript name="blog-index" />
+      <BlogIndexScript />
     </>
   );
 }

@@ -291,9 +291,9 @@ export const addOns: { name: Record<Lang, string>; price: Record<Lang, string>; 
     name: { de: 'Zweite Sprache', tr: 'İkinci dil', en: 'Second language' },
     price: { de: 'ab 890 €', tr: '890 €’dan başlayan', en: 'from €890' },
     desc: {
-      de: 'Eigener Seitenbaum mit hreflang und Sprachumschalter. Übersetzung auf Wunsch vermittelt.',
-      tr: 'hreflang ve dil değiştiriciyle kendi sayfa ağacı. İstenirse çeviri de ayarlanır.',
-      en: 'A separate page tree with hreflang and a language switch. Translation arranged on request.',
+      de: 'Eigener Seitenbaum mit hreflang und Sprachumschalter. Im Business-Paket sind DE/EN enthalten — dieses Add-on gilt für Starter und für jede weitere Sprache. Übersetzung auf Wunsch vermittelt.',
+      tr: 'hreflang ve dil değiştiriciyle kendi sayfa ağacı. Business paketinde DE/EN dahildir — bu ek hizmet Starter için ve her ek dil için geçerlidir. İstenirse çeviri de ayarlanır.',
+      en: 'A separate page tree with hreflang and a language switch. Business already includes DE/EN — this add-on applies to Starter and to every further language. Translation arranged on request.',
     },
   },
   {

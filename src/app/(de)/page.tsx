@@ -4,6 +4,7 @@ import Hero from "@/components/home/Hero";
 import TrustBar from "@/components/sections/TrustBar";
 import Services from "@/components/sections/Services";
 import Work from "@/components/sections/Work";
+import HomeContact from "@/components/sections/HomeContact";
 import Process from "@/components/sections/Process";
 import Studio from "@/components/sections/Studio";
 import Pricing from "@/components/sections/Pricing";
@@ -22,13 +23,14 @@ export default function Page() {
       <Services lang={lang} />
       <TrustBar lang={lang} />
       <Work lang={lang} />
-      <Process lang={lang} />
+      {/* <Process lang={lang} /> */}
       <IndustrySlider lang={lang} />
       <Studio lang={lang} />
       <Pricing lang={lang} />
       <Insights lang={lang} />
       <BlogPreview lang={lang} />
       <Faq lang={lang} />
+      <HomeContact lang={lang} />
       <ContactCta lang={lang} />
     </Base>
   );

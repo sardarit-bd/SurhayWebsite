@@ -7,22 +7,13 @@ import ContactCta from '../ContactCta';
 import { phases, workingRules } from '../../data/process';
 import { useTranslations, path, altPaths } from '../../i18n/utils';
 
-/**
- * Ablaufseite (/prozess, /en/process).
- *
- * Sechs Phasen, jede mit drei Spalten: was passiert, was Sie bekommen, was
- * wir von Ihnen brauchen. Die dritte Spalte ist der eigentliche Grund fuer
- * diese Seite — Webprojekte scheitern fast nie an der Technik, sondern
- * daran, dass Inhalte nicht kommen und das vorher niemand gesagt hat.
- */
-
 export default function ProcessPage({ lang, pathname }: LangProp & PfadProp) {
   const t = useTranslations(lang);
 
   return scoped(
     'data-c-process-page',
     <Base pathname={pathname} lang={lang} title={t('page.process.metaTitle')} description={t('page.process.metaDesc')} alternates={altPaths('process')}>
-      <PageHeader lang={lang} eyebrow={t('process.eyebrow')} title={t('process.title')} lead={t('page.process.lead')} crumbs={[{ label: t('nav.process') }]} />
+      <PageHeader lang={lang} eyebrow={t('process.eyebrow')} title={t('page.process.title')} lead={t('page.process.lead')} crumbs={[{ label: t('nav.process') }]} />
 
       <section style={css("padding-bottom: var(--spacing-section);")}>
         <div className="mx-auto max-w-7xl px-5 md:px-8">
@@ -34,7 +25,7 @@ export default function ProcessPage({ lang, pathname }: LangProp & PfadProp) {
                     <div className="lg:sticky lg:top-28 lg:self-start">
                       <span className="phase-number font-display text-6xl font-bold tracking-tight md:text-7xl">{phase.index}</span>
                       <h2 className="h3 mt-4">{phase.title[lang]}</h2>
-                      <p className="eyebrow mt-4 !text-[0.7rem] text-mute">{phase.duration[lang]}</p>
+                      <p className="eyebrow mt-4 text-[0.7rem]! text-mute">{phase.duration[lang]}</p>
                     </div>
 
                     <div>

@@ -1,45 +1,41 @@
-/* Woertlich uebernommen aus src/components/pages/FaqPage.astro (Astro-Fassung).
-   Nicht umschreiben: dieselbe Datei, dieselben Zeilen, damit das Verhalten
-   nachweisbar unveraendert bleibt. Astro kompilierte den <script>-Block zu
-   JavaScript und lieferte ihn inline aus; hier macht das scripts/build-inline.mjs.
-   Diese Datei wird NICHT gebuendelt — sie ist die Quelle fuer den Inline-Text. */
-
-  /* Stichwortsuche ueber alle Fragen. Sie arbeitet auf dem gerenderten Text,
-     also ohne zweite Datenquelle, die auseinanderlaufen koennte. Ohne
-     JavaScript bleibt schlicht alles sichtbar. */
-  const input = document.getElementById('faq-search') as HTMLInputElement | null;
+const input = document.getElementById('faq-search') as HTMLInputElement | null;
   const groups = Array.from(document.querySelectorAll<HTMLElement>('.faq-group'));
   const empty = document.getElementById('faq-empty');
   const count = document.getElementById('faq-count');
   const jumps = Array.from(document.querySelectorAll<HTMLElement>('[data-jump]'));
+
+  /* Suchregeln: Gross-/Kleinschreibung, Akzente und tuerkisches i/ı/İ werden
+     ignoriert; jedes eingegebene Wort muss in Frage oder Antwort vorkommen. */
+  const fold = (s: string) =>
+    s
+      .toLocaleLowerCase(document.documentElement.lang || 'de')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/ı/g, 'i')
+      .replace(/ß/g, 'ss');
 
   if (input && groups.length) {
     const items = groups.flatMap((group) =>
       Array.from(group.querySelectorAll<HTMLElement>('.faq-item')).map((el) => ({
         el,
         group,
-        text: (el.textContent ?? '').toLowerCase(),
+        text: fold(el.textContent ?? ''),
       }))
     );
     const label = count?.textContent?.trim().split(/\s+/).slice(1).join(' ') ?? '';
 
-    /* Das Accordion erst beim Tippen holen: Beim Laden ist das Custom Element
-       je nach Bundle-Reihenfolge noch nicht aufgewertet. Aufgeklappt wird
-       ohne Bewegung — vierzig Panels gleichzeitig zu animieren waere das
-       Gegenteil von ruhig. */
     type Accordion = HTMLElement & { setOpen?: (item: HTMLElement, open: boolean, animate?: boolean) => void };
     const setOpen = (el: HTMLElement, open: boolean) =>
       document.querySelector<Accordion>('faq-accordion')?.setOpen?.(el, open, false);
 
     const apply = () => {
-      const query = input.value.trim().toLowerCase();
+      const query = input.value.trim();
+      const terms = fold(query).split(/\s+/).filter(Boolean);
       let visible = 0;
 
       items.forEach(({ el, text }) => {
-        const match = query === '' || text.includes(query);
+        const match = terms.length === 0 || terms.every((term) => text.includes(term));
         el.classList.toggle('is-filtered-out', !match);
-        /* Bei einer Suche steht die Antwort meist im Body — also aufklappen,
-           damit der Treffer auch zu sehen ist. */
         setOpen(el, match && query.length > 1);
         if (match) visible++;
       });
@@ -47,9 +43,6 @@
       let first = true;
       groups.forEach((group) => {
         const hasHit = items.some(({ el, group: g }) => g === group && !el.classList.contains('is-filtered-out'));
-        /* Ein Treffer, der erst beim Scrollen erscheint, ist kein Treffer: Das
-           Filtern schiebt Gruppen nach oben, die nie im Blick waren und deren
-           Scroll-Reveal deshalb noch aussteht. Hier vorziehen. */
         if (hasHit) group.querySelectorAll('[data-reveal]').forEach((el) => el.classList.add('is-visible'));
         group.classList.toggle('is-filtered-out', !hasHit);
         group.classList.toggle('is-first', hasHit && first);
@@ -62,8 +55,10 @@
       if (count) count.textContent = `${visible} ${label}`;
     };
 
+    /* Enter darf das Formular nicht absenden — sonst ginge die Eingabe verloren. */
+    input.closest('form')?.addEventListener('submit', (e) => e.preventDefault());
+
     input.addEventListener('input', apply);
-    /* Escape leert das Feld, statt nur den Browser-Vorschlag zu schliessen. */
     input.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && input.value !== '') {
         input.value = '';

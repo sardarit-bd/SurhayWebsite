@@ -2,41 +2,14 @@ import clsx from 'clsx';
 import type { ReactNode } from 'react';
 import { css } from '../lib/css';
 
-/**
- * Eine FAQ-Zeile: Frage als Button, Antwort als aufklappbares Panel.
- *
- * WARUM KEIN <details>
- * Die Hoehe soll animiert laufen, und <details> kennt zwischen `open` und
- * `nicht open` nichts; `<summary>` traegt ausserdem die ARIA-Rolle, die wir
- * hier brauchen, nur halb. Also das Disclosure-Muster von Hand: Button mit
- * aria-expanded/aria-controls, Panel als role="region".
- *
- * OHNE JAVASCRIPT bleibt das Panel offen (siehe global.css) — die Antwort ist
- * wichtiger als die Faltung.
- *
- * Groessen: `md` fuer die Sektion auf Startseite und Leistungsseiten, `sm`
- * fuer die dichtere Liste auf /faq. Beide uebernehmen die vorhandene
- * Typografie und die vorhandenen Abstaende unveraendert.
- */
 interface Props {
   question: string;
-  /** Eindeutig auf der Seite — daraus werden Button- und Panel-ID gebildet. */
   id: string;
-  /** Laufende Nummer der Zeile: steuert den Reveal-Versatz (--i). */
   index: number;
-  /** Sichtbare Nummer vor der Frage (01, 02 …). */
   numbered?: boolean;
   size?: 'md' | 'sm';
-  /** Ersetzt die Standardklassen des Antwortblocks. */
   answerClass?: string;
-  /** Hiess unter Astro <slot />. */
   children?: ReactNode;
-  /**
-   * Antwort als fertiges HTML statt als Kinder — fuer die Markdown-Antworten
-   * aus der FAQ-Sammlung. Astros <Content /> fuegte kein Element hinzu, also
-   * setzt das HTML hier auf .faq-panel-inner, das es schon gab, und nicht in
-   * ein neues <div>.
-   */
   answerHtml?: string;
 }
 

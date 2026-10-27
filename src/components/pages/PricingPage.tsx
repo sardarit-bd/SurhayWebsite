@@ -7,19 +7,10 @@ import ContactCta from '../ContactCta';
 import { projectPlans, carePlans, addOns, priceFactors, alwaysIncluded, paymentTerms, type Plan } from '../../data/pricing';
 import { useTranslations, path, altPaths } from '../../i18n/utils';
 
-/**
- * Preisseite (/preise, /en/pricing).
- *
- * Vier Bloecke in der Reihenfolge, in der gefragt wird: Was kostet die
- * Website? Was kostet der Betrieb danach? Was kostet Zusaetzliches? Und:
- * Warum ist das eine Spanne und kein Preis?
- */
-
 export default function PricingPage({ lang, pathname }: LangProp & PfadProp) {
   const t = useTranslations(lang);
 
-  /* Beide Kartensaetze teilen sich dasselbe Markup — der einzige Unterschied
-     ist der Zusatz „pro Monat“ bei der Wartung. */
+
   const planCards = (plans: Plan[], monthly: boolean) => plans.map((p) => ({ plan: p, monthly }));
   const projectCards = planCards(projectPlans, false);
   const careCards = planCards(carePlans, true);
@@ -28,7 +19,6 @@ export default function PricingPage({ lang, pathname }: LangProp & PfadProp) {
     <Base pathname={pathname} lang={lang} title={t('page.pricing.metaTitle')} description={t('page.pricing.metaDesc')} alternates={altPaths('pricing')}>
       <PageHeader lang={lang} eyebrow={t('pricing.eyebrow')} title={t('pricing.title')} lead={t('page.pricing.lead')} crumbs={[{ label: t('nav.pricing') }]} />
 
-      {/* --------------------------------------------------- Projektpakete */}
       <section style={css("padding-bottom: var(--spacing-section-sm);")}>
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <h2 className="sr-only">{t('page.pricing.projectsTitle')}</h2>
@@ -66,13 +56,7 @@ export default function PricingPage({ lang, pathname }: LangProp & PfadProp) {
                     <p className={clsx(['mt-6 border-t pt-5 text-[0.85rem] leading-relaxed', plan.popular ? 'text-mute-dark' : 'text-mute'])} style={css(`border-color: ${plan.popular ? 'var(--line-dark)' : 'var(--line)'};`)}>
                       <span className="font-semibold">{t('page.pricing.fit')}:</span> {plan.fit[lang]}
                     </p>
-
-                    {/* Anker statt Seitenwechsel: Das Anfrageformular steht am
-                        Fuss dieser Seite (ContactCta). data-paket waehlt dort das
-                        passende Paket vor. */}
-                    {/* Paketname im zugaenglichen Namen — sonst stehen in der
-                        Linkliste drei identische Eintraege (WCAG 2.4.4). */}
-                    <a href="#anfrage" data-paket={plan.id} aria-label={`${t('pricing.cta')} — ${plan.name[lang]}`} className={clsx(['btn mt-7', plan.popular ? 'btn-primary' : 'btn-ghost'])}>
+                    <a href={`${path(lang, 'contact')}/?paket=${plan.id}#anfrage`} data-paket={plan.id} aria-label={`${t('pricing.cta')} — ${plan.name[lang]}`} className={clsx(['btn mt-7', plan.popular ? 'btn-primary' : 'btn-ghost'])}>
                       {t('pricing.cta')}
                     </a>
                   </article>

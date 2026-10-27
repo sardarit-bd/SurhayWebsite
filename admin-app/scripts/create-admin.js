@@ -16,7 +16,7 @@ async function main() {
     },
   });
 
-  console.log('✅ Admin created/updated successfully:', admin);
+  console.log('Admin created/updated successfully:', admin);
 }
 
 main()

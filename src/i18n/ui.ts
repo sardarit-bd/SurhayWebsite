@@ -75,15 +75,16 @@ export const ui = {
     "header.about": "Über uns",
     "header.request": "Website anfragen",
     "showreel.play": "• SHOWREEL ABSPIELEN • TON EINSCHALTEN •",
+    "showreel.soundOn": "Ton einschalten",
+    "showreel.soundOff": "Ton ausschalten",
     "work.filterCount": "{n} Projekte werden angezeigt",
     "work.title.a": "Aus Ideen werden",
     "work.title.mark": "digitale",
     "work.title.b": "Erlebnisse.",
     "work.intro":
-      "Ausgewählte Arbeiten und Fallstudien aus Berlin und dem DACH-Raum. Keine Massenware, sondern maßgeschneiderte Unikate.",
-
+      "Hier erscheinen künftig eigene Projekte — sobald sie veröffentlicht sind.",
     "work.sub":
-      "Ausgewählte Arbeiten und Fallstudien aus Berlin und dem DACH-Raum. Keine Massenware, sondern maßgeschneiderte Unikate.",
+      "Hier erscheinen künftig eigene Projekte — sobald sie veröffentlicht sind.",
     "work.viewCaseStudy": "Projekt ansehen",
     "work.tags.design": "Webdesign",
     "work.tags.dev": "Webentwicklung",
@@ -94,35 +95,16 @@ export const ui = {
     "work.tags.fullstack": "Full Stack",
     "work.tags.api": "Terminsystem-API",
     "work.tags.a11y": "Barrierefreiheit BFSG",
-    "work.p1.title": "Vanguard Bau & Architektur",
-    "work.p1.category": "Handwerk & Bauunternehmen · Berlin",
-    "work.p1.eyebrow": "2026",
     "work.p1.desc":
       "Neuer Markenauftritt und digitale Baustellen-Präsentation für einen renommierten Berliner Generalunternehmer. Vollautomatische Vorqualifikation von Objektanfragen.",
     "work.p1.statValue": "+135%",
     "work.p1.statLabel": "qualifizierte Bauanfragen im ersten Quartal",
-    "hero.badge": "48+ Startups & Gründer vertrauen wfc.design",
     "hero.title1": "Aus Visionen werden",
     "hero.title2": "Websites, die konvertieren",
     "hero.text":
       "Wir gestalten Websites, die überzeugen und Ergebnisse liefern – und bringen Ihren Online-Auftritt auf das nächste Level, damit Sie Ihre Geschäftsziele erreichen.",
     "hero.cta.primary": "Projektangebot anfragen",
     "hero.cta.secondary": "Unsere Arbeiten ansehen",
-    "work.p2.title": "Kanzlei Dr. v. Moers & Partner",
-    "work.p2.category": "Anwälte & Kanzleien · Berlin & Frankfurt",
-    "work.p2.eyebrow": "2026",
-    "work.p2.desc":
-      "Diskrete, hochpräzise Kanzlei-Website mit digitaler Mandatsannahme und anwaltlichem Fachblog. Ladezeit 0.4 Sekunden auf Mobilgeräten.",
-    "work.p2.statValue": "Ø 38",
-    "work.p2.statLabel": "neue Wirtschaftsmandate pro Monat",
-
-    "work.p3.title": "Zentrum für Plastische Chirurgie & Ästhetik",
-    "work.p3.category": "Medizin & Fachpraxis · Kurfürstendamm Berlin",
-    "work.p3.eyebrow": "2026",
-    "work.p3.desc":
-      "Premium-Auftritt für eine führende Privatklinik. Digitale Behandlungsberatung, 3D-Vorher/Nachher-Integration und nahtlose Online-Terminvergabe.",
-    "work.p3.statValue": "68%",
-    "work.p3.statLabel": "telefonische Terminanfragen reduziert",
     "blog.filterCount": "{n} Beiträge werden angezeigt",
     "ai.title": "KI-gestützte Funktionen und Effekte",
     "ai.sub":
@@ -160,19 +142,18 @@ export const ui = {
     "common.included": "Enthalten",
 
     "pricing.p1.name": "Starter",
-    "pricing.p1.price": "3.900 €",
+    "pricing.p1.price": "2.900 €",
     "pricing.p1.desc":
       "OnePager (bis 6 Sektionen) · Für Selbstständige und Praxen, die einen klaren, professionellen Einstieg suchen.",
     "pricing.p1.features":
       "Individuelles Screendesign (kein Baukasten)|Bis zu 6 maßgeschneiderte Sektionen|Optimiert für Smartphone, Tablet & Desktop|Conversion-starkes Kontaktformular|SEO-Grundsetup & Google Vorbereitung|Rechtssicher (DSGVO, Impressum, Cookie-Banner)",
 
     "pricing.p2.name": "Business",
-    "pricing.p2.price": "6.900 €",
+    "pricing.p2.price": "5.900 €",
     "pricing.p2.desc":
-      "Mehrseitige Website (5–12 Unterseiten) · Für Unternehmen, die wachsen wollen.",
+      "Mehrseitige Website (bis zu 8 Unterseiten) · Für Unternehmen, die wachsen wollen.",
     "pricing.p2.features":
-      "Alles aus Starter plus|Mehrseitige Struktur mit Unterseiten|Schlankes, intuitives CMS zur eigenständigen Pflege|Erweiterte On-Page SEO & Schema.org Struktur|Blog- oder News-Infrastruktur|Interaktive Elemente & Lead-Filter|Persönliche Einweisung & Video-Dokumentation",
-
+      "Alles aus Starter plus|Bis zu 8 Unterseiten|Schlankes, intuitives CMS zur eigenständigen Pflege|Erweiterte On-Page SEO & Schema.org Struktur|Blog- oder News-Infrastruktur|Zweisprachig (DE/EN)|Interaktive Elemente & Lead-Filter|Persönliche Einweisung & Video-Dokumentation",
     "pricing.p3.name": "Individuell",
     "pricing.p3.price": "auf Anfrage",
     "pricing.p3.desc":
@@ -406,7 +387,7 @@ export const ui = {
     "svc.4.t2": "Lösungen",
     "svc.4.desc":
       "Individuelle digitale Lösungen für spezielle Anforderungen: Buchungssysteme, Kundenportale & Rechner.",
-    "work.eyebrow": "Ausgewählte Projekte",
+    "work.eyebrow": "Projekte",
     "work.title": "Ergebnisse statt Referenzen.",
     "work.filter.all": "Alle",
     "work.viewCase": "Case Study ansehen",
@@ -490,6 +471,9 @@ export const ui = {
       "Praxiswissen zu Webdesign, Performance und Online-Marketing — direkt anwendbar.",
 
     "insights.all": "Alle Artikel",
+    "insights.servicesTitle": "Drei Leistungen im Überblick.",
+    "insights.servicesSub":
+      "Von der Gestaltung über die Entwicklung bis zur Sichtbarkeit — wählen Sie, was Ihr Projekt braucht.",
     "contact.eyebrow": "Kontakt",
     "contact.title": "Lassen Sie uns über Ihr Projekt sprechen.",
     "contact.sub":
@@ -572,6 +556,7 @@ export const ui = {
       "Wie ein Webprojekt bei uns abläuft: sechs Phasen mit Dauer, Ergebnissen und dem, was wir von Ihnen brauchen. Festpreis, klickbarer Entwurf, planbarer Launch.",
     "page.process.lead":
       "Sechs Phasen, in jeder Phase drei Dinge: was wir tun, was Sie danach in der Hand haben und was wir dafür von Ihnen brauchen.",
+    "page.process.title": "Vom Erstgespräch bis zum Betrieb — in sechs Phasen.",
     "page.process.work": "Was passiert",
     "page.process.output": "Was Sie bekommen",
     "page.process.yourPart": "Was wir von Ihnen brauchen",
@@ -691,6 +676,7 @@ export const ui = {
       "Diese Übersetzung dient allein der Verständlichkeit. Rechtlich verbindlich ist ausschließlich die deutsche Fassung; im Zweifelsfall gilt der deutsche Text.",
     "legal.binding.link": "Zur deutschen Fassung",
     "service.allQuestions": "Alle Fragen",
+    "service.stepsTitleCare": "Laufende Betreuung — in drei Schritten.",
     "service.others": "Weitere Leistungen",
     "404.title": "Seite nicht gefunden",
     "404.text":
@@ -729,7 +715,8 @@ export const ui = {
     "work.filterCount": "{n} proje gösteriliyor",
     "blog.filterCount": "{n} yazı gösteriliyor",
     "showreel.play": "• SHOWREEL’İ OYNAT • SESİ AÇ •",
-    "hero.badge": "48+ girişim ve kurucu wfc.design’ı seçti",
+    "showreel.soundOn": "Sesi aç",
+    "showreel.soundOff": "Sesi kapat",
     "hero.title1": "Vizyonları",
     "hero.title2": "satış getiren web sitelerine dönüştürüyoruz",
     "hero.text":
@@ -740,7 +727,7 @@ export const ui = {
     "work.title.mark": "dijital ",
     "work.title.b": "deneyimlere dönüştürüyoruz.",
     "work.intro":
-      "Berlin ve Almanca konuşulan pazardan seçilmiş işler ve vaka çalışmaları. Seri üretim değil, ölçüye göre hazırlanmış özgün işler.",
+      "Kendi projelerimiz yayınlandığında burada görünecek.",
     "work.viewCaseStudy": "Projeyi görün",
     "work.tags.design": "Web tasarım",
     "work.tags.dev": "Web geliştirme",
@@ -751,30 +738,6 @@ export const ui = {
     "work.tags.fullstack": "Full Stack",
     "work.tags.api": "Randevu sistemi API’si",
     "work.tags.a11y": "Erişilebilirlik BFSG",
-
-    "work.p1.title": "Vanguard İnşaat & Mimarlık",
-    "work.p1.category": "Zanaat & inşaat şirketleri · Berlin",
-    "work.p1.eyebrow": "2026",
-    "work.p1.desc":
-      "Saygın bir Berlinli genel müteahhit için yeni marka kimliği ve dijital şantiye sunumu. Proje taleplerinin tam otomatik ön elemesi.",
-    "work.p1.statValue": "+135%",
-    "work.p1.statLabel": "ilk çeyrekte nitelikli inşaat talebi",
-
-    "work.p2.title": "Hukuk Bürosu Dr. v. Moers & Ortakları",
-    "work.p2.category": "Avukatlar & hukuk büroları · Berlin & Frankfurt",
-    "work.p2.eyebrow": "2026",
-    "work.p2.desc":
-      "Dijital vekâlet kabulü ve hukuk blogu içeren, ketum ve son derece hassas bir hukuk bürosu sitesi. Mobil cihazlarda 0,4 saniye yüklenme süresi.",
-    "work.p2.statValue": "Ø 38",
-    "work.p2.statLabel": "aylık yeni ticari dosya",
-
-    "work.p3.title": "Plastik Cerrahi & Estetik Merkezi",
-    "work.p3.category": "Tıp & uzman muayenehane · Kurfürstendamm Berlin",
-    "work.p3.eyebrow": "2026",
-    "work.p3.desc":
-      "Önde gelen bir özel klinik için premium görünüm. Dijital tedavi danışmanlığı, 3D önce/sonra entegrasyonu ve kesintisiz çevrimiçi randevu.",
-    "work.p3.statValue": "68%",
-    "work.p3.statLabel": "telefonla randevu talebinde azalma",
 
     "ai.title": "Yapay zekâ destekli işlevler ve efektler",
     "ai.sub":
@@ -1028,10 +991,10 @@ export const ui = {
     "svc.4.t2": "Çözümler",
     "svc.4.desc":
       "Özel gereksinimler için bireysel dijital çözümler: rezervasyon sistemleri, müşteri portalları ve hesaplayıcılar.",
-    "work.eyebrow": "Seçilmiş projeler",
+    "work.eyebrow": "Projeler",
     "work.title": "Referans değil, sonuç.",
     "work.sub":
-      "Her proje ölçülebilir bir sonuçla — başlangıç durumundan rakama kadar.",
+      "Kendi projelerimiz yayınlandığında burada görünecek.",
     "work.filter.all": "Tümü",
     "work.viewCase": "Vaka çalışmasını görün",
     "work.empty": "Bu kategoride proje yok.",
@@ -1133,7 +1096,12 @@ export const ui = {
     "studio.cta": "Ön görüşme ayarlayın",
     "insights.eyebrow": "Insights",
     "insights.title": "Bizsiz de uygulayabileceğiniz bilgiler.",
+    "insights.sub":
+      "Web tasarım, performans ve online pazarlama üzerine pratik bilgi — hemen uygulanabilir.",
     "insights.all": "Tüm yazılar",
+    "insights.servicesTitle": "Üç hizmet, kısaca.",
+    "insights.servicesSub":
+      "Tasarımdan geliştirmeye, görünürlüğe kadar — projenizin ihtiyacı olanı seçin.",
 
     "contact.eyebrow": "İletişim",
     "contact.title": "Projenizi konuşalım.",
@@ -1213,9 +1181,9 @@ export const ui = {
     "page.services.combineText":
       "Çoğu projede tasarım ve geliştirme tek bir iş olarak yürür, SEO temel kurulum olarak eşlik eder, bakım da yayınla başlar. Yalnızca tek bir hizmet de alabilirsiniz — örneğin mevcut sitenizin analizi ya da bakımın devralınması.",
 
-    "page.work.metaTitle": "Projeler & vaka çalışmaları | Surhay Design",
+    "page.work.metaTitle": "Projeler | Surhay Design",
     "page.work.metaDesc":
-      "Başlangıç durumu, çözüm ve ölçülebilir sonuçla seçilmiş projeler — KOBİ’ler, serbest çalışanlar ve girişimler için web tasarım ve geliştirme.",
+      "Surhay Design projeleri. Portföy bölümü hazır ve yayınlanan işlerle doldurulacak — o zamana kadar: sabit fiyatlar, net bir süreç, ücretsiz ön görüşme.",
     "page.work.lead":
       "Her proje başlangıç durumu, alınan kararlar ve ölçülebilir sonucuyla — bir resim galerisi olarak değil, izlenebilir bir vaka olarak.",
 
@@ -1225,6 +1193,7 @@ export const ui = {
       "Bir web projesi bizde nasıl ilerler: süresi, çıktıları ve sizden beklediklerimizle altı aşama. Sabit fiyat, tıklanabilir taslak, planlanabilir yayın.",
     "page.process.lead":
       "Altı aşama, her aşamada üç şey: ne yaptığımız, sonunda elinizde ne olduğu ve bunun için sizden neye ihtiyacımız olduğu.",
+    "page.process.title": "İlk görüşmeden işletmeye — altı aşamada.",
     "page.process.work": "Ne oluyor",
     "page.process.output": "Ne alıyorsunuz",
     "page.process.yourPart": "Sizden ne gerekiyor",
@@ -1351,7 +1320,8 @@ export const ui = {
     "legal.binding.link": "Almanca sürüme gidin",
 
     "service.allQuestions": "Tüm sorular",
-    "service.others": "Diğer hizmetler",
+    "service.stepsTitleCare": "Laufende Betreuung — in drei Schritten.",
+    "service.others": "Weitere Leistungen",
 
     "404.title": "Sayfa bulunamadı",
     "404.text": "Bu sayfa (artık) yok. Ama ana sayfa yalnızca bir tık uzakta.",
@@ -1389,9 +1359,9 @@ export const ui = {
     "work.title.mark": "digital",
     "work.title.b": "experiences.",
     "work.intro":
-      "Selected works and case studies from Berlin and the DACH region. No mass production, only tailor-made uniques.",
+      "Our own projects will appear here once they are published.",
     "work.sub":
-      "Selected works and case studies from Berlin and the DACH region. No mass production, only tailor-made uniques.",
+      "Hier erscheinen künftig eigene Projekte — sobald sie veröffentlicht sind.",
     "work.viewCaseStudy": "View Case Study",
     "work.tags.design": "Web Design",
     "work.tags.dev": "Web Development",
@@ -1434,6 +1404,8 @@ export const ui = {
     "work.p3.statLabel": "reduction in phone appointment requests",
     "header.request": "Request website",
     "showreel.play": "• PLAY SHOWREEL • UNMUTE AUDIO •",
+    "showreel.soundOn": "Turn sound on",
+    "showreel.soundOff": "Turn sound off",
     "work.filterCount": "{n} projects shown",
     "blog.filterCount": "{n} articles shown",
     "ai.title": "AI-powered features and effects",
@@ -1528,19 +1500,18 @@ export const ui = {
     "common.included": "Included",
 
     "pricing.p1.name": "Starter",
-    "pricing.p1.price": "€3,900",
+    "pricing.p1.price": "€2,900",
     "pricing.p1.desc":
       "One-pager (up to 6 sections) · For freelancers and clinics looking for a clear, professional start.",
     "pricing.p1.features":
       "Custom screen design (no builders)|Up to 6 tailor-made sections|Optimized for smartphone, tablet & desktop|High-conversion contact form|Basic SEO setup & Google preparation|Legally compliant (GDPR, imprint, cookie banner)",
 
     "pricing.p2.name": "Business",
-    "pricing.p2.price": "€6,900",
+    "pricing.p2.price": "€5,900",
     "pricing.p2.desc":
-      "Multi-page website (5-12 subpages) · For companies that want to grow.",
+      "Multi-page website (up to 8 subpages) · For companies that want to grow.",
     "pricing.p2.features":
-      "Everything from Starter plus|Multi-page structure with subpages|Lean, intuitive CMS for self-maintenance|Advanced on-page SEO & Schema.org structure|Blog or news infrastructure|Interactive elements & lead filters|Personal onboarding & video documentation",
-
+      "Everything from Starter plus|Up to 8 subpages|Lean, intuitive CMS for self-maintenance|Advanced on-page SEO & Schema.org structure|Blog or news infrastructure|Bilingual (DE/EN)|Interactive elements & lead filters|Personal onboarding & video documentation",
     "pricing.p3.name": "Custom",
     "pricing.p3.price": "On Request",
     "pricing.p3.desc":
@@ -1797,6 +1768,9 @@ export const ui = {
     "insights.eyebrow": "Insights",
     "insights.title": "Knowledge you can apply without hiring us.",
     "insights.all": "All articles",
+    "insights.servicesTitle": "Three services at a glance.",
+    "insights.servicesSub":
+      "From design through development to visibility — pick what your project needs.",
     "contact.eyebrow": "Contact",
     "contact.title": "Let’s talk about your project.",
     "contact.sub":
@@ -1878,6 +1852,7 @@ export const ui = {
       "How a web project runs with us: six phases with duration, deliverables and what we need from you. Fixed price, clickable draft, a launch you can plan around.",
     "page.process.lead":
       "Six phases, and three things in each: what we do, what you hold afterwards, and what we need from you to get there.",
+    "page.process.title": "From first call to operation — in six phases.",
     "page.process.work": "What happens",
     "page.process.output": "What you get",
     "page.process.yourPart": "What we need from you",
@@ -1998,6 +1973,7 @@ export const ui = {
     "legal.binding.link": "Go to the German version",
 
     "service.allQuestions": "All questions",
+    "service.stepsTitleCare": "Ongoing care — in three steps.",
     "service.others": "Other services",
 
     "404.title": "Page not found",

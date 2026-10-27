@@ -184,7 +184,6 @@ if (form) {
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    console.log("[cf] submit clicked");
     if (sending) return;
 
     failBox.hidden = true;
@@ -196,7 +195,6 @@ if (form) {
     });
 
     if (failed.length > 0) {
-      console.log("[cf] stopped: validation failed on", failed.map((c) => c.name));
       const target = failed[0].focus();
       fieldOf(failed[0].name).scrollIntoView({
         behavior: reduced ? "auto" : "smooth",
@@ -206,34 +204,30 @@ if (form) {
       return;
     }
 
-    // Shows what is inside the hidden field (autofill is the usual cause).
-    console.log("[cf] honeypot value is:", JSON.stringify(honeypot.value));
+    const endpoint = form.getAttribute("action");
+    if (!endpoint) {
+      showFailure();
+      return;
+    }
 
-    // HARD-CODED endpoint (admin app backend)
-    const endpoint = "http://localhost:3001/api/inquiries";
-
-    // Build the data and drop the hidden field so autofill cannot cause a silent drop on the server.
     const data = new FormData(form);
     data.delete("_gotcha");
 
     sending = true;
     setSending(true);
-    console.log("[cf] sending to", endpoint);
 
     try {
       const response = await fetch(endpoint, {
         method: "POST",
         body: data,
+        headers: { Accept: "application/json" },
       });
-      const text = await response.text();
-      console.log("[cf] response status:", response.status, "body:", text);
       if (response.ok) {
         showSuccess();
       } else {
         showFailure();
       }
-    } catch (error) {
-      console.log("[cf] fetch failed (server not reachable or CORS):", error);
+    } catch {
       showFailure();
     } finally {
       sending = false;

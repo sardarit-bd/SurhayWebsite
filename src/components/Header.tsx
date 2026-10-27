@@ -134,8 +134,6 @@ function ServicesMenu({
           className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`}
         />
       </a>
-
-      {/* Positioned against the fixed <header>, so it spans the page width. */}
       <div
         className={`pointer-events-none absolute inset-x-0 top-full px-5 pt-2 transition-[opacity,transform,visibility] duration-200 sm:px-8 lg:px-12 ${
           open
@@ -170,7 +168,9 @@ function ServicesMenu({
                   />
                   <span className="min-w-0">
                     <span className="flex items-baseline gap-3">
-                      <span className="font-mono text-xs text-mute">{item.index}</span>
+                      <span className="font-mono text-xs text-mute">
+                        {item.index}
+                      </span>
                       <span className="font-display text-base font-bold text-ink">
                         {item.title}
                       </span>
@@ -256,14 +256,11 @@ export default function Header({ lang, alternates, serviceMenu }: Props) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
-
-  // Home page = transparent until scroll. Any other page = always solid.
   const isHome = trim(pathname ?? "/") === trim(localePath(lang, "/"));
   const solid = scrolled || !isHome;
-
   const requestHref = path(lang, "contact");
-
   const navItems = NAV_LINKS.map(({ key, route, hash }) => ({
     key,
     label: t(key),
@@ -316,7 +313,23 @@ export default function Header({ lang, alternates, serviceMenu }: Props) {
       document.body.style.overflow = "";
     };
   }, [menuOpen]);
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setMenuOpen(false);
+      toggleRef.current?.focus();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 w-full transition-[background-color,border-color,backdrop-filter] duration-300 ${
@@ -371,12 +384,6 @@ export default function Header({ lang, alternates, serviceMenu }: Props) {
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
-          {/* <LangLinks
-            lang={lang}
-            alternates={alternates}
-            label={t("nav.langSwitch")}
-            tone={solid ? "dark" : "light"}
-          /> */}
           <LanguageSwitcher
             lang={lang}
             alternates={alternates}
@@ -392,6 +399,7 @@ export default function Header({ lang, alternates, serviceMenu }: Props) {
         </div>
 
         <button
+          ref={toggleRef}
           type="button"
           aria-label={menuOpen ? t("nav.menuClose") : t("nav.menuOpen")}
           aria-expanded={menuOpen}
@@ -438,14 +446,6 @@ export default function Header({ lang, alternates, serviceMenu }: Props) {
         </nav>
 
         <div className="mobile-nav-link pt-8">
-          {/* <LangLinks
-            lang={lang}
-            alternates={alternates}
-            label={t("nav.langSwitch")}
-            tone="light"
-            className="gap-5 text-base"
-            onClick={() => setMenuOpen(false)}
-          /> */}
           <LanguageSwitcher
             lang={lang}
             alternates={alternates}

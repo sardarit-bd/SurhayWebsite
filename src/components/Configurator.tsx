@@ -4,12 +4,10 @@ import type { LangProp } from "../lib/props";
 import { SITE, configuratorAction } from "../config";
 import { getLangFromUrl } from "../i18n/utils";
 import { localeMeta } from "../i18n/ui";
-import { InlineScript } from "../lib/inline-once";
+import ConfiguratorScript from "./ConfiguratorScript";
 
 export default function Configurator({ lang }: LangProp) {
-  /* Konfigurator-Texte & Preis-/Zeitlogik — bewusst lokal statt in ui.ts,
-     damit Optionen, Preise und Dauern an einer Stelle gepflegt werden.
-     weeks: [min, max] Basis-Projektdauer; Extras addieren `weeks` Wochen. */
+
   const dict = {
     de: {
       eyebrow: "Konfigurator",
@@ -35,7 +33,7 @@ export default function Configurator({ lang }: LangProp) {
       weeksUnit: "Wochen",
       custom: "individuell — wir beraten Sie",
       durationCustom: "nach Beratung",
-      monthlyNote: "+ Wartung ab 89 €/Monat",
+      monthlyNote: "+ Wartung ab 49 €/Monat",
       disclaimer:
         "Unverbindliche Schätzung. Den Festpreis erhalten Sie nach dem kostenlosen Erstgespräch.",
       included: "inklusive",
@@ -56,7 +54,7 @@ export default function Configurator({ lang }: LangProp) {
           price: 5900,
           weeks: [5, 7],
           label: "Mehrseitige Website",
-          desc: "Bis 8 Unterseiten inklusive CMS — für Unternehmen mit mehr Inhalt.",
+         desc: "Bis 8 Unterseiten inklusive CMS, Blog und Zweisprachigkeit (DE/EN) — für Unternehmen mit mehr Inhalt.",
         },
         {
           id: "shop",
@@ -84,8 +82,9 @@ export default function Configurator({ lang }: LangProp) {
         },
         {
           id: "bilingual",
-          price: 900,
+          price: 890,
           weeks: 1,
+          freeFor: ["website"],
           label: "Zweisprachig (DE/EN)",
           desc: "Beide Sprachen mit sauberem SEO-Setup.",
         },
@@ -93,6 +92,7 @@ export default function Configurator({ lang }: LangProp) {
           id: "blog",
           price: 400,
           weeks: 0,
+          freeFor: ["website"],
           label: "Blog / News-Bereich",
           desc: "Artikel selbst veröffentlichen, gut für Google.",
         },
@@ -167,7 +167,7 @@ export default function Configurator({ lang }: LangProp) {
       weeksUnit: "hafta",
       custom: "özel — birlikte belirleriz",
       durationCustom: "görüşmeden sonra",
-      monthlyNote: "+ aylık 89 €’dan başlayan bakım",
+      monthlyNote: "+ aylık 49 €’dan başlayan bakım",
       disclaimer:
         "Bağlayıcı olmayan tahmin. Sabit fiyatı ücretsiz ön görüşmeden sonra alırsınız.",
       included: "dahil",
@@ -188,7 +188,7 @@ export default function Configurator({ lang }: LangProp) {
           price: 5900,
           weeks: [5, 7],
           label: "Çok sayfalı web sitesi",
-          desc: "İçerik sistemi dahil 8 alt sayfaya kadar — daha fazla içeriği olan şirketler için.",
+         desc: "İçerik sistemi, blog ve iki dillilik (DE/EN) dahil 8 alt sayfaya kadar — daha fazla içeriği olan şirketler için.",
         },
         {
           id: "shop",
@@ -216,8 +216,9 @@ export default function Configurator({ lang }: LangProp) {
         },
         {
           id: "bilingual",
-          price: 900,
+          price: 890,
           weeks: 1,
+          freeFor: ["website"],
           label: "İki dilli (DE/EN)",
           desc: "Her iki dil de temiz bir SEO kurulumuyla.",
         },
@@ -225,6 +226,7 @@ export default function Configurator({ lang }: LangProp) {
           id: "blog",
           price: 400,
           weeks: 0,
+          freeFor: ["website"],
           label: "Blog / haber alanı",
           desc: "Yazıları kendiniz yayınlayın, Google için iyi.",
         },
@@ -299,7 +301,7 @@ export default function Configurator({ lang }: LangProp) {
       weeksUnit: "weeks",
       custom: "custom — we will advise you",
       durationCustom: "after consultation",
-      monthlyNote: "+ maintenance from €89/month",
+      monthlyNote: "+ maintenance from €49/month",
       disclaimer:
         "Non-binding estimate. You receive a fixed quote after the free consultation.",
       included: "included",
@@ -320,7 +322,7 @@ export default function Configurator({ lang }: LangProp) {
           price: 5900,
           weeks: [5, 7],
           label: "Multi-page website",
-          desc: "Up to 8 subpages including CMS — for companies with more content.",
+          desc: "Up to 8 subpages including CMS, blog and bilingual setup (DE/EN) — for companies with more content.",
         },
         {
           id: "shop",
@@ -348,8 +350,9 @@ export default function Configurator({ lang }: LangProp) {
         },
         {
           id: "bilingual",
-          price: 900,
+          price: 890,
           weeks: 1,
+          freeFor: ["website"],
           label: "Bilingual (DE/EN)",
           desc: "Both languages with a clean SEO setup.",
         },
@@ -357,6 +360,7 @@ export default function Configurator({ lang }: LangProp) {
           id: "blog",
           price: 400,
           weeks: 0,
+          freeFor: ["website"],
           label: "Blog / news section",
           desc: "Publish articles yourself, great for Google.",
         },
@@ -434,12 +438,7 @@ export default function Configurator({ lang }: LangProp) {
           >
             {dict.sub}
           </p>
-
-          {/* Fortschrittsbalken (wird per JS gesteuert; ohne JS ausgeblendet) */}
           <div id="config-progress" className="mt-12" hidden>
-            {/* Eine Live-Region um beides: Vorher lag aria-live nur auf der Zahl,
-                der Name des Schrittes wechselte stumm. Jetzt wird „Schritt 2 von 4,
-                Extras" als ein Satz angesagt (WCAG 4.1.3). */}
             <div
               className="flex items-baseline justify-between gap-4 text-sm font-semibold"
               aria-live="polite"
@@ -450,7 +449,6 @@ export default function Configurator({ lang }: LangProp) {
               ></span>
               <span id="progress-step-name" className="text-mute"></span>
             </div>
-            {/* Der Balken wiederholt nur, was die Zeile darueber sagt. */}
             <div
               className="mt-3 h-1.5 overflow-hidden rounded-full"
               style={css("background: var(--line);")}
@@ -465,9 +463,6 @@ export default function Configurator({ lang }: LangProp) {
               ></div>
             </div>
           </div>
-
-          {/* Der Konfigurator postet an Formspree, nicht an SITE.formEndpoint: seine
-              Felder sind andere als die des Anfrageformulars (siehe config.ts). */}
           <form
             id="config-form"
             action={configuratorAction}
@@ -486,8 +481,6 @@ export default function Configurator({ lang }: LangProp) {
               id="config-summary"
               defaultValue=""
             />
-
-            {/* Schritt 1 — Website-Typ */}
             <div
               className="cfg-step"
               data-step-name={dict.stepNames[0]}
@@ -496,16 +489,12 @@ export default function Configurator({ lang }: LangProp) {
               aria-labelledby="cfg-legend-0"
             >
               <fieldset>
-                {/* Die Legende ist zugleich die Ueberschrift des Schrittes: ohne sie
-                    haette die Seite nur eine h1 und danach nichts mehr, obwohl
-                    optisch vier Kapitel folgen (WCAG 1.3.1). <h2> in <legend> ist
-                    gueltiges HTML — der Inhalt darf Ueberschriften enthalten. */}
                 <legend id="cfg-legend-0">
                   <h2 className="h3">{dict.typeLegend}</h2>
                 </legend>
                 <div className="mt-6 grid gap-4 sm:grid-cols-2">
                   {dict.types.map((type) => (
-                    <label className="option-card">
+                    <label className="option-card" key={type.id}>
                       <input
                         type="radio"
                         name="typ"
@@ -535,8 +524,6 @@ export default function Configurator({ lang }: LangProp) {
                 </div>
               </fieldset>
             </div>
-
-            {/* Schritt 2 — Extras */}
             <div
               className="cfg-step"
               data-step-name={dict.stepNames[1]}
@@ -545,17 +532,13 @@ export default function Configurator({ lang }: LangProp) {
               aria-labelledby="cfg-legend-1"
             >
               <fieldset>
-                {/* Die Legende ist zugleich die Ueberschrift des Schrittes: ohne sie
-                    haette die Seite nur eine h1 und danach nichts mehr, obwohl
-                    optisch vier Kapitel folgen (WCAG 1.3.1). <h2> in <legend> ist
-                    gueltiges HTML — der Inhalt darf Ueberschriften enthalten. */}
                 <legend id="cfg-legend-1">
                   <h2 className="h3">{dict.extrasLegend}</h2>
                 </legend>
                 <p className="mt-2 text-sm text-mute">{dict.extrasHint}</p>
                 <div className="mt-6 grid gap-4 sm:grid-cols-2">
                   {dict.extras.map((extra) => (
-                    <label className="option-card">
+                    <label className="option-card" key={extra.id}>
                       <input
                         type="checkbox"
                         name="extras"
@@ -585,8 +568,6 @@ export default function Configurator({ lang }: LangProp) {
                 </div>
               </fieldset>
             </div>
-
-            {/* Schritt 3 — Wartung */}
             <div
               className="cfg-step"
               data-step-name={dict.stepNames[2]}
@@ -595,16 +576,12 @@ export default function Configurator({ lang }: LangProp) {
               aria-labelledby="cfg-legend-2"
             >
               <fieldset>
-                {/* Die Legende ist zugleich die Ueberschrift des Schrittes: ohne sie
-                    haette die Seite nur eine h1 und danach nichts mehr, obwohl
-                    optisch vier Kapitel folgen (WCAG 1.3.1). <h2> in <legend> ist
-                    gueltiges HTML — der Inhalt darf Ueberschriften enthalten. */}
                 <legend id="cfg-legend-2">
                   <h2 className="h3">{dict.careLegend}</h2>
                 </legend>
                 <div className="mt-6 grid gap-4 sm:grid-cols-3">
                   {dict.care.map((option) => (
-                    <label className="option-card">
+                    <label className="option-card" key={option.id}>
                       <input
                         type="radio"
                         name="wartung"
@@ -624,8 +601,6 @@ export default function Configurator({ lang }: LangProp) {
                 </div>
               </fieldset>
             </div>
-
-            {/* Schritt 4 — Zusammenfassung: Gesamtpreis, Projektdauer, Kontakt */}
             <div
               className="cfg-step"
               data-step-name={dict.stepNames[3]}
@@ -766,9 +741,6 @@ export default function Configurator({ lang }: LangProp) {
               >
                 {dict.success}
               </p>
-              {/* Rahmen war border-red-400 und trug 2.77:1 — unter den 3:1 aus
-                  WCAG 1.4.11. Dieselbe Fehlerfarbe wie im Anfrageformular: 6.54:1
-                  als Text auf Weiss, 5.36:1 als Rahmen. */}
               <p
                 id="cfg-error"
                 className="cfg-error-box mt-4 hidden rounded-xl border px-5 py-4 text-sm"
@@ -782,16 +754,6 @@ export default function Configurator({ lang }: LangProp) {
                   {SITE.email}
                 </a>
               </p>
-
-              {/* Ohne Endpunkt UND ohne JavaScript: der Browser wuerde beim Klick auf
-                  "Absenden" ein natives POST an die aktuelle Seite schicken — die
-                  Konfiguration ginge damit an den Webserver dieser Website, statt
-                  nirgendwohin. Der Guard im Skript oben greift nur mit JavaScript,
-                  deshalb hier zusaetzlich der statische Riegel: Button ausblenden,
-                  Hinweis mit E-Mail-Adresse stehen lassen. Der Inhalt von <noscript>
-                  wird nur geparst, wenn Skripte abgeschaltet sind — fuer alle anderen
-                  aendert sich nichts. Faellt von selbst weg, sobald ein Endpunkt in
-                  src/config.ts gepflegt ist. */}
               {!configuratorAction && (
                 <noscript>
                   <style>{"#cfg-submit { display: none; }"}</style>
@@ -810,8 +772,6 @@ export default function Configurator({ lang }: LangProp) {
                 </noscript>
               )}
             </div>
-
-            {/* Wizard-Navigation (nur mit JS sichtbar) */}
             <div
               id="wizard-nav"
               className="mt-10 flex items-center justify-between gap-4"
@@ -863,7 +823,7 @@ export default function Configurator({ lang }: LangProp) {
           </form>
         </section>,
       )}
-      <InlineScript name="configurator" />
+      <ConfiguratorScript />
     </>
   );
 }

@@ -83,3 +83,6 @@
      Elemente mit eigener display-Angabe trifft. */.is-filtered-out[data-c-faq-page] {
     display: none !important;
   }
+.faq-item.is-filtered-out {
+  display: none !important;
+}

@@ -115,7 +115,7 @@ $consent  = field('einwilligung');
 $company  = field('unternehmen');
 $phone    = field('telefon');
 
-if ($package === '' || $services === [] || mb_strlen($message) < 20 || $name === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+if ($package === '' || mb_strlen($message) < 20 || $name === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     respond(false, 'validation');
 }
 

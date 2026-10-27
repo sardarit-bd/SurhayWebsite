@@ -31,7 +31,15 @@
       form.querySelectorAll<HTMLInputElement>('input[name="extras"]').forEach((extra) => {
         const includedIn = (extra.dataset.freeFor ?? '').split(' ').filter(Boolean);
         const isIncluded = includedIn.includes(typeId);
-        const priceLabel = extra.closest('label')?.querySelector<HTMLElement>('[data-price-label]');
+        /* Im Paket enthalten: nicht wählbar, nicht berechnet, keine Zusatzwochen. */
+        if (isIncluded) extra.checked = false;
+        extra.disabled = isIncluded;
+        const optionCard = extra.closest<HTMLElement>('label');
+        if (optionCard) {
+          optionCard.style.opacity = isIncluded ? '0.65' : '';
+          optionCard.style.cursor = isIncluded ? 'default' : '';
+        }
+        const priceLabel = optionCard?.querySelector<HTMLElement>('[data-price-label]');
         if (priceLabel) {
           priceLabel.classList.toggle('is-included', isIncluded);
           priceLabel.textContent = isIncluded

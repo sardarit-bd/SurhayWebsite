@@ -76,7 +76,10 @@ export default function Studio({ lang }: LangProp) {
             </video>
 
             {!isPlaying && (
-              <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none bg-black/20 backdrop-blur-[2px]">
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none bg-black/20 backdrop-blur-[2px]"
+              >
                 <div className="relative flex items-center justify-center size-28 sm:size-32 md:size-36 rounded-full bg-white/20 backdrop-blur-md border border-white/40 shadow-2xl text-white transition-transform duration-300 group-hover:scale-110">
                   <svg
                     viewBox="0 0 100 100"
@@ -100,6 +103,19 @@ export default function Studio({ lang }: LangProp) {
                 </div>
               </div>
             )}
+
+               <button
+              type="button"
+              aria-label={t(
+                (isPlaying ? "showreel.soundOff" : "showreel.soundOn") as UiKey,
+                lang,
+              )}
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleAudio();
+              }}
+              className="absolute inset-0 z-30 cursor-pointer bg-transparent focus-visible:outline-none focus-visible:shadow-[inset_0_0_0_4px_#ffffff,inset_0_0_0_8px_#0f172a]"
+            />
           </motion.div>
         </div>
       </section>

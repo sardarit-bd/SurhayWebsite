@@ -1,20 +1,4 @@
-/* Woertlich uebernommen aus src/components/FaqAccordion.astro (Astro-Fassung).
-   Nicht umschreiben: dieselbe Datei, dieselben Zeilen, damit das Verhalten
-   nachweisbar unveraendert bleibt. Astro kompilierte den <script>-Block zu
-   JavaScript und lieferte ihn inline aus; hier macht das scripts/build-inline.mjs.
-   Diese Datei wird NICHT gebuendelt — sie ist die Quelle fuer den Inline-Text. */
 
-  /* --------------------------------------------------------------------
-     FAQ-Accordion — Zustand, Hoehenmessung und Scroll-Kompensation.
-
-     Aufgabenteilung: Dauern und Kurven stehen vollstaendig in global.css,
-     damit die Responsive-Stufe unter 810px automatisch greift. JS setzt nur
-     Klassen und die gemessene Hoehe. Die Zeitwerte, die JS selbst braucht
-     (Kollaps-Versatz, Sicherheitsnetze), liest es aus denselben Custom
-     Properties — kein zweiter Satz Zahlen.
-  -------------------------------------------------------------------- */
-
-  /** Zeitwert einer Custom Property in Millisekunden. */
   const ms = (el: Element, prop: string, fallback: number) => {
     const raw = getComputedStyle(el).getPropertyValue(prop).trim();
     if (raw.endsWith('ms')) return parseFloat(raw) || fallback;
@@ -33,9 +17,7 @@
 
   class FaqAccordion extends HTMLElement {
     private items: HTMLElement[] = [];
-    /** Aufraeumfunktion des laufenden Uebergangs, je Zeile. */
     private pending = new WeakMap<HTMLElement, () => void>();
-    /** Abbruch der laufenden Scroll-Kompensation — hoechstens eine je Accordion. */
     private holding: (() => void) | null = null;
     private ready = false;
 
@@ -47,17 +29,11 @@
       for (const item of this.items) {
         const p = parts(item);
         if (!p) continue;
-        /* Geschlossen heisst auch: fuer Screenreader nicht erreichbar. */
         p.panel.hidden = true;
         p.trigger.addEventListener('click', () => this.toggle(item));
       }
     }
 
-    /**
-     * Zustand von aussen setzen (Suchtreffer auf /faq).
-     * `animate: false` springt ohne Bewegung — vierzig Panels gleichzeitig
-     * zu animieren waere genau das Gegenteil von ruhig.
-     */
     setOpen(item: HTMLElement, open: boolean, animate = true) {
       if (animate) {
         if (open !== item.classList.contains('is-open')) open ? this.open(item) : this.close(item);
@@ -83,17 +59,9 @@
       if (!p) return;
 
       const opening = !item.classList.contains('is-open');
-      /* Schliessen laeuft kuerzer als Oeffnen und setzt um --faq-collapse-in
-         spaeter an, damit der Text weg ist, bevor die Hoehe kollabiert. */
       const duration = opening
         ? ms(item, '--dur-panel', 400)
         : ms(item, '--faq-collapse-in', 40) + ms(item, '--dur-panel-out', 300);
-
-      /* Hoehe kommt und geht ausschliesslich unterhalb der Zeile, die Zeile
-         selbst sollte also ohnehin stehen. Die Schleife laeuft trotzdem: Steht
-         die Seite am unteren Rand, zieht das kuerzer werdende Dokument die
-         Scrollposition mit, und dann wandert die Zeile doch. Kostet nichts,
-         solange das Delta null ist. */
       this.hold(item, [p.panel], duration);
 
       if (opening) this.open(item);

@@ -519,8 +519,6 @@ export default function ContactForm({ showHomeLink = true, lang }: Props) {
                 </div>
 
                 <div className="cf-field" data-field="services">
-                  {/* Der Hilfstext gehoert an die Gruppe, sonst steht er zwar sichtbar
-                    da, wird aber beim Betreten der Gruppe nicht vorgelesen. */}
                   <fieldset
                     className="cf-group"
                     aria-describedby="cf-services-hint"
@@ -529,9 +527,6 @@ export default function ContactForm({ showHomeLink = true, lang }: Props) {
                     <p className="cf-hint" id="cf-services-hint">
                       {dict.servicesHint}
                     </p>
-
-                    {/* Der Feldname endet auf [] — nur so kommen beim eigenen
-                      PHP-Endpunkt alle Haken an statt nur des letzten. */}
                     <div className="pick-grid">
                       {dict.services.map((service) => (
                         <label className="pick-tile">
@@ -565,9 +560,6 @@ export default function ContactForm({ showHomeLink = true, lang }: Props) {
                           </svg>
                         </label>
                       ))}
-                      {/* Ohne diese Option bricht genau die Zielgruppe ab, die noch nicht
-                        weiss, ob sie Design, Entwicklung oder Wartung braucht. Kein
-                        Icon: sie steht fuer keine Leistung. */}
                       <label className="pick-tile pick-tile-plain">
                         <input
                           className="sr-only"
@@ -595,10 +587,6 @@ export default function ContactForm({ showHomeLink = true, lang }: Props) {
                     </div>
                   </fieldset>
                 </div>
-                {/* Erst eingrenzen, dann erzaehlen: Paket und Leistungen sortieren die
-                  Anfrage, das Freitextfeld darunter fuellt sie. Umgekehrt stand
-                  „Erzaehlen Sie kurz, worum es geht" direkt ueber „Worum geht es?" —
-                  zwei fast gleich klingende Beschriftungen untereinander. */}
                 <div className="cf-field" data-field="message">
                   <label className="cf-label" htmlFor="cf-message">
                     {dict.messageLabel}
@@ -651,8 +639,6 @@ export default function ContactForm({ showHomeLink = true, lang }: Props) {
                   </p>
                 </div>
               </div>
-
-              {/* ------------------------------------------ Einwilligung und Absenden */}
               <div className="cf-field cf-consent-field" data-field="consent">
                 <label className="cf-consent">
                   <input
@@ -665,10 +651,6 @@ export default function ContactForm({ showHomeLink = true, lang }: Props) {
                     aria-required="true"
                     aria-describedby="cf-consent-error"
                   />
-                  {/* Bewusst ohne Zeilenumbrueche zwischen Text, Link und Satzzeichen:
-                    jeder Umbruch im Markup wird zu einem Leerzeichen, und der Punkt
-                    nach der Datenschutzerklaerung landete dadurch allein am Anfang
-                    der naechsten Zeile. */}
                   <span className="cf-consent-text">
                     {dict.consentBefore}
                     <a
@@ -717,9 +699,6 @@ export default function ContactForm({ showHomeLink = true, lang }: Props) {
                   <span className="cf-error-text"></span>
                 </p>
               </div>
-
-              {/* Nie deaktiviert: ein ausgegrauter Button sagt nicht, was fehlt. Er
-                validiert beim Klick und springt auf das erste fehlerhafte Feld. */}
               <button
                 type="submit"
                 id="cf-submit"
@@ -746,14 +725,6 @@ export default function ContactForm({ showHomeLink = true, lang }: Props) {
 
               <p className="cf-submit-note">{dict.submitNote}</p>
 
-              {/* Ohne Endpunkt UND ohne JavaScript: das Formular traegt dann kein
-                action-Attribut, und ein natives POST landet beim Webserver dieser
-                Website — auf GitHub Pages also mit Name, E-Mail und Nachricht bei
-                GitHub und dessen CDN Fastly (gemessen am 5. September 2026:
-                HTTP 405, der Rumpf geht trotzdem raus). Der Guard im Skript unten
-                greift nur mit JavaScript; das hier ist der statische Riegel fuer
-                alle anderen. Faellt von selbst weg, sobald ein Endpunkt in
-                src/config.ts gepflegt ist. */}
               {!formAction && (
                 <noscript>
                   <style>{"#cf-submit { display: none; }"}</style>
@@ -771,12 +742,6 @@ export default function ContactForm({ showHomeLink = true, lang }: Props) {
                   </p>
                 </noscript>
               )}
-
-              {/* Die beiden Nebenwege. Sie standen auf der Kontaktseite als eigene
-                Karte neben dem Formular und zogen dort Gewicht von der Hauptaktion
-                ab. Als eine Zeile unter dem Button sind sie erreichbar, ohne mit ihm
-                zu konkurrieren — und stehen jetzt auch in der globalen
-                Anfrage-Sektion, wo sie vorher ganz fehlten. */}
               <p className="cf-alt">
                 {dict.altLead}{" "}
                 <a
@@ -797,8 +762,6 @@ export default function ContactForm({ showHomeLink = true, lang }: Props) {
               </p>
             </form>
 
-            {/* Ersetzt das Formular, statt es zu ergaenzen. Kein Konfetti, kein
-              automatischer Redirect — die Bestaetigung ist die Nachricht. */}
             <div id="cf-success" className="cf-success" hidden>
               <h2 id="cf-success-title" className="h3" tabIndex={-1}>
                 {dict.successTitle}

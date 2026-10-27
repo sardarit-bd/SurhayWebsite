@@ -83,7 +83,7 @@ export default function ServiceDetailPage({ service, lang, pathname }: Props) {
       <section className="dark-section grain" style={css("padding-block: var(--spacing-section);")}>
         <div className="relative mx-auto max-w-7xl px-5 md:px-8">
           <p className="eyebrow text-mute-dark" data-reveal="">{t('process.eyebrow')}</p>
-          <h2 className="h2 h2-sm mt-5 max-w-2xl" data-reveal="">{t('process.title')}</h2>
+          <h2 className="h2 h2-sm mt-5 max-w-2xl" data-reveal="">{t(service.id === 'wartung' ? 'service.stepsTitleCare' : 'process.title')}</h2>
 
           <ol className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {

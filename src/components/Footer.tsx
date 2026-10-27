@@ -1,5 +1,6 @@
 import { HiArrowRight } from "react-icons/hi2";
 import { SITE } from "../config";
+import { services as catalog } from "../data/services";
 import { useTranslations, path, localePath } from "../i18n/utils";
 import type { LangProp, PfadProp } from "../lib/props";
 
@@ -53,16 +54,16 @@ function FooterNavColumn({ title, links }: FooterNavColumnProps) {
 
 export default function Footer({ lang }: LangProp & Partial<PfadProp>) {
   const t = useTranslations(lang);
-  const services = path(lang, "services");
+  const serviceHref = (id: string) =>
+       path(lang, "services", catalog.find((s) => s.id === id)![lang].slug);
   const footerNav: FooterNavColumnProps[] = [
     {
       title: t("footer.servicesCol"),
       links: [
-        { label: t("ft.l1"), href: services },
-        { label: t("ft.l2"), href: services },
-        { label: t("ft.l3"), href: services },
-        { label: t("ft.l4"), href: services },
-        { label: t("ft.l5"), href: services },
+        { label: t("ft.l1"), href: serviceHref("webdesign") },
+        { label: t("ft.l2"), href: serviceHref("webentwicklung") },
+        { label: t("ft.l3"), href: serviceHref("seo-performance") },
+        { label: t("ft.l4"), href: serviceHref("wartung") },
       ],
     },
     {
@@ -71,7 +72,7 @@ export default function Footer({ lang }: LangProp & Partial<PfadProp>) {
         { label: t("header.about"), href: path(lang, "about") },
         { label: t("ft.process"), href: path(lang, "process") },
         { label: t("header.projects"), href: path(lang, "work") },
-        { label: t("header.industries"), href: localePath(lang, "/") },
+        { label: t("header.industries"), href: `${localePath(lang, "/")}#branchen` },
         { label: t("ft.pricing"), href: path(lang, "pricing") },
       ],
     },

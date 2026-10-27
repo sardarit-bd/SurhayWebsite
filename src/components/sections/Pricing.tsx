@@ -13,7 +13,7 @@ const PLANS: Plan[] = [
   { id: "p2", variant: "dark", showFrom: true },
   { id: "p3", variant: "light", showFrom: false },
 ];
-
+const PLAN_SLUG = { p1: "starter", p2: "business", p3: "individuell" } as const;
 function PricingCard({ plan, lang }: { plan: Plan; lang: Lang }) {
   const t = useTranslations(lang);
   const isDark = plan.variant === "dark";
@@ -86,7 +86,7 @@ function PricingCard({ plan, lang }: { plan: Plan; lang: Lang }) {
 
       <div className="mt-8">
         <a
-          href={path(lang, "contact")}
+           href={`${path(lang, "contact")}/?paket=${PLAN_SLUG[plan.id]}#anfrage`}
           className={`btn w-full ${isDark ? "btn-primary" : "btn-ghost"}`}
         >
           {t("pricing.cta")}

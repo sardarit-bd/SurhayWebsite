@@ -18,13 +18,9 @@ function isActive(pathname: string, href: string) {
 export default function AdminShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-
-  // Close the mobile menu after navigating.
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
-
-  // While the menu is open: Escape closes it and the page behind it does not scroll.
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -78,7 +74,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
                 aria-current={active ? "page" : undefined}
                 className={`rounded-lg border-l-2 px-4 py-2 transition ${
                   active
-                    ? "border-[var(--accent)] bg-white/15 font-semibold"
+                    ? "border-(--accent) bg-white/15 font-semibold"
                     : "border-transparent hover:bg-white/10"
                 }`}
               >
@@ -96,7 +92,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
       </aside>
 
       <div className="min-w-0 flex-1">
-        <header className="sticky top-0 z-20 flex items-center gap-3 bg-[var(--ink)] px-4 py-3 text-[var(--paper)] lg:hidden">
+        <header className="sticky top-0 z-20 flex items-center gap-3 bg-(--ink) px-4 py-3 text-(--paper) lg:hidden">
           <button
             type="button"
             onClick={() => setOpen(true)}

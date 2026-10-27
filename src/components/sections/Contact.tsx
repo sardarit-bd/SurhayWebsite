@@ -5,20 +5,6 @@ import { SITE, formspreeAction } from '../../config';
 import { useTranslations, localePath, routes } from '../../i18n/utils';
 import { InlineScript } from '../../lib/inline-once';
 
-/**
- * Kontakt — letzter Block der Seite, drei Wege zum Gespräch.
- *
- * FORMULAR ODER NICHT
- * Das Formular postet an Formspree — nicht an SITE.formEndpoint, das der
- * Kontaktseite gehoert. Solange in SITE.formspreeId noch der
- * Auslieferungswert steht, geht jede abgeschickte Anfrage verloren — der
- * teuerste denkbare Fehler auf einer Verkaufsseite. Deshalb rendert die
- * Sektion in diesem Fall gar kein Formular, sondern die beiden Wege, die
- * ohne Konfiguration funktionieren: Direktnachricht per E-Mail und
- * Terminbuchung. Sobald die Form-ID eingetragen ist, erscheint das Formular
- * automatisch wieder.
- */
-
 export default function Contact({ lang }: LangProp) {
   const t = useTranslations(lang);
   const privacyHref = localePath(lang, `/${routes[lang].privacy}`);
@@ -39,7 +25,6 @@ export default function Contact({ lang }: LangProp) {
 
               {
                 formspreeAction ? (
-                  /* Kontaktformular: drei Felder, statisch via Formspree. */
                   <form id="contact-form" action={formspreeAction} method="POST" className="mt-10 max-w-xl space-y-5" data-reveal="" style={css("--reveal-delay: 0.16s;")}>
                     <div className="grid gap-5 sm:grid-cols-2">
                       <div>
@@ -94,7 +79,6 @@ export default function Contact({ lang }: LangProp) {
                     </p>
                   </form>
                 ) : (
-                  /* Ohne Form-ID: die zwei Wege, die ohne Konfiguration tragen. */
                   <div className="mt-10 max-w-xl" data-reveal="" style={css("--reveal-delay: 0.16s;")}>
                     <ol className="space-y-8">
                       <li>

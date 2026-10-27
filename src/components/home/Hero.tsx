@@ -1,15 +1,8 @@
-import Image from "next/image";
 import type { LangProp } from "@/lib/props";
 import { t, path, withBase } from "@/i18n/utils";
 import type { UiKey } from "@/i18n/ui";
 import HeroBackground from "./HeroBackground";
 import HeroCollage from "./HeroCollage";
-
-const avatarSrc = [
-  "/images/testimonials/jonas-weber.webp",
-  "/images/testimonials/lena-bergmann.webp",
-  "/images/testimonials/mara-koenig.webp",
-];
 
 const logos = [
   { src: "/images/logos/figma.svg", name: "Figma" },
@@ -18,22 +11,6 @@ const logos = [
   { src: "/images/logos/wordpress.svg", name: "WordPress" },
   { src: "/images/logos/postgresql.svg", name: "PostgreSQL" },
 ];
-
-const Avatars = ({ size = 24 }: { size?: number }) => (
-  <div className="flex items-center">
-    {avatarSrc.map((src) => (
-      <Image
-        key={src}
-        src={src}
-        alt=""
-        width={size}
-        height={size}
-        className="-ml-2 rounded-full border-2 border-white/80 object-cover first:ml-0"
-        style={{ width: size, height: size }}
-      />
-    ))}
-  </div>
-);
 
 export default function Hero({ lang }: LangProp) {
   const tr = (key: string) => t(key as UiKey, lang);
@@ -45,9 +22,8 @@ export default function Hero({ lang }: LangProp) {
       <div className="mx-auto grid w-full max-w-300 items-center gap-14 px-5 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
         {/* Text column */}
         <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-          <div className="animate-fade-up inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.06] py-1.5 pl-1.5 pr-4 backdrop-blur-md">
-            <Avatars size={24} />
-            <span className="text-[12px] text-white/90">{tr("hero.badge")}</span>
+          <div className="animate-fade-up inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 backdrop-blur-md">
+            <span className="text-[12px] text-white/90">{tr("hero.eyebrow")}</span>
             <span className="relative ml-1 flex h-2 w-2" aria-hidden="true">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-400 opacity-60" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-400" />
@@ -77,22 +53,30 @@ export default function Hero({ lang }: LangProp) {
             </a>
           </div>
 
-          <ul
-            className="animate-fade-up mt-12 flex flex-wrap items-center justify-center gap-x-7 gap-y-4 [animation-delay:400ms] lg:justify-start"
-            aria-label="Tools"
-          >
-            {logos.map((l) => (
-              <li key={l.name}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={withBase(l.src)}
-                  alt={l.name}
-                  height={20}
-                  className="h-5 w-auto opacity-50 brightness-0 invert transition hover:opacity-90"
-                />
-              </li>
-            ))}
-          </ul>
+          <div className="animate-fade-up mt-12 flex flex-col items-center gap-4 [animation-delay:400ms] lg:items-start">
+            <p
+              id="hero-tools-label"
+              className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-white/50"
+            >
+              {tr("page.about.stackTitle")}
+            </p>
+            <ul
+              className="flex flex-wrap items-center justify-center gap-x-7 gap-y-4 lg:justify-start"
+              aria-labelledby="hero-tools-label"
+            >
+              {logos.map((l) => (
+                <li key={l.name}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={withBase(l.src)}
+                    alt={l.name}
+                    height={20}
+                    className="h-5 w-auto opacity-50 brightness-0 invert transition hover:opacity-90"
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         {/* Visual column */}

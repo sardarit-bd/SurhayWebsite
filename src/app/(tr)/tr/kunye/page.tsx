@@ -35,12 +35,7 @@ export default function Page() {
       <h2>§ 18 Abs. 2 MStV uyarınca içerikten sorumlu kişi</h2>
       <p>{LEGAL.owner}, adres yukarıdaki gibidir</p>
 
-      <h2>AB uyuşmazlık çözümü</h2>
-      <p>
-        Avrupa Komisyonu, çevrimiçi uyuşmazlık çözümü (ODR) için bir platform sunmaktadır:{' '}
-        <a href="https://ec.europa.eu/consumers/odr/" rel="noopener noreferrer" target="_blank">https://ec.europa.eu/consumers/odr/<span className="sr-only"> (yeni sekmede açılır)</span></a>.
-        E-posta adresimizi künyenin üst kısmında bulabilirsiniz.
-      </p>
+
 
       <h2>Tüketici uyuşmazlıklarının çözümü</h2>
       <p>

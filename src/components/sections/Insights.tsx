@@ -354,10 +354,10 @@ export function Insights({ lang }: LangProp) {
       <div className="w-full container mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-end">
           <h2 className="h2 lg:col-span-7">
-            {t("insights.title" as UiKey, lang)}
+            {t("insights.servicesTitle" as UiKey, lang)}
           </h2>
           <p className="lead max-w-md text-mute lg:col-span-5 lg:justify-self-end">
-            {t("insights.sub" as UiKey, lang)}
+            {t("insights.servicesSub" as UiKey, lang)}
           </p>
         </div>
       </div>
@@ -439,7 +439,7 @@ export function Insights({ lang }: LangProp) {
                     service.fallbackImage ||
                     "/images/project/CASA.webp"
                   }
-                  alt={`${service.title} showcase`}
+                  alt={service.title}
                   fill
                   sizes="(max-width: 1024px) 100vw, 45vw"
                   className="object-cover"

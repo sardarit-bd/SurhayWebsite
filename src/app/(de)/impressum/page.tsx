@@ -36,13 +36,6 @@ export default function Page() {
       <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
       <p>{LEGAL.owner}, Anschrift wie oben</p>
 
-      <h2>EU-Streitschlichtung</h2>
-      <p>
-        Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:{' '}
-        <a href="https://ec.europa.eu/consumers/odr/" rel="noopener noreferrer" target="_blank">https://ec.europa.eu/consumers/odr/<span className="sr-only"> (öffnet in neuem Tab)</span></a>.
-        Unsere E-Mail-Adresse finden Sie oben im Impressum.
-      </p>
-
       <h2>Verbraucherstreitbeilegung / Universalschlichtungsstelle</h2>
       <p>
         Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle

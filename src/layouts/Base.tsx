@@ -6,7 +6,7 @@ import { SITE_HREF } from '../base';
 import { useTranslations, withBase, homePaths, path } from '../i18n/utils';
 import { services as serviceCatalog, serviceIcons } from '../data/services';
 import { locales, localeMeta, defaultLang, type Lang } from '../i18n/ui';
-import { InlineScript } from '../lib/inline-once';
+import PostHydrationScript from '../components/PostHydrationScript';
 import type { LangProp, PfadProp } from '../lib/props';
 
 /* ---------------------------------------------------------------------------
@@ -221,7 +221,7 @@ export default function Base({
           Animationssystem — Vanilla JS, kein Framework. Woertlich aus
           Base.astro uebernommen, siehe src/inline/base.script.ts.
       ------------------------------------------------------------------ */}
-      <InlineScript name="base" />
+      <PostHydrationScript name="base" />
     </>
   );
 }
