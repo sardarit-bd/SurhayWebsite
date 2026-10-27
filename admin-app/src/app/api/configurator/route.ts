@@ -104,7 +104,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Validation failed', details: error.errors }, { status: 400 });
+      return NextResponse.json({ error: error.issues[0]?.message ?? 'Validation failed' }, { status: 400 });
     }
     console.error('[Configurator API Error]', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
