@@ -16,7 +16,9 @@ const LABEL: Record<string, string> = {
 function Status({ status }: { status: string }) {
   return (
     <span className="inline-flex items-center gap-2 whitespace-nowrap">
-      <span className={`h-2.5 w-2.5 rounded-full ${DOT[status] ?? "bg-gray-400"}`} />
+      <span
+        className={`h-2.5 w-2.5 rounded-full ${DOT[status] ?? "bg-gray-400"}`}
+      />
       {LABEL[status] ?? status}
     </span>
   );
@@ -49,7 +51,9 @@ export default function InquiriesTable({
                   >
                     {inq.name}
                   </Link>
-                  <p className="truncate text-xs text-[var(--muted)]">{inq.unternehmen || "-"}</p>
+                  <p className="truncate text-xs text-(--muted)">
+                    {inq.unternehmen || "-"}
+                  </p>
                 </div>
               </div>
               <span className="shrink-0 text-xs">
@@ -57,9 +61,11 @@ export default function InquiriesTable({
               </span>
             </div>
 
-            <p className="line-clamp-2 wrap-break-word text-sm text-[var(--muted)]">{inq.nachricht}</p>
+            <p className="line-clamp-2 wrap-break-word text-sm text-(--muted)">
+              {inq.nachricht}
+            </p>
 
-            <div className="space-y-0.5 text-xs text-[var(--muted)]">
+            <div className="space-y-0.5 text-xs text-(--muted)">
               <p className="break-all">{inq.email}</p>
               {inq.telefon && <p>{inq.telefon}</p>}
               <p>
@@ -94,7 +100,9 @@ export default function InquiriesTable({
               <th className="px-4 py-3 font-medium">Name / Company</th>
               <th className="px-4 py-3 font-medium">Contact</th>
               <th className="px-4 py-3 font-medium">Package</th>
-              <th className="hidden px-4 py-3 font-medium xl:table-cell">Message</th>
+              <th className="hidden px-4 py-3 font-medium xl:table-cell">
+                Message
+              </th>
               <th className="px-4 py-3 font-medium">Status</th>
               <th className="px-4 py-3 font-medium">Received</th>
               <th className="px-4 py-3 text-right font-medium">Action</th>
@@ -120,17 +128,25 @@ export default function InquiriesTable({
                       >
                         {inq.name}
                       </Link>
-                      <p className="truncate text-xs text-[var(--muted)]">{inq.unternehmen || "-"}</p>
+                      <p className="truncate text-xs text-[var(--muted)]">
+                        {inq.unternehmen || "-"}
+                      </p>
                     </div>
                   </div>
                 </td>
                 <td className="px-4 py-3 align-middle">
                   <p>{inq.email}</p>
-                  <p className="text-xs text-[var(--muted)]">{inq.telefon || "-"}</p>
+                  <p className="text-xs text-[var(--muted)]">
+                    {inq.telefon || "-"}
+                  </p>
                 </td>
-                <td className="whitespace-nowrap px-4 py-3 align-middle">{inq.paket}</td>
+                <td className="whitespace-nowrap px-4 py-3 align-middle">
+                  {inq.paket}
+                </td>
                 <td className="hidden max-w-xs px-4 py-3 align-middle xl:table-cell">
-                  <p className="line-clamp-1 break-words text-[var(--muted)]">{inq.nachricht}</p>
+                  <p className="line-clamp-1 break-words text-[var(--muted)]">
+                    {inq.nachricht}
+                  </p>
                 </td>
                 <td className="px-4 py-3 align-middle">
                   <Status status={inq.status} />
@@ -160,7 +176,9 @@ export default function InquiriesTable({
       </div>
 
       {inquiries.length === 0 && (
-        <p className="px-4 py-12 text-center text-[var(--muted)]">No inquiries found.</p>
+        <p className="px-4 py-12 text-center text-[var(--muted)]">
+          No inquiries found.
+        </p>
       )}
     </div>
   );

@@ -1500,3 +1500,56 @@ html.fx-radial .fx-clone {
   .animate-float-delayed,
   .animate-spin-slow { animation: none; }
 }
+
+.service-row {
+  --fx-dur: 830ms;
+}
+.service-card {
+  --fx-dur: 735ms;
+}
+.other-card {
+  --fx-dur: 616ms;
+}
+@media (max-width: 809px) {
+  .service-row {
+    --fx-dur: 664ms;
+  }
+  .service-card {
+    --fx-dur: 588ms;
+  }
+  .other-card {
+    --fx-dur: 493ms;
+  }
+}
+
+.service-row {
+  --fx-bleed-want: 16px;
+  --fx-bleed: max(
+    0px,
+    min(var(--fx-bleed-want), calc(var(--fx-room, 0px) - 8px))
+  );
+  --fx-inset: 1px calc(-1 * var(--fx-bleed)) 1px calc(-1 * var(--fx-bleed));
+}
+
+@media (min-width: 390px) {
+  .service-row {
+    --fx-bleed-want: 24px;
+  }
+}
+
+@media (min-width: 810px) {
+  .service-row {
+    --fx-bleed-want: 32px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .service-row {
+    --fx-bleed-want: 40px;
+  }
+}
+@property --r {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}

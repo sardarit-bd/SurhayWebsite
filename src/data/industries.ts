@@ -1,5 +1,4 @@
 import type { Lang } from '../i18n/ui';
-
 export interface IndustrySlide {
   tab: string;
   tag: string;
@@ -8,7 +7,6 @@ export interface IndustrySlide {
   features: [string, string, string];
   badge?: { label: string; sub: string; stat: string; statLabel: string };
 }
-
 export interface IndustryContent {
   eyebrow: string;
   title: string;
@@ -20,8 +18,6 @@ export interface IndustryContent {
   goTo: string;
   slides: IndustrySlide[];
 }
-
-/** Bilder in Reihenfolge der Slides (public/images/hero/). */
 export const industryImages = [
   '/images/hero/image1.avif',
   '/images/hero/image2.avif',

@@ -1,29 +1,5 @@
 import type { Lang } from '../i18n/ui';
 
-/**
- * Kennzahlen-Sektionen fuer "SEO & Performance" und "Wartung".
- *
- * WARUM HIER KEINE LOGOS STEHEN
- * Auf diesen beiden Leistungen ist die Werkzeugfrage nicht die Frage des
- * Kunden. Wer Sichtbarkeit kauft, will Zielwerte sehen; wer Betreuung kauft,
- * will den Umfang schwarz auf weiss. Beide Sektionen tragen deshalb dieselbe
- * Kartenoptik wie die Technologie-Sektion, aber Zahlen statt Marken.
- *
- * VERBINDLICHKEIT
- * Was hier steht, ist gegenueber Kunden eine Zusage. Die Werte der
- * Wartungs-Sektion sind bewusst aus `data/pricing.ts` uebernommen, damit
- * Leistungsseite und Preisseite nicht auseinanderlaufen:
- *   30 Tage Backup, Antwort in 1 Werktag, 2 Stunden Inhaltspflege im Paket
- *   Pflege, Quartalsbericht — alles bereits dort zugesagt.
- * Neu hinzugekommen und vor der Veroeffentlichung zu pruefen sind nur der
- * Update-Rhythmus (12 Laeufe im Jahr) und der Pruefabstand der
- * Verfuegbarkeitspruefung (im Minutentakt).
- *
- * Die drei Ladezeit-Werte der SEO-Sektion (2,5 s LCP, 200 ms INP, 0,1 CLS)
- * sind die oeffentlich dokumentierten "gut"-Schwellen der Core Web Vitals,
- * keine eigene Erfindung.
- */
-
 export interface Fact {
   /** Grosse Zahl. Steht mit `unit` in EINEM Textknoten — siehe FactsGrid. */
   value: string;

@@ -1,15 +1,4 @@
 import type { Lang } from '../i18n/ui';
-
-/**
- * Inhalte der Agenturseite (/agentur, /en/about).
- *
- * Ein Ein-Personen-Studio hat gegenueber einer Agentur genau zwei Vorteile:
- * kurze Wege und niemanden, der etwas weiterreicht. Beides muss benannt
- * werden, sonst liest sich „klein“ nur als „wenig Kapazitaet“. Alles hier
- * ist ueberpruefbar formuliert — keine Zahl, fuer die es keinen Beleg gibt.
- */
-
-/** Die Absaetze des Haupttexts. */
 export const story: Record<Lang, string[]> = {
   de: [
     'Surhay Design ist ein Studio für Webdesign und Webentwicklung in Berlin. Wir bauen Websites für kleine und mittlere Unternehmen, Selbstständige und Startups im deutschsprachigen Raum — von der Struktur über das Design bis zur laufenden Wartung.',

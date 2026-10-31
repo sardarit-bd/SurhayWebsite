@@ -1,17 +1,17 @@
 .row-link[data-c-services] {
-    text-decoration: none;
-  }
-  .row-link[data-c-services]::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-  }
+  text-decoration: none;
+}
+.row-link[data-c-services]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
 .row-arrow[data-c-services] {
-    transition: transform var(--dur-short) var(--ease-out);
+  transition: transform var(--dur-short) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .service-row[data-c-services]:hover .row-arrow[data-c-services],
+  .service-row.is-fx-on[data-c-services] .row-arrow[data-c-services] {
+    transform: translateX(6px);
   }
-  @media (hover: hover) and (pointer: fine){
-    .service-row[data-c-services]:hover .row-arrow[data-c-services],
-    .service-row.is-fx-on[data-c-services] .row-arrow[data-c-services] {
-      transform: translateX(6px);
-    }
-  }
+}

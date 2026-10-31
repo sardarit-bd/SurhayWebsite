@@ -80,7 +80,7 @@ export default function ServicesSection({ lang }: LangProp) {
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-paper px-6 py-section text-ink sm:px-10 lg:px-16"
+      className="w-full bg-paper px-6 py-section text-ink sm:px-10 lg:px-16 service-row"
     >
       <div className="container mx-auto">
         <div className="mb-14 md:mb-20">

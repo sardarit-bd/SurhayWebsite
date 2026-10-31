@@ -29,7 +29,10 @@ export default async function InquiriesPage({
   searchParams: Promise<{ status?: string; q?: string; page?: string }>;
 }) {
   const sp = await searchParams;
-  const filter = sp.status && ["new", "checked", "solved"].includes(sp.status) ? sp.status : "";
+  const filter =
+    sp.status && ["new", "checked", "solved"].includes(sp.status)
+      ? sp.status
+      : "";
   const q = (sp.q ?? "").trim();
   const requestedPage = Math.max(1, parseInt(sp.page ?? "1", 10) || 1);
 
@@ -47,7 +50,11 @@ export default async function InquiriesPage({
 
   const [total, grouped] = await Promise.all([
     prisma.inquiry.count({ where }),
-    prisma.inquiry.groupBy({ by: ["status"], where: searchWhere, _count: { _all: true } }),
+    prisma.inquiry.groupBy({
+      by: ["status"],
+      where: searchWhere,
+      _count: { _all: true },
+    }),
   ]);
 
   const counts: Record<string, number> = {};
@@ -81,7 +88,8 @@ export default async function InquiriesPage({
   const to = Math.min(page * PAGE_SIZE, total);
 
   const pageNumbers: number[] = [];
-  for (let i = Math.max(1, page - 2); i <= Math.min(totalPages, page + 2); i++) pageNumbers.push(i);
+  for (let i = Math.max(1, page - 2); i <= Math.min(totalPages, page + 2); i++)
+    pageNumbers.push(i);
 
   const pageBtn =
     "inline-flex h-8 min-w-8 items-center justify-center rounded-lg border px-2 text-sm transition";
@@ -103,7 +111,8 @@ export default async function InquiriesPage({
           <div className="flex flex-wrap items-center gap-1">
             {TABS.map((tab) => {
               const active = filter === tab.value;
-              const count = tab.value === "" ? allCount : counts[tab.value] ?? 0;
+              const count =
+                tab.value === "" ? allCount : (counts[tab.value] ?? 0);
               return (
                 <Link
                   key={tab.value || "all"}
@@ -127,7 +136,11 @@ export default async function InquiriesPage({
             })}
           </div>
 
-          <form action="/inquiries" method="GET" className="flex w-full items-center gap-2 sm:w-auto">
+          <form
+            action="/inquiries"
+            method="GET"
+            className="flex w-full items-center gap-2 sm:w-auto"
+          >
             {filter && <input type="hidden" name="status" value={filter} />}
             <input
               type="search"
@@ -144,7 +157,11 @@ export default async function InquiriesPage({
             </button>
             {q && (
               <Link
-                href={href({ page: 1 }).replace(/([?&])q=[^&]*&?/, "$1").replace(/[?&]$/, "") || "/inquiries"}
+                href={
+                  href({ page: 1 })
+                    .replace(/([?&])q=[^&]*&?/, "$1")
+                    .replace(/[?&]$/, "") || "/inquiries"
+                }
                 className="text-sm text-(--muted) hover:text-(--ink)"
               >
                 Clear
@@ -183,7 +200,9 @@ export default async function InquiriesPage({
                         <Link
                           href={`/inquiries/${inq.id}`}
                           className={`block truncate hover:underline ${
-                            inq.status === "new" ? "font-semibold" : "font-medium"
+                            inq.status === "new"
+                              ? "font-semibold"
+                              : "font-medium"
                           }`}
                         >
                           {inq.name}
@@ -196,15 +215,23 @@ export default async function InquiriesPage({
                   </td>
                   <td className="px-4 py-3 align-middle">
                     <p>{inq.email}</p>
-                    <p className="text-xs text-(--muted)">{inq.telefon || "-"}</p>
+                    <p className="text-xs text-(--muted)">
+                      {inq.telefon || "-"}
+                    </p>
                   </td>
-                  <td className="px-4 py-3 align-middle whitespace-nowrap">{inq.paket}</td>
+                  <td className="px-4 py-3 align-middle whitespace-nowrap">
+                    {inq.paket}
+                  </td>
                   <td className="max-w-xs px-4 py-3 align-middle">
-                    <p className="line-clamp-1 wrap-break-word text-(--muted)">{inq.nachricht}</p>
+                    <p className="line-clamp-1 wrap-break-word text-(--muted)">
+                      {inq.nachricht}
+                    </p>
                   </td>
                   <td className="px-4 py-3 align-middle whitespace-nowrap">
                     <span className="inline-flex items-center gap-2">
-                      <span className={`h-2.5 w-2.5 rounded-full ${DOT[inq.status] ?? "bg-gray-400"}`} />
+                      <span
+                        className={`h-2.5 w-2.5 rounded-full ${DOT[inq.status] ?? "bg-gray-400"}`}
+                      />
                       {LABEL[inq.status] ?? inq.status}
                     </span>
                   </td>
@@ -232,7 +259,9 @@ export default async function InquiriesPage({
           </table>
 
           {inquiries.length === 0 && (
-            <p className="px-4 py-12 text-center text-(--muted)">No inquiries found.</p>
+            <p className="px-4 py-12 text-center text-(--muted)">
+              No inquiries found.
+            </p>
           )}
         </div>
 
@@ -250,7 +279,9 @@ export default async function InquiriesPage({
                   ‹
                 </Link>
               ) : (
-                <span className={`${pageBtn} border-(--border) opacity-40`}>‹</span>
+                <span className={`${pageBtn} border-(--border) opacity-40`}>
+                  ‹
+                </span>
               )}
               {pageNumbers.map((n) => (
                 <Link
@@ -273,7 +304,9 @@ export default async function InquiriesPage({
                   ›
                 </Link>
               ) : (
-                <span className={`${pageBtn} border-(--border) opacity-40`}>›</span>
+                <span className={`${pageBtn} border-(--border) opacity-40`}>
+                  ›
+                </span>
               )}
             </div>
           )}

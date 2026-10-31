@@ -83,7 +83,7 @@ export default function ChangePasswordForm() {
           minLength={8}
           required
         />
-        <p className="mt-1 text-xs text-[var(--muted)]">At least 8 characters.</p>
+        <p className="mt-1 text-xs text-(--muted)">At least 8 characters.</p>
       </div>
 
       <div>
@@ -114,7 +114,7 @@ export default function ChangePasswordForm() {
       <button
         type="submit"
         disabled={busy}
-        className="w-full rounded-lg bg-[var(--accent)] px-4 py-2.5 text-sm font-medium text-white transition hover:opacity-90 disabled:opacity-50 sm:w-auto"
+        className="w-full rounded-lg bg-(--accent) px-4 py-2.5 text-sm font-medium text-white transition hover:opacity-90 disabled:opacity-50 sm:w-auto"
       >
         {busy ? "Saving…" : "Change password"}
       </button>

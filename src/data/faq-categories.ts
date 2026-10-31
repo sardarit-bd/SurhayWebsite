@@ -1,24 +1,8 @@
 import type { Lang } from '../i18n/ui';
 
-/**
- * Kategorien der FAQ-Seite (/faq, /en/faq).
- *
- * WARUM EINE EIGENE DATEI
- * Die Fragen selbst liegen als Content Collection (src/content/faq/<lang>/),
- * damit sie im CMS pflegbar bleiben. Die Kategorien gehoeren aber nicht in
- * einen Eintrag, sondern ueber alle: Reihenfolge, Ueberschrift und der Satz
- * unter der Ueberschrift muessen an einer Stelle stehen, sonst driften
- * Filterleiste, Sprungmarken und Sektionen auseinander.
- *
- * Die IDs sind gleichzeitig die Anker der Seite (/faq#preise) und der Wert
- * im Frontmatter jeder Frage. Wer hier eine ID aendert, aendert URLs —
- * dann auch die Markdown-Dateien und public/admin/config.yml nachziehen.
- */
-
 export interface FaqCategory {
   id: string;
   label: Record<Lang, string>;
-  /** Ein Satz unter der Ueberschrift — ordnet ein, was in der Gruppe steht. */
   desc: Record<Lang, string>;
 }
 
@@ -87,6 +71,4 @@ export const faqCategories: FaqCategory[] = [
     },
   },
 ];
-
-/** IDs als Tupel — so kann content.config.ts daraus ein z.enum() bauen. */
 export const faqCategoryIds = faqCategories.map((c) => c.id) as [string, ...string[]];

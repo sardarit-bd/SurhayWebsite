@@ -1,24 +1,12 @@
 import type { Lang } from '../i18n/ui';
 
-/**
- * Ablauf eines Projekts — ausfuehrliche Fassung fuer /prozess.
- *
- * Die Startseite zeigt davon nur Titel und Dauer; die Prozessseite nennt zu
- * jeder Phase, was wir tun, was Sie bekommen und was wir von Ihnen brauchen.
- * Der dritte Punkt ist der wichtigste: Projekte scheitern selten an Technik,
- * sondern daran, dass Inhalte nicht kommen.
- */
-
 export interface Phase {
   index: string;
   duration: Record<Lang, string>;
   title: Record<Lang, string>;
   summary: Record<Lang, string>;
-  /** Was in dieser Phase passiert. */
   work: Record<Lang, string[]>;
-  /** Was Sie am Ende in der Hand haben. */
   output: Record<Lang, string[]>;
-  /** Was wir von Ihnen brauchen. */
   yourPart: Record<Lang, string>;
 }
 
@@ -265,7 +253,6 @@ export const phases: Phase[] = [
   },
 ];
 
-/** Regeln der Zusammenarbeit — was auf der Prozessseite unter den Phasen steht. */
 export const workingRules: { title: Record<Lang, string>; desc: Record<Lang, string> }[] = [
   {
     title: { de: 'Eine Ansprechperson, durchgehend', tr: 'Baştan sona tek muhatap', en: 'One contact, throughout' },

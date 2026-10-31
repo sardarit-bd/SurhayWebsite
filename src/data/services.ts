@@ -1,49 +1,20 @@
 import type { Lang } from '../i18n/ui';
 
-/**
- * Leistungskatalog — Quelle fuer die Uebersichtsseite, die vier Detailseiten,
- * die Navigation, den Footer und die Startseiten-Teaser.
- *
- * Pro Sprache ein vollstaendiger Textsatz statt einzelner Uebersetzungs-Keys:
- * Eine Leistungsseite ist Verkaufstext, kein Interface. Sie liest sich nur
- * dann, wenn Formulierung und Reihenfolge pro Sprache frei waehlbar sind.
- *
- * Der Slug unterscheidet sich je Sprache (deutsche URLs fuer DE, englische
- * fuer EN) — `altPaths()` in i18n/utils.ts baut daraus die hreflang-Paare.
- */
-
 export interface ServiceCopy {
   slug: string;
   title: string;
-  /** Eine Zeile fuer Karten, Navigation und Teaser. */
   tagline: string;
-  /** Zwei bis drei Saetze als Lead der Detailseite. */
   intro: string;
   metaTitle: string;
   metaDescription: string;
-  /** Rahmen statt Festpreis — der Festpreis kommt nach dem Erstgespraech. */
   priceHint: string;
   duration: string;
-  /** Was konkret geliefert wird. */
   deliverables: { title: string; desc: string }[];
-  /** Wie gearbeitet wird — drei bis vier Schritte. */
   steps: { title: string; desc: string }[];
-  /** Werkzeuge und Technik, offen benannt. Derzeit ohne Renderer: die
-   *  Detailseite zeigt seit der Technologie-Sektion keine Werkzeugliste
-   *  mehr. Der Datensatz bleibt, damit er nicht neu geschrieben werden
-   *  muss, falls die Liste zurueckkehrt. */
   stack: string[];
-  /** Fuer wen die Leistung gedacht ist. Ebenfalls derzeit ohne Renderer. */
   audience: string[];
-  /** Fragen, die genau zu dieser Leistung immer wieder kommen. */
   faq: { q: string; a: string }[];
 }
-
-/**
- * Die vier Leistungen. Der Bezeichner ist zugleich der Schluessel des
- * Leistungs-Icons (siehe `serviceIcons` unten) — eine Leistung, ein Zeichen,
- * kein zweiter Namensraum aus Motiven, der auseinanderlaufen koennte.
- */
 export type ServiceId = 'webdesign' | 'webentwicklung' | 'seo-performance' | 'wartung';
 
 export interface Service {

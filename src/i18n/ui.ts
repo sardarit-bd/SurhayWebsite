@@ -726,8 +726,7 @@ export const ui = {
     "work.title.a": "Fikirleri ",
     "work.title.mark": "dijital ",
     "work.title.b": "deneyimlere dönüştürüyoruz.",
-    "work.intro":
-      "Kendi projelerimiz yayınlandığında burada görünecek.",
+    "work.intro": "Kendi projelerimiz yayınlandığında burada görünecek.",
     "work.viewCaseStudy": "Projeyi görün",
     "work.tags.design": "Web tasarım",
     "work.tags.dev": "Web geliştirme",
@@ -993,8 +992,7 @@ export const ui = {
       "Özel gereksinimler için bireysel dijital çözümler: rezervasyon sistemleri, müşteri portalları ve hesaplayıcılar.",
     "work.eyebrow": "Projeler",
     "work.title": "Referans değil, sonuç.",
-    "work.sub":
-      "Kendi projelerimiz yayınlandığında burada görünecek.",
+    "work.sub": "Kendi projelerimiz yayınlandığında burada görünecek.",
     "work.filter.all": "Tümü",
     "work.viewCase": "Vaka çalışmasını görün",
     "work.empty": "Bu kategoride proje yok.",
@@ -1358,8 +1356,7 @@ export const ui = {
     "work.title.a": "Turning ideas into",
     "work.title.mark": "digital",
     "work.title.b": "experiences.",
-    "work.intro":
-      "Our own projects will appear here once they are published.",
+    "work.intro": "Our own projects will appear here once they are published.",
     "work.sub":
       "Hier erscheinen künftig eigene Projekte — sobald sie veröffentlicht sind.",
     "work.viewCaseStudy": "View Case Study",

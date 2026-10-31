@@ -16,10 +16,18 @@ const LABEL: Record<string, string> = {
   solved: "Solved",
 };
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div>
-      <dt className="text-xs font-medium uppercase tracking-wide text-(--muted)">{label}</dt>
+      <dt className="text-xs font-medium uppercase tracking-wide text-(--muted)">
+        {label}
+      </dt>
       <dd className="mt-1 wrap-break-word text-sm">{children}</dd>
     </div>
   );
@@ -78,7 +86,9 @@ export default async function InquiryDetailPage({
             {inq.name.trim().charAt(0).toUpperCase() || "?"}
           </span>
           <div>
-            <h1 className="wrap-break-word text-xl font-bold sm:text-2xl">{inq.name}</h1>
+            <h1 className="wrap-break-word text-xl font-bold sm:text-2xl">
+              {inq.name}
+            </h1>
             <p className="text-sm text-(--muted)">
               {inq.unternehmen ? `${inq.unternehmen} · ` : ""}
               Received {received}
@@ -86,7 +96,9 @@ export default async function InquiryDetailPage({
           </div>
         </div>
         <span className="inline-flex items-center gap-2 rounded-full border border-(--border) bg-white px-4 py-1.5 text-sm font-medium">
-          <span className={`h-2.5 w-2.5 rounded-full ${DOT[inq.status] ?? "bg-gray-400"}`} />
+          <span
+            className={`h-2.5 w-2.5 rounded-full ${DOT[inq.status] ?? "bg-gray-400"}`}
+          />
           {LABEL[inq.status] ?? inq.status}
         </span>
       </div>
@@ -139,13 +151,19 @@ export default async function InquiryDetailPage({
             <h2 className="mb-4 text-base font-semibold">Contact</h2>
             <dl className="space-y-4">
               <Field label="Email">
-                <a href={`mailto:${inq.email}`} className="text-(--accent) hover:underline">
+                <a
+                  href={`mailto:${inq.email}`}
+                  className="text-(--accent) hover:underline"
+                >
                   {inq.email}
                 </a>
               </Field>
               <Field label="Phone">
                 {inq.telefon ? (
-                  <a href={`tel:${inq.telefon}`} className="text-(--accent) hover:underline">
+                  <a
+                    href={`tel:${inq.telefon}`}
+                    className="text-(--accent) hover:underline"
+                  >
                     {inq.telefon}
                   </a>
                 ) : (

@@ -11,7 +11,10 @@
 body {
   background-color: var(--paper);
   color: var(--ink);
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
 }
 
 .btn-primary {
@@ -22,7 +25,9 @@ body {
   font-weight: 500;
   transition: opacity 0.2s;
 }
-.btn-primary:hover { opacity: 0.9; }
+.btn-primary:hover {
+  opacity: 0.9;
+}
 
 .btn-accent {
   background-color: var(--accent);
@@ -32,7 +37,9 @@ body {
   font-weight: 500;
   transition: opacity 0.2s;
 }
-.btn-accent:hover { opacity: 0.9; }
+.btn-accent:hover {
+  opacity: 0.9;
+}
 
 .card {
   background-color: white;

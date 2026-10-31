@@ -1,26 +1,4 @@
-/* ---------------------------------------------------------------------------
-   Vollstaendigen .tsx-Entwurf aus einer .astro-Datei erzeugen.
 
-   Baut auf astro-template-to-jsx.mjs auf (Vorlagen-Teil) und uebernimmt
-   zusaetzlich den Frontmatter-Teil. Das Ergebnis ist ein ENTWURF: jede Datei
-   wird danach gelesen und nachgezogen — Whitespace zwischen Inline-Inhalt,
-   `key` an .map(), Sonderfaelle. Der Generator nimmt nur das Mechanische ab,
-   und zwar einheitlich.
-
-   Was er umschreibt:
-     import X from './Y.astro'        → './Y'
-     from 'astro:content'             → '../lib/content'  (getCollection/render)
-     const lang = getLangFromUrl(...) → entfaellt, `lang` kommt als Eigenschaft
-     const here = Astro.url.pathname  → `pathname` als Eigenschaft
-     Astro.site?.href ?? SITE.domain  → SITE_HREF aus ../base
-     Astro.generator                  → entfaellt (siehe MIGRATION-NOTES)
-     const { … } = Astro.props        → Parameterliste der Funktion
-     <slot />                          → children
-     <style>-Block                     → bereits als src/styles/components/*.css
-     <script>-Block                    → inlineScripts['name']
-
-   Aufruf: node scripts/astro-to-tsx.mjs <datei.astro> [--out <ziel.tsx>]
---------------------------------------------------------------------------- */
 import { readFile, writeFile, access } from 'node:fs/promises';
 import { basename, dirname, relative, join } from 'node:path';
 import { execFileSync } from 'node:child_process';
@@ -35,34 +13,23 @@ const zielDatei = outIdx !== -1 ? process.argv[outIdx + 1] : quelleDatei.replace
 const roh = await readFile(quelleDatei, 'utf8');
 const name = basename(quelleDatei, '.astro');
 const komponente = kebab(name);
-
-/* --- Frontmatter abtrennen --- */
 let frontmatter = '';
 let frontEnde = 0;
 if (roh.startsWith('---')) {
-  /* Das schliessende --- ist eine Zeile, die NUR aus --- besteht. `indexOf`
-     auf '\n---' traf in Base.astro mitten in einen Kommentar mit einer
-     ----------Trennlinie und schnitt die Frontmatter in der Mitte durch. */
   const m = /\n---[ \t]*(?:\r?\n|$)/.exec(roh.slice(3));
   const e = m ? 3 + m.index : roh.length;
   frontmatter = roh.slice(4, e);
   frontEnde = e;
 }
-
-/* --- Vorlage vom bestehenden Konverter holen --- */
 const jsx = execFileSync('node', [join(dirname(process.argv[1]), 'astro-template-to-jsx.mjs'), quelleDatei], {
   encoding: 'utf8',
 });
-
-/* --- Frontmatter zerlegen --- */
 const zeilen = frontmatter.split('\n');
 const kopfkommentar = [];
 const imports = [];
 const koerper = [];
 let phase = 'kopf';
 let i = 0;
-
-// Fuehrender Blockkommentar
 if (zeilen[0]?.trimStart().startsWith('/**') || zeilen[0]?.trimStart().startsWith('/*')) {
   for (; i < zeilen.length; i++) {
     kopfkommentar.push(zeilen[i]);
@@ -76,7 +43,6 @@ for (; i < zeilen.length; i++) {
   koerper.push(z);
 }
 
-/* --- Imports umschreiben --- */
 const neueImports = [];
 let brauchtContent = false;
 for (let z of imports) {
@@ -89,7 +55,7 @@ for (let z of imports) {
     const ausContent = [];
     const ausConfig = [];
     for (const s of liste) {
-      if (/^type\s+CollectionEntry$/.test(s) || s === 'CollectionEntry') continue; // wird pro Datei ersetzt
+      if (/^type\s+CollectionEntry$/.test(s) || s === 'CollectionEntry') continue;
       if (s === 'getCollection') ausContent.push('getCollection');
       else if (s === 'render') ausContent.push('renderEntry');
       else ausConfig.push(s);
@@ -97,15 +63,12 @@ for (let z of imports) {
     if (ausContent.length) neueImports.push(`import { ${ausContent.join(', ')} } from '${tiefe}/lib/content';`);
     continue;
   }
-  // getLangFromUrl aus dem i18n-Import entfernen
   if (/i18n\/utils/.test(z)) {
     z = z.replace(/getLangFromUrl,\s*/, '').replace(/,\s*getLangFromUrl/, '');
     if (/import\s*\{\s*\}\s*from/.test(z)) continue;
   }
   neueImports.push(z);
 }
-
-/* --- Koerper umschreiben --- */
 let brauchtLang = false;
 let brauchtPfad = false;
 let brauchtSiteHref = false;
@@ -121,8 +84,6 @@ for (const z of koerper) {
   if (/Astro\.generator/.test(n)) n = n.replace(/Astro\.generator/g, "'' /* Astro.generator — siehe MIGRATION-NOTES */");
   koerperNeu.push(n);
 }
-
-/* --- interface Props aus dem Koerper herausziehen (gehoert vor die Funktion) --- */
 let propsInterface = '';
 {
   const text = koerperNeu.join('\n');
@@ -135,7 +96,6 @@ let propsInterface = '';
   }
 }
 
-/* --- Parameterliste --- */
 let params = '';
 let propsTyp = '';
 const hatPropsInterface = Boolean(propsInterface);
@@ -157,7 +117,6 @@ if (params) {
 }
 if (hatPropsInterface) {
   propsTyp = ': Props';
-  /* Die vorhandene Props-Schnittstelle um die hereingegebenen Werte erweitern. */
   const erben = [brauchtLang && 'LangProp', brauchtPfad && 'PfadProp'].filter(Boolean);
   if (erben.length) propsInterface = propsInterface.replace(/interface\s+Props\s*\{/, `interface Props extends ${erben.join(', ')} {`);
   if (/\{children\}/.test(jsx) && !/children/.test(propsInterface)) {
@@ -175,7 +134,6 @@ if (hatPropsInterface) {
   propsTyp = teileT.length ? ': ' + teileT.join(' & ') : '';
 }
 
-/* --- Helfer-Imports nach Bedarf --- */
 const tiefe = relative(dirname(quelleDatei), 'src').replace(/\\/g, '/') || '.';
 const helfer = [];
 if (/clsx\(/.test(jsx)) helfer.push(`import clsx from 'clsx';`);
@@ -187,14 +145,9 @@ if (skript) helfer.push(`import { inlineScripts } from '${tiefe}/inline/generate
 if (/\{children\}/.test(jsx) || /\{head\}/.test(jsx)) helfer.push(`import type { ReactNode } from 'react';`);
 if (brauchtLang || brauchtPfad) helfer.push(`import type { ${[brauchtLang && 'LangProp', brauchtPfad && 'PfadProp'].filter(Boolean).join(', ')} } from '${tiefe}/lib/props';`);
 
-/* --- Zusammensetzen --- */
 const istAsync = /\bawait\b/.test(koerperNeu.join('\n'));
 const hatScope = await da(`src/styles/components/${komponente}.css`);
 
-/* Beginnt die Vorlage mit einer geschweiften Klammer, ist sie entweder ein
-   Kommentar vor dem Wurzelelement (zwei Kinder — React nimmt eins) oder ein
-   Ausdrucksblock, der als Argument ein Objektliteral waere. Ein Fragment loest
-   beides und erzeugt selbst kein Element. */
 let jsxRumpf = jsx.trim();
 if (jsxRumpf.startsWith('{')) jsxRumpf = `<>\n${jsxRumpf}\n</>`;
 const jsxEingerueckt = jsxRumpf.split('\n').map((l) => (l ? '    ' + l : l)).join('\n');

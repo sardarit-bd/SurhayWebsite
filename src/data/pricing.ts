@@ -1,25 +1,12 @@
 import type { Lang } from '../i18n/ui';
 
-/**
- * Preisseite — Projektpakete, Zusatzleistungen, Wartungspakete und die
- * Faktoren, die den Preis bewegen.
- *
- * WARUM HIER ZAHLEN STEHEN
- * Preistransparenz ist bei einem kleinen Studio das wirksamste Argument, das
- * ohne Referenzen auskommt: Sie erspart beiden Seiten Gespraeche, die ohnehin
- * am Budget scheitern. Alle Werte sind Netto-Rahmen; der Festpreis entsteht
- * nach dem Erstgespraech.
- */
-
 export interface Plan {
   id: string;
   price: Record<Lang, string>;
-  /** true → „ab“ vor dem Preis. */
   from: boolean;
   popular?: boolean;
   name: Record<Lang, string>;
   desc: Record<Lang, string>;
-  /** Fuer wen genau dieses Paket gedacht ist. */
   fit: Record<Lang, string>;
   features: Record<Lang, string[]>;
   timeline: Record<Lang, string>;
@@ -276,7 +263,6 @@ export const carePlans: Plan[] = [
   },
 ];
 
-/** Zusatzleistungen, die sich zu jedem Projekt buchen lassen. */
 export const addOns: { name: Record<Lang, string>; price: Record<Lang, string>; desc: Record<Lang, string> }[] = [
   {
     name: { de: 'Weitere Unterseite', tr: 'Ek alt sayfa', en: 'Additional subpage' },
@@ -334,7 +320,6 @@ export const addOns: { name: Record<Lang, string>; price: Record<Lang, string>; 
   },
 ];
 
-/** Was den Preis nach oben oder unten bewegt — offen benannt. */
 export const priceFactors: { title: Record<Lang, string>; desc: Record<Lang, string> }[] = [
   {
     title: { de: 'Anzahl der Seiten', tr: 'Sayfa sayısı', en: 'Number of pages' },
@@ -378,7 +363,6 @@ export const priceFactors: { title: Record<Lang, string>; desc: Record<Lang, str
   },
 ];
 
-/** Zusagen, die in jedem Paket gelten — unabhaengig vom Preis. */
 export const alwaysIncluded: Record<Lang, string[]> = {
   de: [
     'Festpreis, schriftlich vor Projektstart',

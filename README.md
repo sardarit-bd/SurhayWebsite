@@ -49,7 +49,6 @@ scripts/                  → Build-Schritte (Inline-Skripte, Case-Study-Routen,
 .github/workflows/pages.yml  → Build & Deploy zu GitHub Pages
 ```
 
-
 ## Sprachen
 
 Deutsch ist Standardsprache und läuft ohne Präfix (`/leistungen`), Türkisch unter
@@ -94,7 +93,7 @@ erklärung gibt es zusätzlich auf Türkisch und Englisch; diese Fassungen trage
 ## Deployment (GitHub → Hostinger)
 
 1. Repo zu GitHub pushen (`git init`, `git add .`, `git commit`, Remote setzen).
-2. In den Repo-Einstellungen → *Secrets and variables* → *Actions* drei Secrets anlegen:
+2. In den Repo-Einstellungen → _Secrets and variables_ → _Actions_ drei Secrets anlegen:
    - `FTP_SERVER` — z. B. `ftp.deinedomain.de` (aus dem Hostinger-Panel → FTP-Zugänge)
    - `FTP_USERNAME`
    - `FTP_PASSWORD`
@@ -122,10 +121,10 @@ Vor dem Wiederaktivieren:
 2. Ordner nach `public/admin/` zurückschieben und das Skript-Tag in
    `cms/index.html` wieder einkommentieren.
 3. In `cms/config.yml` das Feld `repo:` auf `owner/repo-name` setzen.
-2. **OAuth-Provider** einrichten (GitHub-Login für das CMS). Da Hostinger-Static-Hosting den OAuth-Handshake nicht übernimmt, braucht es einen kleinen Vermittler — zwei bewährte Optionen:
+4. **OAuth-Provider** einrichten (GitHub-Login für das CMS). Da Hostinger-Static-Hosting den OAuth-Handshake nicht übernimmt, braucht es einen kleinen Vermittler — zwei bewährte Optionen:
    - **Cloudflare Worker** (kostenlos): z. B. [decap-proxy](https://github.com/sterlingwes/decap-proxy) deployen, GitHub-OAuth-App anlegen (Callback = Worker-URL), dann in `config.yml` `base_url` auf die Worker-URL setzen.
    - **PHP-Proxy auf Hostinger**: ein OAuth-Skript wie [netlify-cms-oauth-provider-php](https://github.com/DGtheDev/netlify-cms-oauth-provider-php) ins Hosting legen und `base_url` darauf zeigen.
-3. GitHub-OAuth-App: *Settings → Developer settings → OAuth Apps* → Client-ID/Secret in den Provider eintragen.
+5. GitHub-OAuth-App: _Settings → Developer settings → OAuth Apps_ → Client-ID/Secret in den Provider eintragen.
 
 Danach: `https://deinedomain.de/admin` öffnen → mit GitHub anmelden → Inhalte pflegen. Neue Einträge **immer in allen drei Sprachen** ausfüllen (das CMS zeigt DE/TR/EN nebeneinander an).
 
@@ -135,10 +134,10 @@ Das Anfrageformular der Kontaktseite liegt in `src/components/ContactForm.tsx` �
 
 **Empfänger einstellen — eine Stelle, zwei Wege:**
 
-| `src/config.ts` | Wirkung |
-| --- | --- |
+| `src/config.ts`                | Wirkung                                                                                                                           |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
 | `formEndpoint: '/contact.php'` | eigener PHP-Mailer beim Hoster, kein Drittanbieter, Daten bleiben in der EU. In `public/contact.php` die Empfängeradresse prüfen. |
-| `formspreeId: '…'` | Formspree (USA). Greift nur, solange `formEndpoint` leer ist. |
+| `formspreeId: '…'`             | Formspree (USA). Greift nur, solange `formEndpoint` leer ist.                                                                     |
 
 Ist keins von beidem gesetzt, warnt der Build, das Formular wird trotzdem gebaut, und ein Absendeversuch endet sichtbar im Fehlschlag mit der E-Mail-Adresse daneben — es geht keine Anfrage stillschweigend verloren.
 

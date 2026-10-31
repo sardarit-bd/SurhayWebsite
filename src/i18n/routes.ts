@@ -1,23 +1,6 @@
 import { locales, defaultLang, type Lang } from './ui';
 import { services } from '../data/services';
 
-/**
- * Lokalisierte Slugs aller Sammel- und Unterseiten — die EINE Zuordnung
- * zwischen den Sprachfassungen einer Seite.
- *
- * Jede Sprache bekommt eigene URLs: deutsche fuer DE, tuerkische fuer TR,
- * englische fuer EN. Navigation, Footer, Breadcrumbs, hreflang-Alternates,
- * der Sprachumschalter und die Sitemap ziehen alle hier — dadurch landet der
- * Umschalter von /leistungen auf /tr/hizmetler und nicht auf der Startseite.
- *
- * VOLLSTAENDIG UEBERSETZTE SLUGS, KEINE MISCHFORM
- * Wer eine Seite ergaenzt, traegt sie in allen drei Spalten ein — sonst
- * bricht der Typ. Halb uebersetzte Pfade gibt es hier nicht.
- *
- * Die tuerkischen Slugs sind bewusst ohne Sonderzeichen geschrieben
- * (hizmetler, surec, iletisim): ı, ş und ğ waeren in der URL prozentkodiert
- * und damit in Mails, Chats und Analysewerkzeugen unlesbar.
- */
 export const routes = {
   de: {
     services: 'leistungen',
@@ -78,18 +61,6 @@ const bySlug = (lang: Lang, slug: string) => routeKeys.find((key) => routes[lang
 
 const spread = (build: (lang: Lang) => string) =>
   Object.fromEntries(locales.map((lang) => [lang, build(lang)])) as Record<Lang, string>;
-
-/**
- * Alle Sprachfassungen eines Pfades — aus dem Pfad selbst hergeleitet, ohne
- * dass die aufrufende Stelle den Seitenschluessel kennen muss.
- *
- * Gebraucht wird das an genau einer Stelle: in der Sitemap (astro.config.mjs).
- * Sie sieht nur fertige URLs, waehrend die Seiten ihre Alternates ueber
- * `altPaths(key)` direkt aus derselben Tabelle bauen.
- *
- * `null` heisst „keine bekannte Seite“ — dann bleibt der Eintrag ohne
- * Alternates, statt eine falsche Zuordnung zu behaupten.
- */
 export function alternatePaths(pathname: string): Record<Lang, string> | null {
   const segments = pathname.split('/').filter(Boolean);
   const prefix = locales.find((lang) => lang !== defaultLang && lang === segments[0]);
@@ -102,9 +73,6 @@ export function alternatePaths(pathname: string): Record<Lang, string> | null {
   if (!key) return null;
   if (rest.length === 1) return spread((l) => rawPath(l, key));
   if (rest.length > 2) return null;
-
-  /* Leistungs-Unterseiten tragen je Sprache einen eigenen Slug; Blog-,
-     Projekt- und alle Collection-Seiten teilen sich den Dateinamen. */
   if (key === 'services') {
     const service = services.find((entry) => entry[lang].slug === rest[1]);
     return service ? spread((l) => rawPath(l, key, service[l].slug)) : null;

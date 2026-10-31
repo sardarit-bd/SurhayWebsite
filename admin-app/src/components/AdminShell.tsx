@@ -15,7 +15,11 @@ function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export default function AdminShell({ children }: { children: React.ReactNode }) {
+export default function AdminShell({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   useEffect(() => {
@@ -46,7 +50,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-40 flex w-64 shrink-0 transform flex-col bg-[var(--ink)] p-6 text-[var(--paper)] transition-transform duration-200 lg:sticky lg:top-0 lg:h-screen lg:translate-x-0 lg:self-start ${
+        className={`fixed inset-y-0 left-0 z-40 flex w-64 shrink-0 transform flex-col bg-(--ink) p-6 text-(--paper) transition-transform duration-200 lg:sticky lg:top-0 lg:h-screen lg:translate-x-0 lg:self-start ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -58,7 +62,15 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
             aria-label="Close menu"
             className="rounded-lg p-1 hover:bg-white/10 lg:hidden"
           >
-            <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              className="h-6 w-6"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              aria-hidden="true"
+            >
               <path d="M6 6l12 12M18 6L6 18" />
             </svg>
           </button>
@@ -100,7 +112,15 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
             aria-expanded={open}
             className="rounded-lg p-1 hover:bg-white/10"
           >
-            <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              className="h-6 w-6"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              aria-hidden="true"
+            >
               <path d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
