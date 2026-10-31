@@ -392,7 +392,7 @@ export default function Header({ lang, alternates, serviceMenu }: Props) {
           />
           <a
             href={requestHref}
-            className="hidden rounded-md bg-teal-700 px-4 py-2.5 font-sans text-sm font-semibold text-white transition-colors duration-200 hover:bg-teal-800 lg:block"
+            className="hidden rounded-md bg-accent-800 px-4 py-2.5 font-sans text-sm font-semibold text-white transition-colors duration-200 hover:bg-teal-800 lg:block"
           >
             {t("header.request")}
           </a>
