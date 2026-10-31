@@ -58,7 +58,7 @@ const ServiceRow = forwardRef<HTMLDivElement, ServiceRowProps>(
         <span
           ref={layerRef}
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 bg-800"
+          className="pointer-events-none absolute inset-0 -z-10 bg-accent-800"
           style={{ clipPath: "circle(0px at 50% 50%)" }}
         />
 
