@@ -42,6 +42,10 @@ export default async function InquiryDetailPage({
   const inq = await prisma.inquiry.findUnique({ where: { id } });
   if (!inq) notFound();
 
+  const leistung: string[] = Array.isArray(inq.leistung)
+    ? (inq.leistung as string[])
+    : [];
+
   const received = new Date(inq.createdAt).toLocaleString("en-GB", {
     day: "2-digit",
     month: "short",
@@ -52,7 +56,6 @@ export default async function InquiryDetailPage({
 
   return (
     <div className="w-full space-y-6">
-      {/* Back button + breadcrumb */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <Link
           href="/inquiries"
@@ -79,7 +82,6 @@ export default async function InquiryDetailPage({
         </nav>
       </div>
 
-      {/* Header */}
       <div className="card flex flex-wrap items-center justify-between gap-4">
         <div className="flex min-w-0 items-center gap-4">
           <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-(--ink) text-xl font-semibold text-(--paper)">
@@ -104,7 +106,6 @@ export default async function InquiryDetailPage({
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        {/* Left column */}
         <div className="space-y-6 lg:col-span-2">
           <section className="card">
             <h2 className="mb-4 text-base font-semibold">Message</h2>
@@ -120,9 +121,9 @@ export default async function InquiryDetailPage({
               <Field label="Language">{inq.sprache.toUpperCase()}</Field>
               <div className="sm:col-span-2">
                 <Field label="Services">
-                  {inq.leistung.length > 0 ? (
+                  {leistung.length > 0 ? (
                     <span className="flex flex-wrap gap-2">
-                      {inq.leistung.map((s) => (
+                      {leistung.map((s) => (
                         <span
                           key={s}
                           className="rounded-full border border-(--border) bg-black/3 px-3 py-1 text-xs font-medium"
@@ -140,7 +141,6 @@ export default async function InquiryDetailPage({
           </section>
         </div>
 
-        {/* Right column */}
         <div className="space-y-6">
           <section className="card">
             <h2 className="mb-4 text-base font-semibold">Manage</h2>

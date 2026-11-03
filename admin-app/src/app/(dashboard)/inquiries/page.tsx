@@ -106,7 +106,6 @@ export default async function InquiriesPage({
       </div>
 
       <div className="card p-0! overflow-hidden">
-        {/* Toolbar */}
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-(--border) px-4 py-3">
           <div className="flex flex-wrap items-center gap-1">
             {TABS.map((tab) => {
@@ -170,7 +169,6 @@ export default async function InquiriesPage({
           </form>
         </div>
 
-        {/* Table */}
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead className="bg-black/3 text-xs uppercase tracking-wide text-(--muted)">

@@ -81,7 +81,7 @@ export default function InquiriesTable({
             <div className="flex items-center gap-2">
               <Link
                 href={`/inquiries/${inq.id}`}
-                className="inline-flex h-9 flex-1 items-center justify-center rounded-lg border border-[var(--border)] bg-white px-3 text-sm font-medium text-[var(--ink)] transition hover:bg-black/5"
+                className="inline-flex h-9 flex-1 items-center justify-center rounded-lg border border-(--border) bg-white px-3 text-sm font-medium text-(--ink) transition hover:bg-black/5"
               >
                 View
               </Link>
@@ -94,7 +94,7 @@ export default function InquiriesTable({
       {/* Desktop: table */}
       <div className="hidden overflow-x-auto lg:block">
         <table className="w-full text-left text-sm">
-          <thead className="bg-black/[0.03] text-xs uppercase tracking-wide text-[var(--muted)]">
+          <thead className="bg-black/3 text-xs uppercase tracking-wide text-(--muted)">
             <tr>
               <th className="hidden px-4 py-3 font-medium xl:table-cell">#</th>
               <th className="px-4 py-3 font-medium">Name / Company</th>
@@ -108,15 +108,15 @@ export default function InquiriesTable({
               <th className="px-4 py-3 text-right font-medium">Action</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[var(--border)]">
+          <tbody className="divide-y divide-(--border)">
             {inquiries.map((inq, i) => (
-              <tr key={inq.id} className="transition hover:bg-black/[0.02]">
-                <td className="hidden px-4 py-3 align-middle text-[var(--muted)] xl:table-cell">
+              <tr key={inq.id} className="transition hover:bg-black/2">
+                <td className="hidden px-4 py-3 align-middle text-(--muted) xl:table-cell">
                   {startIndex + i + 1}
                 </td>
                 <td className="px-4 py-3 align-middle">
                   <div className="flex items-center gap-3">
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--ink)] text-sm font-semibold text-[var(--paper)]">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-(--ink) text-sm font-semibold text-(--paper)">
                       {inq.name.trim().charAt(0).toUpperCase() || "?"}
                     </span>
                     <div className="min-w-0">
@@ -128,7 +128,7 @@ export default function InquiriesTable({
                       >
                         {inq.name}
                       </Link>
-                      <p className="truncate text-xs text-[var(--muted)]">
+                      <p className="truncate text-xs text-(--muted)">
                         {inq.unternehmen || "-"}
                       </p>
                     </div>
@@ -136,7 +136,7 @@ export default function InquiriesTable({
                 </td>
                 <td className="px-4 py-3 align-middle">
                   <p>{inq.email}</p>
-                  <p className="text-xs text-[var(--muted)]">
+                  <p className="text-xs text-(--muted)">
                     {inq.telefon || "-"}
                   </p>
                 </td>
@@ -144,14 +144,14 @@ export default function InquiriesTable({
                   {inq.paket}
                 </td>
                 <td className="hidden max-w-xs px-4 py-3 align-middle xl:table-cell">
-                  <p className="line-clamp-1 break-words text-[var(--muted)]">
+                  <p className="line-clamp-1 wrap-break-word text-(--muted)">
                     {inq.nachricht}
                   </p>
                 </td>
                 <td className="px-4 py-3 align-middle">
                   <Status status={inq.status} />
                 </td>
-                <td className="whitespace-nowrap px-4 py-3 align-middle text-[var(--muted)]">
+                <td className="whitespace-nowrap px-4 py-3 align-middle ttext-(--muted)">
                   {new Date(inq.createdAt).toLocaleDateString("en-GB", {
                     day: "2-digit",
                     month: "short",
@@ -162,7 +162,7 @@ export default function InquiriesTable({
                   <div className="flex items-center justify-end gap-2">
                     <Link
                       href={`/inquiries/${inq.id}`}
-                      className="inline-flex h-8 items-center rounded-lg border border-[var(--border)] bg-white px-3 text-sm font-medium text-[var(--ink)] transition hover:bg-black/5"
+                      className="inline-flex h-8 items-center rounded-lg border border-(--border) bg-white px-3 text-sm font-medium text-(--ink) transition hover:bg-black/5"
                     >
                       View
                     </Link>
@@ -176,7 +176,7 @@ export default function InquiriesTable({
       </div>
 
       {inquiries.length === 0 && (
-        <p className="px-4 py-12 text-center text-[var(--muted)]">
+        <p className="px-4 py-12 text-center text-(--muted)">
           No inquiries found.
         </p>
       )}

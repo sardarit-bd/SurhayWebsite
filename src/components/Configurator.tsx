@@ -7,7 +7,6 @@ import { localeMeta } from "../i18n/ui";
 import ConfiguratorScript from "./ConfiguratorScript";
 
 export default function Configurator({ lang }: LangProp) {
-
   const dict = {
     de: {
       eyebrow: "Konfigurator",
@@ -54,7 +53,7 @@ export default function Configurator({ lang }: LangProp) {
           price: 5900,
           weeks: [5, 7],
           label: "Mehrseitige Website",
-         desc: "Bis 8 Unterseiten inklusive CMS, Blog und Zweisprachigkeit (DE/EN) — für Unternehmen mit mehr Inhalt.",
+          desc: "Bis 8 Unterseiten inklusive CMS, Blog und Zweisprachigkeit (DE/EN) — für Unternehmen mit mehr Inhalt.",
         },
         {
           id: "shop",
@@ -188,7 +187,7 @@ export default function Configurator({ lang }: LangProp) {
           price: 5900,
           weeks: [5, 7],
           label: "Çok sayfalı web sitesi",
-         desc: "İçerik sistemi, blog ve iki dillilik (DE/EN) dahil 8 alt sayfaya kadar — daha fazla içeriği olan şirketler için.",
+          desc: "İçerik sistemi, blog ve iki dillilik (DE/EN) dahil 8 alt sayfaya kadar — daha fazla içeriği olan şirketler için.",
         },
         {
           id: "shop",

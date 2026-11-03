@@ -48,10 +48,10 @@ export default function InquiryActions({ id, status, note }: Props) {
   return (
     <div className="space-y-5">
       <div>
-        <p className="mb-2 text-xs font-medium uppercase tracking-wide text-[var(--muted)]">
+        <p className="mb-2 text-xs font-medium uppercase tracking-wide text-(--muted)">
           Set status
         </p>
-        <div className="grid grid-cols-3 gap-1 rounded-xl border border-[var(--border)] bg-black/[0.03] p-1">
+        <div className="grid grid-cols-3 gap-1 rounded-xl border border-(--border) bg-black/3 p-1">
           {OPTIONS.map((opt) => {
             const active = status === opt.value;
             return (
@@ -62,8 +62,8 @@ export default function InquiryActions({ id, status, note }: Props) {
                 onClick={() => send({ status: opt.value })}
                 className={`rounded-lg px-2 py-2 text-sm font-medium transition disabled:cursor-default ${
                   active
-                    ? "bg-[var(--ink)] text-[var(--paper)] shadow-sm"
-                    : "text-[var(--muted)] hover:bg-white hover:text-[var(--ink)]"
+                    ? "bg-(--ink) text-(--paper) shadow-sm"
+                    : "text-(--muted) hover:bg-white hover:text-(--ink)"
                 }`}
               >
                 {opt.label}
@@ -76,7 +76,7 @@ export default function InquiryActions({ id, status, note }: Props) {
       <div>
         <label
           htmlFor={`note-${id}`}
-          className="mb-2 block text-xs font-medium uppercase tracking-wide text-[var(--muted)]"
+          className="mb-2 block text-xs font-medium uppercase tracking-wide text-(--muted)"
         >
           Internal note
         </label>
@@ -88,7 +88,7 @@ export default function InquiryActions({ id, status, note }: Props) {
             setNoteSaved(false);
           }}
           rows={4}
-          className="w-full rounded-lg border border-[var(--border)] bg-white p-3 text-sm outline-none focus:border-[var(--accent)]"
+          className="w-full rounded-lg border border-(--border) bg-white p-3 text-sm outline-none focus:border-(--accent)"
           placeholder="Only visible to admins"
         />
         <div className="mt-2 flex items-center gap-3">
@@ -96,7 +96,7 @@ export default function InquiryActions({ id, status, note }: Props) {
             type="button"
             disabled={busy}
             onClick={async () => setNoteSaved(await send({ note: noteText }))}
-            className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white transition hover:opacity-90 disabled:opacity-50"
+            className="rounded-lg bg-(--accent) px-4 py-2 text-sm font-medium text-white transition hover:opacity-90 disabled:opacity-50"
           >
             Save note
           </button>

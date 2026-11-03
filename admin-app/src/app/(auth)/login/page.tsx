@@ -26,7 +26,9 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
       <form onSubmit={handleSubmit} className="card w-full max-w-sm space-y-4">
-        <h1 className="text-2xl font-bold text-center text-(--ink)">Admin Login</h1>
+        <h1 className="text-2xl font-bold text-center text-(--ink)">
+          Admin Login
+        </h1>
         <PasswordInput
           placeholder="Password"
           value={password}
@@ -36,7 +38,9 @@ export default function LoginPage() {
           required
         />
         {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-        <button type="submit" className="btn-primary w-full">Sign In</button>
+        <button type="submit" className="btn-primary w-full">
+          Sign In
+        </button>
       </form>
     </div>
   );

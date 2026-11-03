@@ -27,7 +27,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  // Limit guessing of the current password
   const ip = (request.headers.get("x-forwarded-for") || "unknown")
     .split(",")[0]
     .trim();

@@ -57,12 +57,9 @@ function detectLanguage(
     if (path === "/en" || path.startsWith("/en/")) return "en";
     if (path === "/tr" || path.startsWith("/tr/")) return "tr";
   } catch {
-    // no usable referer
   }
   return "de";
 }
-
-// Open http://localhost:3001/api/inquiries in the browser: if you see this JSON, the server is reachable.
 export async function GET() {
   console.log("[API] GET /api/inquiries reached");
   return NextResponse.json({ ok: true, message: "Inquiries API is running" });
@@ -89,7 +86,6 @@ export async function POST(request: NextRequest) {
   const json = (body: unknown, status: number) =>
     NextResponse.json(body, { status, headers });
 
-  // 1. CORS check
   if (!origin || !getAllowedOrigins().includes(origin)) {
     console.log("[API] REJECTED 403: origin not allowed ->", origin);
     return json({ error: "Forbidden" }, 403);
@@ -141,8 +137,6 @@ export async function POST(request: NextRequest) {
       sprache: detectLanguage(request, formData.get("sprache")),
     });
     console.log("[API] validation OK for:", validated.email);
-
-    // 6. Save to database
     const saved = await prisma.inquiry.create({
       data: {
         name: validated.name,
@@ -157,8 +151,6 @@ export async function POST(request: NextRequest) {
       },
     });
     console.log("[API] SAVED to database, id:", saved.id);
-
-    // 7. Email (never fails the request: the inquiry is already saved)
     if (resend) {
       try {
         const adminEmail =

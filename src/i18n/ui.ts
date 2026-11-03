@@ -50,7 +50,6 @@ export const ui = {
       "Surhay Design — Websites, die verkaufen | Webdesign & Entwicklung Berlin",
     "meta.description":
       "Maßgeschneiderte, performante Websites für KMU, Selbstständige und Startups im DACH-Raum. Webdesign, Entwicklung und Wartung aus Berlin — messbar besser.",
-
     "nav.services": "Leistungen",
     "nav.work": "Projekte",
     "nav.process": "Prozess",
@@ -140,14 +139,12 @@ export const ui = {
     "pricing.from": "ab",
     "pricing.cta": "Projekt anfragen",
     "common.included": "Enthalten",
-
     "pricing.p1.name": "Starter",
     "pricing.p1.price": "2.900 €",
     "pricing.p1.desc":
       "OnePager (bis 6 Sektionen) · Für Selbstständige und Praxen, die einen klaren, professionellen Einstieg suchen.",
     "pricing.p1.features":
       "Individuelles Screendesign (kein Baukasten)|Bis zu 6 maßgeschneiderte Sektionen|Optimiert für Smartphone, Tablet & Desktop|Conversion-starkes Kontaktformular|SEO-Grundsetup & Google Vorbereitung|Rechtssicher (DSGVO, Impressum, Cookie-Banner)",
-
     "pricing.p2.name": "Business",
     "pricing.p2.price": "5.900 €",
     "pricing.p2.desc":
@@ -165,7 +162,6 @@ export const ui = {
     "svcShow.stat2": "Kundenzufriedenheit",
     "svcShow.stat3": "Betreute Länder",
     "svcShow.stat4": "Design-System-Adoption",
-
     "svcShow.p1.title": "Digitales Produktdesign & Markensysteme",
     "svcShow.p1.label": "Markenidentität",
     "svcShow.p1.shortTitle": "Produkt & Marke",

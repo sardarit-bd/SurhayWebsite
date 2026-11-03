@@ -69,7 +69,6 @@ export async function POST(request: NextRequest) {
       anmerkungen: formData.get("anmerkungen") || undefined,
     });
 
-    // Capture any other hidden fields (like _subject) into rawData
     const rawData: Record<string, any> = {};
     formData.forEach((value, key) => {
       if (

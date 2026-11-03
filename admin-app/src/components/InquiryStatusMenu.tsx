@@ -75,7 +75,7 @@ export default function InquiryStatusMenu({ id, status }: { id: string; status: 
         aria-label="More actions"
         aria-haspopup="menu"
         aria-expanded={open}
-        className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-[var(--border)] bg-white text-[var(--muted)] transition hover:bg-black/5 hover:text-[var(--ink)] disabled:opacity-50"
+        className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-(--border) bg-white text-(--muted) transition hover:bg-black/5 hover:text-(--ink) disabled:opacity-50"
       >
         <svg viewBox="0 0 16 16" className="h-4 w-4" fill="currentColor" aria-hidden="true">
           <circle cx="8" cy="3" r="1.4" />
@@ -89,7 +89,7 @@ export default function InquiryStatusMenu({ id, status }: { id: string; status: 
           ref={menuRef}
           role="menu"
           style={{ position: "fixed", top: pos.top, left: pos.left, width: 208 }}
-          className="z-50 overflow-hidden rounded-xl border border-[var(--border)] bg-white py-1 shadow-lg"
+          className="z-50 overflow-hidden rounded-xl border border-(--border) bg-white py-1 shadow-lg"
         >
           {OPTIONS.map((opt) => (
             <button
@@ -97,10 +97,10 @@ export default function InquiryStatusMenu({ id, status }: { id: string; status: 
               type="button"
               role="menuitem"
               onClick={() => choose(opt.value)}
-              className="flex w-full items-center justify-between px-4 py-2 text-left text-sm text-[var(--ink)] hover:bg-black/5"
+              className="flex w-full items-center justify-between px-4 py-2 text-left text-sm text-(--ink) hover:bg-black/5"
             >
               {opt.label}
-              {status === opt.value && <span className="text-[var(--accent)]">✓</span>}
+              {status === opt.value && <span className="text-(--accent)">✓</span>}
             </button>
           ))}
         </div>

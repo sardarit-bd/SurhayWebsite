@@ -1,7 +1,7 @@
-import { SITE } from '../config';
-import { useTranslations, path } from '../i18n/utils';
-import { css } from '../lib/css';
-import type { LangProp } from '../lib/props';
+import { SITE } from "../config";
+import { useTranslations, path } from "../i18n/utils";
+import { css } from "../lib/css";
+import type { LangProp } from "../lib/props";
 
 interface Props extends LangProp {
   title?: string;
@@ -10,25 +10,41 @@ interface Props extends LangProp {
 
 export default function CtaBand({ lang, title, sub }: Props) {
   const t = useTranslations(lang);
-  const titel = title ?? t('cta.title');
-  const unter = sub ?? t('cta.sub');
+  const titel = title ?? t("cta.title");
+  const unter = sub ?? t("cta.sub");
 
   return (
-    <section className="dark-section grain" style={css('padding-block: var(--spacing-section-sm);')}>
+    <section
+      className="dark-section grain"
+      style={css("padding-block: var(--spacing-section-sm);")}
+    >
       <div className="relative mx-auto max-w-7xl px-5 md:px-8">
         <div className="grid gap-10 lg:grid-cols-[3fr_2fr] lg:items-end">
           <div>
             <h2 className="h2 h2-sm max-w-2xl" data-reveal>
               {titel}
             </h2>
-            <p className="lead mt-5 max-w-xl text-mute-dark" data-reveal style={css('--reveal-delay: 0.08s;')}>
+            <p
+              className="lead mt-5 max-w-xl text-mute-dark"
+              data-reveal
+              style={css("--reveal-delay: 0.08s;")}
+            >
               {unter}
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-4 lg:justify-end" data-reveal style={css('--reveal-delay: 0.16s;')}>
-            <a href={path(lang, 'contact')} className="btn btn-primary">
-              {t('cta.primary')}{' '}
-              <svg className="btn-arrow h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <div
+            className="flex flex-wrap items-center gap-4 lg:justify-end"
+            data-reveal
+            style={css("--reveal-delay: 0.16s;")}
+          >
+            <a href={path(lang, "contact")} className="btn btn-primary">
+              {t("cta.primary")}{" "}
+              <svg
+                className="btn-arrow h-4 w-4"
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden="true"
+              >
                 <path
                   d="M1 8h13M9 3l5 5-5 5"
                   stroke="currentColor"
@@ -38,19 +54,22 @@ export default function CtaBand({ lang, title, sub }: Props) {
                 ></path>
               </svg>
             </a>
-            <a href={path(lang, 'configurator')} className="btn btn-ghost">
-              {t('cta.secondary')}
+            <a href={path(lang, "configurator")} className="btn btn-ghost">
+              {t("cta.secondary")}
             </a>
           </div>
         </div>
-        <p className="mt-10 border-t pt-6 text-sm text-mute-dark" style={css('border-color: var(--line-dark);')}>
+        <p
+          className="mt-10 border-t pt-6 text-sm text-mute-dark"
+          style={css("border-color: var(--line-dark);")}
+        >
           <a href={`mailto:${SITE.email}`} className="link-slide font-semibold">
             {SITE.email}
-          </a>{' '}
+          </a>{" "}
           <span className="mx-2" aria-hidden="true">
             ·
-          </span>{' '}
-          {t('trust.1.title')}
+          </span>{" "}
+          {t("trust.1.title")}
         </p>
       </div>
     </section>
