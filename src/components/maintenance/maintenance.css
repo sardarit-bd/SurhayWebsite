@@ -1,0 +1,255 @@
+/* ============================== SURHAY · maintenance ==============================
+   Hintergrund: zur Laufzeit aus document.body gelesen und 1:1 gesetzt (inline).
+   Farben: ausschließlich globals.css @theme-Tokens. Light/Dark über data-mt-theme.
+   Keine Partikel, kein Aurora, kein Grain, keine Verläufe.
+==================================================================================== */
+
+.mt,
+.mt[data-mt-theme='light'] {
+  --mt-bg: var(--color-paper, #f5f3ee);
+  --mt-surface: var(--color-white, #ffffff);
+  --mt-surface-2: var(--color-paper-2, #ebe8e0);
+  --mt-text: var(--color-ink, #0a0a0b);
+  --mt-secondary: var(--color-mute, #68675f);
+  --mt-border: var(--color-paper-2, #ebe8e0);
+  --mt-accent: var(--color-accent-ctx, #0e7490);
+  --mt-accent-strong: var(--color-accent-800, #155e75);
+  --mt-accent-soft: var(--color-accent-100, #cffafe);
+  --mt-on-accent: var(--color-white, #ffffff);
+  --mt-track: rgba(10, 10, 11, 0.08);
+  --mt-display: var(--font-display, 'Bricolage Grotesque Variable', 'Arial Black', sans-serif);
+  --mt-sans: var(--font-body, 'Inter Variable', system-ui, sans-serif);
+}
+
+.mt[data-mt-theme='dark'] {
+  --mt-bg: var(--color-ink, #0a0a0b);
+  --mt-surface: var(--color-ink-2, #141417);
+  --mt-surface-2: var(--color-ink-3, #1e1e23);
+  --mt-text: var(--color-paper, #f5f3ee);
+  --mt-secondary: var(--color-mute-dark, #a3a29a);
+  --mt-border: var(--color-ink-3, #1e1e23);
+  --mt-accent: var(--color-accent-400, #22d3ee);
+  --mt-accent-strong: var(--color-accent-300, #67e8f9);
+  --mt-accent-soft: rgba(34, 211, 238, 0.12);
+  --mt-on-accent: var(--color-ink, #0a0a0b);
+  --mt-track: rgba(245, 243, 238, 0.08);
+}
+
+.mt {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--mt-bg);
+  color: var(--mt-text);
+  font-family: var(--mt-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  scrollbar-width: thin;
+  scrollbar-color: var(--mt-accent) var(--mt-bg);
+}
+
+.mt *,
+.mt *::before,
+.mt *::after { box-sizing: border-box; }
+.mt h1, .mt h2, .mt p, .mt ol, .mt li { margin: 0; }
+.mt ol { padding: 0; list-style: none; }
+.mt a { color: inherit; text-decoration: none; }
+.mt button { font-family: inherit; }
+.mt ::selection { background: var(--mt-accent); color: var(--mt-on-accent); }
+.mt a:focus-visible,
+.mt button:focus-visible { outline: 2px solid var(--mt-accent); outline-offset: 3px; }
+
+.mt::-webkit-scrollbar { width: 10px; }
+.mt::-webkit-scrollbar-track { background: var(--mt-bg); }
+.mt::-webkit-scrollbar-thumb { background: var(--mt-accent); border-radius: 8px; border: 2px solid var(--mt-bg); }
+.mt::-webkit-scrollbar-thumb:hover { background: var(--mt-accent-strong); }
+
+/* --------------------------------- shell ---------------------------------- */
+
+.mt-shell {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(26px, 4vh, 42px);
+  padding: clamp(22px, 4.5vw, 52px);
+}
+
+.mt [data-rise] {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: mtRise 0.7s cubic-bezier(0.16, 0.8, 0.26, 1) forwards;
+  animation-delay: var(--d, 0ms);
+}
+
+/* --------------------------------- top bar -------------------------------- */
+
+.mt-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.mt-brand { display: flex; align-items: center; gap: 12px; }
+.mt-brand-name { font-family: var(--mt-display); font-size: 19px; font-weight: 800; letter-spacing: 0.14em; color: var(--mt-text); }
+.mt-brand-name sup { font-size: 9px; color: var(--mt-accent); margin-left: 2px; }
+.mt-brand-tag {
+  font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.2em;
+  color: var(--mt-secondary); border: 1px solid var(--mt-border); padding: 4px 9px; border-radius: 999px;
+}
+.mt-langs { display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--mt-surface); border: 1px solid var(--mt-border); }
+.mt-lang {
+  display: flex; align-items: center; gap: 7px; padding: 7px 12px; border-radius: 999px;
+  border: none; background: transparent; color: var(--mt-secondary);
+  font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+.mt-lang svg { width: 20px; height: 14px; border-radius: 3px; display: block; box-shadow: 0 0 0 1px var(--mt-border); }
+.mt-lang:hover { color: var(--mt-text); background: var(--mt-surface-2); }
+.mt-lang[aria-pressed='true'] { background: var(--mt-accent-soft); color: var(--mt-accent-strong); }
+
+/* ---------------------------------- main ---------------------------------- */
+
+.mt-main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
+  gap: clamp(32px, 5vw, 76px);
+  align-items: center;
+}
+.mt-hero { max-width: 640px; }
+
+.mt-eyebrow {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.22em;
+  color: var(--mt-accent-strong);
+}
+.mt-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--mt-accent); flex-shrink: 0; animation: mtPulse 2s infinite; }
+
+.mt-title {
+  margin-top: 18px;
+  font-family: var(--mt-display);
+  font-weight: 620;
+  font-size: clamp(2.7rem, 6.2vw, 5.2rem);
+  line-height: 1.03;
+  letter-spacing: -0.02em;
+  color: var(--mt-text);
+}
+.mt-title em { font-style: normal; font-weight: 700; color: var(--mt-accent); }
+.mt-sub { margin-top: 20px; font-size: 16.5px; line-height: 1.75; color: var(--mt-secondary); max-width: 56ch; }
+
+/* Buttons: solide Akzentfläche (Projekt-Button) + Text-Button mit Unterstrich. */
+.mt-actions { display: flex; align-items: center; gap: 22px; margin-top: 30px; flex-wrap: wrap; }
+.mt-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 13px 22px; border-radius: 8px; border: none;
+  background: var(--mt-accent); color: var(--mt-on-accent);
+  font-size: 15px; font-weight: 600; cursor: pointer;
+  transition: background 0.2s;
+}
+.mt-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+.mt-btn:hover { background: var(--mt-accent-strong); }
+.mt-textbtn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 4px 0; border: none; background: transparent;
+  color: var(--mt-accent); font-size: 15px; font-weight: 600;
+  text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px;
+  cursor: pointer; transition: color 0.2s;
+}
+.mt-textbtn svg { width: 15px; height: 15px; flex-shrink: 0; }
+.mt-textbtn:hover { color: var(--mt-accent-strong); }
+.mt-textbtn:disabled { opacity: 0.7; cursor: progress; }
+.mt-spin-icon { animation: mtSpin 0.8s linear infinite; }
+
+.mt-note { display: flex; gap: 8px; margin-top: 22px; max-width: 52ch; font-size: 13px; line-height: 1.6; color: var(--mt-secondary); }
+.mt-note svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; color: var(--mt-accent); }
+
+/* -------------------------------- status card ------------------------------ */
+
+.mt-card { padding: 26px; border-radius: 16px; background: var(--mt-surface); border: 1px solid var(--mt-border); }
+.mt-card-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 14px; }
+.mt-card-head h2 { font-size: 15px; font-weight: 600; color: var(--mt-text); }
+.mt-badge {
+  font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--mt-accent-strong); background: var(--mt-accent-soft);
+  padding: 4px 10px; border-radius: 999px;
+}
+
+.mt-step { padding: 11px 0; border-bottom: 1px solid var(--mt-border); }
+.mt-step:last-child { border-bottom: none; }
+.mt-step-row { display: flex; align-items: center; gap: 12px; }
+.mt-step-icon { width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; display: grid; place-items: center; }
+.mt-step-done .mt-step-icon { background: var(--mt-accent-soft); color: var(--mt-accent-strong); }
+.mt-step-done .mt-step-icon svg { width: 12px; height: 12px; }
+.mt-step-active .mt-step-icon { background: var(--mt-accent-soft); }
+.mt-step-next .mt-step-icon { border: 1px solid var(--mt-border); }
+.mt-spinner { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--mt-track); border-top-color: var(--mt-accent); animation: mtSpin 1s linear infinite; }
+.mt-hollow { width: 6px; height: 6px; border-radius: 50%; background: var(--mt-secondary); opacity: 0.5; }
+.mt-step-label { flex: 1; font-size: 14.5px; color: var(--mt-text); }
+.mt-step-active .mt-step-label { font-weight: 600; }
+.mt-step-next .mt-step-label { color: var(--mt-secondary); }
+.mt-chip { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
+.mt-chip-done { color: var(--mt-secondary); background: var(--mt-surface-2); }
+.mt-chip-active { color: var(--mt-accent-strong); background: var(--mt-accent-soft); }
+.mt-chip-next { color: var(--mt-secondary); background: var(--mt-surface-2); }
+
+.mt-bar { display: block; position: relative; overflow: hidden; margin: 10px 0 2px 38px; height: 4px; border-radius: 4px; background: var(--mt-track); }
+.mt-bar i { position: absolute; top: 0; bottom: 0; width: 45%; border-radius: 4px; background: var(--mt-accent); animation: mtBar 1.9s cubic-bezier(0.45, 0.1, 0.55, 0.9) infinite; }
+
+.mt-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+.mt-tile { display: flex; flex-direction: column; gap: 6px; padding: 14px 16px; border-radius: 12px; background: var(--mt-surface-2); }
+.mt-tile-label { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--mt-secondary); }
+.mt-tile-sub { font-size: 11px; color: var(--mt-secondary); }
+.mt-clock { font-size: 28px; font-weight: 650; color: var(--mt-text); font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
+.mt-count { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.mt-count-cell { text-align: center; padding: 8px 4px; border-radius: 8px; background: var(--mt-surface); border: 1px solid var(--mt-border); }
+.mt-count-cell b { display: block; font-size: 18px; font-weight: 700; color: var(--mt-accent-strong); font-variant-numeric: tabular-nums; }
+.mt-count-cell i { font-style: normal; font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mt-secondary); }
+.mt-soon { display: flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 600; color: var(--mt-text); }
+.mt-soon i { width: 8px; height: 8px; border-radius: 50%; background: var(--mt-accent); animation: mtBlink 1.6s ease-in-out infinite; }
+
+/* --------------------------------- footer --------------------------------- */
+
+.mt-foot {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding-top: 22px; border-top: 1px solid var(--mt-border);
+  font-size: 12.5px; color: var(--mt-secondary);
+}
+.mt-foot nav { display: flex; gap: 18px; }
+.mt-foot a { text-decoration: underline; text-underline-offset: 3px; transition: color 0.2s; }
+.mt-foot a:hover { color: var(--mt-accent); }
+
+/* -------------------------------- keyframes ------------------------------- */
+
+@keyframes mtRise { to { opacity: 1; transform: translateY(0); } }
+@keyframes mtSpin { to { transform: rotate(360deg); } }
+@keyframes mtPulse {
+  0% { box-shadow: 0 0 0 0 var(--mt-accent-soft); }
+  70% { box-shadow: 0 0 0 8px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+@keyframes mtBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+@keyframes mtBar { 0% { left: -45%; } 100% { left: 100%; } }
+
+/* -------------------------------- responsive ------------------------------ */
+
+@media (max-width: 1020px) {
+  .mt-main { grid-template-columns: 1fr; align-items: start; }
+  .mt-hero { max-width: none; }
+}
+@media (max-width: 560px) {
+  .mt-actions { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .mt-foot { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .mt-card { padding: 20px; }
+}
+@media (max-width: 440px) {
+  .mt-tiles { grid-template-columns: 1fr; }
+  .mt-brand-tag { display: none; }
+}
+
+/* ----------------------------- reduced motion ----------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .mt [data-rise] { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .mt-dot, .mt-soon i { animation: none !important; }
+  .mt-bar i { animation: none; left: 20%; width: 60%; }
+  .mt-btn, .mt-textbtn, .mt-lang, .mt-foot a { transition: none; }
+}

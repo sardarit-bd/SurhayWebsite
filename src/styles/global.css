@@ -1,11 +1,4 @@
-@import 'tailwindcss';
-
-/* ---------------------------------------------------------------------------
-   SURHAY DESIGN — Designsystem
-   Farben, Typografie und Motion als CSS Custom Properties.
-   Tailwind v4 liest die @theme-Tokens und erzeugt daraus Utilities
-   (bg-ink, text-accent-600, font-display, …).
---------------------------------------------------------------------------- */
+@import "tailwindcss";
 
 @theme {
   /* Farbsystem — "Tinte, Papier, Amethyst" */
@@ -26,13 +19,17 @@
   --color-mute-dark: #a3a29a; /* Sekundärtext auf Tinte (7.72:1 auf ink) */
 
   /* Typografie */
-  --font-display: 'Bricolage Grotesque Variable', 'Arial Black', sans-serif;
-  --font-body: 'Inter Variable', system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque Variable", "Arial Black", sans-serif;
+  --font-body: "Inter Variable", system-ui, sans-serif;
 
   /* Layout — zwei Stufen. Vorher benutzten alle Sektionen denselben Wert,
      dadurch wirkten Neben- und Hauptsektionen gleich gewichtig. */
   --spacing-section: clamp(5rem, 12vw, 9rem); /* Haupt-Sektionen */
-  --spacing-section-sm: clamp(3rem, 7vw, 5.5rem); /* Vertrauenszeile, Insights */
+  --spacing-section-sm: clamp(
+    3rem,
+    7vw,
+    5.5rem
+  ); /* Vertrauenszeile, Insights */
 }
 
 :root {
@@ -78,8 +75,6 @@
   --z-sprung: 100;
 }
 
-/* Unter 810 px ist der Weg kürzer und der Daumen näher am Inhalt: gleiche
-   Kurven, knappere Werte. */
 @media (max-width: 809px) {
   :root {
     --dur-panel: 340ms;
@@ -89,13 +84,9 @@
   }
 }
 
-/* ------------------------------------------------------------------ Basis */
-
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5.5rem; /* fixe Navigation bei Ankersprüngen */
-  /* Scrollbar-Platz dauerhaft reservieren: verhindert, dass der Header
-     (und damit Burger/X) beim Scroll-Lock des Menüs seitlich springt */
+  scroll-padding-top: 5.5rem;
   scrollbar-gutter: stable;
 }
 
@@ -145,34 +136,17 @@ body {
   border-radius: 2px;
 }
 
-/* Der Vollton traegt auf Tinte nur 3.69:1 — als Ring gerade noch zulaessig,
-   aber kaum zu sehen. Auf dunklem Grund ringt deshalb der helle Akzent
-   (10.95:1). Das Burger-Menue ist so ein Grund, auch wenn es keine
-   `.dark-section` ist. */
 .dark-section :focus-visible,
 #mobile-menu :focus-visible {
   outline-color: var(--color-accent-400);
 }
 
-/* ------------------------------------------------------------ Trefferflaeche
-   WCAG 2.5.8 (Zielgroesse, minimal) verlangt 24x24 CSS-Pixel. Reine
-   Textlinks in Listen sind ueber ihre Zeilenhoehe rund 22 px hoch und
-   damit knapp darunter.
-
-   Der Ausweg ist kein groesserer Text und kein zusaetzliches Padding — beides
-   wuerde das Satzbild aendern. Stattdessen legt ein Pseudoelement eine
-   unsichtbare Flaeche ueber den Link hinaus. Layout, Zeilenabstand und die
-   Unterlinie von .link-slide (die an ::after haengt) bleiben unberuehrt.
-
-   -6px vertikal ergibt bei 22 px Zeilenhoehe 34 px. Die Fusszeilen-Listen
-   stehen 12 px auseinander, die Flaechen stossen also aneinander, ohne sich
-   zu ueberlappen — kein Ziel liegt ueber dem Nachbarn. */
 .tap-24 {
   position: relative;
 }
 
 .tap-24::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: -6px -4px;
   border-radius: 4px;
@@ -185,7 +159,9 @@ body {
   line-height: 0.98;
   letter-spacing: -0.02em;
   text-wrap: balance;
-  font-variation-settings: 'opsz' 96, 'wdth' 90;
+  font-variation-settings:
+    "opsz" 96,
+    "wdth" 90;
 }
 
 .h2 {
@@ -195,12 +171,11 @@ body {
   line-height: 1.02;
   letter-spacing: -0.015em;
   text-wrap: balance;
-  font-variation-settings: 'opsz' 60, 'wdth' 92;
+  font-variation-settings:
+    "opsz" 60,
+    "wdth" 92;
 }
 
-/* Eine Stufe unter .h2 — fuer sekundaere Sektionen (Insights). Ohne sie
-   wiegt ein Nebenblock optisch genauso schwer wie Leistungen oder Preise,
-   und die Seite liest sich als flache Liste gleichrangiger Kapitel. */
 .h2-sm {
   font-size: var(--text-h2-sm);
   line-height: 1.08;
@@ -232,7 +207,7 @@ body {
 }
 
 .eyebrow::before {
-  content: '';
+  content: "";
   width: 0.55rem;
   height: 0.55rem;
   border-radius: 50%;
@@ -296,21 +271,11 @@ body {
   color: var(--color-white);
 }
 
-/* Der Outline-Button fuellt sich beim Hover. Damit der Text nicht weiss
-   dasteht, bevor die Flaeche unter ihm gefuellt ist, zieht er 60 ms nach —
-   die Flaeche laeuft laenger und mit der Eintrittskurve, der Text kurz und
-   mit der Mikrokurve.
-   Welcher Akzent fuellt, entscheidet der Untergrund: auf Papier der Vollton
-   mit weisser Schrift, auf Tinte der helle mit schwarzer. 600 als Flaeche
-   auf Tinte traegt nur 3.69:1 und bliebe dort eine dunkle Beule. */
 .btn-ghost {
   --ghost-fill: var(--color-accent-600);
   --ghost-on: var(--color-white);
   --ghost-deep: var(--color-accent-800);
   --ghost-on-deep: var(--color-white);
-  /* Der Rahmen IST die Schaltflaeche — ohne ihn ist nicht zu sehen, wo sie
-     anfaengt. Deshalb die Bedienelement-Stufe (3:1, WCAG 1.4.11) statt der
-     Haarlinie, die hier vorher stand und nur 1.36:1 trug. */
   border-color: var(--line-control);
   color: var(--color-ink);
   background: transparent;
@@ -329,16 +294,12 @@ body {
   color: var(--color-paper);
 }
 
-/* Tastaturfokus zeigt denselben Zustand wie der Hover — sonst waere der
-   gefuellte Button eine reine Mausbelohnung. */
 .btn-ghost:focus-visible {
   background: var(--ghost-fill);
   border-color: var(--ghost-fill);
   color: var(--ghost-on);
 }
 
-/* Gedrueckt: eine Stufe tiefer, und ohne den Versatz des Textes — beim
-   Druck soll nichts nachlaufen. Gilt auch als Touch-Ersatz (§8). */
 .btn-primary:active,
 .btn-ghost:active {
   transition-delay: 0s;
@@ -354,8 +315,6 @@ body {
   color: var(--ghost-on-deep);
 }
 
-/* Hover nur mit echter Zeigerspitze: Touch-Geraete halten :hover nach dem
-   Tippen sonst faelschlich fest. */
 @media (hover: hover) and (pointer: fine) {
   .btn:hover .btn-arrow {
     transform: translateX(4px);
@@ -370,7 +329,6 @@ body {
   }
 }
 
-/* Link mit Unterstrich, der von links wächst (scaleX, GPU-freundlich) */
 .link-slide {
   position: relative;
   text-decoration: none;
@@ -378,7 +336,7 @@ body {
 }
 
 .link-slide::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: 0;
@@ -395,26 +353,13 @@ body {
   transform: scaleX(1);
 }
 
-/* ------------------------------------------------------------- Kartenlink
-   Eine Karte, die als Ganzes ein Link ist (Blog-Teaser, Blog-Uebersicht).
-
-   DREI STUFEN
-   Nicht jede Flaeche antwortet gleich stark — die Staerke richtet sich
-   danach, was der Klick tut:
-     1  Kreis-Fill  ausschliesslich die Leistungs-Elemente (s. Flaechen-Hover)
-     2  Kartenlink  Rahmen, Flaeche, Link-Detail — hier
-     3  Ruhige Zelle nicht klickbare Raster (s. unten), minimal
-   Wenn alles gleich stark reagiert, verliert der starke Effekt seine
-   Bedeutung. Deshalb hier bewusst: kein Anheben, keine Skalierung, kein
-   wachsender Schatten.
-
-   --card-bg-hover setzt jede Karte selbst: die Grundflaechen sind
-   verschieden (weiss, Papier, vertieftes Papier), der Schritt soll ueberall
-   gleich klein ausfallen. */
-
 .card-link {
   /* Standard: weisse Karte, die eine Spur waermer wird. */
-  --card-bg-hover: color-mix(in srgb, var(--color-paper) 45%, var(--color-white));
+  --card-bg-hover: color-mix(
+    in srgb,
+    var(--color-paper) 45%,
+    var(--color-white)
+  );
   text-decoration: none;
   transition:
     background-color var(--dur-short) var(--ease-micro),
@@ -439,16 +384,6 @@ body {
   }
 }
 
-/* Das Link-Detail der Karte: Wort, Unterlinie, Pfeil.
-   Der Pfeil liegt absolut in einem Streifen, der im Ruhezustand schon
-   freigehalten ist — so kann er erscheinen, ohne dass die Zeile verrutscht.
-   Die Unterlinie laeuft von links ein und nach rechts wieder hinaus; nur die
-   Skalierung wird animiert, die transform-origin springt hart mit.
-   Unterlinie und Pfeil stehen bewusst zusaetzlich zur Farbe: kein Zustand
-   darf allein ueber Farbe informieren.
-   Die Ueberschrift der Karte bleibt unberuehrt — sie ist der Grund, warum
-   jemand hinsieht, und darf beim Hover keinen Kontrast verlieren. */
-
 .read-more {
   position: relative;
   display: inline-block;
@@ -458,7 +393,7 @@ body {
 }
 
 .read-more::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   right: 20px; /* nur unter dem Wort, nicht unter dem Pfeil */
@@ -511,9 +446,6 @@ body {
   }
 }
 
-/* Reduzierte Bewegung: die Farben bleiben, die Wege entfallen. Die
-   Unterlinie erscheint ohne Aufziehen, der Pfeil ohne Weg, und was bleibt,
-   laeuft in der kuerzesten Dauer ab. */
 @media (prefers-reduced-motion: reduce) {
   .card-link {
     transition-duration: var(--dur-micro);
@@ -527,7 +459,6 @@ body {
   }
 }
 
-
 .quiet-cell {
   transition: background-color var(--dur-short) var(--ease-micro);
 }
@@ -539,7 +470,11 @@ body {
 /* Die Flaechenfarbe steht inline am Element — deshalb !important. */
 @media (hover: hover) and (pointer: fine) {
   .quiet-cell:hover {
-    background: color-mix(in srgb, var(--color-white) 3%, var(--color-ink-2)) !important;
+    background: color-mix(
+      in srgb,
+      var(--color-white) 3%,
+      var(--color-ink-2)
+    ) !important;
   }
   .quiet-cell:hover .quiet-num {
     color: var(--color-accent-300);
@@ -552,17 +487,13 @@ body {
   }
 }
 
-
 .price-cell {
   --lift: 4px;
   --dim-sibling: 0.88;
   /* Helle Karte auf hellem Grund. */
-  --card-shadow:
-    0 1px 2px rgb(10 10 11 / 0.04),
-    0 2px 8px rgb(10 10 11 / 0.03);
+  --card-shadow: 0 1px 2px rgb(10 10 11 / 0.04), 0 2px 8px rgb(10 10 11 / 0.03);
   --card-shadow-hover:
-    0 2px 4px rgb(10 10 11 / 0.05),
-    0 14px 36px rgb(10 10 11 / 0.09);
+    0 2px 4px rgb(10 10 11 / 0.05), 0 14px 36px rgb(10 10 11 / 0.09);
   position: relative;
   border-radius: 1rem; /* = rounded-2xl der Karte */
   box-shadow: var(--card-shadow);
@@ -573,8 +504,7 @@ body {
    entsprechend mehr. */
 .price-cell--ink {
   --card-shadow-hover:
-    0 4px 8px rgb(10 10 11 / 0.10),
-    0 18px 44px rgb(10 10 11 / 0.16);
+    0 4px 8px rgb(10 10 11 / 0.1), 0 18px 44px rgb(10 10 11 / 0.16);
 }
 
 /* Auf Tinte tragen Schatten nicht — Schwarz auf Schwarz ist keine Tiefe.
@@ -586,7 +516,7 @@ body {
 }
 
 .price-cell::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
@@ -617,7 +547,11 @@ html.js .price-cell[data-reveal].reveal-done {
 }
 
 .dark-section .price-card {
-  --card-bg-hover: color-mix(in srgb, var(--color-paper) 5%, var(--color-ink-2));
+  --card-bg-hover: color-mix(
+    in srgb,
+    var(--color-paper) 5%,
+    var(--color-ink-2)
+  );
 }
 
 /* Der Button ist bereits gefuellt, bevor der Zeiger ihn erreicht: 80 ms
@@ -680,7 +614,9 @@ html.js .price-cell[data-reveal].reveal-done {
   background: var(--card-bg-hover) !important;
 }
 
-.dark-section .price-cell:has(.btn:focus-visible) > .price-card:not(.price-card--marked) {
+.dark-section
+  .price-cell:has(.btn:focus-visible)
+  > .price-card:not(.price-card--marked) {
   border-color: rgb(245 243 238 / 0.3) !important;
 }
 
@@ -754,7 +690,7 @@ html.js .price-cell[data-reveal].reveal-done {
 }
 
 .marker::after {
-  content: '';
+  content: "";
   position: absolute;
   z-index: -1;
   left: -0.04em;
@@ -773,7 +709,7 @@ html.js .price-cell[data-reveal].reveal-done {
 }
 
 .grain::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
@@ -786,7 +722,11 @@ html.js .price-cell[data-reveal].reveal-done {
     linear-gradient(var(--line) 1px, transparent 1px),
     linear-gradient(90deg, var(--line) 1px, transparent 1px);
   background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse 90% 75% at 50% 30%, black 30%, transparent 75%);
+  mask-image: radial-gradient(
+    ellipse 90% 75% at 50% 30%,
+    black 30%,
+    transparent 75%
+  );
 }
 
 .tile-section {
@@ -853,7 +793,6 @@ html.js .price-cell[data-reveal].reveal-done {
   line-height: 1.6;
   text-wrap: pretty;
 }
-
 
 html.js [data-reveal] {
   opacity: 0;
@@ -928,7 +867,6 @@ html.js .marker.is-visible::after {
     transition: none;
   }
 }
-
 
 .prose {
   max-width: 65ch;
@@ -1113,7 +1051,7 @@ html.js .intro-rise {
 }
 
 .page-header:not(.dark-section)::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
@@ -1121,14 +1059,17 @@ html.js .intro-rise {
     linear-gradient(var(--line) 1px, transparent 1px),
     linear-gradient(90deg, var(--line) 1px, transparent 1px);
   background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse 80% 100% at 20% 0%, black 5%, transparent 70%);
+  mask-image: radial-gradient(
+    ellipse 80% 100% at 20% 0%,
+    black 5%,
+    transparent 70%
+  );
   opacity: 0.6;
 }
 
-
 .faq-item {
-  --faq-text-in: 80ms; 
-  --faq-text-out: 140ms; 
+  --faq-text-in: 80ms;
+  --faq-text-out: 140ms;
   --faq-collapse-in: 40ms;
   border-top: 1px solid var(--line);
 }
@@ -1172,7 +1113,8 @@ html.js .faq-item.is-open .faq-panel-inner {
 }
 
 html.js .faq-item.is-closing .faq-panel {
-  transition: height var(--dur-panel-out) var(--ease-panel) var(--faq-collapse-in);
+  transition: height var(--dur-panel-out) var(--ease-panel)
+    var(--faq-collapse-in);
 }
 
 html.js .faq-item.is-closing .faq-panel-inner {
@@ -1185,7 +1127,6 @@ html.js .faq-item.is-instant .faq-panel,
 html.js .faq-item.is-instant .faq-panel-inner {
   transition: none;
 }
-
 
 .faq-icon {
   position: relative;
@@ -1311,7 +1252,7 @@ html.js [data-faq-rows].is-visible .faq-trigger {
 }
 
 @property --fx-s {
-  syntax: '<number>';
+  syntax: "<number>";
   inherits: true;
   initial-value: 0;
 }
@@ -1350,7 +1291,10 @@ html.js [data-faq-rows].is-visible .faq-trigger {
 
 .service-row {
   --fx-bleed-want: 16px;
-  --fx-bleed: max(0px, min(var(--fx-bleed-want), calc(var(--fx-room, 0px) - 8px)));
+  --fx-bleed: max(
+    0px,
+    min(var(--fx-bleed-want), calc(var(--fx-room, 0px) - 8px))
+  );
   --fx-inset: 1px calc(-1 * var(--fx-bleed)) 1px calc(-1 * var(--fx-bleed));
 }
 
@@ -1371,7 +1315,6 @@ html.js [data-faq-rows].is-visible .faq-trigger {
     --fx-bleed-want: 40px;
   }
 }
-
 
 .fx-clip {
   position: absolute;
@@ -1410,7 +1353,7 @@ html.js [data-faq-rows].is-visible .faq-trigger {
 
 html.fx-radial .fx-fill {
   --fx-s: 0;
-  --fx-t: var(--dur-fill-out); 
+  --fx-t: var(--dur-fill-out);
   --fx-e: var(--ease-out);
 }
 
@@ -1434,17 +1377,16 @@ html.fx-radial .fx-clone {
   transform: scale(calc(1 / max(var(--fx-s), 0.02)));
 }
 
-
 .fx-clone .text-mute {
-  color: rgb(255 255 255 / 0.9); 
+  color: rgb(255 255 255 / 0.9);
 }
 
 .fx-clone .fx-list {
-  color: rgb(255 255 255 / 0.95); 
+  color: rgb(255 255 255 / 0.95);
 }
 
 .fx-clone .fx-dim {
-  color: rgb(255 255 255 / 0.88); 
+  color: rgb(255 255 255 / 0.88);
 }
 
 .fx-clone .row-arrow,
@@ -1474,31 +1416,51 @@ html.fx-radial .fx-clone {
   }
 }
 
-
-
-
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(14px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 @keyframes float {
-  0%, 100% { transform: translateY(0) rotate(var(--tw-rotate, 0deg)); }
-  50%      { transform: translateY(-8px) rotate(var(--tw-rotate, 0deg)); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--tw-rotate, 0deg));
+  }
+  50% {
+    transform: translateY(-8px) rotate(var(--tw-rotate, 0deg));
+  }
 }
 @keyframes spin-slow {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.animate-fade-up       { animation: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both; }
-.animate-float         { animation: float 6s ease-in-out infinite; }
-.animate-float-delayed { animation: float 7s ease-in-out 1.2s infinite; }
-.animate-spin-slow     { animation: spin-slow 28s linear infinite; }
+.animate-fade-up {
+  animation: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+.animate-float-delayed {
+  animation: float 7s ease-in-out 1.2s infinite;
+}
+.animate-spin-slow {
+  animation: spin-slow 28s linear infinite;
+}
 
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-up,
   .animate-float,
   .animate-float-delayed,
-  .animate-spin-slow { animation: none; }
+  .animate-spin-slow {
+    animation: none;
+  }
 }
 
 .service-row {
