@@ -194,6 +194,7 @@ export default async function FaqPage({ lang, pathname }: LangProp & PfadProp) {
                       id={group.id}
                       data-group={group.id}
                       className="faq-group scroll-mt-28"
+                      key={group.id}
                     >
                       <div data-reveal="">
                         <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
@@ -212,24 +213,23 @@ export default async function FaqPage({ lang, pathname }: LangProp & PfadProp) {
                         <p className="mt-3 max-w-2xl text-mute">{group.desc}</p>
                       </div>
 
-                      <div
-                        className="mt-7 space-y-4"
-                        data-faq-rows=""
-                        data-reveal=""
-                      >
+                      <div className="mt-7" data-faq-rows="" data-reveal="">
                         {group.items.map((item, i) => (
                           <FaqItem
                             question={item.question}
                             id={`faq-${group.id}-${i}`}
                             index={i}
-                            numbered
-                            variant="card"
+                            size="sm"
                             answerHtml={item.html ?? undefined}
                             key={item.question}
                           >
                             {item.html ? null : <p>{item.body}</p>}
                           </FaqItem>
                         ))}
+                        <div
+                          className="border-t"
+                          style={css("border-color: var(--line);")}
+                        />
                       </div>
                     </section>
                   ))}
