@@ -5,7 +5,9 @@ import MaintenanceGate from '@/components/maintenance/MaintenanceGate';
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <Document lang="en">
-      <MaintenanceGate>{children}</MaintenanceGate>
+      {/* <MaintenanceGate> */}
+        {children}
+        {/* </MaintenanceGate> */}
     </Document>
   );
 }

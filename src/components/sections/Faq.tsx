@@ -1,4 +1,3 @@
-import { css } from "../../lib/css";
 import type { LangProp } from "../../lib/props";
 import { getCollection, renderEntry } from "../../lib/content";
 import FaqAccordion from "../FaqAccordion";
@@ -25,49 +24,57 @@ export default async function Faq({ lang }: LangProp) {
   return (
     <section
       id="faq"
-      className="scroll-mt-24"
-      style={css("padding-block: var(--spacing-section);")}
+      className="scroll-mt-24 py-20 lg:py-28 bg-paper border-b border-ink/10"
     >
-      <div className="mx-auto container px-5 md:px-8">
-        <div className="mb-14 md:mb-20">
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-end">
-            <h2 className="h2 lg:col-span-7">{t("faq.title")}</h2>
-            <p className="lead max-w-md text-mute lg:col-span-5 lg:justify-self-end">
-              {t("faq.sub")}
-            </p>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16" data-reveal="">
+          <div className="inline-flex items-center gap-2 mb-3">
+            <span className="w-2 h-2 rounded-full bg-[#0E7490]"></span>
+            <span className="text-xs font-mono uppercase tracking-[0.2em] text-[#686759]">
+              {t("faq.eyebrow")}
+            </span>
           </div>
+          <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-ink tracking-[-0.03em] mb-4">
+            {t("faq.title")}
+          </h2>
+          <p className="font-body text-base sm:text-lg text-[#686759]">
+            {t("faq.sub")}
+          </p>
         </div>
 
-        <div className="grid gap-12 lg:grid-cols-[2fr_3fr] lg:gap-20">
-          <div className="lg:sticky lg:top-28 lg:self-start">
-            <a
-              href={path(lang, "faq")}
-              className="link-slide inline-block font-semibold"
-              data-reveal=""
-              style={css("--reveal-delay: 0.08s;")}
-            >
-              {t("faq.allLink")} <span aria-hidden="true">→</span>
-            </a>
-          </div>
-
-          <FaqAccordion data-faq-rows="true" data-reveal="true">
+        <FaqAccordion id="faq-home-list" data-reveal="">
+          <div className="space-y-4">
             {faqs.map(({ question, html }, i) => (
               <FaqItem
                 question={question}
                 id={`faq-home-${i}`}
                 index={i}
                 numbered
+                variant="card"
                 answerHtml={html}
                 key={question}
               />
             ))}
-            <div
-              className="border-t"
-              style={css("border-color: var(--line);")}
-            ></div>
-          </FaqAccordion>
+          </div>
+        </FaqAccordion>
+
+        <div className="mt-10 text-center" data-reveal="">
+          <a
+            href={path(lang, "faq")}
+            className="link-slide inline-block font-body font-semibold text-ink"
+          >
+            {t("faq.allLink")} <span aria-hidden="true">→</span>
+          </a>
         </div>
       </div>
+
+      <script
+        type="module"
+        dangerouslySetInnerHTML={{
+          __html:
+            "customElements.whenDefined('faq-accordion').then(function(){var a=document.getElementById('faq-home-list');var i=a&&a.querySelector('.faq-item');if(a&&i&&typeof a.setOpen==='function')a.setOpen(i,true,false);});",
+        }}
+      />
     </section>
   );
 }
