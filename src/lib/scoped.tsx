@@ -1,4 +1,4 @@
-import { cloneElement, isValidElement, Fragment, type ReactNode, type ReactElement } from 'react';
+import { Children, cloneElement, isValidElement, Fragment, type ReactNode, type ReactElement } from 'react';
 
 /* ---------------------------------------------------------------------------
    Bereichskennung an die eigenen Elemente haengen — Astros Style-Scoping.
@@ -51,7 +51,14 @@ function traegtElemente(wert: unknown): boolean {
 }
 
 function gehe(node: ReactNode, attr: string): ReactNode {
-  if (Array.isArray(node)) return node.map((k) => gehe(k, attr));
+  /* Children.toArray vergibt jedem Element einen Schluessel und flacht
+     verschachtelte Listen ab. Ohne diesen Schritt macht das `.map()` aus der
+     statischen Kindliste eine dynamische: React verlangt dann fuer JEDES Kind
+     einen key und warnt fuer alle Elemente der markierten Vorlage (gemessen:
+     ueber zwanzig Meldungen pro Seite, u. a. am <select> des Kontaktformulars).
+     Die Schluessel sind rein indexbasiert und damit auf Server und Client
+     identisch — kein Hydration-Unterschied. */
+  if (Array.isArray(node)) return Children.toArray(node).map((k) => gehe(k, attr));
   if (!isValidElement(node)) return node;
 
   const el = node as ReactElement<Record<string, unknown>>;

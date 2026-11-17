@@ -13,8 +13,9 @@ Ziel: Next.js 16 (App Router) mit `output: 'export'`, React 19.
 ## 1. Prüfergebnis
 
 Verglichen wurde gegen einen **eingefrorenen Astro-Build** (beide Deploy-Ziele,
-vor der ersten Änderung erzeugt). Alle Zahlen sind reproduzierbar über die
-Skripte in `scripts/`.
+vor der ersten Änderung erzeugt). Alle Zahlen wurden über die Vergleichs-Skripte
+in `scripts/` erzeugt; diese Einmalskripte sind nach Abschluss der Migration
+entfernt worden (siehe Abschnitt 6).
 
 | Prüfung | Ergebnis |
 |---|---|
@@ -34,10 +35,10 @@ Skripte in `scripts/`.
 | **Berechnete Stile im Browser** (53 Eigenschaften, jedes Element, beide Breiten) | **0 Differenzen über 0,2 px** (412 Subpixel-Rundungen unter 1/64 px) |
 | Interaktion (Mobilmenü, Sprachumschalter, FAQ-Akkordeon, Projektfilter, Formularprüfung, Konfigurator, FAQ-Suche) | **7/7 identisch** |
 
-Werkzeuge:
-`scripts/compare-dom.py` (Routen, DOM, Attribute, JSON-LD, `<head>`),
-`scripts/compare-text-nodes.py` (Textknoten),
-und für den Browser-Teil Playwright gegen das installierte Chrome —
+Werkzeuge (Einmalskripte, nach Abschluss der Migration entfernt, siehe
+Abschnitt 6): `scripts/compare-dom.py` (Routen, DOM, Attribute, JSON-LD,
+`<head>`) und `scripts/compare-text-nodes.py` (Textknoten); für den
+Browser-Teil Playwright gegen das installierte Chrome —
 die drei Skripte dafür lagen außerhalb des Repos, damit keine Abhängigkeit
 dazukommt.
 
@@ -46,8 +47,9 @@ dazukommt.
 ## 2. Wie migriert wurde
 
 **Die Interaktivität ist nicht neu geschrieben.** Die zwölf `<script>`-Blöcke
-der Astro-Fassung liegen wörtlich in `src/inline/*.script.ts` und werden von
-`scripts/build-inline.mjs` mit esbuild zu JavaScript übersetzt und minifiziert
+der Astro-Fassung lagen wörtlich in `src/inline/*.script.ts`; sieben davon sind
+in Gebrauch und werden von `scripts/build-inline.mjs` mit esbuild zu JavaScript
+übersetzt und minifiziert
 — dasselbe Werkzeug, das Astro über Vite benutzte. Vier der sieben Blöcke der
 Startseite sind sogar zeichengleich mit der Astro-Ausgabe; die Unterschiede in
 den anderen sind Variablennamen und ein gefaltetes `420 + 40 → 460`, beides
@@ -66,10 +68,12 @@ sind nur die Astro-Hüllen `defineCollection()` und `glob()`. Geprüft wird
 weiterhin zur Bauzeit, ein Schemaverstoß bricht den Build.
 
 **Das CSS ist mechanisch umgeschrieben, nicht neu geschrieben.**
-`scripts/gen-scoped-css.mjs` hat die 26 `<style>`-Blöcke zu Dateien unter
-`src/styles/components/` gemacht und dabei genau die Umschreibung vorgenommen,
-die Astro mit `data-astro-cid-*` vornahm. Gegenprobe gegen Astros kompiliertes
-CSS: 272 von 272 Selektoren, 0 fehlend.
+`scripts/gen-scoped-css.mjs` (Einmalskript, nach der Migration entfernt) hat die
+26 `<style>`-Blöcke zu Dateien unter `src/styles/components/` gemacht und dabei
+genau die Umschreibung vorgenommen, die Astro mit `data-astro-cid-*` vornahm.
+Gegenprobe gegen Astros kompiliertes CSS: 272 von 272 Selektoren, 0 fehlend.
+Zwölf dieser Stylesheets sind später entfallen, weil ihre `data-c-*`-Kennung in
+keiner gerenderten Seite mehr vorkam — siehe Abschnitt 6.
 
 **Der Kommentar-Bestand ist übernommen.** Die Begründungen im Code (WCAG-Bezüge,
 Kontrastmessungen, rechtliche Hinweise) stehen weiter da, wo sie standen; wo
@@ -265,3 +269,61 @@ Die eingefrorenen Referenz-Builds (`.reference-dist-root/`,
 `.reference-dist-pages/`) sind nicht versioniert. Neu erzeugen lassen sie sich
 aus jenem Commit mit
 `SITE_URL=… BASE_PATH=… npx astro build`.
+
+---
+
+## 6. Aufräum-Schnitt nach der Migration (17.11.2026)
+
+Nach Abschluss der Migration wurde die Codebasis auf toten Ballast geprüft und
+entfernt. Grundlage waren vier unabhängige Nachweise, nicht Vermutungen:
+
+1. **Importgraph** über alle 177 Quelldateien (`src/**` plus `scripts/*.mjs`),
+   inklusive `@/`-Alias und CSS-`@import`: 174 erreichbar, 9 ohne jede Kante.
+2. **Gerendertes HTML**: Auf 12 Routen wurde geprüft, welche
+   `data-c-*`-Kennungen tatsächlich im `<body>` stehen. Die gescopten
+   Stylesheets wirken ausschließlich über diese Kennung.
+3. **Byte-Vergleich**: 54 URLs vor und nach dem Schnitt (HTML ohne
+   `<script>`/`<style>`/`<link>`, Whitespace normalisiert).
+4. **Produktions-Build** (`npm run build`) mit Abgleich der Routenzahl.
+
+### 6.1 Entfernt
+
+| Was | Umfang | Nachweis |
+|---|---|---|
+| Tote Komponenten/Daten | 10 Dateien: `CtaBand.tsx`, `home/HeroMockup.tsx`, `sections/Contact.tsx`, `sections/Hero.tsx`, `sections/ServicesInteractive.tsx`, `data/branches.ts`, `i18n/hero.ts`, `lib/configurator.ts` (2-Zeilen-Stub), `app/globals.css`, `app/sitemap-index.xml/assets/branchen-icons.ts` | keine Importkante; `globals.css` wurde nirgends importiert, seine Klassen (`hero-aurora`, `hero-grid`, `hero-drift`) kamen weder im Dev-CSS noch im Referenz-CSS vor |
+| Nicht injizierte Inline-Skripte | 5 von 12: `header`, `hero`, `language-switcher`, `work`, `contact` | keine Komponente rendert `<InlineScript name="…">` dafür; 7 bleiben (`base`, `blog-index`, `configurator`, `contact-form`, `faq-accordion`, `faq-page`, `work-index-page`) |
+| Wirkungslose Stylesheets | 12 von 26 (≈ 49 KB Quelle): `contact-cta`, `footer`, `header`, `hero`, `insights`, `language-switcher`, `process`, `services`, `studio`, `trust-bar`, `work`, `contact` | jede Regel ist an eine `data-c-*`-Kennung gebunden, die auf keiner Route gerendert wird; im gebauten CSS sinken die Top-Level-Selektoren von 398 auf 261 (−137), **0 hinzugefügt, 0 entfernte Selektoren ohne `data-c-`-Bindung** |
+| Verwaiste Medien | `public/colors.mp4` (2,3 MB), `public/viserx3d.webm` (0,9 MB), `public/herobg.avif` (8 KB) | null Treffer im gesamten Repo inklusive Markdown-Frontmatter |
+| Einmalskripte der Migration | `astro-template-to-jsx.mjs`, `astro-to-tsx.mjs`, `gen-scoped-css.mjs`, `compare-dom.py`, `compare-text-nodes.py` | kein npm-Skript ruft sie auf; die Astro-Quellen und Referenz-Builds, gegen die sie liefen, sind nicht mehr im Repo |
+| Ungenutzte npm-Pakete | `@gsap/react`, `@prisma/adapter-mariadb`, `decap-cms` (dev) | keine Importkante im Code; `decap-cms` wird nur als fertiges Bundle `public/admin/decap-cms.js` ausgeliefert. **`gsap` bleibt** — es wird von `Header.tsx`, `sections/Services.tsx` und `sections/Work.tsx` benutzt |
+| Toter Code in `FaqItem.tsx` | `variant="card"`-Zweig (47 Zeilen) und der dadurch ungenutzte `lucide-react`-Import | kein Aufrufer setzt `variant`; alle drei Verwendungsstellen nutzen die Standardvariante |
+
+Der npm-Schnitt entfernte 684 Pakete aus `node_modules`.
+
+### 6.2 Ergebnis der Gegenprobe
+
+- **52 von 54 URLs byte-identisch.** Die zwei Abweichungen sind die literalen
+  Platzhalter-URLs `/leistungen/[slug]/` und `/tr/blog/[slug]/`, die in beiden
+  Läufen mit HTTP 500 antworten (ungültiger `generateStaticParams`-Wert) und
+  deren Dev-Fehlerseite sich je nach Aufwärmreihenfolge unterscheidet. Sie sind
+  keine echten Routen.
+- **`npm run build`: 70 Seiten** — dieselbe Routenzahl wie in Abschnitt 1.
+- Gebautes CSS: 181.851 → 145.918 Bytes (−35.933 B, −19,8 %).
+- `npm run check`: unverändert **5 vorbestehende Fehler** (siehe Abschnitt 4),
+  keine neuen.
+- Dev-Server nach dem Schnitt: 0 Hydration-Warnungen, 0 Modulauflösungsfehler,
+  0 Serverfehler auf allen geprüften Routen.
+- **Sicherung vor dem Schnitt:** `SurhayWebsite-backup-2026-11-17.zip`
+  (25,7 MB, 373 Einträge, ohne `node_modules`/`.next`).
+
+### 6.3 Bewusst behalten
+
+- `entwuerfe/homepage-editorial.html` — eigenständiger Design-Entwurf (59 KB),
+  von keiner Route referenziert, aber Inhalt und keine Ableitung.
+- `AGENTS.md` / `CLAUDE.md` — werden von `next dev` bei jedem Lauf neu erzeugt.
+  Löschen ist wirkungslos; abschalten ließe es sich mit `agentRules: false` in
+  `next.config.mjs`.
+- `src/types/custom-elements.d.ts` — JSX-Deklaration für `<faq-accordion>`,
+  ohne Importkante, aber typrelevant.
+- `public/contact.php`, `public/.htaccess` — Deploy-Artefakte, die laut
+  Abschnitt 1 unverändert bleiben müssen.

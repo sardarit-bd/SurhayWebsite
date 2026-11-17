@@ -976,10 +976,9 @@ export function serviceSlugs(service: Service): Record<Lang, string> {
  * gemeinsames Raster. Eine Bibliothek statt vier Handzeichnungen ist der
  * Unterschied, den auch Laien sofort sehen.
  *
- * Wie bei den Branchen-Symbolen (src/assets/branchen-icons.ts) liegt hier nur
- * der Inhalt des <svg>-Elements; das Paket wird bewusst NICHT als Dependency
- * installiert. Rahmen, Groesse, Strichstaerke und aria-hidden setzt
- * ServiceIcon.astro — dadurch gibt es genau eine Stelle, an der der
+ * Hier liegt nur der Inhalt des <svg>-Elements; das Paket wird bewusst NICHT
+ * als Dependency installiert. Rahmen, Groesse, Strichstaerke und aria-hidden
+ * setzt ServiceIcon.tsx — dadurch gibt es genau eine Stelle, an der der
  * Zeichenstil festgelegt ist.
  *
  * MOTIVWAHL

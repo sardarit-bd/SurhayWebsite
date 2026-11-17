@@ -183,10 +183,9 @@ jeder Unterseite und in jeder Größe dasselbe.
   die schon belegt ist (kein zweites Werkzeug, kein zweites Messgerät).
 
 **Lizenzen**: Die Leistungs-Icons stammen aus [Lucide](https://lucide.dev)
-(ISC-Lizenz, kommerziell frei, keine Namensnennung nötig), die Branchen-Symbole
-der Hero-Textur aus [Tabler Icons](https://tabler.io/icons) (MIT-Lizenz). Beide
-Pakete liegen bewusst nicht als Dependency im Projekt: die benötigten Pfade sind
-in `src/data/services.ts` bzw. `src/assets/branchen-icons.ts` abgelegt.
+(ISC-Lizenz, kommerziell frei, keine Namensnennung nötig). Das Paket liegt
+bewusst nicht als Dependency im Projekt: die benötigten Pfade sind in
+`src/data/services.ts` abgelegt.
 
 ## Hinweise
 

@@ -156,13 +156,6 @@ export default async function FaqPage({ lang, pathname }: LangProp & PfadProp) {
                     {total} {t("page.faq.questionsWord")}
                   </p>
                 </form>
-                <script
-                  type="module"
-                  dangerouslySetInnerHTML={{
-                    __html:
-                      "document.querySelector('.faq-search')?.setAttribute('onsubmit','return false;');",
-                  }}
-                />
 
                 <nav
                   className="mt-8 border-t pt-6"

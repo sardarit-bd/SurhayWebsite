@@ -1084,6 +1084,9 @@ html.js .intro-rise {
   background: none;
   border: 0;
   color: inherit;
+  /* Bezug fuer das absolut gesetzte Plus: Es sitzt damit immer an der rechten
+     Kante der Zeile — unabhaengig von Textlaenge, Umbruch und Flex-Verteilung. */
+  position: relative;
 }
 
 html:not(.js) .faq-icon {
@@ -1129,7 +1132,13 @@ html.js .faq-item.is-instant .faq-panel-inner {
 }
 
 .faq-icon {
-  position: relative;
+  /* Fest an der rechten Kante verankert statt als Flex-Element im Textfluss.
+     Die Drehung liegt weiterhin auf .faq-glyph, die Animation bleibt also
+     unveraendert. */
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
   height: 2rem;
   width: 2rem;
   flex: none;
