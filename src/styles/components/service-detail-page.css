@@ -1,0 +1,21 @@
+.other-card[data-c-service-detail-page] {
+    text-decoration: none;
+  }
+.section-mark[data-c-service-detail-page] {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    font-family: var(--font-display);
+    font-size: var(--text-h2-sm);
+  }
+
+  .section-mark[data-c-service-detail-page] .service-icon {
+    --cap: 0.72em;
+    transform: translateY(calc((var(--service-icon-size) - var(--cap)) / 2));
+  }
+
+  @supports (height: 1cap){
+    .section-mark[data-c-service-detail-page] .service-icon {
+      --cap: 1cap;
+    }
+  }

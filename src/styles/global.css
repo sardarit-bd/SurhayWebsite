@@ -1,0 +1,1517 @@
+@import "tailwindcss";
+
+@theme {
+  /* Farbsystem — "Tinte, Papier, Amethyst" */
+  --color-ink: #0a0a0b; /* Fast-Schwarz, Basis dunkler Sektionen */
+  --color-ink-2: #141417; /* Erhöhte dunkle Fläche (Cards auf ink) */
+  --color-ink-3: #1e1e23; /* Linien/Borders auf dunklem Grund */
+  --color-paper: #f5f3ee; /* Warmes Off-White, Basis heller Sektionen */
+  --color-paper-2: #ebe8e0; /* Vertiefte helle Fläche */
+  --color-white: #ffffff;
+  --color-accent-800: #155e75;
+  --color-accent-600: #0e7490;
+  --color-accent-400: #22d3ee;
+  --color-accent-300: #67e8f9;
+  --color-accent-100: #cffafe;
+  --color-accent-ctx: #0e7490;
+
+  --color-mute: #68675f; /* Sekundärtext auf hellem Grund (AA auf paper-2) */
+  --color-mute-dark: #a3a29a; /* Sekundärtext auf Tinte (7.72:1 auf ink) */
+
+  /* Typografie */
+  --font-display: "Bricolage Grotesque Variable", "Arial Black", sans-serif;
+  --font-body: "Inter Variable", system-ui, sans-serif;
+
+  /* Layout — zwei Stufen. Vorher benutzten alle Sektionen denselben Wert,
+     dadurch wirkten Neben- und Hauptsektionen gleich gewichtig. */
+  --spacing-section: clamp(5rem, 12vw, 9rem); /* Haupt-Sektionen */
+  --spacing-section-sm: clamp(
+    3rem,
+    7vw,
+    5.5rem
+  ); /* Vertrauenszeile, Insights */
+}
+
+:root {
+  /* Fluid-Typo-Skala */
+  --text-hero: clamp(2.8rem, 9.5vw, 7rem);
+  --text-h2: clamp(2.1rem, 5.5vw, 4rem);
+  --text-h2-sm: clamp(1.6rem, 3.2vw, 2.4rem);
+  --text-h3: clamp(1.35rem, 2.6vw, 1.75rem);
+  --text-lead: clamp(1.05rem, 1.6vw, 1.3rem);
+  --line: rgb(10 10 11 / 0.14);
+  --line-dark: rgb(245 243 238 / 0.16);
+  --line-control: rgb(10 10 11 / 0.45);
+  --line-control-dark: rgb(245 243 238 / 0.38);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); /* Eintritte, Reveals, Text-In */
+  --ease-panel: cubic-bezier(0.65, 0, 0.35, 1); /* Zweiwege: Höhe, Rotation */
+  --ease-micro: cubic-bezier(0.4, 0, 0.2, 1); /* Farbe, Border, Hover */
+  --ease-fill: cubic-bezier(0.19, 1, 0.22, 1); /* Kreis-Expansion beim Hover */
+
+  /* Dauern */
+  --dur-micro: 160ms; /* Hover, Farbwechsel, Fokus */
+  --dur-short: 240ms; /* Text-Fade, kleine Zustände */
+  --dur-base: 320ms; /* Icon-Transformation */
+  --dur-panel: 400ms; /* Panel öffnen */
+  --dur-panel-out: 300ms; /* Panel schließen — bewusst kürzer als öffnen */
+  --dur-fill-out: 498ms; /* Kreis zieht sich zusammen — kürzer als jede Expansion */
+  --dur-reveal: 600ms; /* Scroll-Reveal */
+
+  /* Distanzen */
+  --move-micro: 2px;
+  --move-text: 8px; /* Text-Eintritt innerhalb eines Panels */
+  --move-block: 24px; /* Block-Reveal beim Scrollen */
+
+  /* Rhythmus */
+  --stagger: 60ms; /* Versatz zwischen Geschwistern */
+
+  --header-h: 72px;
+
+  --z-deko: -1;
+  --z-inhalt: 1;
+  --z-sticky: 10;
+  --z-blatt: 60;
+  --z-leiste: 70;
+  --z-sprung: 100;
+}
+
+@media (max-width: 809px) {
+  :root {
+    --dur-panel: 340ms;
+    --dur-reveal: 480ms;
+    --move-block: 16px;
+    --stagger: 40ms;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+  scrollbar-gutter: stable;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 30em) {
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  li,
+  dd,
+  dt,
+  blockquote,
+  .display,
+  .h2,
+  .h3,
+  .lead {
+    hyphens: auto;
+  }
+}
+
+::selection {
+  background: var(--color-accent-600);
+  color: var(--color-white);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-accent-600);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.dark-section :focus-visible,
+#mobile-menu :focus-visible {
+  outline-color: var(--color-accent-400);
+}
+
+.tap-24 {
+  position: relative;
+}
+
+.tap-24::before {
+  content: "";
+  position: absolute;
+  inset: -6px -4px;
+  border-radius: 4px;
+}
+
+/* Überschriften */
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  font-variation-settings:
+    "opsz" 96,
+    "wdth" 90;
+}
+
+.h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  font-variation-settings:
+    "opsz" 60,
+    "wdth" 92;
+}
+
+.h2-sm {
+  font-size: var(--text-h2-sm);
+  line-height: 1.08;
+}
+
+.h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: 650;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.lead {
+  font-size: var(--text-lead);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+/* Eyebrow-Label über Sektionen: ● LEISTUNGEN */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--color-accent-ctx);
+  flex: none;
+}
+
+/* Der Akzentpunkt (Logo, Eyebrow): das einzige dauerhaft animierte Element */
+.pulse-dot {
+  animation: pulse-dot 3s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse-dot {
+    animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------- Buttons */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 1.05rem 1.75rem;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-micro) var(--ease-micro),
+    color var(--dur-micro) var(--ease-micro),
+    border-color var(--dur-micro) var(--ease-micro);
+}
+
+.btn .btn-arrow {
+  transition: transform var(--dur-micro) var(--ease-micro);
+}
+
+/* Kompakte Variante für die Header-Leiste */
+.btn-sm {
+  padding: 0.7rem 1.25rem;
+  font-size: 0.9rem;
+}
+
+.btn-primary {
+  background: var(--color-accent-600);
+  color: var(--color-white);
+}
+
+.btn-ghost {
+  --ghost-fill: var(--color-accent-600);
+  --ghost-on: var(--color-white);
+  --ghost-deep: var(--color-accent-800);
+  --ghost-on-deep: var(--color-white);
+  border-color: var(--line-control);
+  color: var(--color-ink);
+  background: transparent;
+  transition:
+    background-color var(--dur-short) var(--ease-out),
+    border-color var(--dur-micro) var(--ease-micro),
+    color var(--dur-micro) var(--ease-micro) 60ms;
+}
+
+.dark-section .btn-ghost {
+  --ghost-fill: var(--color-accent-400);
+  --ghost-on: var(--color-ink);
+  --ghost-deep: var(--color-accent-600);
+  --ghost-on-deep: var(--color-white);
+  border-color: var(--line-control-dark);
+  color: var(--color-paper);
+}
+
+.btn-ghost:focus-visible {
+  background: var(--ghost-fill);
+  border-color: var(--ghost-fill);
+  color: var(--ghost-on);
+}
+
+.btn-primary:active,
+.btn-ghost:active {
+  transition-delay: 0s;
+}
+
+.btn-primary:active {
+  background: var(--color-accent-800);
+}
+
+.btn-ghost:active {
+  background: var(--ghost-deep);
+  border-color: var(--ghost-deep);
+  color: var(--ghost-on-deep);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover .btn-arrow {
+    transform: translateX(4px);
+  }
+  .btn-primary:hover {
+    background: var(--color-accent-800);
+  }
+  .btn-ghost:hover {
+    background: var(--ghost-fill);
+    border-color: var(--ghost-fill);
+    color: var(--ghost-on);
+  }
+}
+
+.link-slide {
+  position: relative;
+  text-decoration: none;
+  padding-bottom: 2px;
+}
+
+.link-slide::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-micro) var(--ease-micro);
+}
+
+.link-slide:hover::after,
+.link-slide:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.card-link {
+  /* Standard: weisse Karte, die eine Spur waermer wird. */
+  --card-bg-hover: color-mix(
+    in srgb,
+    var(--color-paper) 45%,
+    var(--color-white)
+  );
+  text-decoration: none;
+  transition:
+    background-color var(--dur-short) var(--ease-micro),
+    border-color var(--dur-short) var(--ease-micro);
+}
+
+/* Die Rahmenfarbe steht inline am Element — deshalb !important. */
+.card-link:focus-visible {
+  background: var(--card-bg-hover);
+  border-color: var(--color-accent-600) !important;
+}
+
+/* Touch-Ersatz: nur der Rahmen, ohne Unterlinie und ohne Pfeil. */
+.card-link:active {
+  border-color: var(--color-accent-600) !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card-link:hover {
+    background: var(--card-bg-hover);
+    border-color: var(--color-accent-600) !important;
+  }
+}
+
+.read-more {
+  position: relative;
+  display: inline-block;
+  padding-right: 20px; /* Standplatz des Pfeils */
+  color: var(--color-ink);
+  transition: color var(--dur-micro) var(--ease-micro);
+}
+
+.read-more::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 20px; /* nur unter dem Wort, nicht unter dem Pfeil */
+  bottom: -3px;
+  height: 1.5px;
+  background: var(--color-accent-600);
+  transform: scaleX(0);
+  transform-origin: right; /* beim Verlassen zieht sie nach rechts weg */
+  transition: transform var(--dur-micro) var(--ease-out);
+}
+
+.read-more-arrow {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  opacity: 0;
+  transform: translate(-6px, -50%);
+  transition:
+    opacity var(--dur-short) var(--ease-out) 40ms,
+    transform var(--dur-short) var(--ease-out) 40ms;
+}
+
+.card-link:focus-visible .read-more {
+  color: var(--color-accent-600);
+}
+
+.card-link:focus-visible .read-more::after {
+  transform: scaleX(1);
+  transform-origin: left;
+  transition-duration: var(--dur-short);
+}
+
+.card-link:focus-visible .read-more-arrow {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card-link:hover .read-more {
+    color: var(--color-accent-600);
+  }
+  .card-link:hover .read-more::after {
+    transform: scaleX(1);
+    transform-origin: left;
+    transition-duration: var(--dur-short);
+  }
+  .card-link:hover .read-more-arrow {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-link {
+    transition-duration: var(--dur-micro);
+  }
+  .read-more::after {
+    transition: none;
+  }
+  .read-more-arrow {
+    transform: translate(0, -50%);
+    transition: opacity var(--dur-micro) var(--ease-micro);
+  }
+}
+
+.quiet-cell {
+  transition: background-color var(--dur-short) var(--ease-micro);
+}
+
+.quiet-num {
+  transition: color var(--dur-micro) var(--ease-micro);
+}
+
+/* Die Flaechenfarbe steht inline am Element — deshalb !important. */
+@media (hover: hover) and (pointer: fine) {
+  .quiet-cell:hover {
+    background: color-mix(
+      in srgb,
+      var(--color-white) 3%,
+      var(--color-ink-2)
+    ) !important;
+  }
+  .quiet-cell:hover .quiet-num {
+    color: var(--color-accent-300);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quiet-cell {
+    transition-duration: var(--dur-micro);
+  }
+}
+
+.price-cell {
+  --lift: 4px;
+  --dim-sibling: 0.88;
+  /* Helle Karte auf hellem Grund. */
+  --card-shadow: 0 1px 2px rgb(10 10 11 / 0.04), 0 2px 8px rgb(10 10 11 / 0.03);
+  --card-shadow-hover:
+    0 2px 4px rgb(10 10 11 / 0.05), 0 14px 36px rgb(10 10 11 / 0.09);
+  position: relative;
+  border-radius: 1rem; /* = rounded-2xl der Karte */
+  box-shadow: var(--card-shadow);
+  transition: translate var(--dur-short) var(--ease-out);
+}
+
+/* Dunkle Karte auf hellem Grund (Business): steht optisch hoeher und wirft
+   entsprechend mehr. */
+.price-cell--ink {
+  --card-shadow-hover:
+    0 4px 8px rgb(10 10 11 / 0.1), 0 18px 44px rgb(10 10 11 / 0.16);
+}
+
+/* Auf Tinte tragen Schatten nicht — Schwarz auf Schwarz ist keine Tiefe.
+   Dort ist die Flaechenhelligkeit der Traeger, und ein einziger sehr
+   weicher Schatten loest die Karte vom Grund. */
+.dark-section .price-cell {
+  --card-shadow: none;
+  --card-shadow-hover: 0 20px 48px rgb(0 0 0 / 0.55);
+}
+
+.price-cell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: var(--card-shadow-hover);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-short) var(--ease-out);
+}
+
+html.js .price-cell[data-reveal].reveal-done {
+  transition: translate var(--dur-short) var(--ease-out);
+}
+
+.price-card {
+  transition:
+    opacity var(--dur-short) var(--ease-micro),
+    background-color var(--dur-short) var(--ease-micro),
+    border-color var(--dur-short) var(--ease-micro);
+}
+
+.price-card--light {
+  --card-bg-hover: var(--color-white);
+  background: color-mix(in srgb, var(--color-paper) 25%, var(--color-white));
+}
+
+.price-card.dark-section {
+  --card-bg-hover: color-mix(in srgb, var(--color-paper) 4%, var(--color-ink));
+}
+
+.dark-section .price-card {
+  --card-bg-hover: color-mix(
+    in srgb,
+    var(--color-paper) 5%,
+    var(--color-ink-2)
+  );
+}
+
+/* Der Button ist bereits gefuellt, bevor der Zeiger ihn erreicht: 80 ms
+   Verzug beim Betreten, damit zuerst die Karte antwortet — beim Verlassen
+   kein Verzug. Welcher Akzent fuellt, entscheidet weiter unten der
+   Untergrund ueber --ghost-fill. */
+.price-card .btn {
+  transition:
+    background-color var(--dur-short) var(--ease-out),
+    border-color var(--dur-short) var(--ease-out),
+    color var(--dur-short) var(--ease-out);
+}
+
+/* Zeigerspitze: der volle Zustand. Die Flaechenfarben stehen inline am
+   Element — deshalb !important. */
+@media (hover: hover) and (pointer: fine) {
+  .price-cell:hover {
+    translate: 0 calc(-1 * var(--lift));
+    transition-duration: var(--dur-base);
+  }
+  .price-cell:hover::before {
+    opacity: 1;
+    transition-duration: var(--dur-base);
+  }
+  .price-cell:hover > .price-card {
+    background: var(--card-bg-hover) !important;
+  }
+  /* Auf Tinte hellt der Rand weiss auf, nicht farbig — eine Lichtkante,
+     keine Auswahl. Die markierte Karte behaelt ihren Akzentrahmen: er ist
+     Teil der Empfehlung und kein Zustand. */
+  .dark-section .price-cell:hover > .price-card:not(.price-card--marked) {
+    border-color: rgb(245 243 238 / 0.3) !important;
+  }
+  .price-cell:hover .btn-ghost {
+    background: var(--ghost-fill);
+    border-color: var(--ghost-fill);
+    color: var(--ghost-on);
+    transition-delay: 80ms;
+  }
+  .price-cell:hover .btn-primary {
+    background: var(--color-accent-800);
+    transition-delay: 80ms;
+  }
+}
+
+/* Tastatur sieht dasselbe wie die Maus. Der Fokus liegt auf dem Button —
+   ausgeloest wird der Zustand der ganzen Karte, sonst waere die
+   Vorbereitung eine reine Mausbelohnung. */
+.price-cell:has(.btn:focus-visible) {
+  translate: 0 calc(-1 * var(--lift));
+  transition-duration: var(--dur-base);
+}
+
+.price-cell:has(.btn:focus-visible)::before {
+  opacity: 1;
+  transition-duration: var(--dur-base);
+}
+
+.price-cell:has(.btn:focus-visible) > .price-card {
+  background: var(--card-bg-hover) !important;
+}
+
+.dark-section
+  .price-cell:has(.btn:focus-visible)
+  > .price-card:not(.price-card--marked) {
+  border-color: rgb(245 243 238 / 0.3) !important;
+}
+
+.price-cell:has(.btn:focus-visible) .btn-primary {
+  background: var(--color-accent-800);
+}
+
+/* Gedrueckt laeuft nichts nach. */
+.price-card .btn:active {
+  transition-delay: 0s;
+  transition-duration: var(--dur-micro);
+}
+
+/* Die Nachbarn treten zurueck — reine Fokushilfe, nie Traeger einer
+   Information: sie bleiben vollstaendig lesbar, ohne Graustufen und ohne
+   Weichzeichner. Ausloeser ist die Karte, nicht das Raster: sonst dunkelte
+   die Reihe schon ab, wenn der Zeiger nur in der Luecke steht.
+   Gestapelt (< 810 px) entfaellt das Abdunkeln ersatzlos — untereinander
+   wirkt es wie ein Fehler, nicht wie Fokus. */
+@media (min-width: 810px) {
+  @media (hover: hover) and (pointer: fine) {
+    .price-grid:has(.price-cell:hover) .price-card {
+      opacity: var(--dim-sibling);
+    }
+    .price-grid .price-cell:hover > .price-card {
+      opacity: 1;
+    }
+  }
+  .price-grid:has(.btn:focus-visible) .price-card {
+    opacity: var(--dim-sibling);
+  }
+  .price-grid .price-cell:has(.btn:focus-visible) > .price-card {
+    opacity: 1;
+  }
+}
+
+/* Reduzierte Bewegung: es bleiben der Flaechenwechsel und die
+   Button-Vorbereitung, beide kurz und ohne Verzug. Anhebung, Schatten und
+   Abdunkeln entfallen. */
+@media (prefers-reduced-motion: reduce) {
+  .price-cell,
+  html.js .price-cell[data-reveal].reveal-done {
+    transition: none;
+  }
+  .price-cell:hover,
+  .price-cell:has(.btn:focus-visible) {
+    translate: none;
+  }
+  .price-cell::before {
+    display: none;
+  }
+  .price-grid:has(.price-cell:hover) .price-card,
+  .price-grid:has(.btn:focus-visible) .price-card {
+    opacity: 1;
+  }
+  .price-card,
+  .price-card .btn {
+    transition-duration: var(--dur-micro);
+  }
+  .price-cell:hover .btn-ghost,
+  .price-cell:hover .btn-primary,
+  .price-cell:has(.btn:focus-visible) .btn-primary {
+    transition-delay: 0s;
+  }
+}
+
+.marker {
+  position: relative;
+  white-space: nowrap;
+  z-index: 0;
+}
+
+.marker::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -0.04em;
+  right: -0.04em;
+  bottom: 0.06em;
+  height: 0.32em;
+  background: var(--color-accent-400);
+  transform-origin: left center;
+}
+
+.dark-section {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  position: relative;
+  --color-accent-ctx: var(--color-accent-400);
+}
+
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(
+    ellipse 90% 75% at 50% 30%,
+    black 30%,
+    transparent 75%
+  );
+}
+
+.tile-section {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding-block: var(--spacing-section-sm);
+}
+
+.tile-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+  max-width: var(--tile-max, none);
+}
+
+@media (min-width: 810px) {
+  .tile-grid {
+    grid-template-columns: repeat(var(--tile-cols-md, 2), minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .tile-grid {
+    grid-template-columns: repeat(var(--tile-cols-lg, 3), minmax(0, 1fr));
+  }
+}
+
+.tile {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: 1.75rem;
+  transition: border-color var(--dur-micro) var(--ease-micro);
+}
+
+@media (max-width: 389px) {
+  .tile {
+    padding: 1.25rem;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tile:hover {
+    border-color: rgb(10 10 11 / 0.28);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile {
+    transition: none;
+  }
+}
+
+.tile-title {
+  margin-top: 1.25rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.tile-text {
+  margin-top: 0.6rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+html.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(var(--reveal-shift, var(--move-block)));
+  transition:
+    opacity var(--dur-reveal) var(--ease-out),
+    transform var(--dur-reveal) var(--ease-out);
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: opacity, transform;
+}
+
+html.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+html.js [data-reveal].reveal-done {
+  will-change: auto;
+  transition: none;
+}
+
+.reveal-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+
+html.js .reveal-mask {
+  opacity: 1;
+  transform: none;
+}
+
+html.js .reveal-mask .reveal-line {
+  display: block;
+  transform: translateY(110%);
+  transition: transform var(--dur-reveal) var(--ease-out);
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: transform;
+}
+
+html.js .reveal-mask.is-visible .reveal-line {
+  transform: none;
+}
+
+html.js .reveal-mask.reveal-done .reveal-line {
+  will-change: auto;
+  transition: none;
+}
+
+html.js .marker::after {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--dur-reveal) var(--ease-out);
+  transition-delay: var(--marker-delay, 0.55s);
+}
+
+html.js .marker.is-visible::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-reveal],
+  html.js .reveal-mask .reveal-line {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  html.js .marker::after {
+    transform: scaleX(1);
+    transition: none;
+  }
+}
+
+.prose {
+  max-width: 65ch;
+  line-height: 1.75;
+  font-size: 1.06rem;
+}
+
+.prose > * + * {
+  margin-top: 1.2em;
+}
+
+.prose h2 {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-top: 2.2em;
+  letter-spacing: -0.01em;
+}
+
+.prose h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 650;
+  margin-top: 1.8em;
+}
+
+.prose a {
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent-600);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.4em;
+}
+
+.prose ul {
+  list-style: disc;
+}
+
+.prose ol {
+  list-style: decimal;
+}
+
+.prose li + li {
+  margin-top: 0.5em;
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--color-accent-600);
+  padding-left: 1.2em;
+  font-style: italic;
+  color: var(--color-mute);
+}
+
+.prose code {
+  background: var(--color-paper-2);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.prose pre {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  padding: 1.2em 1.4em;
+  border-radius: 12px;
+  overflow-x: auto;
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+}
+
+.prose img {
+  border-radius: 12px;
+}
+
+.prose strong {
+  font-weight: 650;
+}
+.table-scroll {
+  overflow-x: auto;
+  --table-min: 20rem;
+}
+
+.table-scroll:focus-visible {
+  outline: 3px solid var(--color-accent-600);
+  outline-offset: 3px;
+}
+
+.prose table {
+  min-width: var(--table-min);
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.prose caption {
+  caption-side: top;
+  text-align: left;
+  padding-bottom: 0.7em;
+  color: var(--color-mute);
+  font-size: 0.9rem;
+}
+
+.prose th,
+.prose td {
+  padding: 0.7em 0.9em;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.prose thead th {
+  font-family: var(--font-display);
+  font-weight: 650;
+  font-size: 0.88rem;
+  letter-spacing: 0.01em;
+  border-bottom-width: 2px;
+}
+
+.prose tbody th {
+  font-weight: 650;
+  width: 34%;
+}
+
+.prose tbody tr:last-child th,
+.prose tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.prose tbody tr:nth-child(even) {
+  background: var(--color-paper-2);
+}
+
+@media (max-width: 559px) {
+  .table-scroll {
+    --table-min: 15rem;
+  }
+
+  .prose table {
+    font-size: 0.9rem;
+  }
+
+  .prose th,
+  .prose td {
+    padding: 0.6em 0.55em;
+  }
+
+  .prose tbody th {
+    width: 38%;
+  }
+}
+
+html.js .intro-rise {
+  animation: intro-rise var(--dur-reveal) var(--ease-out) both;
+  animation-delay: var(--intro-delay, 0s);
+}
+
+@keyframes intro-rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--move-block));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .intro-rise {
+    animation: none;
+  }
+}
+
+.page-header:not(.dark-section)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(
+    ellipse 80% 100% at 20% 0%,
+    black 5%,
+    transparent 70%
+  );
+  opacity: 0.6;
+}
+
+.faq-item {
+  --faq-text-in: 80ms;
+  --faq-text-out: 140ms;
+  --faq-collapse-in: 40ms;
+  border-top: 1px solid var(--line);
+}
+
+.faq-head {
+  margin: 0;
+  font: inherit;
+}
+
+.faq-trigger {
+  appearance: none;
+  background: none;
+  border: 0;
+  color: inherit;
+}
+
+html:not(.js) .faq-icon {
+  display: none;
+}
+
+html.js .faq-panel {
+  height: 0;
+  overflow: hidden;
+}
+
+html.js .faq-panel-inner {
+  opacity: 0;
+  transform: translateY(var(--move-text));
+}
+
+html.js .faq-item.is-open .faq-panel {
+  transition: height var(--dur-panel) var(--ease-panel);
+}
+
+html.js .faq-item.is-open .faq-panel-inner {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--dur-short) var(--ease-out) var(--faq-text-in),
+    transform var(--dur-short) var(--ease-out) var(--faq-text-in);
+}
+
+html.js .faq-item.is-closing .faq-panel {
+  transition: height var(--dur-panel-out) var(--ease-panel)
+    var(--faq-collapse-in);
+}
+
+html.js .faq-item.is-closing .faq-panel-inner {
+  opacity: 0;
+  transform: none;
+  transition: opacity var(--faq-text-out) var(--ease-micro);
+}
+
+html.js .faq-item.is-instant .faq-panel,
+html.js .faq-item.is-instant .faq-panel-inner {
+  transition: none;
+}
+
+.faq-icon {
+  position: relative;
+  height: 2rem;
+  width: 2rem;
+  flex: none;
+  border-radius: 999px;
+  border: 1px solid var(--line-control);
+  transition:
+    background-color var(--dur-micro) var(--ease-micro),
+    border-color var(--dur-micro) var(--ease-micro),
+    color var(--dur-micro) var(--ease-micro);
+}
+
+.faq-glyph {
+  position: absolute;
+  inset: 0;
+  transform: rotate(0deg);
+  transform-origin: 50% 50%;
+  transition: transform var(--dur-base) var(--ease-panel);
+}
+
+.faq-bar {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: currentColor;
+  transform: translate(-50%, -50%);
+}
+
+.faq-bar-v {
+  height: 0.75rem;
+  width: 1.5px;
+}
+
+.faq-bar-h {
+  height: 1.5px;
+  width: 0.75rem;
+}
+
+.faq-item.is-open .faq-icon {
+  background-color: var(--color-accent-600);
+  border-color: var(--color-accent-600);
+  color: var(--color-white);
+}
+
+.faq-item.is-open .faq-glyph {
+  transform: rotate(45deg);
+}
+
+.faq-num {
+  color: var(--color-mute);
+  transition: color var(--dur-micro) var(--ease-micro);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .faq-trigger:hover .faq-num {
+    color: var(--color-accent-600);
+  }
+
+  .faq-trigger:hover .faq-icon {
+    border-color: var(--color-ink);
+  }
+
+  .faq-item.is-open .faq-trigger:hover .faq-icon {
+    border-color: var(--color-accent-600);
+  }
+}
+
+@media (hover: none) {
+  .faq-trigger:active .faq-icon {
+    border-color: var(--color-ink);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .faq-item.is-open .faq-panel,
+  html.js .faq-item.is-closing .faq-panel,
+  html.js .faq-glyph {
+    transition-duration: 0.01ms;
+    transition-delay: 0s;
+  }
+
+  html.js .faq-panel-inner,
+  html.js .faq-item.is-open .faq-panel-inner,
+  html.js .faq-item.is-closing .faq-panel-inner {
+    transform: none;
+    transition: opacity var(--dur-micro) var(--ease-micro);
+  }
+}
+
+faq-accordion {
+  display: block;
+}
+
+html.js [data-faq-rows][data-reveal] {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+html.js [data-faq-rows] .faq-trigger {
+  opacity: 0;
+  transform: translateY(var(--move-block));
+  transition:
+    opacity var(--dur-reveal) var(--ease-out),
+    transform var(--dur-reveal) var(--ease-out);
+  /* 120 ms nach der linken Spalte, danach --stagger je Zeile */
+  transition-delay: calc(120ms + var(--i, 0) * var(--stagger));
+}
+
+html.js [data-faq-rows].is-visible .faq-trigger {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-faq-rows] .faq-trigger {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@property --fx-s {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+.fx-fill {
+  position: relative;
+  --fx-inset: 0px;
+  --fx-dur: 600ms;
+}
+
+.fx-card {
+  --fx-inset: -1px;
+}
+
+.service-row {
+  --fx-dur: 830ms;
+}
+.service-card {
+  --fx-dur: 735ms;
+}
+.other-card {
+  --fx-dur: 616ms;
+}
+
+@media (max-width: 809px) {
+  .service-row {
+    --fx-dur: 664ms;
+  }
+  .service-card {
+    --fx-dur: 588ms;
+  }
+  .other-card {
+    --fx-dur: 493ms;
+  }
+}
+
+.service-row {
+  --fx-bleed-want: 16px;
+  --fx-bleed: max(
+    0px,
+    min(var(--fx-bleed-want), calc(var(--fx-room, 0px) - 8px))
+  );
+  --fx-inset: 1px calc(-1 * var(--fx-bleed)) 1px calc(-1 * var(--fx-bleed));
+}
+
+@media (min-width: 390px) {
+  .service-row {
+    --fx-bleed-want: 24px;
+  }
+}
+
+@media (min-width: 810px) {
+  .service-row {
+    --fx-bleed-want: 32px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .service-row {
+    --fx-bleed-want: 40px;
+  }
+}
+
+.fx-clip {
+  position: absolute;
+  inset: var(--fx-inset);
+  z-index: 1;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.fx-circle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--color-accent-600);
+  opacity: 0;
+  transition: opacity var(--dur-micro) var(--ease-micro);
+}
+
+.fx-fill.is-fx-on .fx-circle {
+  opacity: 1;
+}
+
+.fx-clone {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: none;
+  border-color: transparent;
+  box-shadow: none;
+  color: var(--color-white);
+}
+
+html.fx-radial .fx-fill {
+  --fx-s: 0;
+  --fx-t: var(--dur-fill-out);
+  --fx-e: var(--ease-out);
+}
+
+html.fx-radial .fx-fill.is-fx-on {
+  --fx-s: 1;
+  --fx-t: var(--fx-dur);
+  --fx-e: var(--ease-fill);
+}
+
+html.fx-radial .fx-circle {
+  width: auto;
+  height: auto;
+  border-radius: 50%;
+  opacity: 1;
+  transform: scale(var(--fx-s));
+  transform-origin: center;
+  transition: --fx-s var(--fx-t) var(--fx-e);
+}
+
+html.fx-radial .fx-clone {
+  transform: scale(calc(1 / max(var(--fx-s), 0.02)));
+}
+
+.fx-clone .text-mute {
+  color: rgb(255 255 255 / 0.9);
+}
+
+.fx-clone .fx-list {
+  color: rgb(255 255 255 / 0.95);
+}
+
+.fx-clone .fx-dim {
+  color: rgb(255 255 255 / 0.88);
+}
+
+.fx-clone .row-arrow,
+.fx-clone .text-accent-600 {
+  color: var(--color-white);
+}
+
+.fx-clone .border-t {
+  border-color: rgb(255 255 255 / 0.2);
+}
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-16.666%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 12s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--tw-rotate, 0deg));
+  }
+  50% {
+    transform: translateY(-8px) rotate(var(--tw-rotate, 0deg));
+  }
+}
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+.animate-float-delayed {
+  animation: float 7s ease-in-out 1.2s infinite;
+}
+.animate-spin-slow {
+  animation: spin-slow 28s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-float,
+  .animate-float-delayed,
+  .animate-spin-slow {
+    animation: none;
+  }
+}
+
+.service-row {
+  --fx-dur: 830ms;
+}
+.service-card {
+  --fx-dur: 735ms;
+}
+.other-card {
+  --fx-dur: 616ms;
+}
+@media (max-width: 809px) {
+  .service-row {
+    --fx-dur: 664ms;
+  }
+  .service-card {
+    --fx-dur: 588ms;
+  }
+  .other-card {
+    --fx-dur: 493ms;
+  }
+}
+
+.service-row {
+  --fx-bleed-want: 16px;
+  --fx-bleed: max(
+    0px,
+    min(var(--fx-bleed-want), calc(var(--fx-room, 0px) - 8px))
+  );
+  --fx-inset: 1px calc(-1 * var(--fx-bleed)) 1px calc(-1 * var(--fx-bleed));
+}
+
+@media (min-width: 390px) {
+  .service-row {
+    --fx-bleed-want: 24px;
+  }
+}
+
+@media (min-width: 810px) {
+  .service-row {
+    --fx-bleed-want: 32px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .service-row {
+    --fx-bleed-want: 40px;
+  }
+}
+@property --r {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}

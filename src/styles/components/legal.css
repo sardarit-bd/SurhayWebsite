@@ -1,0 +1,8 @@
+.legal-notice[data-c-legal] {
+    max-width: 46rem;
+    padding: 1.25rem 1.4rem;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--color-accent-600);
+    border-radius: 0.9rem;
+    background: var(--color-paper-2);
+  }

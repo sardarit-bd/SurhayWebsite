@@ -1,0 +1,8 @@
+.card-cover[data-c-services-page] {
+    text-decoration: none;
+  }
+  .card-cover[data-c-services-page]::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }

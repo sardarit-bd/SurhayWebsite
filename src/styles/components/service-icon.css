@@ -1,0 +1,6 @@
+.service-icon[data-c-service-icon] {
+    display: block;
+    flex: none;
+    width: var(--service-icon-size);
+    height: var(--service-icon-size);
+  }
