@@ -62,30 +62,14 @@ try {
 
 /* ---------------------------------------------------------------------------
    Client-Laufzeit aus dem HTML nehmen
---------------------------------------------------------------------------- */
-/** JSON-LD aus dem Rumpf in den <head> schieben — in unveraenderter Reihenfolge. */
-function jsonldInDenKopf(html) {
-  const bloecke = [];
-  const rumpfBeginn = html.indexOf("<body");
-  if (rumpfBeginn === -1) return html;
-  const kopf = html.slice(0, rumpfBeginn);
-  let rumpf = rumpfBeginn === -1 ? "" : html.slice(rumpfBeginn);
-  rumpf = rumpf.replace(
-    /<script type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/g,
-    (treffer) => {
-      bloecke.push(treffer);
-      return "";
-    },
-  );
-  if (!bloecke.length) return html;
-  const eingesetzt = kopf.replace("</head>", bloecke.join("") + "</head>");
-  return eingesetzt + rumpf;
-}
 
-const MUSTER = [
-  [/<link[^>]*\srel="preconnect"[^>]*>/g, "preconnect"],
-  [/<div hidden=""><!--\$--><!--\/\$--><\/div>/g, "Suspense-Platzhalter"],
-];
+   Nur Eingriffe, die React nicht sieht. Das HTML im Rumpf muss exakt dem
+   Baum entsprechen, den die RSC-Nutzlast beschreibt — sonst schlaegt die
+   Hydration fehl, React rendert die Wurzel neu und setzt dabei <html> auf
+   className="no-js" zurueck. Deshalb bleiben JSON-LD-Skripte und der
+   <div hidden>-Platzhalter an ihrem Platz.
+--------------------------------------------------------------------------- */
+const MUSTER = [[/<link[^>]*\srel="preconnect"[^>]*>/g, "preconnect"]];
 
 async function htmlDateien(ordner) {
   const raus = [];
@@ -106,11 +90,6 @@ for (const datei of dateien) {
     const n = (html.match(muster) ?? []).length;
     if (n) treffer[name] = (treffer[name] ?? 0) + n;
     html = html.replace(muster, "");
-  }
-  const mitKopf = jsonldInDenKopf(html);
-  if (mitKopf !== html) {
-    treffer["JSON-LD in den Kopf"] = (treffer["JSON-LD in den Kopf"] ?? 0) + 1;
-    html = mitKopf;
   }
   if (html !== vorher) await writeFile(datei, html);
 }
