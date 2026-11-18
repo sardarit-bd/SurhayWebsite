@@ -1,6 +1,4 @@
 node_modules/
-.env
-.env.*
 .DS_Store
 npm-debug.log*
 .next/
@@ -14,3 +12,4 @@ src/inline/generated.ts
 src/app/*/projekte/[slug]/
 src/app/*/*/projeler/[slug]/
 src/app/*/*/work/[slug]/
+config.bat
