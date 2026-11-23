@@ -1,12 +1,18 @@
 import { altPaths, useTranslations } from "@/i18n/utils";
-import { SITE, LEGAL, legalAddress } from "@/config";
 import Legal from "@/layouts/Legal";
 import { astroPathname } from "@/lib/props";
 
 export default function Page() {
   const lang = "en" as const;
   const t = useTranslations(lang);
-  const address = legalAddress(lang);
+
+  const address = [
+    "Surhay Design",
+    "Huseyin Surhay Yilmaz",
+    "Kolonnenstrage 8",
+    "10827 Berlin",
+    "Germany",
+  ];
 
   return (
     <Legal
@@ -22,28 +28,25 @@ export default function Page() {
 
       <h2>Contact</h2>
       <p>
-        Email: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        Email:{" "}
+        <a href="mailto:hallo@surhay-design.de">hallo@surhay-design.de</a>
         <br />
-        Phone: {LEGAL.phone}
+        Phone: +49 1525 1780665
       </p>
 
       <h2>VAT</h2>
-      {LEGAL.kleinunternehmer ? (
-        <p>
-          Pursuant to § 19 of the German VAT Act (UStG), no VAT is charged and
-          no VAT identification number is held (small business regulation).
-        </p>
-      ) : (
-        <p>VAT identification number pursuant to § 27a UStG: {LEGAL.vatId}</p>
-      )}
-
-      <h2>Responsible for content pursuant to § 18 (2) MStV</h2>
-      <p>{LEGAL.owner}, address as above</p>
-
-      <h2>Consumer dispute resolution</h2>
       <p>
-        We are neither willing nor obliged to participate in dispute resolution
-        proceedings before a consumer arbitration board.
+        Value-added tax identification number pursuant to § 27a UStG:
+        DE460132065
+      </p>
+
+      <h2>Responsible for content pursuant to § 18 Para. 2 MStV</h2>
+      <p>Huseyin Surhay Yilmaz, address as above</p>
+
+      <h2>Consumer dispute resolution / universal arbitration body</h2>
+      <p>
+        We are not willing or obliged to participate in dispute resolution
+        procedures before a consumer arbitration body.
       </p>
 
       <h2>Liability for content</h2>
