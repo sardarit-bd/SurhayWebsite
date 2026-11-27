@@ -1,0 +1,39 @@
+
+# ---------------------------------------------------------------------------
+# Sicherheits- und Datenschutz-Header — nur fuer das Apache-Ziel (Hostinger).
+#
+# WOFUER DIESE DATEI DA IST
+# GitHub Pages liefert ausschliesslich seine eigenen Header aus; eigene lassen
+# sich dort nicht setzen. Was per <meta> geht, steht deshalb in
+# src/layouts/Base.astro (Content-Security-Policy, Referrer-Policy). Alles
+# uebrige — nosniff, Permissions-Policy, frame-ancestors, HSTS — gibt es nur
+# als echten HTTP-Header, und den kann nur ein Server wie Apache senden.
+#
+# Auf GitHub Pages ist diese Datei wirkungslos; der Pages-Workflow entfernt sie
+# deshalb vor dem Upload (.github/workflows/pages.yml).
+#
+# Die Header hier wiederholen die <meta>-Angaben absichtlich: Header und meta
+# gelten gemeinsam, und bei mehreren Richtlinien setzt sich jeweils die
+# strengere durch.
+# ---------------------------------------------------------------------------
+
+<IfModule mod_headers.c>
+  # Kein MIME-Sniffing: der Browser haelt sich an den gesendeten Content-Type.
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Beim Verlassen der Seite geht nur die Herkunft mit, nie der volle Pfad.
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Nicht benoetigte Browser-Funktionen ausdruecklich abschalten.
+  Header always set Permissions-Policy "accelerometer=(), ambient-light-sensor=(), autoplay=(), browsing-topics=(), camera=(), display-capture=(), encrypted-media=(), geolocation=(), gyroscope=(), idle-detection=(), local-fonts=(), magnetometer=(), microphone=(), midi=(), payment=(), screen-wake-lock=(), serial=(), usb=(), xr-spatial-tracking=()"
+
+  # Klickjacking verhindern.
+  Header always set Content-Security-Policy "frame-ancestors 'none'"
+
+  # HTTPS erzwingen, sobald das SSL-Zertifikat zuverlaessig funktioniert.
+  Header always set Strict-Transport-Security "max-age=31536000"
+</IfModule>
+
+# Weiterleitung von HTTP auf HTTPS wird ueber Hostinger "Force HTTPS"
+# verwaltet. Keine zusaetzliche Rewrite-Regel, um Redirect-Schleifen
+# hinter dem Hostinger-Proxy zu vermeiden.

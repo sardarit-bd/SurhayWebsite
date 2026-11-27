@@ -4,7 +4,6 @@ node_modules/
 .DS_Store
 npm-debug.log*
 .next/
-out/
 out-pages/
 next-env.d.ts
 tsconfig.tsbuildinfo
