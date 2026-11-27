@@ -1,0 +1,9 @@
+:HL["/_next/static/chunks/1scorzdsb4qb3.css","style"]
+:HL["/_next/static/chunks/1pww_zxylzd5c.css","style"]
+:HL["/_next/static/chunks/1jxdw9x45-1ac.css","style"]
+:HC["/",""]
+:HL["/images/logos/webflow.svg","image"]
+:HL["/images/logos/framer.svg","image"]
+:HL["/images/logos/wordpress.svg","image"]
+:HL["/images/logos/postgresql.svg","image"]
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"(tr)","param":null,"prefetchHints":4208,"slots":{"children":{"name":"tr","param":null,"prefetchHints":4192,"slots":{"children":{"name":"hizmetler","param":null,"prefetchHints":4192,"slots":{"children":{"name":"slug","param":{"type":"d","key":"web-gelistirme","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}}}}}},"staleTime":300,"buildId":"FjIpT6zOkPJhwT_lq98w7"}

@@ -1,15 +1,5 @@
-node_modules/
+
 .env
 .env.*
 .DS_Store
-npm-debug.log*
-.next/
-out-pages/
-next-env.d.ts
-tsconfig.tsbuildinfo
-.reference-dist-root/
-.reference-dist-pages/
-src/inline/generated.ts
-src/app/*/projekte/[slug]/
-src/app/*/*/projeler/[slug]/
-src/app/*/*/work/[slug]/
+
