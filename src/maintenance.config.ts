@@ -6,7 +6,7 @@ export type MaintenanceLang = 'de' | 'en' | 'tr';
 
 export const MAINTENANCE = {
   /** Master switch. true = whole site shows the maintenance screen. */
-  enabled: true,
+  enabled: false,
 
   /**
    * Optional countdown target, ISO 8601, e.g. '2026-11-20T18:00:00+01:00'.
